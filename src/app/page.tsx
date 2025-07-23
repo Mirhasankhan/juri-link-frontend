@@ -1,7 +1,9 @@
 "use client";
 
+import Banner from "@/components/home/Banner";
+
 const HOmePage = () => {
-  return <div>hello</div>;
+  return <div><Banner></Banner></div>;
 };
 
 export default HOmePage;
