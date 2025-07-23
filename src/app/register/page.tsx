@@ -1,20 +1,12 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import logo from "../../assets/logo1.avif";
-import Image from "next/image";
 import { TLoginValues } from "@/types/common";
 import Link from "next/link";
-// import { FcGoogle } from "react-icons/fc";
-import { useRegisterMutation } from "@/redux/features/auth/authApi";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Register = () => {
-  const [registerUser, { isLoading }] = useRegisterMutation();
-  const router = useRouter();
-  console.log(isLoading);
-
+  const [active, setActive] = useState("client");
   const {
     register,
     handleSubmit,
@@ -22,35 +14,46 @@ const Register = () => {
   } = useForm<TLoginValues>();
 
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
-    try {
-      const response = await registerUser(data);
-
-      if (response.data?.result) {
-        toast.success("User Created Successfully");
-        router.push("/login");
-      } else if (response.error) {
-        if ("data" in response.error) {
-          const errorData = response.error.data as { message?: string };
-          toast.error(errorData.message || "Something went wrong.");
-        } else {
-          toast.error("Unexpected error structure.");
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("An unexpected error occurred.");
-    } finally {
-    }
+    console.log(data);
   };
 
   return (
     <div className="bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100 py-12 min-h-screen">
-      <div className="w-full md:w-2/5 2xl:w-1/4 shadow-md mx-auto p-6 dark:text-white bg-white rounded-[4px]">
-        <Image src={logo} alt="" height={60} width={60}></Image>
-        <h1 className="text-xl font-medium ppy-2 ">Create Account</h1>
-        <p className="text-sm">
-          Enter to get unlimited access to data & information
+      <div className="text-center">
+        <h1 className="text-primary text-xl font-medium"> Join Juri Link</h1>
+        <p className="font-medium pb-3 text-gray-500">
+          Create your account to get started
         </p>
+      </div>
+      <div className="w-full mb-4 flex justify-between font-medium cursor-pointer items-center bg-gray-100 p-1 md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto">
+        <h1
+          onClick={() => setActive("client")}
+          className={`w-full rounded-[4px] ${
+            active == "client" ? "bg-white" : "bg-transparent"
+          } py-1 text-center`}
+        >
+          Client
+        </h1>
+        <h1
+          onClick={() => setActive("lawyer")}
+          className={`w-full rounded-[4px]  ${
+            active == "lawyer" ? "bg-white" : "bg-transparent"
+          } py-1 text-center`}
+        >
+          Lawyer
+        </h1>
+      </div>
+
+      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-6 dark:text-white bg-white rounded-[4px]">
+        <h1 className="text-xl font-medium ppy-2 ">
+          {active == "client" ? "Client Registration" : "Lawyer Registration"}
+        </h1>
+        <h1 className="text-sm">
+          {active == "client"
+            ? "Sign up to find and hire lawyers"
+            : "Join as a legal professional"}
+        </h1>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="rounded-lg pt-6 bg-white"
@@ -100,25 +103,13 @@ const Register = () => {
             )}
           </div>
           <button
-            disabled={isLoading}
             type="submit"
             className="bg-primary text-white py-3 w-full font-medium rounded-[4px]"
           >
-            {isLoading ? "Signing Up.." : "Create Account"}
+            Create Account
           </button>
         </form>
-        {/* <div className="flex items-center justify-center my-4">
-          <div className="flex-1 border-t border-gray-300"></div>
-          <span className="px-3 text-gray-500 text-sm">Or, Login with</span>
-          <div className="flex-1 border-t border-gray-300"></div>
-        </div> */}
-        {/* <button
-          disabled={isLoading}
-          type="submit"
-          className="bg-white flex items-center gap-2 justify-center border py-3 w-full rounded-[4px]"
-        >
-          <FcGoogle size={20} /> Sign Up With Google
-        </button> */}
+
         <div className="flex pt-2 justify-center">
           <h1>Already have an account?</h1>
           <Link href="/login" className="text-primary hover:underline">

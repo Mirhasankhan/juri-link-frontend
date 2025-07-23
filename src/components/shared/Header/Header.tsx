@@ -1,7 +1,5 @@
 import Container from "@/utils/Container";
 import logo from "../../../assets/logo1.avif";
-import NavMenu from "./NavMenu";
-import SmallDeviceMenu from "./SmallDeviceMenu";
 import Link from "next/link";
 
 const Header = () => {
@@ -27,11 +25,7 @@ const Header = () => {
               <p className="text-gray-600 font-medium text-sm">Spa Beauty</p>
             </div>
           </Link>
-
-          <div>
-            <NavMenu></NavMenu>
-            <SmallDeviceMenu></SmallDeviceMenu>
-          </div>
+<Link href="/login">Login</Link>
         </div>
       </Container>
     </div>
