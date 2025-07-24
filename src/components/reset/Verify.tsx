@@ -1,111 +1,115 @@
 "use client";
-import { useVerifyOtpMutation } from "@/redux/features/auth/authApi";
-import { ArrowLeft, LoaderCircle } from "lucide-react";
-import Link from "next/link";
-import { useState, useRef } from "react";
-import { toast } from "react-toastify";
-import Cookies from "js-cookie";
+import { KeySquare } from "lucide-react";
+import { useRef, useState } from "react";
 
-const Verify = ({
+const VerifyEmail = ({
   setActive,
   email,
 }: {
   setActive: (value: string) => void;
   email: string;
 }) => {
-  const [code, setCode] = useState(["", "", "", ""]);
-  const inputRefs = useRef<HTMLInputElement[]>([]);
-  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [otp, setOtp] = useState({
+    d1: "",
+    d2: "",
+    d3: "",
+    d4: "",
+    d5: "",
+    d6: "",
+  });
 
-  const handleChange = (index: number, value: string) => {
-    if (/^\d?$/.test(value)) {
-      const newCode = [...code];
-      newCode[index] = value;
-      setCode(newCode);
+  const [focusedIndex, setFocusedIndex] = useState(0);
 
-      if (value && index < 3) {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const rawValue = e.target.value;
+    const value = rawValue.slice(0, 1); // Only first digit
+
+    if (!/^\d?$/.test(value)) return;
+
+    const field = `d${index + 1}` as keyof typeof otp;
+    const newOtp = { ...otp, [field]: value };
+    setOtp(newOtp);
+
+    if (value && index < 5) {
+      setTimeout(() => {
         inputRefs.current[index + 1]?.focus();
-      }
+      }, 10);
     }
   };
 
   const handleKeyDown = (
-    index: number,
-    e: React.KeyboardEvent<HTMLInputElement>
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
   ) => {
-    if (e.key === "Backspace" && !code[index] && index > 0) {
+    if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
 
-  const handleSubmit = async () => {
-    const numberCode = parseInt(code.join(""), 10);
+  const otpString = Object.values(otp).join("");
+  const isComplete = otpString.length === 6;
 
-    try {
-      const response = await verifyOtp({ email, otp: numberCode.toString() });
-
-      if (response.data) {
-        toast.success(response.data.message);
-        Cookies.set("token", response.data.result.accessToken);
-        setActive("reset");
-      } else if (response.error) {
-        if ("data" in response.error) {
-          const errorData = response.error.data as { message?: string };
-          toast.error(errorData.message || "Something went wrong.");
-        } else {
-          toast.error("Unexpected error structure.");
-        }
-      }
-    } catch (error) {
-      console.log(error);
-
-      toast.error("An unexpected error occurred.");
-    } finally {
-    }
+  const handleVerify = () => {
+    console.log("OTP Submitted:", otpString);
+    setActive("reset");
   };
 
   return (
-    <div className="flex flex-col items-center p-4">
-      <h1 className="text-2xl font-medium pb-4">Password Reset Request</h1>
-      <p>
-        We sent a code to{" "}
-        <span className="font-medium">mirhasan000034@gmail.com</span>
-      </p>
-      <h2 className="text-lg font-bold mb-4">Enter 4-digit Code</h2>
-      <div className="flex space-x-2">
-        {code.map((digit, index) => (
-          <input
-            key={index}
-            ref={(el) => {
-              if (el) inputRefs.current[index] = el;
-            }}
-            type="text"
-            value={digit}
-            onChange={(e) => handleChange(index, e.target.value)}
-            onKeyDown={(e) => handleKeyDown(index, e)}
-            maxLength={1}
-            className="border p-2 w-16 h-16 text-center text-lg rounded-xl"
-          />
-        ))}
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
+      <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-3 rounded-[4px]">
+        <div className="p-3 bg-blue-100 rounded-full">
+          <KeySquare size={30} className="text-blue-800" />
+        </div>
+        <h1 className="text-xl font-medium py-2">Verify OTP</h1>
+        <p className="text-gray-600">
+          We&apos;ve sent a 6-digit verification code to
+        </p>
+        <p className="text-primary">{email}</p>
+
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex mt-2 gap-2">
+            {[0, 1, 2, 3, 4, 5].map((i) => (
+              <input
+                key={i}
+                ref={(el) => {
+                  inputRefs.current[i] = el;
+                }}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                className={`w-12 h-12 text-center text-xl border-2 rounded-[4px] focus:outline-none transition 
+                ${
+                  focusedIndex === i
+                    ? "border-primary shadow-md"
+                    : "border-gray-300"
+                }`}
+                value={otp[`d${i + 1}` as keyof typeof otp]}
+                onChange={(e) => handleChange(e, i)}
+                onKeyDown={(e) => handleKeyDown(e, i)}
+                onFocus={() => setFocusedIndex(i)}
+                disabled={i !== 0 && !otp[`d${i}` as keyof typeof otp]}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={handleVerify}
+            disabled={!isComplete}
+            className={`mt-2 w-full py-2 rounded-[4px] text-white font-semibold transition 
+            ${isComplete ? "bg-primary" : "bg-gray-400 cursor-not-allowed"}`}
+          >
+            Verify
+          </button>
+          <p className="text-gray-600">Didn&apos;t receive the code?</p>
+          <p className="text-primary cursor-pointer">Resend verification code</p>
+        </div>
       </div>
-      <button
-        onClick={handleSubmit}
-        disabled={code.join("").length !== 4 || isLoading}
-        className={`mt-4 px-4 py-3  text-white w-60 font-bold ${
-          code.join("").length === 4 ? "bg-primary" : "bg-gray-300"
-        }`}
-      >
-        {isLoading ? (
-          <LoaderCircle className="animate-spin mx-auto"></LoaderCircle>
-        ) : (
-          "Continue"
-        )}
-      </button>
-      <Link href="/login" className="flex items-center gap-1 pt-6">
-        <ArrowLeft size={15} /> Back to login
-      </Link>
     </div>
   );
 };
 
-export default Verify;
+export default VerifyEmail;

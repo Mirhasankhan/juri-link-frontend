@@ -3,7 +3,6 @@ import { Roboto } from 'next/font/google';
 import "./globals.css";
 import { ThemeProvider } from "@/components/Providers/ThemeProvider";
 import Header from "@/components/shared/Header/Header";
-import SubHeader from "@/components/shared/Header/SubHeader";
 import Footer from "@/components/shared/Footer/Footer";
 import Providers from "@/lib/providers/Providers";
 import { ToastContainer } from 'react-toastify';
@@ -43,8 +42,7 @@ export default function RootLayout({
         >
           <Providers>
             <div>
-            <ToastContainer position="top-right" autoClose={3000}/>
-              <SubHeader></SubHeader>
+            <ToastContainer position="top-right" autoClose={3000}/>   
               <Header></Header>
               {children}
               <Footer></Footer>

@@ -1,18 +1,19 @@
 import Container from "@/utils/Container";
-import logo from "../../../assets/logo1.avif";
+// import logo from "../../../assets/logo1.avif";
 import Link from "next/link";
 
 const Header = () => {
   return (
     <div className="bg-white">
       <Container>
-        <div className="flex justify-between items-center py-2">
+        <div className="flex justify-between items-center py-6">
           <Link href="/" className="flex items-center gap-1">
-            <img
+            {/* <img
               className="h-16 w-16 rounded-full"
               src={logo.src}
               alt="GlamVibe logo"
-            />
+            /> */}
+            hello logo
             <div className="dark:text-black">
               <h1
                 style={{
@@ -25,7 +26,7 @@ const Header = () => {
               <p className="text-gray-600 font-medium text-sm">Spa Beauty</p>
             </div>
           </Link>
-<Link href="/login">Login</Link>
+          <Link href="/login">Login</Link>
         </div>
       </Container>
     </div>

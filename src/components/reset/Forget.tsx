@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ArrowLeft, LoaderCircle } from "lucide-react";
+import { ArrowLeft, LoaderCircle, Mail } from "lucide-react";
 import { TLoginValues } from "@/types/common";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -45,42 +45,49 @@ const ForgetPassword = ({
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center mt-24">
-      <h1 className="text-xl font-medium">Forget Password?</h1>
-      <p>No worries, we will send you reset instructions.</p>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="rounded-lg pt-6  bg-white"
-      >
-        <div className="mb-4">
-          <label className="block font-medium">Email</label>
-          <input
-            {...register("email", {
-              required: "Email is required",
-            })}
-            className="w-[430px] p-2 border rounded-md"
-            placeholder="Enter your email"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
+      <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-5  rounded-[4px]">
+        <div className="p-3 bg-blue-100 rounded-full">
+          <Mail size={30} className="text-blue-800"></Mail>
         </div>
-
-        <button
-          disabled={isLoading}
-          type="submit"
-          className="bg-primary text-white py-3 w-full font-medium rounded-md"
+        <h1 className="text-xl font-medium py-2">Reset Password</h1>
+        <p className="text-gray-600 text-center">
+          Enter your email address and we&apos;ll send you a verification code
+        </p>     
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="rounded-lg pt-6  bg-white"
         >
-          {isLoading ? (
-            <LoaderCircle className="animate-spin mx-auto"></LoaderCircle>
-          ) : (
-            "Send OTP"
-          )}
-        </button>
-      </form>
-      <Link href="/login" className="flex items-center gap-1 pt-6">
-        <ArrowLeft size={15} /> Back to login
-      </Link>
+          <div className="mb-4">
+            <label className="block pb-2 font-medium">Email</label>
+            <input
+              {...register("email", {
+                required: "Email is required",
+              })}
+              className="w-[430px] p-2 border rounded-[4px]"
+              placeholder="Enter your email"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
+
+          <button
+            disabled={isLoading}
+            type="submit"
+            className="bg-primary text-white py-3 w-full font-medium rounded-[4px]"
+          >
+            {isLoading ? (
+              <LoaderCircle className="animate-spin mx-auto"></LoaderCircle>
+            ) : (
+              "Send OTP"
+            )}
+          </button>
+        </form>
+        <Link href="/auth/login" className="flex items-center gap-1 pt-6">
+          <ArrowLeft size={15} /> Back to login
+        </Link>
+      </div>
     </div>
   );
 };
