@@ -32,7 +32,7 @@ const VerifyEmail = () => {
     if (value && index < 5) {
       setTimeout(() => {
         inputRefs.current[index + 1]?.focus();
-      }, 10); 
+      }, 10);
     }
   };
 
@@ -68,7 +68,9 @@ const VerifyEmail = () => {
             {[0, 1, 2, 3, 4, 5].map((i) => (
               <input
                 key={i}
-                ref={(el) => (inputRefs.current[i] = el)}
+                ref={(el) => {
+                  inputRefs.current[i] = el;
+                }}
                 type="text"
                 inputMode="numeric"
                 maxLength={1}
@@ -85,18 +87,12 @@ const VerifyEmail = () => {
             onClick={handleVerify}
             disabled={!isComplete}
             className={`mt-2 w-full py-2 rounded-[4px] text-white font-semibold transition 
-          ${
-            isComplete
-              ? "bg-primary "
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
+          ${isComplete ? "bg-primary " : "bg-gray-400 cursor-not-allowed"}`}
           >
             Verify
           </button>
-           <p className="text-gray-600">
-          Didn&apos;t receive the code?
-        </p>
-        <p className="text-primary">Resend verification code</p>
+          <p className="text-gray-600">Didn&apos;t receive the code?</p>
+          <p className="text-primary">Resend verification code</p>
         </div>
       </div>
     </div>
