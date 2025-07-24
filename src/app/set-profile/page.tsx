@@ -72,7 +72,7 @@ const LawyerForm = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-12 flex flex-col items-center w-full bg-white md:w-3/4 xl:w-1/2 2xl:w-1/4 shadow-md mx-auto p-6 space-y-2  rounded-[4px]"
+        className="mt-12 flex flex-col items-center w-full bg-white md:w-3/4 xl:w-1/2 2xl:w-1/3 shadow-md mx-auto p-6 space-y-2  rounded-[4px]"
       >
         <div className="w-full">
           <label className="font-semibold block mb-2">
