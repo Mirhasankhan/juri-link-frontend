@@ -112,7 +112,7 @@ const Register = () => {
 
         <div className="flex pt-2 justify-center">
           <h1>Already have an account?</h1>
-          <Link href="/login" className="text-primary hover:underline">
+          <Link href="/auth/login" className="text-primary hover:underline">
             Login
           </Link>
         </div>

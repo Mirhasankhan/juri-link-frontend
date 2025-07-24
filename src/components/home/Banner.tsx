@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Banner = () => {
   return (
     <div className="relative w-full xl:h-[600px] h-[500px] overflow-hidden">
@@ -20,8 +22,14 @@ const Banner = () => {
           expert <br /> legal assistance when you need it most.
         </p>
         <div className="flex gap-6 mt-4">
-          <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">Find Lawyers</button>
-          <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">Post You Request</button>
+          <Link href="/lawyers">           
+            <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
+              Find Lawyers
+            </button>
+          </Link>
+          <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
+            Post You Request
+          </button>
         </div>
       </div>
     </div>

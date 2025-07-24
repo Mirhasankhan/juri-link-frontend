@@ -182,7 +182,7 @@ const Login = () => {
         </button> */}
         <div className="text-center pt-2">
           Dont have an account?
-          <Link href="/register" className="text-primary hover:underline">
+          <Link href="/auth/register" className="text-primary hover:underline">
             Register Here
           </Link>
         </div>

@@ -26,7 +26,7 @@ const Header = () => {
               <p className="text-gray-600 font-medium text-sm">Spa Beauty</p>
             </div>
           </Link>
-          <Link href="/login">Login</Link>
+          <Link href="/auth/login">Login</Link>
         </div>
       </Container>
     </div>
