@@ -21,6 +21,7 @@ const ForgetPassword = ({
   } = useForm<TLoginValues>();
 
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
+        setActive("verify");
     try {
       const response = await sendOpt(data);
 

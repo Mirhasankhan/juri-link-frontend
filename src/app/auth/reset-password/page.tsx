@@ -5,7 +5,7 @@ import Verify from "@/components/reset/Verify";
 import React, { useState } from "react";
 
 const ResetPassword = () => {
-  const [active, setActive] = useState("verify");
+  const [active, setActive] = useState("forget");
   const [email, setEmail] = useState("")
 
   return (
