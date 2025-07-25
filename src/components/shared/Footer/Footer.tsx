@@ -12,7 +12,7 @@ const Footer = () => {
               Ready to Get Legal Help?
             </h1>
             <p className="text-white pb-4">
-              Join thousands of satisfied clients who found the right legal{" "}
+              Join thousands of satisfied clients who found the right legal
               <br /> representation through LegalConnect.
             </p>
             <div className="flex gap-6">
