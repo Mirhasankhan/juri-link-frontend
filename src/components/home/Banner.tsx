@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="relative w-full xl:h-[600px] h-[500px] overflow-hidden">
+    <div className="relative w-full xl:h-[600px] 2xl:h-[800px] h-[500px] overflow-hidden">
       <video
         autoPlay
         muted
@@ -28,7 +28,7 @@ const Banner = () => {
             </button>
           </Link>
           <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
-            Post You Request
+            Post Your Request
           </button>
         </div>
       </div>

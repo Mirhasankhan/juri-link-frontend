@@ -1,16 +1,18 @@
 import Container from "@/utils/Container";
 import React from "react";
 
-const SearchLawyers = () => {
+const SearchPosts = () => {
   return (
     <div className="bg-primary py-16">
       <Container>
         <div className="flex flex-col items-center justify-center text-white">
-          <h1 className="text-6xl font-medium pb-2">Find Qualified Lawyers</h1>
+          <h1 className="text-6xl font-medium pb-2">
+            Find Client&apos;s Posts
+          </h1>
           <p className="text-center pb-2">
-            Browse through our network of experienced legal professionals and
-            find the <br />
-            right lawyer for your needs.
+            Browse client posts and connect with individuals seeking legal help{" "}
+            <br />
+            through our network.
           </p>
           <div className="xl:w-4/6 text-black grid grid-cols-8 w-full gap-4">
             <input
@@ -23,8 +25,8 @@ const SearchLawyers = () => {
               type="text"
               placeholder="Location..."
             />
-            <button className="px-8 py-3 rounded-[4px] col-span-2 border border-white text-white font-medium">
-              Search Lawyers
+            <button className="px-8 py-3 col-span-2 border rounded-[4px] border-white text-white font-medium">
+              Search Posts
             </button>
           </div>
         </div>
@@ -33,4 +35,4 @@ const SearchLawyers = () => {
   );
 };
 
-export default SearchLawyers;
+export default SearchPosts;
