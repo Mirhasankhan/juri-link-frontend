@@ -88,12 +88,17 @@ const CreatePost = () => {
 
       <div className="mb-6 grid grid-cols-2 gap-4">
         <div>
-          <label className="block font-medium">🕒 Timeline</label>
-          <input
-            type="date"
-            {...register("timeline")}
+          <label className="block font-medium">Service Type</label>
+          <select
+            {...register("type")}
             className="w-full border px-3 py-2 rounded mt-1"
-          />
+          >
+            <option value="">Select Service Type</option>
+            <option value="online">Online Consultation</option>
+            <option value="inPerson">In-Persion</option>
+            <option value="both">Online Or In-Persion</option>
+
+          </select>
         </div>
 
         <div>

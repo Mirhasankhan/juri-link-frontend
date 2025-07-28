@@ -32,6 +32,7 @@ type FormValues = {
   experienceOfYears: number;
   licenceNumber: string;
   barAssociation: string;
+  type: string;
   fee: number;
   lawDegree: FileList;
 };
@@ -141,6 +142,18 @@ const LawyerForm = () => {
           )}
         </div>
         <div className="w-full">
+          <label className="block font-medium">Service Type</label>
+          <select
+            {...register("type")}
+            className="w-full border px-3 py-2 rounded mt-1"
+          >
+            <option value="">Select Service Type</option>
+            <option value="online">Online Consultation</option>
+            <option value="inPerson">In-Persion</option>
+            <option value="both">Online & In-Persion</option>
+          </select>
+        </div>
+        <div className="w-full">
           <label className="block font-semibold">Fee (BDT)</label>
           <input
             type="number"
@@ -164,7 +177,7 @@ const LawyerForm = () => {
           )}
         </div>
         <div className="flex gap-4 w-full">
-            <button className="w-full py-2 round-[4px] border">Skip Now</button>
+          <button className="w-full py-2 round-[4px] border">Skip Now</button>
           <button
             type="submit"
             className="bg-primary text-white py-2 rounded-[4px] w-full"

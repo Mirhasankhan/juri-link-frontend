@@ -5,7 +5,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <div className="bg-blue-700 py-10">
+      <div className="bg-black bg-opacity-90 py-10">
         <Container>
           <div className="flex flex-col items-center justify-center text-center">
             <h1 className="text-2xl lg:text-4xl font-medium pb-4 text-white">
@@ -26,12 +26,20 @@ const Footer = () => {
           </div>
         </Container>
       </div>
-      <div className="bg-blue-700 bg-opacity-85 py-8 text-white ">
+      <div className="bg-black bg-opacity-90 py-8 text-white ">
         <Container>
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 border-b pb-6 border-blue-800">
             <div>
-              <h1>Logo</h1>
-              <p>details</p>
+              <Link
+                style={{
+                  fontFamily: "'Satisfy', cursive",
+                }}
+                href="/"
+                className="flex text-green-600 text-3xl font-bold items-center gap-1"
+              >
+                Juri.Link
+              </Link>
+              <p className="mt-2">Juri.Link is a legal services platform that connects individuals and businesses with trusted lawyers for family, business, immigration, or criminal matters—quickly, confidently, and within your budget.</p>
             </div>
             <div className="flex flex-col gap-2">
               <h1 className="text-xl font-medium">For Clients</h1>
@@ -54,11 +62,10 @@ const Footer = () => {
               <Link href="/lawyers">Privacy Policy</Link>
               <Link href="/lawyers">Terms of Service</Link>
             </div>
-           
           </div>
         </Container>
       </div>
-      <p className="pb-6 text-center bg-blue-700 text-white bg-opacity-85">
+      <p className="pb-6 text-center bg-black text-white bg-opacity-90">
         © 2024 LegalConnect. All rights reserved.
       </p>
     </div>
