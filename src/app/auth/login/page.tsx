@@ -56,7 +56,7 @@ const Login = () => {
 
   return (
     <div className="bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100 py-12 min-h-screen">
-      <div className="w-full md:w-2/5 2xl:w-1/4 shadow-md mx-auto p-6 dark:text-white bg-white rounded-[4px]">
+      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-6 dark:text-white bg-white rounded-[4px]">
         <Image placeholder="blur" src={logo} alt="" height={60} width={60}></Image>
         <h1 className="text-xl font-medium ppy-2 ">Welcome Back!</h1>
         <p className="text-sm">
