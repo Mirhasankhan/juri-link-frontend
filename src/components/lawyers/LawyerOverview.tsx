@@ -3,8 +3,8 @@ import { Clock, MapPin, Star, Video } from "lucide-react";
 import Image from "next/image";
 
 const LawyerOverview = () => {
-    return (
-         <div className="bg-primary py-12">
+  return (
+    <div className="bg-primary py-12">
       <Container>
         <div className="grid grid-cols-2 md:mx-16 text-white gap-6 ">
           <Image
@@ -52,7 +52,7 @@ const LawyerOverview = () => {
             </div>
             <div className="flex gap-4 mt-6">
               <button className="bg-green-600 w-full py-2 rounded-[4px] text-white font-medium">
-                View Details
+                Book Consultation
               </button>
               <button className="text-red-600 border-red-600 border  w-full py-2 rounded-[4px]  font-medium">
                 Send Message
@@ -62,7 +62,7 @@ const LawyerOverview = () => {
         </div>
       </Container>
     </div>
-    );
+  );
 };
 
 export default LawyerOverview;
