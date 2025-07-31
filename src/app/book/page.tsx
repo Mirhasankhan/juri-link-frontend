@@ -1,6 +1,7 @@
 import Container from "@/utils/Container";
 import { Calendar, Clock, Video } from "lucide-react";
 import Image from "next/image";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const BookingPage = () => {
   return (
@@ -136,7 +137,40 @@ const BookingPage = () => {
             </div>
           </div>
 
-          <div className="col-span-1 sticky top-8 max-h-80 bg-red-950">sdfds</div>
+          <div className="col-span-1 sticky font-medium top-8 max-h-80 bg-white p-3 rounded-[6px]">
+            <div className="flex gap-2 pb-2">
+              <IoMdCheckmarkCircleOutline
+                className="text-primary"
+                size={25}
+              ></IoMdCheckmarkCircleOutline>
+              <h1 className="font-medium">Booking Summary</h1>
+            </div>
+            <div className="flex justify-between py-2 border-b border-primary">
+              <h1 className="text-primary">Lawyer Name</h1>
+              <h1 className="font-medium">Sarah Johnson</h1>
+            </div>
+            <div className="flex justify-between pt-2 pb-1">
+              <h1 className="text-primary">Date:</h1>
+              <h1 className="font-medium">01/08/2025</h1>
+            </div>
+            <div className="flex justify-between py-1">
+              <h1 className="text-primary">Time:</h1>
+              <h1 className="font-medium">11 PM</h1>
+            </div>
+            <div className="flex justify-between py-1">
+              <h1 className="text-primary">Fee:</h1>
+              <h1 className="font-medium">450</h1>
+            </div>
+            <div className="flex justify-between py-1">
+              <h1 className="text-primary">Consultation Type:</h1>
+              <h1 className="font-medium">In Person</h1>
+            </div>
+            <div className="flex justify-between py-1">
+              <h1 className="text-primary">Service Type:</h1>
+              <h1 className="font-medium">Family Law</h1>
+            </div>
+            <button className="w-full py-3 text-white rounded-[4px] mt-3 bg-primary">Pay 450 And Book Consultation</button>
+          </div>
         </div>
       </Container>
     </div>
