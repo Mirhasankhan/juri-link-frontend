@@ -31,7 +31,7 @@ const Header = () => {
             </Link>
             <Link
               className="border border-primary text-white bg-primary px-4 py-1 rounded-[4px] font-medium"
-              href="/auth/login"
+              href="/auth/register"
             >
               Get Started
             </Link>
