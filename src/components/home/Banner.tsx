@@ -10,7 +10,7 @@ const Banner = () => {
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       >
         <source src="/videos/video22.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+        Your browser does not support te video tag.
       </video>
 
       <div className="text-center absolute top-0 left-0 z-10 text-white h-full w-full flex flex-col items-center justify-center bg-black/40">
