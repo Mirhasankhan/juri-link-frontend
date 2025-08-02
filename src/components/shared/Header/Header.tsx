@@ -3,11 +3,15 @@ import Container from "@/utils/Container";
 import Link from "next/link";
 import SubMenu from "./SubMenu";
 import Image from "next/image";
-import {  useState } from "react";
+import { useState } from "react";
 import DropDownMenus from "./DropDownMenus";
+import SmallDeviceMenu from "./SmallDeviceMenu";
+import { Menu, X } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [active, setActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="bg-white">
       <Container>
@@ -21,8 +25,10 @@ const Header = () => {
           >
             Juri.Link
           </Link>
-          <SubMenu></SubMenu>
-          <div className="relative flex items-center gap-2">
+          <div className="hidden md:block">
+            <SubMenu></SubMenu>
+          </div>
+          <div className="hidden relative md:flex items-center gap-2">
             <Link
               className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
               href="/auth/login"
@@ -47,6 +53,23 @@ const Header = () => {
               <div className="absolute right-0 top-12">
                 <DropDownMenus></DropDownMenus>
               </div>
+            )}
+          </div>
+          <div className="md:hidden relative">
+            {!isOpen && (
+              <Menu
+                className="cursor-pointer"
+                onClick={() => setIsOpen(true)}
+              ></Menu>
+            )}
+            {isOpen && (
+              <X
+                className="cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              ></X>
+            )}
+            {isOpen && (
+              <AnimatePresence>{isOpen && <SmallDeviceMenu />}</AnimatePresence>
             )}
           </div>
         </div>
