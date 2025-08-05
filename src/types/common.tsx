@@ -52,6 +52,18 @@ export interface TExprt {
   imageUrl: string;
   category: { categoryName: string };
 }
+export type FormValues = {
+  fullName: string;
+  email: string;
+  password: string;
+  licenseNumber: string;
+  yearsOfExperience: number;
+  barAssociation: string;
+  serviceType: string;
+  fee: number;
+  lawDegreeImage: FileList;
+  specializations: string[];
+};
 
 export interface IFormInput {
   oldPassword: string;

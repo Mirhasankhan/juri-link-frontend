@@ -1,13 +1,15 @@
 "use client";
 
 import Banner from "@/components/home/Banner";
-import OurServices from "@/components/home/OurServices";
+import Testimonials from "@/components/home/Testi";
+
 
 const HOmePage = () => {
   return (
     <div>
       <Banner></Banner>
-      <OurServices></OurServices>
+      <Testimonials></Testimonials>
+ 
     </div>
   );
 };
