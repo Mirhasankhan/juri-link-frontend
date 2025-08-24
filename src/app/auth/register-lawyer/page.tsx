@@ -1,23 +1,20 @@
 "use client";
 
+import { useRegisterRequestMutation } from "@/redux/features/auth/authApi";
+import { useServicesQuery } from "@/redux/features/services/services.api";
 import { FormValues } from "@/types/common";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
-const specializations = [
-  "Corporate Law",
-  "Criminal Law",
-  "Family Law",
-  "Real Estate Law",
-  "Intellectual Property Law",
-  "Environmental Law",
-  "Immigration Law",
-  "Personal Injury Law",
-  "Tax Law",
-  "Employment Law",
-];
+import { toast } from "react-toastify";
 
 const LawyerSignUpForm = () => {
+  const { data: legalServices } = useServicesQuery("");
+  const [registerRequest, { isLoading }] = useRegisterRequestMutation();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const router = useRouter()
+  const [fileError, setFileError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -25,15 +22,40 @@ const LawyerSignUpForm = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Form Data:", data);
-
-    const file = data.lawDegreeImage?.[0];
-    if (file) {
-      console.log("Uploaded File:", file.name);
+  const onSubmit = async (data: FormValues) => {
+    if (!selectedFile) {
+      setFileError("Law degree image is required");
+      return;
     }
+    const lawyerData = {
+      role: "Lawyer",
+      fullName: data.fullName,
+      password: data.password,
+      email: data.email,
+      serviceType: data.serviceType,
+      barAssociation: data.barAssociation,
+      specialization: data.specializations,
+      experience: data.yearsOfExperience,
+      licenceNumber: data.licenseNumber,
+    };
 
-    reset();
+    const formData = new FormData();
+    formData.append("licenceUrl", selectedFile);
+    formData.append("bodyData", JSON.stringify(lawyerData));
+
+    const response: any = await registerRequest(formData);
+    console.log(response);
+    if (response.data) {
+      localStorage.setItem("verify", data.email);
+      
+      reset();
+      setSelectedFile(null);
+      setFileError(null);
+      router.push("/auth/verify-email")
+      toast.success(response.data.message);
+    } else {
+      toast.error(response.error.data.message);
+    }
   };
 
   return (
@@ -52,7 +74,7 @@ const LawyerSignUpForm = () => {
               type="text"
               placeholder="Full Name"
               {...register("fullName", { required: "Full Name is required" })}
-              className="border p-2 rounded w-full"
+              className="border focus:outline-gray-500 p-2 rounded w-full"
             />
             {errors.fullName && (
               <p className="text-red-500 text-sm">{errors.fullName.message}</p>
@@ -76,6 +98,7 @@ const LawyerSignUpForm = () => {
             )}
           </div>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <input
@@ -90,7 +113,7 @@ const LawyerSignUpForm = () => {
           </div>
           <div>
             <input
-              type="text"
+              type="number"
               placeholder="License Number"
               {...register("licenseNumber", {
                 required: "License Number is required",
@@ -142,7 +165,7 @@ const LawyerSignUpForm = () => {
               </p>
             )}
           </div>
-        </div>
+        </div> 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <select
@@ -152,8 +175,9 @@ const LawyerSignUpForm = () => {
               className="border p-2 rounded w-full"
             >
               <option value="">Select Service Type</option>
-              <option value="Hourly">Hourly</option>
-              <option value="Per Case">Per Case</option>
+              <option value="Online">Online</option>
+              <option value="In_Person">In_Person</option>
+              <option value="Both">Both</option>
             </select>
             {errors.serviceType && (
               <p className="text-red-500 text-sm">
@@ -178,38 +202,43 @@ const LawyerSignUpForm = () => {
             )}
           </div>
         </div>
-        <div>
-          <label className="block mb-1">Law Degree Image</label>
+        <div className="w-full">
+          <label className="block pb-1 font-medium">Law Degree Image</label>
           <input
+            className="border w-full rounded-[8px] p-2"
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setSelectedFile(e.target.files[0]);
+                setFileError(null);
+              }
+            }}
             type="file"
-            {...register("lawDegreeImage", {
-              required: "Law Degree Image is required",
-            })}
-            className="border p-2 rounded w-full"
+            accept="image/*"
           />
-          {errors.lawDegreeImage && (
-            <p className="text-red-500 text-sm">
-              {errors.lawDegreeImage.message}
-            </p>
-          )}
+          {fileError && <p className="text-red-500 text-sm">{fileError}</p>}
         </div>
         <div>
           <label className="block mb-2 font-medium">Specialization(s)</label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {specializations.map((spec) => (
-              <label key={spec} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  value={spec}
-                  {...register("specializations", {
-                    validate: (value) =>
-                      value.length > 0 ||
-                      "At least one specialization is required",
-                  })}
-                />
-                <span>{spec}</span>
-              </label>
-            ))}
+            {legalServices?.data?.map(
+              (service: { _id: string; serviceName: string }) => (
+                <label
+                  key={service._id}
+                  className="flex items-center space-x-2"
+                >
+                  <input
+                    type="checkbox"
+                    value={service._id}
+                    {...register("specializations", {
+                      validate: (value) =>
+                        value.length > 0 ||
+                        "At least one specialization is required",
+                    })}
+                  />
+                  <span>{service.serviceName}</span>
+                </label>
+              )
+            )}
           </div>
           {errors.specializations && (
             <p className="text-red-500 text-sm">
@@ -218,10 +247,11 @@ const LawyerSignUpForm = () => {
           )}
         </div>
         <button
+          disabled={isLoading}
           type="submit"
           className="w-full py-2 px-4 bg-primary/80 text-white rounded hover:bg-primary"
         >
-          Sign Up
+          {isLoading ? "Signing up..." : "     Sign Up"}
         </button>
       </form>
     </div>

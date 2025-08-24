@@ -1,35 +1,49 @@
 "use client";
+import {
+  useResendOtpMutation,
+  useVerifyEmailMutation,
+} from "@/redux/features/auth/authApi";
 import { Mail } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const VerifyEmail = () => {
+  const [verifyOtp, { isLoading }] = useVerifyEmailMutation();
+  const [resendOtp] = useResendOtpMutation();
+  const email = localStorage.getItem("verify");
+  const router = useRouter();
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [otp, setOtp] = useState({
-    d1: "",
-    d2: "",
-    d3: "",
-    d4: "",
-    d5: "",
-    d6: "",
-  });
+  const [otp, setOtp] = useState({ d1: "", d2: "", d3: "", d4: "" });
+  const [timeLeft, setTimeLeft] = useState(30);
+  const [openModal, setOpenModal] = useState(false);
+  const [stripeLink, setStripeLink] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [timeLeft]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const rawValue = e.target.value;
-
-    // Only keep first digit
-    const value = rawValue.slice(0, 1);
-
+    const value = e.target.value.slice(0, 1);
     if (!/^\d?$/.test(value)) return;
-
     const field = `d${index + 1}` as keyof typeof otp;
     const newOtp = { ...otp, [field]: value };
     setOtp(newOtp);
-
-    // Move to next input if value is filled
-    if (value && index < 5) {
+    if (value && index < 3) {
       setTimeout(() => {
         inputRefs.current[index + 1]?.focus();
       }, 10);
@@ -46,56 +60,127 @@ const VerifyEmail = () => {
   };
 
   const otpString = Object.values(otp).join("");
-  console.log(otpString);
-  const isComplete = otpString.length === 6;
+  const isComplete = otpString.length === 4;
 
-  const handleVerify = () => {
-    console.log("OTP Submitted:", otpString);
+  const handleVerify = async () => {
+    const response: any = await verifyOtp({ email: email, otp: otpString });
+    if (response.data) {
+      toast.success(response.data.message);
+      localStorage.removeItem("verify");
+      if (response.data.data?.accountLink) {
+        setStripeLink(response.data.data.accountLink);
+        setOpenModal(true);
+      } else {
+        router.push("/auth/login");
+      }
+    } else {
+      toast.error(response.error.data.message);
+    }
   };
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
-      <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-3  rounded-[4px]">
-        <div className="p-3 bg-blue-100 rounded-full">
-          <Mail className="text-blue-800"></Mail>
-        </div>
-        <h1 className="text-xl font-medium py-2">Verify Your Email</h1>
-        <p className="text-gray-600">
-          We&apos;ve sent a 6-digit verification code to
-        </p>
-        <p className="text-primary">mirhasan000034@gmail.com</p>
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex mt-2">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <input
-                key={i}
-                ref={(el) => {
-                  inputRefs.current[i] = el;
-                }}
-                type="text"
-                inputMode="numeric"
-                maxLength={1}
-                className="w-12 h-12 text-center text-xl border rounded-md focus:outline-none"
-                value={otp[`d${i + 1}` as keyof typeof otp]}
-                onChange={(e) => handleChange(e, i)}
-                onKeyDown={(e) => handleKeyDown(e, i)}
-                disabled={i !== 0 && !otp[`d${i}` as keyof typeof otp]} // Disable if previous is empty
-              />
-            ))}
-          </div>
 
-          <button
-            onClick={handleVerify}
-            disabled={!isComplete}
-            className={`mt-2 w-full py-2 rounded-[4px] text-white font-semibold transition 
-          ${isComplete ? "bg-primary " : "bg-gray-400 cursor-not-allowed"}`}
-          >
-            Verify
-          </button>
-          <p className="text-gray-600">Didn&apos;t receive the code?</p>
-          <p className="text-primary">Resend verification code</p>
+  const handleResendOtp = async () => {
+    const response = await resendOtp({ email });
+    if (response.data) {
+      toast.success(response.data.message);
+      setTimeLeft(30);
+    }
+  };
+
+  return (
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-2">
+        <div className="flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-lg rounded-lg p-6">
+          <div className="p-4 bg-blue-100 rounded-full mb-3">
+            <Mail className="text-blue-800 w-6 h-6" />
+          </div>
+          <h1 className="text-2xl font-semibold py-1">Verify Your Email</h1>
+          <p className="text-gray-600 text-center">
+            We&apos;ve sent a 4-digit verification code to
+          </p>
+          <p className="text-primary font-medium">{email}</p>
+
+          <div className="flex flex-col items-center gap-5 mt-4 w-full">
+            <div className="flex gap-3">
+              {[0, 1, 2, 3].map((i) => (
+                <input
+                  key={i}
+                  ref={(el) => {
+                    inputRefs.current[i] = el;
+                  }}
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  className="w-12 h-12 border rounded-md text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={otp[`d${i + 1}` as keyof typeof otp]}
+                  onChange={(e) => handleChange(e, i)}
+                  onKeyDown={(e) => handleKeyDown(e, i)}
+                  disabled={i !== 0 && !otp[`d${i}` as keyof typeof otp]}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={handleVerify}
+              disabled={!isComplete || isLoading}
+              className={`w-full py-2 rounded-md text-white font-semibold transition ${
+                isComplete ? "bg-primary hover:bg-primary/90" : "bg-gray-400"
+              }`}
+            >
+              {isLoading ? "Verifying..." : "Verify"}
+            </button>
+
+            <div className="text-center">
+              <p className="text-gray-600">Didn&apos;t receive the code?</p>
+              {timeLeft > 0 ? (
+                <p className="text-gray-500 text-sm">
+                  Resend available in {timeLeft}s
+                </p>
+              ) : (
+                <button
+                  onClick={handleResendOtp}
+                  className="text-primary font-medium hover:underline text-sm"
+                >
+                  Resend verification code
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
+        <DialogContent className="sm:max-w-[420px] bg-white rounded-lg p-6 shadow-lg">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold">
+              Setup Your Payment
+            </DialogTitle>
+            <DialogDescription className="text-gray-600 mt-2">
+              Connect your account with Stripe to start receiving payments.
+              Without connecting, users won&apos;t be able to book you.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={() => {
+                setOpenModal(false);
+                router.push("/auth/login");
+              }}
+              className="border border-primary text-primary py-2 px-4 rounded-[6px] w-1/2 font-medium hover:bg-gray-50 transition"
+            >
+              Skip for Now
+            </button>
+            <button
+              onClick={() => {
+                if (stripeLink) window.location.href = stripeLink;
+              }}
+              className="bg-primary text-white py-2 px-4 rounded-[6px] w-1/2 font-medium hover:bg-primary/90 transition"
+            >
+              Connect Stripe
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

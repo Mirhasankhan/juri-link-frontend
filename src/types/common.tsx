@@ -8,7 +8,7 @@ export type TRoles = keyof typeof userRoles;
 export interface TLoginValues {
   email: string;
   password: string;
-  username: string;
+  fullName: string;
   confirmPassword: string;
 }
 

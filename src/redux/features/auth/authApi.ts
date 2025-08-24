@@ -1,13 +1,26 @@
-
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    register: builder.mutation({
+    registerRequest: builder.mutation({
       query: (userInfo) => ({
-        url: "/users/create",
+        url: "/user/request",
         method: "POST",
         body: userInfo,
+      }),
+    }),
+    verifyEmail: builder.mutation({
+      query: (data) => ({
+        url: "/user/verify",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    resendOtp: builder.mutation({
+      query: (email) => ({
+        url: "/user/resend-otp",
+        method: "POST",
+        body: email,
       }),
     }),
     login: builder.mutation({
@@ -28,9 +41,8 @@ const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: "/auth/profile",
         method: "GET",
-        
       }),
-      providesTags:["users"]
+      providesTags: ["users"],
     }),
     sendOtp: builder.mutation({
       query: (email) => ({
@@ -66,7 +78,7 @@ const authApi = baseApi.injectEndpoints({
         method: "PUT",
         body: image,
       }),
-      invalidatesTags:["users"]
+      invalidatesTags: ["users"],
     }),
     updateProfile: builder.mutation({
       query: (data) => ({
@@ -74,7 +86,7 @@ const authApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags:["users"]
+      invalidatesTags: ["users"],
     }),
 
     allUsers: builder.query({
@@ -97,7 +109,9 @@ const authApi = baseApi.injectEndpoints({
 
 export const {
   useSendOtpMutation,
-  useRegisterMutation,
+  useRegisterRequestMutation,
+  useVerifyEmailMutation,
+  useResendOtpMutation,
   useProfileQuery,
   useUpdateImageMutation,
   useLoginMutation,
@@ -106,5 +120,5 @@ export const {
   useUpdateProfileMutation,
   useSocialLoginMutation,
   useVerifyOtpMutation,
-  useResetPasswordMutation
+  useResetPasswordMutation,
 } = authApi;
