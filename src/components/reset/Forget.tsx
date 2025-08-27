@@ -1,17 +1,15 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ArrowLeft, LoaderCircle, Mail } from "lucide-react";
-import { TLoginValues } from "@/types/common";
-import Link from "next/link";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import { TLoginValues } from "@/types/common";
 import { useSendOtpMutation } from "@/redux/features/auth/authApi";
 
 const ForgetPassword = ({
   setActive,
-  setEmail,
 }: {
   setActive: (value: string) => void;
-  setEmail: (value: string) => void;
 }) => {
   const [sendOpt, { isLoading }] = useSendOtpMutation();
   const {
@@ -21,15 +19,13 @@ const ForgetPassword = ({
   } = useForm<TLoginValues>();
 
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
-        setActive("verify");
     try {
-      const response = await sendOpt(data);
-
+      const response = await sendOpt({email:data.email});
+      console.log(response);
       if (response.data) {
         toast.success(response.data.message);
         setActive("verify");
-
-        setEmail(data.email);
+        localStorage.setItem("email", data.email);
       } else if (response.error) {
         if ("data" in response.error) {
           const errorData = response.error.data as { message?: string };
@@ -42,7 +38,6 @@ const ForgetPassword = ({
       console.log(error);
 
       toast.error("An unexpected error occurred.");
-    } finally {
     }
   };
   return (
@@ -54,7 +49,7 @@ const ForgetPassword = ({
         <h1 className="text-xl font-medium py-2">Reset Password</h1>
         <p className="text-gray-600 text-center">
           Enter your email address and we&apos;ll send you a verification code
-        </p>     
+        </p>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="rounded-lg pt-6  bg-white"
@@ -85,7 +80,7 @@ const ForgetPassword = ({
             )}
           </button>
         </form>
-        <Link href="/auth/login" className="flex items-center gap-1 pt-6">
+        <Link href="/" className="flex items-center gap-1 pt-6">
           <ArrowLeft size={15} /> Back to login
         </Link>
       </div>

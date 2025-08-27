@@ -1,22 +1,18 @@
 "use client";
+import { useVerifyOtpMutation } from "@/redux/features/auth/authApi";
 import { KeySquare } from "lucide-react";
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
-const VerifyEmail = ({
-  setActive,
-  email,
-}: {
-  setActive: (value: string) => void;
-  email: string;
-}) => {
+const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
+  const [verifyOtp,{isLoading}] = useVerifyOtpMutation();
+  const email = localStorage.getItem("email");
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otp, setOtp] = useState({
     d1: "",
     d2: "",
     d3: "",
     d4: "",
-    d5: "",
-    d6: "",
   });
 
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -26,7 +22,7 @@ const VerifyEmail = ({
     index: number
   ) => {
     const rawValue = e.target.value;
-    const value = rawValue.slice(0, 1); // Only first digit
+    const value = rawValue.slice(0, 1);
 
     if (!/^\d?$/.test(value)) return;
 
@@ -51,11 +47,21 @@ const VerifyEmail = ({
   };
 
   const otpString = Object.values(otp).join("");
-  const isComplete = otpString.length === 6;
+  const isComplete = otpString.length == 4;
 
-  const handleVerify = () => {
-    console.log("OTP Submitted:", otpString);
-    setActive("reset");
+  const handleVerify = async () => {
+    const verifyData = {
+      email,
+      otp: otpString,
+    };
+    const response = await verifyOtp(verifyData);
+    console.log(response);
+    if (response.data) {
+      localStorage.removeItem("email");
+      localStorage.setItem("token", response.data?.data?.accessToken);
+      toast.success("Otp verified successfully");
+      setActive("reset");
+    }
   };
 
   return (
@@ -66,13 +72,13 @@ const VerifyEmail = ({
         </div>
         <h1 className="text-xl font-medium py-2">Verify OTP</h1>
         <p className="text-gray-600">
-          We&apos;ve sent a 6-digit verification code to
+          We&apos;ve sent a 4-digit verification code to
         </p>
         <p className="text-primary">{email}</p>
 
         <div className="flex flex-col items-center gap-4">
           <div className="flex mt-2 gap-2">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <input
                 key={i}
                 ref={(el) => {
@@ -98,18 +104,22 @@ const VerifyEmail = ({
 
           <button
             onClick={handleVerify}
-            disabled={!isComplete}
+            disabled={!isComplete || isLoading}
             className={`mt-2 w-full py-2 rounded-[4px] text-white font-semibold transition 
             ${isComplete ? "bg-primary" : "bg-gray-400 cursor-not-allowed"}`}
           >
-            Verify
+            {
+                isLoading ? "Verifying...":"Verify"
+            }
           </button>
           <p className="text-gray-600">Didn&apos;t receive the code?</p>
-          <p className="text-primary cursor-pointer">Resend verification code</p>
+          <p className="text-primary cursor-pointer">
+            Resend verification code
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default VerifyEmail;
+export default VerifyOtp;

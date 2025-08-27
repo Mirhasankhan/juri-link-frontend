@@ -1,9 +1,10 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeft, Lock } from "lucide-react";
+
+import { useRouter } from "next/navigation";
 import { TLoginValues } from "@/types/common";
 import { toast } from "react-toastify";
 import { useResetPasswordMutation } from "@/redux/features/auth/authApi";
@@ -34,8 +35,9 @@ const NewPass = () => {
 
       if (response.data) {
         toast.success(response.data.message);
-        router.push("/login");
+        router.push("/");
         setIsLoading(false);
+        localStorage.removeItem("token");
       } else if (response.error) {
         if ("data" in response.error) {
           const errorData = response.error.data as { message?: string };
@@ -105,14 +107,10 @@ const NewPass = () => {
             type="submit"
             className="bg-primary text-white py-3 w-full font-medium rounded-[4px]"
           >
-            {isLoading ? (
-              "updating...."
-            ) : (
-              "Update Password"
-            )}
+            {isLoading ? "updating...." : "Update Password"}
           </button>
         </form>
-        <Link href="/auth/login" className="flex items-center gap-1 pt-6">
+        <Link href="/login" className="flex items-center gap-1 pt-6">
           <ArrowLeft size={15} /> Back to login
         </Link>
       </div>

@@ -6,12 +6,12 @@ import React, { useState } from "react";
 
 const ResetPassword = () => {
   const [active, setActive] = useState("forget");
-  const [email, setEmail] = useState("")
+
 
   return (
     <div>
-      {active === "forget" && <ForgetPassword setActive={setActive} setEmail={setEmail}/>}
-      {active === "verify" && <Verify email={email} setActive={setActive}/> }
+      {active === "forget" && <ForgetPassword setActive={setActive}/>}
+      {active === "verify" && <Verify setActive={setActive}/> }
       {active === "reset" && <NewPass />}
     </div>
   );
