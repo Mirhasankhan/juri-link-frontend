@@ -1,8 +1,22 @@
-"use client"
-import { useState } from "react";
+"use client";
 
+type FiltersProps = {
+  selectedYear: string | null;
+  setSelectedYear: (val: string | null) => void;
+  selectedService: string | null;
+  setSelectedService: (val: string | null) => void;
+  selectedBar: string | null;
+  setSelectedBar: (val: string | null) => void;
+};
 
-const Filters = () => {
+const Filters = ({
+  selectedYear,
+  setSelectedYear,
+  selectedService,
+  setSelectedService,
+  selectedBar,
+  setSelectedBar,
+}: FiltersProps) => {
   const yearOptions = ["1 year", "2 years", "3 years", "4 years", "5 years"];
   const serviceOptions = ["Online Consultation", "In Call Meeting"];
   const barOptions = [
@@ -14,10 +28,6 @@ const Filters = () => {
     "Washington State Bar",
   ];
 
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedBar, setSelectedBar] = useState<string | null>(null);
-
   const renderCheckboxGroup = (
     title: string,
     options: string[],
@@ -27,7 +37,10 @@ const Filters = () => {
     <div className="pb-4 mb-4 border-b border-gray-300">
       <h3 className="font-semibold mb-2">{title}</h3>
       {options.map((option, index) => (
-        <label key={index} className="flex items-center space-x-2 cursor-pointer mb-1">
+        <label
+          key={index}
+          className="flex items-center space-x-2 cursor-pointer mb-1"
+        >
           <input
             type="checkbox"
             checked={selected === option}

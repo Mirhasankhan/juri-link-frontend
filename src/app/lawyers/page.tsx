@@ -1,15 +1,23 @@
 "use client";
 
 import Filters from "@/components/lawyers/Filters";
-import LawyerCard from "@/components/lawyers/LawyerCard";
+// import LawyerCard from "@/components/lawyers/LawyerCard";
 import SearchLawyers from "@/components/lawyers/SearchLawyers";
 import Container from "@/utils/Container";
 import { Funnel, X } from "lucide-react";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
+import LawyerCard from "@/components/lawyers/LawyerCard";
 
 const LawyersPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedBar, setSelectedBar] = useState<string | null>(null);
+
+  const { data: lawyers } = useAllLawyersQuery("");
+  console.log(lawyers?.data);
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
@@ -32,19 +40,34 @@ const LawyersPage = () => {
               <X size={24} />
             </button>
           </div>
-          <Filters />
+          {/* pass filter state + setters */}
+          <Filters
+            selectedYear={selectedYear}
+            setSelectedYear={setSelectedYear}
+            selectedService={selectedService}
+            setSelectedService={setSelectedService}
+            selectedBar={selectedBar}
+            setSelectedBar={setSelectedBar}
+          />
         </motion.div>
       )}
 
       <Container>
         <div className="grid grid-cols-4 gap-5 my-6">
           <div className="hidden md:block md:col-span-1">
-            <Filters />
+            <Filters
+              selectedYear={selectedYear}
+              setSelectedYear={setSelectedYear}
+              selectedService={selectedService}
+              setSelectedService={setSelectedService}
+              selectedBar={selectedBar}
+              setSelectedBar={setSelectedBar}
+            />
           </div>
           <div className="col-span-4 md:col-span-3">
-            <div className="flex justify-between items-center pb-6">
+            {/* <div className="flex justify-between items-center pb-6">
               <h1 className="text-xl font-medium">
-                Found &quot;6 lawyers&quot;
+                Found &quot;{lawyers.length} lawyers&quot;
               </h1>
               <button
                 onClick={toggleFilters}
@@ -53,9 +76,11 @@ const LawyersPage = () => {
                 <Funnel size={18} />
                 Filters
               </button>
-            </div>
+            </div> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <LawyerCard />
+              {lawyers?.data.map((lawyer: any) => (
+                <LawyerCard key={lawyer.id} {...lawyer} />
+              ))}
             </div>
           </div>
         </div>
