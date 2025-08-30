@@ -70,12 +70,12 @@ const Login = () => {
           className="rounded-lg pt-6 bg-white"
         >
           <div className="mb-4">
-            <label className="block pb-1 font-medium">Email Address</label>
+            <label className="label-design pb-1">Email Address</label>
             <input
               {...register("email", {
                 required: "Email is required",
               })}
-              className="w-full p-2 border rounded-[4px]"
+              className="input-design"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -83,11 +83,11 @@ const Login = () => {
             )}
           </div>
           <div className="mb-4">
-            <label className="block pb-1 font-medium">Password</label>
+            <label className="label-design pb-1">Password</label>
             <input
               type="password"
               {...register("password", { required: "Password is required" })}
-              className="w-full p-2 border rounded-[4px]"
+              className="input-design"
               placeholder="Enter password"
             />
             {errors.password && (

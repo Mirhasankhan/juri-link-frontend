@@ -12,7 +12,7 @@ const LawyerSignUpForm = () => {
   const { data: legalServices } = useServicesQuery("");
   const [registerRequest, { isLoading }] = useRegisterRequestMutation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const router = useRouter()
+  const router = useRouter();
   const [fileError, setFileError] = useState<string | null>(null);
 
   const {
@@ -47,11 +47,11 @@ const LawyerSignUpForm = () => {
     console.log(response);
     if (response.data) {
       localStorage.setItem("verify", data.email);
-      
+
       reset();
       setSelectedFile(null);
       setFileError(null);
-      router.push("/auth/verify-email")
+      router.push("/auth/verify-email");
       toast.success(response.data.message);
     } else {
       toast.error(response.error.data.message);
@@ -70,17 +70,19 @@ const LawyerSignUpForm = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
+            <label className="label-design pb-1">Full Name</label>
             <input
               type="text"
               placeholder="Full Name"
               {...register("fullName", { required: "Full Name is required" })}
-              className="border focus:outline-gray-500 p-2 rounded w-full"
+              className="input-design"
             />
             {errors.fullName && (
               <p className="text-red-500 text-sm">{errors.fullName.message}</p>
             )}
           </div>
           <div>
+            <label className="label-design pb-1">Email</label>
             <input
               type="email"
               placeholder="Email"
@@ -91,7 +93,7 @@ const LawyerSignUpForm = () => {
                   message: "Invalid email address",
                 },
               })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -101,24 +103,26 @@ const LawyerSignUpForm = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
+            <label className="label-design pb-1">Password</label>
             <input
               type="password"
               placeholder="Password"
               {...register("password", { required: "Password is required" })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             />
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
           <div>
+            <label className="label-design pb-1">License Number</label>
             <input
               type="number"
               placeholder="License Number"
               {...register("licenseNumber", {
                 required: "License Number is required",
               })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             />
             {errors.licenseNumber && (
               <p className="text-red-500 text-sm">
@@ -129,6 +133,7 @@ const LawyerSignUpForm = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
+            <label className="label-design pb-1">Years of Experience</label>
             <input
               type="number"
               placeholder="Years of Experience"
@@ -137,7 +142,7 @@ const LawyerSignUpForm = () => {
                 valueAsNumber: true,
                 min: { value: 0, message: "Must be at least 0" },
               })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             />
             {errors.yearsOfExperience && (
               <p className="text-red-500 text-sm">
@@ -146,11 +151,12 @@ const LawyerSignUpForm = () => {
             )}
           </div>
           <div>
+            <label className="label-design pb-1">Bar Association</label>
             <select
               {...register("barAssociation", {
                 required: "Bar Association is required",
               })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             >
               <option value="">Select Bar Association</option>
               <option value="American Bar Association">
@@ -165,14 +171,15 @@ const LawyerSignUpForm = () => {
               </p>
             )}
           </div>
-        </div> 
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
+            <label className="label-design pb-1">Service Type</label>
             <select
               {...register("serviceType", {
                 required: "Service Type is required",
               })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             >
               <option value="">Select Service Type</option>
               <option value="Online">Online</option>
@@ -186,6 +193,7 @@ const LawyerSignUpForm = () => {
             )}
           </div>
           <div>
+            <label className="label-design pb-1">Fee (per case)</label>
             <input
               type="number"
               step="0.01"
@@ -195,7 +203,7 @@ const LawyerSignUpForm = () => {
                 valueAsNumber: true,
                 min: { value: 0, message: "Fee must be positive" },
               })}
-              className="border p-2 rounded w-full"
+              className="input-design"
             />
             {errors.fee && (
               <p className="text-red-500 text-sm">{errors.fee.message}</p>
@@ -203,9 +211,9 @@ const LawyerSignUpForm = () => {
           </div>
         </div>
         <div className="w-full">
-          <label className="block pb-1 font-medium">Law Degree Image</label>
+          <label className="label-design pb-1">Law Degree Image</label>
           <input
-            className="border w-full rounded-[8px] p-2"
+            className="input-design"
             onChange={(e) => {
               if (e.target.files && e.target.files[0]) {
                 setSelectedFile(e.target.files[0]);

@@ -142,7 +142,7 @@ const LawyerForm = () => {
           )}
         </div>
         <div className="w-full">
-          <label className="block font-medium">Service Type</label>
+          <label className="label-design">Service Type</label>
           <select
             {...register("type")}
             className="w-full border px-3 py-2 rounded mt-1"

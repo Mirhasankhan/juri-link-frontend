@@ -1,7 +1,5 @@
-
-"use client"
+"use client";
 import { useForm } from "react-hook-form";
-
 
 const CreatePost = () => {
   const {
@@ -12,7 +10,6 @@ const CreatePost = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    
   };
 
   return (
@@ -23,21 +20,23 @@ const CreatePost = () => {
       <h2 className="text-xl font-semibold mb-4">Request Details</h2>
 
       <div className="mb-4">
-        <label className="block font-medium">Request Title *</label>
+        <label className="label-design">Request Title *</label>
         <input
           type="text"
           placeholder="Brief title describing your legal need"
           {...register("title", { required: true })}
-          className="w-full border px-3 py-2 rounded mt-1"
+          className="input-design mt-1"
         />
-        {errors.title && <span className="text-red-500 text-sm">Title is required</span>}
+        {errors.title && (
+          <span className="text-red-500 text-sm">Title is required</span>
+        )}
       </div>
 
       <div className="mb-4">
-        <label className="block font-medium">Legal Category *</label>
+        <label className="label-design">Legal Category *</label>
         <select
           {...register("category", { required: true })}
-          className="w-full border px-3 py-2 rounded mt-1"
+          className="input-design mt-1"
         >
           <option value="">Select a category</option>
           <option value="Family">Family Law</option>
@@ -46,70 +45,63 @@ const CreatePost = () => {
           <option value="Business">Business</option>
           {/* Add more categories as needed */}
         </select>
-        {errors.category && <span className="text-red-500 text-sm">Category is required</span>}
+        {errors.category && (
+          <span className="text-red-500 text-sm">Category is required</span>
+        )}
       </div>
 
       <div className="mb-4">
-        <label className="block font-medium">Detailed Description *</label>
+        <label className="label-design">Detailed Description *</label>
         <textarea
           rows={4}
           placeholder="Provide detailed information about your legal situation..."
           {...register("description", { required: true })}
-          className="w-full border px-3 py-2 rounded mt-1"
+          className="input-design mt-1"
         ></textarea>
-        {errors.description && <span className="text-red-500 text-sm">Description is required</span>}
+        {errors.description && (
+          <span className="text-red-500 text-sm">Description is required</span>
+        )}
       </div>
 
       <div className="mb-4 grid grid-cols-2 gap-4">
         <div>
-          <label className="block font-medium">📍 Location</label>
+          <label className="label-design">📍 Location</label>
           <input
             type="text"
             placeholder="City, State"
             {...register("location")}
-            className="w-full border px-3 py-2 rounded mt-1"
+            className="input-design mt-1"
           />
         </div>
 
         <div>
-          <label className="block font-medium">$ Budget Range</label>
-          <select
+          <label className="label-design">$ Budget Range</label>
+          <input
+            type="number"
+            placeholder="enter your budget"
             {...register("budget")}
-            className="w-full border px-3 py-2 rounded mt-1"
-          >
-            <option value="">Select budget range</option>
-            <option value="under-100">$0 - $100</option>
-            <option value="100-500">$100 - $500</option>
-            <option value="500-1000">$500 - $1000</option>
-            <option value="1000-plus">$1000+</option>
-          </select>
+            className="input-design mt-1"
+          />
         </div>
       </div>
 
       <div className="mb-6 grid grid-cols-2 gap-4">
         <div>
-          <label className="block font-medium">Service Type</label>
-          <select
-            {...register("type")}
-            className="w-full border px-3 py-2 rounded mt-1"
-          >
+          <label className="label-design">Service Type</label>
+          <select {...register("type")} className="input-design mt-1">
             <option value="">Select Service Type</option>
             <option value="online">Online Consultation</option>
             <option value="inPerson">In-Persion</option>
             <option value="both">Online Or In-Persion</option>
-
           </select>
         </div>
 
         <div>
-          <label className="block font-medium">Urgency Level</label>
-          <select
-            {...register("urgency")}
-            className="w-full border px-3 py-2 rounded mt-1"
-          >
-            <option value="Normal">Normal - Standard timeline</option>
-            <option value="Urgent">Urgent</option>
-            <option value="Immediate">Immediate attention</option>
+          <label className="label-design">Urgency Level</label>
+          <select {...register("urgency")} className="input-design mt-1">
+            <option value="low">Normal - Standard timeline</option>
+            <option value="medium">Urgent</option>
+            <option value="high">Immediate attention</option>
           </select>
         </div>
       </div>

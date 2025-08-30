@@ -27,9 +27,9 @@ const Banner = () => {
               Find Lawyers
             </button>
           </Link>
-          <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
+         <Link href="/create-post"> <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
             Post Your Request
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>
