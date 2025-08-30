@@ -4,7 +4,7 @@ import Filters from "@/components/lawyers/Filters";
 // import LawyerCard from "@/components/lawyers/LawyerCard";
 import SearchLawyers from "@/components/lawyers/SearchLawyers";
 import Container from "@/utils/Container";
-import { Funnel, X } from "lucide-react";
+import {  X } from "lucide-react";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
