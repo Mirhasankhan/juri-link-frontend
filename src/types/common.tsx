@@ -65,12 +65,12 @@ export type FormValues = {
   specializations: string[];
 };
 
-export interface IFormInput {
-  oldPassword: string;
-  email:string
-  newPassword: string;
-  confirm: string;
-  username: string;
-  phone: string;
-  address: string;
+export interface TPostInput {
+  title: string;
+  description:string
+  budget: string;
+  urgencyLevel: string;
+  serviceId: string;
+  location: string;
+  
 }
