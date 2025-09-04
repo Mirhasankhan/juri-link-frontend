@@ -7,6 +7,7 @@ export const baseApi = createApi({
     baseUrl: "https://juri-link-server.vercel.app/api/v1/",
     prepareHeaders: (headers) => {
       const { token } = JWTDecode();
+      console.log(token);
 
       headers.set(
         "Authorization",
