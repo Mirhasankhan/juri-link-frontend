@@ -1,7 +1,6 @@
 "use client";
 
 import Filters from "@/components/lawyers/Filters";
-// import LawyerCard from "@/components/lawyers/LawyerCard";
 import SearchLawyers from "@/components/lawyers/SearchLawyers";
 import Container from "@/utils/Container";
 import {  X } from "lucide-react";
@@ -79,7 +78,7 @@ const LawyersPage = () => {
             </div> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {lawyers?.data.map((lawyer: any) => (
-                <LawyerCard key={lawyer.id} {...lawyer} />
+                <LawyerCard key={lawyer.id} lawyer={lawyer} />
               ))}
             </div>
           </div>

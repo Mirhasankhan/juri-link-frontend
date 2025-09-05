@@ -2,7 +2,7 @@ import { AlarmClockPlus, MapPin, Star, User, Video } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-const LawyerCard = () => {
+const LawyerCard = ({ lawyer }: { lawyer: any }) => {
   return (
     <div className="p-3 rounded-md w-full shadow-xl max-h-[220px]">
       <div className="flex items-center justify-between">
@@ -17,14 +17,15 @@ const LawyerCard = () => {
             alt=""
           ></Image>
           <div>
-            <h1 className="font-medium text-xl">Sarah Johnson</h1>
+            <h1 className="font-medium text-xl">{lawyer?.fullName}</h1>
             <p className="text-primary font-medium">Corporate Law</p>
           </div>
         </div>
         <div>
           <h1 className="text-primary text-xl font-medium">350</h1>
           <div className="gap-1 items-center flex">
-            <Star size={18} className="text-orange-400"></Star> <p>4</p>
+            <Star size={18} className="text-orange-400"></Star>{" "}
+            <p>{lawyer?.avgRating}</p>
           </div>
         </div>
       </div>
@@ -35,7 +36,7 @@ const LawyerCard = () => {
         </div>
         <div className="flex gap-1 items-center">
           <AlarmClockPlus size={15} className="text-primary"></AlarmClockPlus>
-          <h1 className="text-sm">Experience: 15 Years</h1>
+          <h1 className="text-sm">Experience: {lawyer?.experience} Years</h1>
         </div>
       </div>
       <div className="flex mt-2 justify-between items-center">
