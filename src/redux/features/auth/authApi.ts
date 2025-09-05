@@ -95,6 +95,14 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+    lawyerDetails: builder.query({
+      query: (id) => ({
+        url: `/user/details/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["users"],
+    }),
+
     allUsers: builder.query({
       query: ({ searchQuery, selectedRole, page, limit }) => ({
         url: `/analysis/all-users?search=${searchQuery}&role=${selectedRole}&page=${page}&limit=${limit}`,
@@ -120,6 +128,7 @@ export const {
   useResendOtpMutation,
   useProfileQuery,
   useUpdateImageMutation,
+  useLawyerDetailsQuery,
   useAllLawyersQuery,
   useLoginMutation,
   useAllUsersQuery,

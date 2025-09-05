@@ -1,5 +1,6 @@
 import { AlarmClockPlus, MapPin, Star, User, Video } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
@@ -51,9 +52,11 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
         </h1>
       </div>
       <div className="flex gap-4 mt-4">
-        <button className="bg-primary w-full py-2 rounded-[4px] text-white font-medium">
-          View Details
-        </button>
+        <Link className="w-full" href={`/lawyers/${lawyer._id}`}>
+          <button className="bg-primary w-full py-2 rounded-[4px] text-white font-medium">
+            View Details
+          </button>
+        </Link>
         <button className="text-primary border-primary border  w-full py-2 rounded-[4px]  font-medium">
           Send Message
         </button>
