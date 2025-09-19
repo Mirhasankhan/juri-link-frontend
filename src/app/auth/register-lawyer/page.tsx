@@ -34,6 +34,7 @@ const LawyerSignUpForm = () => {
       email: data.email,
       serviceType: data.serviceType,
       barAssociation: data.barAssociation,
+      fee: data.fee,
       specialization: data.specializations,
       experience: data.yearsOfExperience,
       licenceNumber: data.licenseNumber,

@@ -4,12 +4,13 @@ import Link from "next/link";
 import React from "react";
 
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
+  console.log(lawyer);
   return (
-    <div className="p-3 rounded-md w-full shadow-xl max-h-[220px]">
+    <div className="p-3 rounded-[8px] w-full shadow-2xl max-h-[220px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Image
-            className="h-16 w-16 object-cover rounded-full"
+            className="h-[40px] w-[40px] object-cover rounded-full"
             height={400}
             width={100}
             src={
@@ -19,11 +20,22 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
           ></Image>
           <div>
             <h1 className="font-medium text-xl">{lawyer?.fullName}</h1>
-            <p className="text-primary font-medium">Corporate Law</p>
+
+            <div className="flex gap-1">
+              {lawyer?.legalServices?.map(
+                (service: { _id: string; serviceName: string }) => (
+                  <div key={service._id}>
+                    <p className="text-primary text-xs font-medium">
+                      {service?.serviceName} |
+                    </p>
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
         <div>
-          <h1 className="text-primary text-xl font-medium">350</h1>
+          <h1 className="text-primary text-xl font-medium">${lawyer?.fee}</h1>
           <div className="gap-1 items-center flex">
             <Star size={18} className="text-orange-400"></Star>{" "}
             <p>{lawyer?.avgRating}</p>
@@ -64,13 +76,13 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
           New York State Bar
         </h1>
       </div>
-      <div className="flex gap-4 mt-4">
+      <div className="flex gap-6 mt-4">
         <Link className="w-full" href={`/lawyers/${lawyer._id}`}>
-          <button className="bg-primary w-full py-2 rounded-[4px] text-white font-medium">
+          <button className="bg-primary w-full py-1 rounded-[4px] text-white font-medium">
             View Details
           </button>
         </Link>
-        <button className="text-primary border-primary border  w-full py-2 rounded-[4px]  font-medium">
+        <button className="text-primary border-primary border  w-full py-1 rounded-[4px]  font-medium">
           Send Message
         </button>
       </div>

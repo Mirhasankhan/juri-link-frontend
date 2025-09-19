@@ -3,7 +3,7 @@
 import Filters from "@/components/lawyers/Filters";
 import SearchLawyers from "@/components/lawyers/SearchLawyers";
 import Container from "@/utils/Container";
-import { X } from "lucide-react";
+import { Funnel, X } from "lucide-react";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
@@ -11,7 +11,7 @@ import LawyerCard from "@/components/lawyers/LawyerCard";
 
 const LawyersPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string | null>("");
   const [selectedService, setSelectedService] = useState<string | null>("");
   const [selectedLegal, setSelectedLegal] = useState<string | null>("");
  
@@ -20,7 +20,8 @@ const LawyersPage = () => {
     type: selectedService,
     specializationId: selectedLegal,
   });
- 
+
+  
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
@@ -43,7 +44,6 @@ const LawyersPage = () => {
               <X size={24} />
             </button>
           </div>
-          {/* pass filter state + setters */}
           <Filters
             selectedYear={selectedYear}
             setSelectedYear={setSelectedYear}
@@ -68,9 +68,9 @@ const LawyersPage = () => {
             />
           </div>
           <div className="col-span-4 md:col-span-3">
-            {/* <div className="flex justify-between items-center pb-6">
+            <div className="flex justify-between items-center pb-6">
               <h1 className="text-xl font-medium">
-                Found &quot;{lawyers.length} lawyers&quot;
+                Found &quot;{lawyers?.data?.length} lawyers&quot;
               </h1>
               <button
                 onClick={toggleFilters}
@@ -79,8 +79,8 @@ const LawyersPage = () => {
                 <Funnel size={18} />
                 Filters
               </button>
-            </div> */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {lawyers?.data.map((lawyer: any) => (
                 <LawyerCard key={lawyer.id} lawyer={lawyer} />
               ))}
