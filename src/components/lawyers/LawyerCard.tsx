@@ -42,9 +42,22 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
       </div>
       <div className="flex mt-2 justify-between items-center">
         <div className="flex gap-1 items-center">
-          <Video size={15} className="text-primary"></Video>
-          <User size={15} className="text-primary"></User>
-          <h1 className="text-sm">Online & In Person</h1>
+          {(lawyer.serviceType === "Online" ||
+            lawyer.serviceType === "Both") && (
+            <Video size={15} className="text-primary" />
+          )}
+          {(lawyer.serviceType === "In_Person" ||
+            lawyer.serviceType === "Both") && (
+            <User size={15} className="text-primary"></User>
+          )}
+
+          <h1 className="text-sm">
+            {lawyer?.serviceType == "Both"
+              ? "Online & In Person"
+              : lawyer.serviceType == "Online"
+              ? "Online"
+              : "In Person"}
+          </h1>
         </div>
 
         <h1 className="text-sm border-2 font-medium py-1 px-2 rounded-xl">

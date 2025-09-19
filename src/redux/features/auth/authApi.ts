@@ -89,8 +89,8 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
     allLawyers: builder.query({
-      query: () => ({
-        url: `/user/all`,
+      query: ({experience, type, specializationId }) => ({
+        url: `/user/all?experience=${experience}&type=${type}&specializationId=${specializationId}`,
         method: "GET",
       }),
       providesTags: ["users"],

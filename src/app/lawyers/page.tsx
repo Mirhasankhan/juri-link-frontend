@@ -3,7 +3,7 @@
 import Filters from "@/components/lawyers/Filters";
 import SearchLawyers from "@/components/lawyers/SearchLawyers";
 import Container from "@/utils/Container";
-import {  X } from "lucide-react";
+import { X } from "lucide-react";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
@@ -12,11 +12,15 @@ import LawyerCard from "@/components/lawyers/LawyerCard";
 const LawyersPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedBar, setSelectedBar] = useState<string | null>(null);
-
-  const { data: lawyers } = useAllLawyersQuery("");
-  console.log(lawyers?.data);
+  const [selectedService, setSelectedService] = useState<string | null>("");
+  const [selectedLegal, setSelectedLegal] = useState<string | null>("");
+ 
+  const { data: lawyers } = useAllLawyersQuery({
+    experience: selectedYear,
+    type: selectedService,
+    specializationId: selectedLegal,
+  });
+ 
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
@@ -45,8 +49,8 @@ const LawyersPage = () => {
             setSelectedYear={setSelectedYear}
             selectedService={selectedService}
             setSelectedService={setSelectedService}
-            selectedBar={selectedBar}
-            setSelectedBar={setSelectedBar}
+            selectedLegalService={selectedLegal}
+            setSelectedLegalService={setSelectedLegal}
           />
         </motion.div>
       )}
@@ -59,8 +63,8 @@ const LawyersPage = () => {
               setSelectedYear={setSelectedYear}
               selectedService={selectedService}
               setSelectedService={setSelectedService}
-              selectedBar={selectedBar}
-              setSelectedBar={setSelectedBar}
+              selectedLegalService={selectedLegal}
+              setSelectedLegalService={setSelectedLegal}
             />
           </div>
           <div className="col-span-4 md:col-span-3">

@@ -1,12 +1,14 @@
 "use client";
 
+import { useServicesQuery } from "@/redux/features/services/services.api";
+
 type FiltersProps = {
   selectedYear: string | null;
   setSelectedYear: (val: string | null) => void;
   selectedService: string | null;
   setSelectedService: (val: string | null) => void;
-  selectedBar: string | null;
-  setSelectedBar: (val: string | null) => void;
+  selectedLegalService: string | null;
+  setSelectedLegalService: (val: string | null) => void;
 };
 
 const Filters = ({
@@ -14,23 +16,34 @@ const Filters = ({
   setSelectedYear,
   selectedService,
   setSelectedService,
-  selectedBar,
-  setSelectedBar,
+  selectedLegalService,
+  setSelectedLegalService,
 }: FiltersProps) => {
-  const yearOptions = ["1 year", "2 years", "3 years", "4 years", "5 years"];
-  const serviceOptions = ["Online Consultation", "In Call Meeting"];
-  const barOptions = [
-    "New York State Bar",
-    "California State Bar",
-    "Texas State Bar",
-    "Florida Bar",
-    "Illinois State Bar",
-    "Washington State Bar",
+  const { data: legalServices } = useServicesQuery(""); 
+
+  const yearOptions = [
+    { label: "1 Year", value: "1" },
+    { label: "2 Years", value: "2" },
+    { label: "3 Years", value: "3" },
+    { label: "4 Years", value: "4" },
+    { label: "5 Years", value: "5" },
   ];
+
+  const serviceOptions = [
+    { label: "Online Consultation", value: "Online" },
+    { label: "In Call Meeting", value: "In_Person" },
+    { label: "Online & In Person", value: "Both" },
+  ];
+
+  const legalServiceOptions =
+    legalServices?.data?.map((service: any) => ({
+      label: service.serviceName,
+      value: service._id,
+    })) || [];
 
   const renderCheckboxGroup = (
     title: string,
-    options: string[],
+    options: { label: string; value: string }[],
     selected: string | null,
     setSelected: (val: string | null) => void
   ) => (
@@ -43,11 +56,13 @@ const Filters = ({
         >
           <input
             type="checkbox"
-            checked={selected === option}
-            onChange={() => setSelected(selected === option ? null : option)}
+            checked={selected === option.value}
+            onChange={() =>
+              setSelected(selected === option.value ? null : option.value)
+            }
             className="accent-blue-500 w-4 h-4"
           />
-          <span>{option}</span>
+          <span>{option.label}</span>
         </label>
       ))}
     </div>
@@ -57,7 +72,7 @@ const Filters = ({
     <div className="p-4 max-w-md bg-white rounded-md shadow">
       {renderCheckboxGroup("Years of Experience", yearOptions, selectedYear, setSelectedYear)}
       {renderCheckboxGroup("Service Type", serviceOptions, selectedService, setSelectedService)}
-      {renderCheckboxGroup("Bar Association", barOptions, selectedBar, setSelectedBar)}
+      {renderCheckboxGroup("Legal Services", legalServiceOptions, selectedLegalService, setSelectedLegalService)}
     </div>
   );
 };

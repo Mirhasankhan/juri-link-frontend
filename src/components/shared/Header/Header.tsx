@@ -23,7 +23,8 @@ const Header = () => {
             href="/"
             className="flex text-green-600 text-3xl font-bold items-center gap-1"
           >
-            Juri.Link
+            {/* Juri.Link */}
+            heelo
           </Link>
           <div className="hidden md:block">
             <SubMenu></SubMenu>
