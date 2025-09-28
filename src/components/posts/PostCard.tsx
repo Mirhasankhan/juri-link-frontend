@@ -4,10 +4,10 @@ import {
   DollarSign,
   Zap,
   Laptop2,
-  Heart,
-  MessageCircle,
+  Heart,  
   MessageSquare,
 } from "lucide-react";
+import PostDetailModal from "./PostDetailModal";
 
 const PostCard = () => {
   return (
@@ -65,10 +65,7 @@ const PostCard = () => {
             <Heart></Heart>
             <p className="font-medium">24</p>
           </div>
-          <div className="flex text-gray-500 gap-2">
-            <MessageCircle></MessageCircle>
-            <p className="font-medium">10</p>
-          </div>
+         <PostDetailModal></PostDetailModal>
         </div>
         <button className="flex items-center gap-2 text-sm text-white font-medium px-2 rounded-[6px] bg-primary py-1">
           <MessageSquare size={15}></MessageSquare>
