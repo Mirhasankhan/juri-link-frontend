@@ -7,6 +7,7 @@ import Container from "@/utils/Container";
 import React, { useState } from "react";
 import { Funnel, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePostsQuery } from "@/redux/features/services/services.api";
 
 const PostsPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -14,11 +15,15 @@ const PostsPage = () => {
   const [selectedService, setSelectedService] = useState<string | null>("");
   const [selectedLegal, setSelectedLegal] = useState<string | null>("");
 
-  console.log(selectedYear,selectedService,selectedLegal);
+  const { data: posts, isLoading } = usePostsQuery("");
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
   };
+
+  if(isLoading){
+    return "loading....."
+  }
 
   return (
     <div>
@@ -75,7 +80,9 @@ const PostsPage = () => {
               </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <PostCard />
+              {posts?.data?.map((post: any) => (
+                <PostCard key={post.id} post={post} />
+              ))}
             </div>
           </div>
         </div>

@@ -12,8 +12,8 @@ const PostDetailModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-     <div className="flex text-gray-500 gap-2">
-            <MessageCircle></MessageCircle>
+     <div className="flex items-center text-gray-500 gap-2">
+            <MessageCircle size={20}></MessageCircle>
             <p className="font-medium">10</p>
           </div>
       </DialogTrigger>

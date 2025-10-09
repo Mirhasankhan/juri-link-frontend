@@ -8,8 +8,10 @@ import {
   MessageSquare,
 } from "lucide-react";
 import PostDetailModal from "./PostDetailModal";
+import { formatDistanceToNow } from "date-fns";
 
-const PostCard = () => {
+const PostCard = ({post}:{post:any}) => {
+  console.log(post);
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 transition hover:shadow-lg">
       <div className="flex gap-2">
@@ -20,7 +22,9 @@ const PostCard = () => {
         <div>
           <div>
             <h1 className="font-medium text-xl">
-              Sarah johsn son <span className="text-gray-500">2h ago</span>
+              {post?.userId?.fullName} <span className="text-gray-500 text-xs">
+  {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+</span>
             </h1>
             <div className="flex gap-1 mt-1">
               <h1 className="inline-block bg-gray-100 text-gray-800 text-xs font-medium px-3 py-1 rounded-full mb-4">
@@ -34,20 +38,18 @@ const PostCard = () => {
         </div>
       </div>
 
-      <h1 className="text-xl font-medium py-3">Need help in family law</h1>
+      <h1 className="text-xl font-medium py-3">{post?.title}</h1>
       <p className="text-gray-700 text-sm mb-6 leading-relaxed">
-        I need a lawyer to help me file and process divorce documents in
-        California. The process is already started, but I need legal guidance
-        and filing help ASAP.
+       {post.description}
       </p>
       <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-gray-500" />
-          <span>Los Angeles, CA</span>
+          <span>{post.location}</span>
         </div>
         <div className="flex items-center gap-2">
           <DollarSign className="h-4 w-4 text-gray-500" />
-          <span>$100 - $500</span>
+          <span>{post.budget}</span>
         </div>
         <div className="flex items-center gap-2">
           <Laptop2 className="h-4 w-4 text-gray-500" />
@@ -55,15 +57,15 @@ const PostCard = () => {
         </div>
         <div className="flex items-center gap-2">
           <Zap className="h-4 w-4 text-yellow-500" />
-          <span>Urgent</span>
+          <span>{post.urgencyLevel}</span>
         </div>
       </div>
 
       <div className="mt-6 flex justify-between items-center border-t pt-2">
         <div className="flex gap-8">
-          <div className="flex text-gray-500 gap-2">
-            <Heart></Heart>
-            <p className="font-medium">24</p>
+          <div className="flex items-center text-gray-500 gap-2">
+            <Heart size={20}></Heart>
+            <p className="font-medium">{post.likedUsers.length}</p>
           </div>
          <PostDetailModal></PostDetailModal>
         </div>
