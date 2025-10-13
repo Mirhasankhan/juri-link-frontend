@@ -17,6 +17,8 @@ const PostsPage = () => {
 
   const { data: posts, isLoading } = usePostsQuery("");
 
+  console.log(posts);
+
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
   };

@@ -12,7 +12,7 @@ export const baseApi = createApi({
 
       headers.set(
         "Authorization",
-        `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTZmNWM5NjMxMDFlZjc2NDM5OTk5MiIsImVtYWlsIjoiam9obmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiVXNlciIsImZ1bGxOYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE3NTY2MzE4MzgsImV4cCI6MTc1NzkyNzgzOH0.vd9-d1BqQQnVu4jgHS2YouTUjCdtue4fhb2Lhw6yp5A`
+        `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDYzNDJkZDExY2E5YzkzMDIwY2IxZiIsImVtYWlsIjoibWlyaGFzYXNuLmJkNUBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImZ1bGxOYW1lIjoiSm9obiBEbyIsImlhdCI6MTc2MDM2OTA2OSwiZXhwIjoxNzYxNjY1MDY5fQ.-afNk6TeCnglZj4bhHG3hcUkeRGQb9zKo_cUTj-0Ttg`
       );
 
       // if (token) {

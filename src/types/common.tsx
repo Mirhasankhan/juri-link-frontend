@@ -69,6 +69,7 @@ export interface TPostInput {
   title: string;
   description:string
   budget: string;
+  serviceType:string
   urgencyLevel: string;
   serviceId: string;
   location: string;
