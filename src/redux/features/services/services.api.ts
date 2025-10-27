@@ -24,8 +24,15 @@ const serviceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["service"],
     }),
+    post: builder.query({
+      query: (id) => ({
+        url: `/post/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["service"],
+    }),
   }),
 });
 
-export const { useServicesQuery, useCreatePostMutation, usePostsQuery } =
+export const { useServicesQuery, useCreatePostMutation, usePostsQuery,usePostQuery } =
   serviceApi;

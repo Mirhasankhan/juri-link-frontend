@@ -12,7 +12,6 @@ import PostDetailModal from "./PostDetailModal";
 import { formatDistanceToNow } from "date-fns";
 
 const PostCard = ({ post }: { post: any }) => {
-  console.log(post);
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 transition hover:shadow-lg">
       <div className="flex gap-2">
@@ -75,7 +74,7 @@ const PostCard = ({ post }: { post: any }) => {
             <Heart size={20}></Heart>
             <p className="font-medium">{post.likedUsers.length}</p>
           </div>
-          <PostDetailModal></PostDetailModal>
+          <PostDetailModal id={post._id}></PostDetailModal>
         </div>
         <button className="flex items-center gap-2 text-sm text-white font-medium px-2 rounded-[6px] bg-primary py-1">
           <MessageSquare size={15}></MessageSquare>

@@ -15,9 +15,7 @@ const PostsPage = () => {
   const [selectedService, setSelectedService] = useState<string | null>("");
   const [selectedLegal, setSelectedLegal] = useState<string | null>("");
 
-  const { data: posts, isLoading } = usePostsQuery("");
-
-  console.log(posts);
+  const { data: posts, isLoading } = usePostsQuery(""); 
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
