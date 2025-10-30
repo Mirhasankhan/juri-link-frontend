@@ -86,9 +86,9 @@ const VerifyEmail = () => {
     }
   };
 
-  if(!email){
-    router.push("/")
-  }
+  // if(!email){
+  //   router.push("/")
+  // }
 
   return (
     <>

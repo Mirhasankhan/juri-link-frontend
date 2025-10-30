@@ -65,7 +65,7 @@ const BookingPage = () => {
             <div className="border mt-4 bg-white p-6 rounded-[6px]">
               <h1 className="font-medium pb-2">Consultation Type</h1>
               <div className="flex gap-5">
-                <div className="flex border items-center w-full p-3 gap-2">
+                <div className="flex border rounded-[6px] items-center w-full p-3 gap-2">
                   <input
                     className="border rounded-full"
                     type="checkbox"
@@ -82,7 +82,7 @@ const BookingPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex border items-center w-full p-3 gap-2">
+                <div className="flex border rounded-[6px] items-center w-full p-3 gap-2">
                   <input
                     className="border rounded-full"
                     type="checkbox"

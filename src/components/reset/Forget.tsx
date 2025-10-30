@@ -20,19 +20,16 @@ const ForgetPassword = ({
 
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
     try {
-      const response = await sendOpt({email:data.email});
+      const response: any = await sendOpt({ email: data.email });
       console.log(response);
+
       if (response.data) {
         toast.success(response.data.message);
         setActive("verify");
         localStorage.setItem("email", data.email);
-      } else if (response.error) {
-        if ("data" in response.error) {
-          const errorData = response.error.data as { message?: string };
-          toast.error(errorData.message || "Something went wrong.");
-        } else {
-          toast.error("Unexpected error structure.");
-        }
+      } else {
+        console.log("lsdflksfjk");
+        toast.error(response.error.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -41,7 +38,7 @@ const ForgetPassword = ({
     }
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-[#f8f8f8] pt-12">
       <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-5  rounded-[4px]">
         <div className="p-3 bg-blue-100 rounded-full">
           <Mail size={30} className="text-blue-800"></Mail>
@@ -57,6 +54,7 @@ const ForgetPassword = ({
           <div className="mb-4">
             <label className="block pb-2 font-medium">Email</label>
             <input
+              type="email"
               {...register("email", {
                 required: "Email is required",
               })}
@@ -80,7 +78,7 @@ const ForgetPassword = ({
             )}
           </button>
         </form>
-        <Link href="/" className="flex items-center gap-1 pt-6">
+        <Link href="/auth/login" className="flex items-center gap-1 pt-6">
           <ArrowLeft size={15} /> Back to login
         </Link>
       </div>

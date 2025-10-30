@@ -33,7 +33,7 @@ const Login = () => {
 
       if (response.data?.result?.accessToken) {
         toast.success("Login Successful");
-      
+
         router.push("/");
         dispatch(
           setUser({
@@ -55,16 +55,22 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100 py-12 min-h-screen">
-      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-6 dark:text-white bg-white rounded-[4px]">
-        <Image placeholder="blur" src={logo} alt="" height={60} width={60}></Image>
-        <h1 className="text-xl font-medium ppy-2 ">Welcome Back!</h1>
-        <p className="text-sm">
-          Enter to get unlimited access to data & information
-        </p>
-        <h1 className="pt-3">Email: mirhasan000034@gmail.com</h1>
-        <p>Password: 123456</p>
-        {/* https://advocate-service-finder.lovable.app/ */}
+    <div className="bg-[#f8f8f8] py-12 min-h-screen">
+      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto py-12 px-6 dark:text-white bg-white rounded-[6px]">
+        <div className="flex flex-col items-center">
+          <Image
+            placeholder="blur"
+            src={logo}
+            alt=""
+            height={60}
+            width={60}
+          ></Image>
+          <h1 className="text-3xl font-semibold py-2 ">Welcome Back</h1>
+          <p className="text-sm text-gray-600">Access unlimited data & information</p>
+          {/* <h1 className="pt-3">Email: mirhasan000034@gmail.com</h1>
+          <p>Password: 123456</p> */}
+        </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="rounded-lg pt-6 bg-white"
@@ -72,6 +78,7 @@ const Login = () => {
           <div className="mb-4">
             <label className="label-design pb-1">Email Address</label>
             <input
+              type="email"
               {...register("email", {
                 required: "Email is required",
               })}
@@ -144,10 +151,10 @@ const Login = () => {
                     d="M4 12a8 8 0 018-8v8H4z"
                   />
                 </svg>
-                Authenticating...
+                Signing in...
               </>
             ) : (
-              <>Login</>
+              <>Sign In</>
             )}
           </button>
         </form>
@@ -180,8 +187,8 @@ const Login = () => {
         >
           <FaGithub size={20} /> Sign In With Github
         </button> */}
-        <div className="text-center pt-2">
-          Dont have an account?
+        <div className="text-center text-gray-700 pt-4">
+          Dont have an account? 
           <Link href="/auth/register" className="text-primary hover:underline">
             Register Here
           </Link>

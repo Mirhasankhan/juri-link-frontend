@@ -36,21 +36,21 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100 py-12 min-h-screen">
+    <div className="bg-[#f8f8f8] py-12 min-h-screen">
       <div className="text-center">
-        <h1 className="text-primary text-xl font-medium"> Join Juri Link</h1>
-        <p className="font-medium pb-3 text-gray-500">
+        <h1 className="text-4xl font-medium"> Join Juri Link</h1>
+        <p className="font-medium py-3 text-gray-500">
           Create your account to get started
         </p>
       </div>
 
-      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-6 dark:text-white bg-white rounded-[4px]">
-        <h1 className="text-xl font-medium ppy-2 ">Client Registration</h1>
-        <h1 className="text-sm">Sign up to find and hire lawyers</h1>
+      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
+        <h1 className="text-2xl font-medium ppy-2 ">Client Registration</h1>
+        <h1 className="text-sm text-gray-600">Sign up to find and hire lawyers</h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="rounded-lg pt-6 bg-white"
+          className="rounded-lg py-6 bg-white"
         >
           <div className="mb-4">
             <label className="label-design pb-1">Full Name</label>
@@ -69,6 +69,7 @@ const Register = () => {
           <div className="mb-4">
             <label className="label-design pb-1">Email</label>
             <input
+            type="email"
               {...register("email", {
                 required: "Email is required",
               })}
@@ -104,13 +105,13 @@ const Register = () => {
             type="submit"
             className={`${
               isLoading ? "bg-primary/75" : "bg-primary"
-            } text-white py-3 w-full font-medium rounded-[4px]`}
+            } text-white py-3 mt-3 w-full font-medium rounded-[4px]`}
           >
             {isLoading ? "Creating...." : "Create Account"}
           </button>
         </form>
 
-        <div className="flex pt-2 justify-center">
+        <div className="flex border-t pt-4 border-gray-200 text-gray-700 justify-center">
           <h1>Already have an account?</h1>
           <Link
             href="/auth/login"
@@ -120,7 +121,7 @@ const Register = () => {
           </Link>
         </div>
 
-        <div className="flex pt-2 justify-center">
+        <div className="flex text-gray-700 pt-2 justify-center">
           <h1>Want to register as a lawyer?</h1>
           <Link
             href="/auth/register-lawyer"
