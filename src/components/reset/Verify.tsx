@@ -54,18 +54,21 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
       email,
       otp: otpString,
     };
-    const response = await verifyOtp(verifyData);
-    console.log(response);
+    const response :any = await verifyOtp(verifyData);
+    
     if (response.data) {
       localStorage.removeItem("email");
       localStorage.setItem("token", response.data?.data?.accessToken);
       toast.success("Otp verified successfully");
       setActive("reset");
     }
+    else {
+      toast.error(response.error.data.message)
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-[#f8f8f8] pt-12">
       <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-3 rounded-[4px]">
         <div className="p-3 bg-blue-100 rounded-full">
           <KeySquare size={30} className="text-blue-800" />

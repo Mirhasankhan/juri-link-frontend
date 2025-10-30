@@ -27,8 +27,7 @@ const ForgetPassword = ({
         toast.success(response.data.message);
         setActive("verify");
         localStorage.setItem("email", data.email);
-      } else {
-        console.log("lsdflksfjk");
+      } else {       
         toast.error(response.error.data.message);
       }
     } catch (error) {

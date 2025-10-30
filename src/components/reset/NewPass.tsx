@@ -58,7 +58,7 @@ const NewPass = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-[#f8f8f8] pt-12">
       <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-5  rounded-[4px]">
         <div className="p-3 bg-blue-100 rounded-full">
           <Lock className="text-blue-800"></Lock>
@@ -110,7 +110,7 @@ const NewPass = () => {
             {isLoading ? "updating...." : "Update Password"}
           </button>
         </form>
-        <Link href="/login" className="flex items-center gap-1 pt-6">
+        <Link href="/auth/login" className="flex items-center gap-1 pt-6">
           <ArrowLeft size={15} /> Back to login
         </Link>
       </div>
