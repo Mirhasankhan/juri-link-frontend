@@ -22,7 +22,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 p-2 via-blue-50 to-indigo-100">
+    <div className="bg-[#f8f8f8] py-12">
       <h1 className="text-4xl font-semibold pb-2 text-center">Create Service Request</h1>
       <p className="text-center text-gray-500 pb-8 text-xl font-medium">
         Share your service needs and connect with lawyers in
@@ -30,7 +30,7 @@ const CreatePost = () => {
       </p>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-[8px]"
+        className="max-w-2xl mx-2 md:mx-auto p-6 bg-white shadow-md rounded-[8px]"
       >
         <h2 className="text-xl font-semibold mb-4">Request Details</h2>
 

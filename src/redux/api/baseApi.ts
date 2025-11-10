@@ -8,11 +8,10 @@ export const baseApi = createApi({
     baseUrl: "https://juri-link-server.vercel.app/api/v1/",
     prepareHeaders: (headers) => {
       const { token } = JWTDecode();
-      console.log(token);
-
+  
       headers.set(
         "Authorization",
-        `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDYzNDJkZDExY2E5YzkzMDIwY2IxZiIsImVtYWlsIjoibWlyaGFzYXNuLmJkNUBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImZ1bGxOYW1lIjoiSm9obiBEbyIsImlhdCI6MTc2MDM2OTA2OSwiZXhwIjoxNzYxNjY1MDY5fQ.-afNk6TeCnglZj4bhHG3hcUkeRGQb9zKo_cUTj-0Ttg`
+        token as string
       );
 
       // if (token) {
@@ -21,6 +20,6 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["users", "bookings", "service"],
+  tagTypes: ["users", "bookings", "service","post"],
   endpoints: () => ({}),
 });

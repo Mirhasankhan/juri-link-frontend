@@ -20,6 +20,7 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import Cookies from "js-cookie";
 
 interface ExtendedJwtPayload extends JwtPayload {
+  id?:string
   role?: string;
   userName?: string;
   email?: string;

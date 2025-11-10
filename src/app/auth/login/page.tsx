@@ -30,20 +30,20 @@ const Login = () => {
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
     try {
       const response: any = await loginUser(data);
-
-      if (response.data?.result?.accessToken) {
+  
+      if (response.data?.data?.accessToken) {
         toast.success("Login Successful");
 
         router.push("/");
         dispatch(
           setUser({
-            name: response.data.result.userInfo.username,
-            email: response.data.result.userInfo.email,
-            role: response.data.result.userInfo.role,
-            token: response.data.result.accessToken,
+            name: response.data.data.userInfo.fullName,
+            email: response.data.data.userInfo.email,
+            role: response.data.data.userInfo.role,
+            token: response.data.data.accessToken,
           })
         );
-        Cookies.set("token", response.data?.result.accessToken);
+        Cookies.set("token", response.data?.data.accessToken);
       } else if (response.error) {
         toast.error(response.error.data.message);
       }
@@ -54,6 +54,7 @@ const Login = () => {
     }
   };
 
+ 
   return (
     <div className="bg-[#f8f8f8] py-12 min-h-screen">
       <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto py-12 px-6 dark:text-white bg-white rounded-[6px]">

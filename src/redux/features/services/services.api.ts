@@ -8,7 +8,23 @@ const serviceApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["service"],
+      invalidatesTags: ["post"],
+    }),
+    createComment: builder.mutation({
+      query: (data) => ({
+        url: `/post/comment/create`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["post"],
+    }),
+    createReply: builder.mutation({
+      query: (data) => ({
+        url: `/post/reply/create`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["post"],
     }),
     services: builder.query({
       query: () => ({
@@ -22,17 +38,31 @@ const serviceApi = baseApi.injectEndpoints({
         url: `/post`,
         method: "GET",
       }),
-      providesTags: ["service"],
+      providesTags: ["post"],
+    }),
+    toggleLikePost: builder.mutation({
+      query: (id) => ({
+        url: `/post/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["post"],
     }),
     post: builder.query({
       query: (id) => ({
         url: `/post/${id}`,
         method: "GET",
       }),
-      providesTags: ["service"],
+      providesTags: ["post"],
     }),
   }),
 });
 
-export const { useServicesQuery, useCreatePostMutation, usePostsQuery,usePostQuery } =
-  serviceApi;
+export const {
+  useServicesQuery,
+  useCreatePostMutation,
+  useCreateCommentMutation,
+  useCreateReplyMutation,
+  useToggleLikePostMutation,
+  usePostsQuery,
+  usePostQuery,
+} = serviceApi;

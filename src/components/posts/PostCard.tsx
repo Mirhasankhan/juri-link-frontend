@@ -4,14 +4,23 @@ import {
   DollarSign,
   Zap,
   Laptop2,
-  Heart,
   MessageSquare,
   User,
 } from "lucide-react";
 import PostDetailModal from "./PostDetailModal";
 import { formatDistanceToNow } from "date-fns";
+import { useToggleLikePostMutation } from "@/redux/features/services/services.api";
+import { JWTDecode } from "@/utils/jwt";
+import { IoIosHeart } from "react-icons/io";
 
 const PostCard = ({ post }: { post: any }) => {
+  const [toggleLike] = useToggleLikePostMutation();
+
+  const handleToggleLikePost = async (id: string) => {
+    await toggleLike(id);
+  };
+  const {decoded} = JWTDecode()
+  const hasLiked = post.likedUsers.includes(decoded?.id);
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 transition hover:shadow-lg">
       <div className="flex gap-2">
@@ -70,8 +79,12 @@ const PostCard = ({ post }: { post: any }) => {
 
       <div className="mt-6 flex justify-between items-center border-t pt-2">
         <div className="flex gap-8">
-          <div className="flex items-center text-gray-500 gap-2">
-            <Heart size={20}></Heart>
+          <div className="flex items-center text-gray-500 gap-1">
+            <IoIosHeart
+            className={`${hasLiked ? "text-red-600" :""} cursor-pointer`}
+              onClick={() => handleToggleLikePost(post.id)}
+              size={20}
+            ></IoIosHeart>
             <p className="font-medium">{post.likedUsers.length}</p>
           </div>
           <PostDetailModal id={post._id}></PostDetailModal>

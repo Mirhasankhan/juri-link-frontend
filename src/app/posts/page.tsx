@@ -2,7 +2,6 @@
 
 import Filters from "@/components/lawyers/Filters";
 import PostCard from "@/components/posts/PostCard";
-import SearchPosts from "@/components/posts/SearchPosts";
 import Container from "@/utils/Container";
 import React, { useState } from "react";
 import { Funnel, X } from "lucide-react";
@@ -14,20 +13,20 @@ const PostsPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>("");
   const [selectedService, setSelectedService] = useState<string | null>("");
   const [selectedLegal, setSelectedLegal] = useState<string | null>("");
-
-  const { data: posts, isLoading } = usePostsQuery(""); 
+  const { data: posts, isLoading } = usePostsQuery("");   
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
   };
+
+ 
 
   if(isLoading){
     return "loading....."
   }
 
   return (
-    <div>
-      <SearchPosts />
+    <div className="py-6">
       <AnimatePresence>
         {showMobileFilters && (
           <motion.div
@@ -70,7 +69,7 @@ const PostsPage = () => {
 
           <div className="col-span-4 md:col-span-3">
             <div className="flex justify-between items-center pb-6">
-              <h1 className="text-xl font-medium">Found &quot;2 posts&quot;</h1>
+              <h1 className="text-xl font-medium">Found &quot;{posts?.data?.length} posts&quot;</h1>
               <button
                 onClick={toggleFilters}
                 className="md:hidden font-medium border px-4 py-1 rounded-[6px] flex gap-2 items-center"

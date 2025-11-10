@@ -13,7 +13,7 @@ const Header = () => {
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="bg-white">
+    <div className="bg-white border-b">
       <Container>
         <div className="flex justify-between items-center py-8">
           <Link
