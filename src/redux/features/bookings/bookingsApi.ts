@@ -2,9 +2,9 @@ import { baseApi } from "../../api/baseApi";
 
 const bookingsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    allBookings: builder.query({
-      query: () => ({
-        url: `/order/admin-list`,
+    lawyerDetails: builder.query({
+      query: (id) => ({
+        url: `/user/details/${id}`,
         method: "GET",
       }),
       providesTags: ["users"],
@@ -63,12 +63,12 @@ const bookingsApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useAllBookingsQuery,
+  useLawyerDetailsQuery,
   useTopOwnersQuery,
   useTopCustomersQuery,
   useRecentBookingQuery,
   useCancellationsQuery,
   useRevenueQuery,
-  useCreateBookingMutation,
+ 
   useMyBookingsQuery
 } = bookingsApi;

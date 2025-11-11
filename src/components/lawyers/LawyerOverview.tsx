@@ -1,10 +1,17 @@
+"use client";
 import Container from "@/utils/Container";
 import { Clock, MapPin, Star, Video } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
+  const router = useRouter();
+
+  const handleBook = () => {
+    router.push(`/book?lawyerId=${lawyer._id}`);
+  };
   return (
-    <div className="bg-primary py-12">
+    <div className="bg-gray-600 py-12">
       <Container>
         <div className="grid grid-cols-2 md:mx-16 text-white gap-6 ">
           <Image
@@ -51,9 +58,13 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
               </div>
             </div>
             <div className="flex gap-4 mt-6">
-              <button className="bg-green-600 w-full py-2 rounded-[4px] text-white font-medium">
+              <button
+                onClick={handleBook}
+                className="bg-green-600 w-full py-2 rounded-[4px] text-white font-medium"
+              >
                 Book Consultation
               </button>
+
               <button className="text-red-600 border-red-600 border  w-full py-2 rounded-[4px]  font-medium">
                 Send Message
               </button>

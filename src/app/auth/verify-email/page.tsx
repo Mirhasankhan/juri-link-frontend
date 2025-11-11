@@ -7,13 +7,13 @@ import { Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogDescription,
+//   DialogHeader,
+//   DialogTitle,
+// } from "@/components/ui/dialog";
 
 const VerifyEmail = () => {
   const [verifyOtp, { isLoading }] = useVerifyEmailMutation();
@@ -23,8 +23,8 @@ const VerifyEmail = () => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otp, setOtp] = useState({ d1: "", d2: "", d3: "", d4: "" });
   const [timeLeft, setTimeLeft] = useState(30);
-  const [openModal, setOpenModal] = useState(false);
-  const [stripeLink, setStripeLink] = useState<string | null>(null);
+  // const [openModal, setOpenModal] = useState(false);
+  // const [stripeLink, setStripeLink] = useState<string | null>(null);
 
   useEffect(() => {
     if (timeLeft <= 0) return;
@@ -66,13 +66,14 @@ const VerifyEmail = () => {
     const response: any = await verifyOtp({ email: email, otp: otpString });
     if (response.data) {
       toast.success(response.data.message);
+       router.push("/auth/login");
       localStorage.removeItem("verify");
-      if (response.data.data?.accountLink) {
-        setStripeLink(response.data.data.accountLink);
-        setOpenModal(true);
-      } else {
-        router.push("/auth/login");
-      }
+      // if (response.data.data?.accountLink) {
+      //   setStripeLink(response.data.data.accountLink);
+      //   setOpenModal(true);
+      // } else {
+      //   router.push("/auth/login");
+      // }
     } else {
       toast.error(response.error.data.message);
     }
@@ -152,7 +153,7 @@ const VerifyEmail = () => {
         </div>
       </div>
 
-      <Dialog open={openModal} onOpenChange={setOpenModal}>
+      {/* <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogContent className="sm:max-w-[420px] bg-white rounded-lg p-6 shadow-lg">
           <DialogHeader>
             <DialogTitle className="text-xl font-semibold">
@@ -183,7 +184,7 @@ const VerifyEmail = () => {
             </button>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };
