@@ -63,10 +63,7 @@ const LawyerSignUpForm = () => {
   return (
     <div className="bg-[#f8f8f8] py-12">
       <div className="w-full md:w-3/5 xl:w-2/3  2xl:w-1/3 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-2"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           <h2 className="text-3xl font-bold">Lawyer Registration</h2>
           <p className="text-gray-600 pb-6 pt-2  font-medium">
             Provide your professional details to create your account.
@@ -157,26 +154,20 @@ const LawyerSignUpForm = () => {
                 </p>
               )}
             </div>
-            <div>
-              <label className="label-design pb-1">Bar Association</label>
-              <select
-                {...register("barAssociation", {
-                  required: "Bar Association is required",
-                })}
+            <div className="w-full">
+              <label className="label-design pb-1">Law Degree Image</label>
+              <input
                 className="input-design"
-              >
-                <option value="">Select Bar Association</option>
-                <option value="American Bar Association">
-                  American Bar Association
-                </option>
-                <option value="State Bar">State Bar</option>
-                <option value="Other">Other</option>
-              </select>
-              {errors.barAssociation && (
-                <p className="text-red-500 text-sm">
-                  {errors.barAssociation.message}
-                </p>
-              )}
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setSelectedFile(e.target.files[0]);
+                    setFileError(null);
+                  }
+                }}
+                type="file"
+                accept="image/*"
+              />
+              {fileError && <p className="text-red-500 text-sm">{fileError}</p>}
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -217,21 +208,7 @@ const LawyerSignUpForm = () => {
               )}
             </div>
           </div>
-          <div className="w-full">
-            <label className="label-design pb-1">Law Degree Image</label>
-            <input
-              className="input-design"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  setSelectedFile(e.target.files[0]);
-                  setFileError(null);
-                }
-              }}
-              type="file"
-              accept="image/*"
-            />
-            {fileError && <p className="text-red-500 text-sm">{fileError}</p>}
-          </div>
+
           <div>
             <label className="block mb-2 font-medium">Areas of Practice</label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">

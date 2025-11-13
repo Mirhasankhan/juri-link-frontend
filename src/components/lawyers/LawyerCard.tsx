@@ -6,15 +6,15 @@ import React from "react";
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
   console.log(lawyer);
   return (
-    <div className="p-3 rounded-[8px] w-full shadow-2xl max-h-[220px]">
+    <div className="p-3 rounded-[8px] w-full border max-h-[220px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Image
-            className="h-[40px] w-[40px] object-cover rounded-full"
+            className="h-[48px] w-[48px] object-cover rounded-full"
             height={400}
             width={100}
             src={
-              "https://images.unsplash.com/photo-1743328008236-894ce463461e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
+              "https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHVzZXJ8ZW58MHx8MHx8fDA%3D"
             }
             alt=""
           ></Image>
@@ -72,8 +72,8 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
           </h1>
         </div>
 
-        <h1 className="text-sm border-2 font-medium py-1 px-2 rounded-xl">
-          New York State Bar
+        <h1 className="text-sm border-2 font-medium py-1 px-2 rounded-[4px]">
+          10 (Booked)
         </h1>
       </div>
       <div className="flex gap-6 mt-4">

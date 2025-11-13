@@ -20,9 +20,9 @@ const bookingsApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `/booking/create`,
         method: "POST",
-        body: data
+        body: data,
       }),
-      invalidatesTags: ["users"],
+      invalidatesTags: ["bookings"],
     }),
     topOwners: builder.query({
       query: () => ({
@@ -69,6 +69,6 @@ export const {
   useRecentBookingQuery,
   useCancellationsQuery,
   useRevenueQuery,
- 
-  useMyBookingsQuery
+  useCreateBookingMutation,
+  useMyBookingsQuery,
 } = bookingsApi;

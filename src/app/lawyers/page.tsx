@@ -1,7 +1,6 @@
 "use client";
 
 import Filters from "@/components/lawyers/Filters";
-import SearchLawyers from "@/components/lawyers/SearchLawyers";
 import Container from "@/utils/Container";
 import { Funnel, X } from "lucide-react";
 import React, { useState } from "react";
@@ -28,8 +27,7 @@ const LawyersPage = () => {
   };
 
   return (
-    <div>
-      <SearchLawyers />
+    <div>  
       {showMobileFilters && (
         <motion.div
           initial={{ x: "-100%" }}

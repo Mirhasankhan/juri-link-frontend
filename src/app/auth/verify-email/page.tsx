@@ -127,7 +127,7 @@ const VerifyEmail = () => {
             <button
               onClick={handleVerify}
               disabled={!isComplete || isLoading}
-              className={`w-full py-2 rounded-md text-white font-semibold transition ${
+              className={`w-full py-2 rounded-[6px] text-white font-semibold transition ${
                 isComplete ? "bg-primary hover:bg-primary/90" : "bg-gray-400"
               }`}
             >
