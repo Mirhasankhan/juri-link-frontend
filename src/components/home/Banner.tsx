@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="relative w-full xl:h-[600px] 2xl:h-[800px] h-[500px] overflow-hidden">
+    <div className="relative w-full xl:h-[600px] 2xl:h-[800px] -z-20 h-[500px] overflow-hidden">
       <video
         autoPlay
         muted
