@@ -1,8 +1,18 @@
-import Link from "next/link";
+"use client";
+
+import { useServicesQuery } from "@/redux/features/services/services.api";
+import { MoveRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
+  const { data: legalServies } = useServicesQuery("");
+   const router = useRouter();
+  
+    const handleBook = (id:string) => {
+      router.push(`/lawyers?serviceId=${id}`);
+    };
   return (
-    <div className="relative w-full xl:h-[600px] 2xl:h-[800px] -z-20 h-[500px] overflow-hidden">
+    <div className="relative w-full xl:h-[600px] 2xl:h-[900px] z-20 h-[500px] overflow-hidden">
       <video
         autoPlay
         muted
@@ -19,21 +29,25 @@ const Banner = () => {
         </h1>
         <p className="mt-4 md:text-lg">
           Connect with qualified lawyers, post your legal requirements, and get
-          expert <br /> legal assistance when you need it most.
+          expert <br /> legal assistance when you need it most.ff
         </p>
-        <div className="flex gap-6 mt-4">
-          <Link href="/lawyers">           
-            <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
-              Find Lawyers
-            </button>
-          </Link>
-         <Link href="/create-post"> <button className="bg-primary px-6 py-2 rounded-[4px] font-medium">
-            Post Your Request
-          </button></Link>
+        <input
+          className="border text-black w-2/4 py-4 pl-6 rounded-xl mt-6"
+          type="text"
+          placeholder="Search for any service"
+          name=""
+          id=""
+        />
+        <div className="flex gap-6 mt-6">
+          {legalServies?.data?.map(
+            (service: { serviceName: string; _id: string }) => (
+              <button  onClick={()=>handleBook(service._id)}  className="bg-white border border-white bg-opacity-10 flex items-center gap-2 font-semibold text-xl px-4 py-2 rounded-[6px]" key={service._id}>{service?.serviceName} <MoveRight size={15}/></button>
+            )
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Banner
+export default Banner;

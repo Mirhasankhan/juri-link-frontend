@@ -9,7 +9,7 @@ const SubMenu = () => {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/services', label: 'Services' },
+    // { href: '/services', label: 'Services' },
     { href: '/lawyers', label: 'Find Lawyers' },
     { href: '/posts', label: 'Posts' },
     { href: '/premium', label: 'Premium' },
