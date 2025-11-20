@@ -1,11 +1,11 @@
 import { GraduationCap, Mail, Phone } from "lucide-react";
 import React from "react";
 
-const ContactLawyer = () => {
+const ContactLawyer = ({ lawyer }: { lawyer: any }) => {
   return (
     <div className="border rounded-[6px] ">
       <div className="bg-primary rounded-t-[5px] text-white py-8 text-center">
-        <h1 className="text-5xl font-semibold">450</h1>
+        <h1 className="text-5xl font-semibold">{lawyer?.fee}</h1>
         <h1 className="text-2xl font-semibold py-1">Book Consultation</h1>
         <p>Get personalized guidance from our expert</p>
       </div>
@@ -20,7 +20,7 @@ const ContactLawyer = () => {
           </div>
           <div>
             <small>Email</small>
-            <p className="font-medium">sarah.j@gmail.com</p>
+            <p className="font-medium">{lawyer?.email}</p>
           </div>
         </div>
         <div className="flex items-center gap-2 pt-6">

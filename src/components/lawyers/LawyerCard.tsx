@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
-
+  console.log(lawyer);
   return (
     <div className="p-3 rounded-[8px] w-full border max-h-[220px]">
       <div className="flex items-center justify-between">
@@ -14,7 +14,8 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
             height={400}
             width={100}
             src={
-              "https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHVzZXJ8ZW58MHx8MHx8fDA%3D"
+              lawyer?.profileImage ||
+              "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
             }
             alt=""
           ></Image>
@@ -24,10 +25,11 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
             <div className="flex gap-1">
               {lawyer?.legalServices?.map(
                 (service: { _id: string; serviceName: string }) => (
-                  <div key={service._id}>
-                    <p className="text-primary text-xs font-medium">
-                      {service?.serviceName} |
-                    </p>
+                  <div
+                    key={service._id}
+                    className="px-2 py-0.5  bg-primary/10 rounded-[4px] text-primary text-xs font-medium"
+                  >
+                    {service.serviceName}
                   </div>
                 )
               )}
@@ -37,7 +39,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
         <div>
           <h1 className="text-primary text-xl font-medium">${lawyer?.fee}</h1>
           <div className="gap-1 items-center flex">
-            <Star size={18} className="text-orange-400"></Star>{" "}
+            <Star size={18} className="text-orange-400"></Star>
             <p>{lawyer?.avgRating}</p>
           </div>
         </div>

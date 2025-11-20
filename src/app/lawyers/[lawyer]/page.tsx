@@ -17,15 +17,14 @@ const LawyerDetailsPage = () => {
       <Container>
         <div className="grid grid-cols-3 gap-6 my-8">
           <div className="col-span-2">
-            <Expertise></Expertise>
+            <Expertise lawyer={lawyerDetails?.data?.lawyer}></Expertise>
             <ClientReviews></ClientReviews>
             <ClientReviews></ClientReviews>
-            <ClientReviews></ClientReviews>
-            <ClientReviews></ClientReviews>
+          
           </div>
           <div className="col-span-1">
             <div className="sticky top-8">
-              <ContactLawyer></ContactLawyer>
+              <ContactLawyer lawyer={lawyerDetails?.data?.lawyer}></ContactLawyer>
             </div>
           </div>
         </div>

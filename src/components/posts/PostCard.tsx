@@ -26,7 +26,7 @@ const PostCard = ({ post }: { post: any }) => {
       <div className="flex gap-2">
         <img
           className="h-16 w-16 rounded-full"
-          src={post?.userId?.profileImage}
+          src={post?.userId?.profileImage || "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"}
         ></img>
         <div>
           <div>

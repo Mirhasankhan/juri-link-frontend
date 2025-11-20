@@ -9,9 +9,9 @@ const bookingsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
-    myBookings: builder.query({
+    userBookings: builder.query({
       query: () => ({
-        url: `/booking/user-booking`,
+        url: `/booking/user-wise`,
         method: "GET",
       }),
       providesTags: ["users"],
@@ -70,5 +70,5 @@ export const {
   useCancellationsQuery,
   useRevenueQuery,
   useCreateBookingMutation,
-  useMyBookingsQuery,
+  useUserBookingsQuery,
 } = bookingsApi;

@@ -34,8 +34,8 @@ const serviceApi = baseApi.injectEndpoints({
       providesTags: ["service"],
     }),
     posts: builder.query({
-      query: () => ({
-        url: `/post`,
+      query: ({serviceId,serviceType, level}) => ({
+        url: `/post?serviceId=${serviceId}&serviceType=${serviceType}&level=${level}`,
         method: "GET",
       }),
       providesTags: ["post"],
