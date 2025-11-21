@@ -219,7 +219,7 @@ const LawyerSignUpForm = () => {
                     className="flex items-center hover:bg-gray-100 p-2 rounded-xl hover:cursor-pointer space-x-2"
                   >
                     <input
-                      className="bg-red-500"
+                       className="accent-orange-600 w-5 h-5"
                       type="checkbox"
                       value={service._id}
                       {...register("specializations", {

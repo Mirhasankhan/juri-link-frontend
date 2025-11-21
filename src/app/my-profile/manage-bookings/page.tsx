@@ -5,7 +5,7 @@ import Container from "@/utils/Container";
 import React from "react";
 
 const ManageBookingsPage = () => {
-  const {data:bookings, isLoading} = useUserBookingsQuery("")
+  const {data:bookings} = useUserBookingsQuery("")
   console.log(bookings?.data?.bookings?.length);
   return (
     <Container>

@@ -86,6 +86,7 @@ const LawyerForm = () => {
                 <input
                   type="checkbox"
                   value={spec}
+                     className="accent-orange-600 w-5 h-5"
                   {...register("specialization", { required: true })}
                 />
                 <span>{spec}</span>
