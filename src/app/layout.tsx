@@ -23,17 +23,44 @@ export const metadata: Metadata = {
   
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <html lang="en">
+//       <head><link rel="icon" type="image/png" href="/logo9.png"/></head>
+//       <body
+//         className={`${roboto.variable} antialiased`}
+//       >
+//         <ThemeProvider
+//           attribute="class"
+//           defaultTheme="system"
+//           enableSystem
+//           disableTransitionOnChange
+//         >
+//           <Providers>
+//             <div>
+//             <ToastContainer position="top-right" autoClose={3000}/>   
+//               <Header></Header>
+//               {children}
+//               <Footer></Footer>
+//             </div>
+//           </Providers>
+//         </ThemeProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head><link rel="icon" type="image/png" href="/logo9.png"/></head>
-      <body
-        className={`${roboto.variable} antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" type="image/png" href="/logo9.png" />
+      </head>
+      <body className={`${roboto.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -41,12 +68,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Providers>
-            <div>
-            <ToastContainer position="top-right" autoClose={3000}/>   
-              <Header></Header>
-              {children}
-              <Footer></Footer>
-            </div>
+            <ToastContainer position="top-right" autoClose={3000} />
+            <Header />
+            {children}
+            <Footer />
           </Providers>
         </ThemeProvider>
       </body>

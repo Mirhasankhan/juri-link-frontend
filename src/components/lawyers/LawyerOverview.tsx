@@ -10,7 +10,10 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
   const handleBook = () => {
     router.push(`/book?lawyerId=${lawyer._id}`);
   };
-  console.log(lawyer);
+  const handleMessage = () => {
+    router.push(`/messages?receiverId=${lawyer._id}`);
+  };
+
   return (
     <div className="bg-[#f8f8f8] py-12">
       <Container>
@@ -88,7 +91,7 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
                 Book Consultation
               </button>
 
-              <button className="text-primary border-primary border  w-full py-2 rounded-[4px]  font-medium">
+              <button   onClick={handleMessage} className="text-primary border-primary border  w-full py-2 rounded-[4px]  font-medium">
                 Send Message
               </button>
             </div>
