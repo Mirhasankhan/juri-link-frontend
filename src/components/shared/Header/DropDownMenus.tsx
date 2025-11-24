@@ -4,7 +4,8 @@ import { useAppSelector } from "@/redux/hooks";
 import React from "react";
 import SignOut from "../SignOut";
 import Image from "next/image";
-import { Bell, CircleUser, Heart, Settings } from "lucide-react";
+import { Bell, CircleDollarSign, CircleUser, Settings } from "lucide-react";
+import Link from "next/link";
 
 const DropDownMenus = ({ setActive }: { setActive: any }) => {
   const { name, email } = useAppSelector(useCurrentUser);
@@ -26,19 +27,20 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
           </div>
         </div>
         <div className="p-2 border-b">
-          <div className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
+          <Link href="/my-profile/manage-profile" className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
             <CircleUser size={20} className="text-primary "></CircleUser>
             <h1 className="font-medium">My Account</h1>
-          </div>
+          </Link>
 
-          <div className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
+          <Link href="/my-profile/manage-bookings" className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
             <Bell size={20} className="text-primary "></Bell>
             <h1 className="font-medium">Booking History</h1>
-          </div>
-          <div className="flex gap-2 items-center my-1 hover:bg-primary/10 py-2 px-4 rounded-[6px]">
-            <Heart size={20} className="text-primary "></Heart>
-            <h1 className="font-medium">My Favourites</h1>
-          </div>
+          </Link>
+          <Link href="/my-profile/manage-earnings" className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
+            <CircleDollarSign size={20} className="text-primary "></CircleDollarSign>
+            <h1 className="font-medium">Earnings</h1>
+          </Link>
+         
           <div className="flex gap-2 my-1 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
             <Settings size={20} className="text-primary "></Settings>
             <h1 className="font-medium">Settings</h1>

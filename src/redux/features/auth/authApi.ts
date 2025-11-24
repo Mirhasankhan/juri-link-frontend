@@ -39,10 +39,10 @@ const authApi = baseApi.injectEndpoints({
     }),
     profile: builder.query({
       query: () => ({
-        url: "/auth/profile",
+        url: "/user/profile",
         method: "GET",
       }),
-      providesTags: ["users"],
+      providesTags: ["availability"],
     }),
     sendOtp: builder.mutation({
       query: (email) => ({

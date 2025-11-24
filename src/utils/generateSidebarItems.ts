@@ -1,5 +1,5 @@
 import { SidbarItem, TRoles, userRoles } from "@/types/common";
-import { SquareChartGantt,BookmarkPlus, Settings, Heart } from "lucide-react";
+import { SquareChartGantt,BookmarkPlus, Settings, Calendar, CircleDollarSign, MessageCircleMore } from "lucide-react";
 
 export const sidebarItems = (role: TRoles): SidbarItem[] => {
   const roleMenus: SidbarItem[] = [];
@@ -17,14 +17,19 @@ export const sidebarItems = (role: TRoles): SidbarItem[] => {
         icon: BookmarkPlus,
       });
       roleMenus.push({
-        title: "Favourite Lawyers",
-        path: `profile/favourite`,
-        icon: Heart,
+        title: "Earnings Summary",
+        path: `my-profile/manage-earnings`,
+        icon: CircleDollarSign,
+      });
+      roleMenus.push({
+        title: "Availability ",
+        path: `my-profile/availability`,
+        icon: Calendar,
       });
       roleMenus.push({
         title: "View Reviews",
         path: `profile/favourite`,
-        icon: Heart,
+        icon: MessageCircleMore,
       });
       roleMenus.push({
         title: "Settings",

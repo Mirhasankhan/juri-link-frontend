@@ -18,7 +18,7 @@ const Sidebar = () => {
               pathName === `/${item.path}`
                 ? "bg-primary  text-white border-r-4 border-orange-600"
                 : ""
-            } hover:bg-primary hover:text-white my-4 p-3 mx-3 rounded-[4px] font-medium flex items-center`}
+            } hover:bg-primary hover:text-white  p-3 mx-3 rounded-[4px] font-medium flex items-center`}
           >
             {item.icon && <p className="mr-2 text-xl">{<item.icon />}</p>}
             <h1>{item.title}</h1>
