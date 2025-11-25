@@ -1,26 +1,27 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { LogOut } from 'lucide-react';
-import React from 'react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { Home, Users, FileText, Star, Info, LogOut } from "lucide-react";
+import React from "react";
+import { useAppSelector } from "@/redux/hooks";
+import { useCurrentUser } from "@/redux/features/auth/authSlice";
 
 const SmallDeviceMenu = () => {
   const pathname = usePathname();
+  const { email } = useAppSelector(useCurrentUser);
 
   const links = [
-    { href: '/', label: 'Home' },
-    // { href: '/services', label: 'Services' },
-    { href: '/lawyers', label: 'Find Lawyers' },
-    { href: '/posts', label: 'Posts' },
-    { href: '/premium', label: 'Premium' },
-    { href: '/about-us', label: 'About Us' },
+    { href: "/", label: "Home", icon: Home },
+    { href: "/lawyers", label: "Find Lawyers", icon: Users },
+    { href: "/posts", label: "Posts", icon: FileText },
+    { href: "/premium", label: "Premium", icon: Star },
+    { href: "/about-us", label: "About Us", icon: Info },
   ];
 
   const handleLogout = () => {
-    console.log('Logging out...');
-    // Add your actual logout logic here
+    console.log("Logging out...");
   };
 
   return (
@@ -28,36 +29,59 @@ const SmallDeviceMenu = () => {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="absolute right-4 top-16 w-60 p-5 rounded-2xl shadow-xl bg-gradient-to-br from-white/90 to-gray-100 backdrop-blur-lg border border-gray-200 flex flex-col gap-4 z-50"
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="absolute right-0 top-16 w-[320px] p-5 text-white rounded-2xl shadow-xl bg-black border border-gray-200 flex flex-col gap-4 z-50"
     >
-      {links.map((link) => {
-        const isActive = pathname === link.href;
+      <div className="border-b pb-3">
+        <h1>Menu</h1>
+        <p>Legal Services Portal</p>
+      </div>
+
+      {links.map(({ href, label, icon: Icon }) => {
+        const isActive = pathname === href;
+
         return (
           <Link
-            key={link.href}
-            href={link.href}
-            className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 group
-              ${isActive ? 'text-primary font-semibold bg-primary/10' : 'text-gray-800 hover:text-primary hover:bg-primary/5'}`}
+            key={href}
+            href={href}
+            className={`flex items-center gap-3 px-3 py-2 rounded-[5px] text-sm font-medium transition-all duration-200
+              ${
+                isActive
+                  ? "bg-white/10 text-white"
+                  : "text-white hover:bg-white/10"
+              }
+            `}
           >
-            <span
-              className={`inline-block relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full 
-                after:transition-all after:duration-300
-                ${isActive ? 'after:bg-primary' : 'after:bg-transparent group-hover:after:bg-primary'}`}
-            >
-              {link.label}
-            </span>
+            <Icon size={18} />
+            <span>{label}</span>
           </Link>
         );
       })}
 
-      <button
-        onClick={handleLogout}
-        className="mt-4 flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-red-600 hover:text-white hover:bg-red-500 transition-all duration-300 font-medium"
-      >
-        <LogOut size={16} />
-        Logout
-      </button>
+      {email ? (
+        <div className="flex gap-2">
+          <Link
+            className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
+            href="/auth/login"
+          >
+            Login
+          </Link>
+          <Link
+            className="border border-primary text-white bg-primary px-4 py-1 rounded-[4px] font-medium"
+            href="/auth/register"
+          >
+            Get Started
+          </Link>
+        </div>
+      ) : (
+        <button
+          onClick={handleLogout}
+          className="mt-4 flex items-center gap-2 px-4 py-2 rounded-[5px] border border-red-500 text-red-500 bg-red-500 bg-opacity-10 transition-all duration-300 font-medium"
+        >
+          <LogOut size={16} />
+          Logout
+        </button>
+      )}
     </motion.div>
   );
 };
