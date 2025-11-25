@@ -6,8 +6,8 @@ import { Loader } from "lucide-react";
 import React, { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import UpdateSlotModal from "./UpdateSlotModal";
-import AddSlotModal from "./AddNewSlotModal";
+import UpdateSlotModal from "../profile/UpdateSlotModal";
+import AddSlotModal from "../profile/AddNewSlotModal";
 
 interface Slot {
   id: string;

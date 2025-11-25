@@ -1,7 +1,7 @@
 "use client";
 
 import LawyerAvailabilities from "@/components/lawyers/LawyerAvailabilities";
-import WeeklyAvailabilityPage from "@/components/lawyers/WeeklyAvailability";
+import WeeklyAvailabilityPage from "@/components/profile/WeeklyAvailability";
 import Sidebar from "@/components/profile/Sidebar";
 import { useProfileQuery } from "@/redux/features/auth/authApi";
 import Container from "@/utils/Container";
