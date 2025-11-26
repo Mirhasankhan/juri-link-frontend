@@ -5,6 +5,7 @@ import {
 } from "@/redux/features/services/services.api";
 import { TPostInput } from "@/types/common";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const CreatePost = () => {
   const { data: legalServices } = useServicesQuery("");
@@ -13,20 +14,28 @@ const CreatePost = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TPostInput>();
 
   const onSubmit = async (data: any) => {
-    const response = await submitPost(data);
-    console.log(response);
+    const response: any = await submitPost(data);
+    console.log(response.data?.message);
+    if (response.data) {
+      reset();
+      toast.success(response.data.message);
+    } else {
+      toast.error(response.error.data.message);
+    }
   };
 
   return (
     <div className="bg-[#f8f8f8] py-12">
-      <h1 className="text-4xl font-semibold pb-2 text-center">Create Service Request</h1>
+      <h1 className="text-4xl font-semibold pb-2 text-center">
+        Create Service Request
+      </h1>
       <p className="text-center text-gray-500 pb-8 text-xl font-medium">
-        Share your service needs and connect with lawyers in
-        your area
+        Share your service needs and connect with lawyers in your area
       </p>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -150,7 +159,7 @@ const CreatePost = () => {
             >
               <option value="">Select Service Type</option>
               <option value="Online">Online</option>
-              <option value="In_Person">In Person</option>             
+              <option value="In_Person">In Person</option>
             </select>
             {errors.serviceType && (
               <span className="text-red-500 text-sm">
@@ -161,9 +170,11 @@ const CreatePost = () => {
         </div>
 
         <button
-        disabled={isLoading}
+          disabled={isLoading}
           type="submit"
-          className={`w-full ${isLoading ? "bg-primary/40" :"bg-primary"} text-white font-semibold py-3 px-4 rounded`}
+          className={`w-full ${
+            isLoading ? "bg-primary/40" : "bg-primary"
+          } text-white font-semibold py-3 px-4 rounded`}
         >
           {isLoading ? "Submitting....." : "Post Legal Request"}
         </button>

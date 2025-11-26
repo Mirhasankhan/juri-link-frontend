@@ -1,11 +1,11 @@
 "use client";
 
-// import { useServicesQuery } from "@/redux/features/services/services.api";
+import { useServicesQuery } from "@/redux/features/services/services.api";
 import { MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Banner = () => {
-  // const { data: legalServies } = useServicesQuery("");
+  const { data: legalServies } = useServicesQuery("");
    const router = useRouter();
   
     const handleBook = (id:string) => {
@@ -38,13 +38,13 @@ const Banner = () => {
           name=""
           id=""
         />
-        {/* <div className="flex gap-6 mt-6">
+        <div className="flex gap-6 mt-6">
           {legalServies?.data?.map(
             (service: { serviceName: string; _id: string }) => (
               <button  onClick={()=>handleBook(service._id)}  className="bg-white border border-white bg-opacity-10 flex items-center gap-2 font-semibold text-xl px-4 py-2 rounded-[6px]" key={service._id}>{service?.serviceName} <MoveRight size={15}/></button>
             )
           )}
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, Users, FileText, Star, Info, LogOut } from "lucide-react";
+import { Home, Users, FileText, Star, Info } from "lucide-react";
 import React from "react";
 import { useAppSelector } from "@/redux/hooks";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
+import SignOut from "../SignOut";
 
 const SmallDeviceMenu = () => {
   const pathname = usePathname();
@@ -18,11 +19,7 @@ const SmallDeviceMenu = () => {
     { href: "/posts", label: "Posts", icon: FileText },
     { href: "/premium", label: "Premium", icon: Star },
     { href: "/about-us", label: "About Us", icon: Info },
-  ];
-
-  const handleLogout = () => {
-    console.log("Logging out...");
-  };
+  ];  
 
   return (
     <motion.div
@@ -58,7 +55,7 @@ const SmallDeviceMenu = () => {
         );
       })}
 
-      {email ? (
+      {!email ? (
         <div className="flex gap-2">
           <Link
             className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
@@ -74,13 +71,14 @@ const SmallDeviceMenu = () => {
           </Link>
         </div>
       ) : (
-        <button
-          onClick={handleLogout}
-          className="mt-4 flex items-center gap-2 px-4 py-2 rounded-[5px] border border-red-500 text-red-500 bg-red-500 bg-opacity-10 transition-all duration-300 font-medium"
-        >
-          <LogOut size={16} />
-          Logout
-        </button>
+        // <button
+        //   onClick={handleLogout}
+        //   className="mt-4 flex items-center gap-2 px-4 py-2 rounded-[5px] border border-red-500 text-red-500 bg-red-500 bg-opacity-10 transition-all duration-300 font-medium"
+        // >
+        //   <LogOut size={16} />
+        //   Logout
+        // </button>
+          <SignOut></SignOut>
       )}
     </motion.div>
   );

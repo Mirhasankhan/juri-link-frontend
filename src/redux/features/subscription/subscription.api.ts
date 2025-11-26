@@ -2,6 +2,14 @@ import { baseApi } from "../../api/baseApi";
 
 const subscriptionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    checkoutSession: builder.mutation({
+      query: (priceId) => ({
+        url: `/subscription-plan/checkout-session`,
+        method: "POST",
+        body: priceId,
+      }),
+      invalidatesTags: ["subscription"],
+    }),
     plans: builder.query({
       query: () => ({
         url: `/subscription-plan`,
@@ -12,4 +20,4 @@ const subscriptionApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { usePlansQuery } = subscriptionApi;
+export const { usePlansQuery, useCheckoutSessionMutation } = subscriptionApi;

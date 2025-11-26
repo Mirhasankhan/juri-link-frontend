@@ -1,17 +1,34 @@
 "use client";
 
-import { CheckCircle } from "lucide-react";
-import { usePlansQuery } from "@/redux/features/subscription/subscription.api";
+import { CheckCircle, Loader2 } from "lucide-react";
+import {
+  useCheckoutSessionMutation,
+  usePlansQuery,
+} from "@/redux/features/subscription/subscription.api";
 import Container from "@/utils/Container";
 
 export default function SubscriptionPlans() {
   const { data: response, isLoading } = usePlansQuery("");
+  const [subscribe, { isLoading: isCheckoutLoading }] =
+    useCheckoutSessionMutation();
 
   if (isLoading) {
     return <p className="text-center py-20">Loading plans...</p>;
   }
 
   const plans = response?.data || [];
+
+  const handleSubscribe = async (priceId: string) => {
+    try {
+      const response = await subscribe({ priceId });
+      const url = response?.data?.data?.url;
+      if (!url) return;
+
+      window.open(url, "_blank");
+    } catch (error) {
+      console.error("Subscription failed:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#f8f8f8] py-16 px-4">
@@ -20,7 +37,8 @@ export default function SubscriptionPlans() {
           Choose the Right Plan
         </h1>
         <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
-          Get listed, get noticed, and connect with clients faster. Flexible plans tailored for legal professionals.
+          Get listed, get noticed, and connect with clients faster. Flexible
+          plans tailored for legal professionals.
         </p>
 
         <div className="grid gap-8 md:grid-cols-3">
@@ -53,8 +71,15 @@ export default function SubscriptionPlans() {
                 </ul>
               </div>
 
-              <button className="w-full py-3 rounded-xl font-semibold text-white bg-primary hover:bg-blue-600 transition-all text-lg">
-                Buy Plan
+              <button
+                onClick={() => handleSubscribe(plan.priceId)}
+                className="w-full py-3 rounded-xl font-semibold text-white bg-primary hover:bg-blue-600 transition-all text-lg"
+              >
+                {isCheckoutLoading ? (
+                  <Loader2 className="animate-spin"></Loader2>
+                ) : (
+                  "Buy Plan"
+                )}
               </button>
             </div>
           ))}

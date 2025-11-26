@@ -30,7 +30,7 @@ const MonthlyEarnings = ({
     datasets: [
       {
         data: chartData.map((item: any) => item.earnings),
-        borderColor: "#FF7F50",
+        borderColor: "#7869ff",
         backgroundColor: "rgba(255, 127, 80, 0.2)",
         tension: 0.4,
         pointRadius: 5,

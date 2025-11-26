@@ -1,23 +1,24 @@
 "use client"
+import BookingList from "@/components/lawyers/Bookings";
 import Sidebar from "@/components/profile/Sidebar";
-import { useUserBookingsQuery } from "@/redux/features/bookings/bookingsApi";
-import Container from "@/utils/Container";
+import { useLawyerBookingsQuery } from "@/redux/features/bookings/bookingsApi";
+
 import React from "react";
 
 const ManageBookingsPage = () => {
-  const {data:bookings} = useUserBookingsQuery("")
-  console.log(bookings?.data?.bookings?.length);
+  const {data:bookings} = useLawyerBookingsQuery("")
+  console.log(bookings?.data?.bookings);
   return (
-    <Container>
-      <div className="grid grid-cols-4 gap-6">
+    <>
+      <div className="grid grid-cols-5 gap-6">
         <div className="hidden md:block md:col-span-1 border-r-2">
           <Sidebar></Sidebar>
         </div>
-        <div className="col-span-4 md:col-span-3">
-          <h1 className="text-xl font-semibold pb-4">My Bookings {bookings?.data?.bookings?.length}</h1>
+        <div className="col-span-5 md:col-span-4 w-4/5">
+          <BookingList></BookingList>
         </div>
       </div>
-    </Container>
+    </>
   );
 };
 

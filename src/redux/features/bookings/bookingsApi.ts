@@ -2,6 +2,14 @@ import { baseApi } from "../../api/baseApi";
 
 const bookingsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createBooking: builder.mutation({
+      query: (data) => ({
+        url: `/booking/create`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["bookings"],
+    }),
     lawyerDetails: builder.query({
       query: (id) => ({
         url: `/user/details/${id}`,
@@ -16,59 +24,27 @@ const bookingsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
-    createBooking: builder.mutation({
-      query: (data) => ({
-        url: `/booking/create`,
+    lawyerBookings: builder.query({
+      query: () => ({
+        url: `/booking/lawyer-wise`,
+        method: "GET",
+      }),
+      providesTags: ["bookings"],
+    }),
+    markCompleted: builder.mutation({
+      query: (id) => ({
+        url: `/booking/mark-completed/${id}`,
         method: "POST",
-        body: data,
       }),
       invalidatesTags: ["bookings"],
-    }),
-    topOwners: builder.query({
-      query: () => ({
-        url: `/analysis/top-owner`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
-    }),
-    topCustomers: builder.query({
-      query: () => ({
-        url: `/analysis/top-customer`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
-    }),
-    recentBooking: builder.query({
-      query: () => ({
-        url: `/analysis/booking-analysis`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
-    }),
-    cancellations: builder.query({
-      query: () => ({
-        url: `/analysis/cancel-rate`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
-    }),
-    revenue: builder.query({
-      query: () => ({
-        url: `/analysis/total/revenue?timeframe=monthly`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
     }),
   }),
 });
 
 export const {
   useLawyerDetailsQuery,
-  useTopOwnersQuery,
-  useTopCustomersQuery,
-  useRecentBookingQuery,
-  useCancellationsQuery,
-  useRevenueQuery,
+  useLawyerBookingsQuery,
   useCreateBookingMutation,
+  useMarkCompletedMutation,
   useUserBookingsQuery,
 } = bookingsApi;

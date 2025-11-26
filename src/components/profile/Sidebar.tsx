@@ -10,15 +10,15 @@ const Sidebar = () => {
 
 
   return (
-    <div className="min-h-screen bg-primary bg-opacity-20">
+    <div className="min-h-screen ">
       {sidebarItems("User" as TRoles).map((item, index) => (
         <Link key={index} href={`/${item.path}`}>
           <div
             className={`${
               pathName === `/${item.path}`
-                ? "bg-primary  text-white border-r-4 border-orange-600"
+                ? "bg-[#7869ff] bg-opacity-15 text-[#7869ff] border-r-4 border-[#7869ff]"
                 : ""
-            } hover:bg-primary hover:text-white  p-3 mx-3 rounded-[4px] font-medium flex items-center`}
+            } hover:bg-[#7869ff] my-1 hover:text-[#7869ff] hover:bg-opacity-15 p-3 mx-3 rounded-[4px] font-medium flex items-center`}
           >
             {item.icon && <p className="mr-2 text-xl">{<item.icon />}</p>}
             <h1>{item.title}</h1>
