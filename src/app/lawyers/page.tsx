@@ -10,28 +10,29 @@ import LawyerCard from "@/components/lawyers/LawyerCard";
 import { useSearchParams } from "next/navigation";
 
 const LawyersPage = () => {
-    const searchParams = useSearchParams();
-    const serviceId = searchParams.get("serviceId");
+  const searchParams = useSearchParams();
+  const serviceId = searchParams.get("serviceId");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [selectedYear, setSelectedYear] = useState<string | null>("");
   const [selectedService, setSelectedService] = useState<string | null>("");
-  const [selectedLegal, setSelectedLegal] = useState<string | null>(serviceId || "");
+  const [selectedLegal, setSelectedLegal] = useState<string | null>(
+    serviceId || ""
+  );
 
-  
   const { data: lawyers } = useAllLawyersQuery({
     experience: selectedYear,
     type: selectedService,
     specializationId: selectedLegal,
   });
 
-  
+  console.log(lawyers);
 
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
   };
 
   return (
-    <div>  
+    <div>
       {showMobileFilters && (
         <motion.div
           initial={{ x: "-100%" }}

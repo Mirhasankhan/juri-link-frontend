@@ -41,12 +41,20 @@ const availabilityApi = baseApi.injectEndpoints({
       }),
       providesTags: ["availability"],
     }),
+    dayWiseSlots: builder.query({
+      query: ({day,lawyerId}) => ({
+        url: `/availability/expert-slots?day=${day}&lawyerId=${lawyerId}`,
+        method: "GET",
+      }),
+      providesTags: ["availability"],
+    }),
   }),
 });
 
 export const {
   useSetAvailabilityMutation,
   useAvailabilitySlotsQuery,
+  useDayWiseSlotsQuery,
   useCreateSlotMutation,
   useDeleteSlotMutation,
   useUpdateSlotMutation

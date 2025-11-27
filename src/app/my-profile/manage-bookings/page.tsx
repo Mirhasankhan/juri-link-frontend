@@ -1,13 +1,15 @@
-"use client"
+"use client";
 import BookingList from "@/components/lawyers/Bookings";
+import UserBookings from "@/components/lawyers/UserBookings";
 import Sidebar from "@/components/profile/Sidebar";
-import { useLawyerBookingsQuery } from "@/redux/features/bookings/bookingsApi";
-
-import React from "react";
+import { JWTDecode } from "@/utils/jwt";
 
 const ManageBookingsPage = () => {
-  const {data:bookings} = useLawyerBookingsQuery("")
-  console.log(bookings?.data?.bookings);
+  const { decoded } = JWTDecode();
+  if (!decoded?.role) {
+    return "User not found";
+  }
+
   return (
     <>
       <div className="grid grid-cols-5 gap-6">
@@ -15,7 +17,11 @@ const ManageBookingsPage = () => {
           <Sidebar></Sidebar>
         </div>
         <div className="col-span-5 md:col-span-4 w-4/5">
-          <BookingList></BookingList>
+          {decoded.role === "User" ? (
+            <UserBookings></UserBookings>
+          ) : (
+            <BookingList></BookingList>
+          )}
         </div>
       </div>
     </>

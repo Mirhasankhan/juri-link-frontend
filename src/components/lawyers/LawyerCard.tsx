@@ -1,10 +1,15 @@
 import { AlarmClockPlus, MapPin, Star, User, Video } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
-  console.log(lawyer);
+  const router = useRouter();
+
+ const handleMessage = () => {
+    router.push(`/messages?receiverId=${lawyer._id}`);
+  };
   return (
     <div className="p-3 rounded-[8px] w-full border max-h-[220px]">
       <div className="flex items-center justify-between">
@@ -44,10 +49,10 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
           </div>
         </div>
       </div>
-      <div className="flex mt-2 justify-between items-center">
+      <div className="flex my-3 justify-between items-center">
         <div className="flex gap-1 items-center">
           <MapPin size={15} className="text-primary"></MapPin>
-          <h1 className="text-sm">New York City</h1>
+          <h1 className="text-sm">{lawyer?.location}</h1>
         </div>
         <div className="flex gap-1 items-center">
           <AlarmClockPlus size={15} className="text-primary"></AlarmClockPlus>
@@ -84,7 +89,10 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
             View Details
           </button>
         </Link>
-        <button className="text-primary border-primary border  w-full py-1 rounded-[4px]  font-medium">
+        <button
+          onClick={handleMessage}
+          className="text-primary border-primary border  w-full py-1 rounded-[4px]  font-medium"
+        >
           Send Message
         </button>
       </div>
