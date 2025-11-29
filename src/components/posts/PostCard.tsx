@@ -12,21 +12,31 @@ import { formatDistanceToNow } from "date-fns";
 import { useToggleLikePostMutation } from "@/redux/features/services/services.api";
 import { JWTDecode } from "@/utils/jwt";
 import { IoIosHeart } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 const PostCard = ({ post }: { post: any }) => {
+  const router = useRouter();
   const [toggleLike] = useToggleLikePostMutation();
+  console.log(post);
 
   const handleToggleLikePost = async (id: string) => {
     await toggleLike(id);
   };
-  const {decoded} = JWTDecode()
+  const { decoded } = JWTDecode();
   const hasLiked = post.likedUsers.includes(decoded?.id);
+
+  const handleMessage = (id:string) => {
+    router.push(`/messages?receiverId=${id}`);
+  };
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 transition hover:shadow-lg">
       <div className="flex gap-2">
         <img
           className="h-16 w-16 rounded-full"
-          src={post?.userId?.profileImage || "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"}
+          src={
+            post?.userId?.profileImage ||
+            "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
+          }
         ></img>
         <div>
           <div>
@@ -81,7 +91,7 @@ const PostCard = ({ post }: { post: any }) => {
         <div className="flex gap-8">
           <div className="flex items-center text-gray-500 gap-1">
             <IoIosHeart
-            className={`${hasLiked ? "text-red-600" :""} cursor-pointer`}
+              className={`${hasLiked ? "text-red-600" : ""} cursor-pointer`}
               onClick={() => handleToggleLikePost(post.id)}
               size={20}
             ></IoIosHeart>
@@ -89,7 +99,10 @@ const PostCard = ({ post }: { post: any }) => {
           </div>
           <PostDetailModal id={post._id}></PostDetailModal>
         </div>
-        <button className="flex items-center gap-2 text-sm text-white font-medium px-2 rounded-[6px] bg-primary py-1">
+        <button
+          onClick={() => handleMessage(post?.userId?._id)}
+          className="flex items-center gap-2 text-sm text-white font-medium px-2 rounded-[6px] bg-primary py-1"
+        >
           <MessageSquare size={15}></MessageSquare>
           Send Message
         </button>

@@ -3,7 +3,7 @@ import React from "react";
 
 const Expertise = ({ lawyer }: { lawyer: any }) => {
   return (
-    <div className="border p-6 rounded-[6px]">
+    <div className="border bg-white p-6 rounded-[12px]">
       <div className="border-b-[0.5px] border-primary pb-6 ">
         <div className="flex items-center gap-2">
           <Award className="text-primary"></Award>
@@ -23,7 +23,7 @@ const Expertise = ({ lawyer }: { lawyer: any }) => {
         </div>
       </div>
       <h1 className="text-xl text-primary pt-4 font-medium">
-        Professional Background
+        Abuout Me
       </h1>
       <p className="text-gray-500 font-medium pt-2">
         Sarah Johnson is a highly experienced corporate attorney with over 12

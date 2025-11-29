@@ -12,14 +12,13 @@ const LawyerDetailsPage = () => {
   const {data:lawyerDetails} = useLawyerDetailsQuery(lawyer)
 
   return (
-    <div>
+    <div className="bg-[#f8f8f8] pt-6">
       <LawyerOverview lawyer={lawyerDetails?.data?.lawyer}></LawyerOverview>
       <Container>
         <div className="grid grid-cols-3 gap-6 my-8">
           <div className="col-span-2">
             <Expertise lawyer={lawyerDetails?.data?.lawyer}></Expertise>
-            <ClientReviews></ClientReviews>
-            <ClientReviews></ClientReviews>
+            <ClientReviews></ClientReviews>        
           
           </div>
           <div className="col-span-1">

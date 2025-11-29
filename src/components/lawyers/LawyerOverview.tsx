@@ -1,6 +1,6 @@
 "use client";
 import Container from "@/utils/Container";
-import { Clock, Star, User, Video } from "lucide-react";
+import { Mail, MapPin, MessageCircleMore } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -14,91 +14,93 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
 
+  console.log(lawyer);
+
   return (
-    <div className="bg-[#f8f8f8] py-12">
-      <Container>
-        <div className="grid grid-cols-2  text-black gap-6 ">
+    <Container>
+      <div className="grid grid-cols-3 shadow-lg text-black bg-white px-8 py-16 gap-6 rounded-[20px]">
+        <div className="col-span-1 flex items-center justify-start">
           <Image
             alt=""
             height={200}
             width={700}
-            className="border-2 object-cover h-[420px] w-full rounded-xl"
+            className="object-cover w-[280px] h-[240px] rounded-xl"
             src={
               lawyer?.profileImage ||
               "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
             }
           ></Image>
-          <div className="flex flex-col">
-            <h1 className="text-5xl font-semibold">{lawyer?.fullName}</h1>
-            <div className="flex gap-4 mt-4">
-              {lawyer?.specialization?.map((s: any) => (
-                <h1
-                  key={s._id}
-                  className="px-4 py-2  bg-primary/10 rounded-[4px] text-primary  font-medium"
-                >
-                  {s.serviceName}
-                </h1>
-              ))}
-            </div>
-
-            <div className="flex items-center mt-4 gap-2">
-              <div className="flex items-center gap-1 py-1 rounded-full bg-white bg-opacity-15">
-                <Clock className="text-primary" size={20}></Clock>
-                <p className="font-semibold text-gray-600">{lawyer?.experience} years of experience</p>
+        </div>
+        <div className="col-span-2 flex flex-col">
+          <div className="flex justify-between border-b pb-4 items-center">
+            <div>
+              <h1 className="text-4xl font-semibold">{lawyer?.fullName}</h1>
+              <div className="flex gap-4 mt-4">
+                {lawyer?.specialization?.map((s: any) => (
+                  <h1
+                    key={s._id}
+                    className="px-2 py-1 text-sm  bg-secondary/10 rounded-[4px] text-secondary  font-medium"
+                  >
+                    {s.serviceName}
+                  </h1>
+                ))}
               </div>
             </div>
-            <div className="flex mt-4 gap-1 items-center">
-              {(lawyer?.serviceType === "Online" ||
-                lawyer?.serviceType === "Both") && (
-                <Video size={20} className="text-primary" />
-              )}
-              {(lawyer?.serviceType === "In_Person" ||
-                lawyer?.serviceType === "Both") && (
-                <User size={20} className="text-primary"></User>
-              )}
-
-              <h1 className="text-sm">
-                {lawyer?.serviceType == "Both"
-                  ? "Online & In Person"
-                  : lawyer?.serviceType == "Online"
-                  ? "Online"
-                  : "In Person"}
-              </h1>
-            </div>
-            <div className="flex items-center mt-4 gap-2">
-              <div className="flex items-center gap-4 py-2 rounded-xl bg-white bg-opacity-15">
-                <div className="flex gap-1">
-                  <Star size={18} className="text-orange-500"></Star>
-                  <Star size={18} className="text-orange-500"></Star>
-                  <Star size={18} className="text-orange-500"></Star>
-                  <Star size={18} className="text-orange-500"></Star>
-                  <Star size={18} className="text-orange-500"></Star>
-                </div>
-
-                <h1 className="text-2xl font-semibold">{lawyer?.avgRating}</h1>
-                <p>({lawyer?.totalReview} reviews)</p>
-              </div>
-            </div>
-            <div className="flex gap-2 items-center">
-              <h1 className="text-2xl font-semibold">$430</h1>
-              <p>per Consultation</p>
-            </div>
-            <div className="flex  gap-4 mt-auto">
-              <button
-                onClick={handleBook}
-                className="bg-[#1f2b44] w-full py-2 rounded-[4px] text-white font-medium"
-              >
-                Book Consultation
-              </button>
-
-              <button   onClick={handleMessage} className="text-primary border-primary border  w-full py-2 rounded-[4px]  font-medium">
-                Send Message
-              </button>
+            <div>
+              <MessageCircleMore
+                onClick={() => handleMessage()}
+                size={30}
+                className="text-secondary cursor-pointer"
+              />
             </div>
           </div>
+          <div className="flex justify-between border-b py-4 items-center">
+            <div>
+              <h1 className="text-secondary font-medium text-xl">
+                {lawyer?.avgRating}
+              </h1>
+              <p className="text-gray-500 text-sm">
+                {lawyer?.totalReview} reviews
+              </p>
+            </div>
+            <div>
+              <h1 className="text-secondary font-medium text-xl">
+                ${lawyer?.fee}
+              </h1>
+              <p className="text-gray-500 text-sm">per consultation</p>
+            </div>
+            <div>
+              <h1 className="text-secondary font-medium text-xl">
+                {lawyer?.serviceType === "Both"
+                  ? "Online & In Person"
+                  : lawyer?.serviceType === "In_Person"
+                  ? "In Person"
+                  : lawyer?.serviceType === "Online"
+                  ? "Online"
+                  : ""}
+              </h1>
+              <p className="text-gray-500 text-sm">consultation type</p>
+            </div>
+          </div>
+          <div className="flex pt-4 justify-between">
+            <div className="flex gap-1 items-center">
+              <MapPin className="text-secondary"></MapPin>
+              <h1 className="font-medium">{lawyer?.location}</h1>
+            </div>
+            <div className="flex gap-1 items-center">
+              <Mail className="text-secondary"></Mail>
+              <h1 className="font-medium">{lawyer?.email}</h1>
+            </div>
+            <button
+              className="bg-purple-500 text-white px-4 py-2 font-medium rounded-[5px]"
+              onClick={() => handleBook()}
+            >
+              Book Consultation
+            </button>
+          </div>
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 };
 

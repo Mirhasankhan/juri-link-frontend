@@ -4,7 +4,7 @@ import React from "react";
 
 const ClientReviews = () => {
   return (
-    <div className="my-8 border rounded-[6px] p-6">
+    <div className="my-8 border bg-white rounded-[6px] p-6">
       <div className="flex items-center pb-4 gap-2">
         <Star className="text-primary"></Star>{" "}
         <h1 className="text-xl font-medium">Client Reviews (5 reviews)</h1>

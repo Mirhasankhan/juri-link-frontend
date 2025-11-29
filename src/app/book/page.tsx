@@ -1,6 +1,6 @@
 "use client";
 import Container from "@/utils/Container";
-import { Calendar, Clock, Video } from "lucide-react";
+import { Calendar, Clock, Clock1, DollarSign, User, Video } from "lucide-react";
 import Image from "next/image";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { useSearchParams } from "next/navigation";
@@ -14,10 +14,8 @@ const BookingPage = () => {
   const lawyerId = searchParams.get("lawyerId");
 
   // ALWAYS RUN HOOKS (never behind a return)
-  const {
-    data: lawyerData,
-    isLoading: lawyerLoading,
-  } = useLawyerDetailsQuery(lawyerId);
+  const { data: lawyerData, isLoading: lawyerLoading } =
+    useLawyerDetailsQuery(lawyerId);
 
   const lawyer = lawyerData?.data?.lawyer;
 
@@ -30,10 +28,7 @@ const BookingPage = () => {
   const [serviceId, setServiceId] = useState("");
 
   // SLOT HOOK ALWAYS EXECUTES — SKIP HANDLES CONDITIONALITY
-  const {
-    data: slotData,
-    isLoading: slotLoading,
-  } = useDayWiseSlotsQuery(
+  const { data: slotData, isLoading: slotLoading } = useDayWiseSlotsQuery(
     { day: dayNumber ?? 0, lawyerId },
     { skip: dayNumber === null }
   );
@@ -85,7 +80,10 @@ const BookingPage = () => {
                 height={200}
                 width={700}
                 className="border-2 h-16 w-16 rounded-full object-cover"
-                src={lawyer?.profileImage}
+                src={
+                  lawyer?.profileImage ||
+                  "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
+                }
               />
               <div>
                 <h1 className="font-medium text-3xl">Book Consultation</h1>
@@ -123,7 +121,9 @@ const BookingPage = () => {
 
                   {!slotLoading &&
                     (dayNumber === null || slotData?.data?.length === 0) && (
-                      <p className="text-red-500">No slots found</p>
+                      <p className="text-red-500">
+                        Select A Date To Get Lawyer Available Slots{" "}
+                      </p>
                     )}
 
                   <div className="grid grid-cols-3 gap-5">
@@ -152,7 +152,7 @@ const BookingPage = () => {
                       <div
                         key={type}
                         onClick={() => setConsultationType(type)}
-                        className={`flex border rounded-[6px] p-3 gap-2 w-full cursor-pointer ${
+                        className={`flex items-center border rounded-[6px] p-3 gap-2 w-full cursor-pointer ${
                           consultationType === type
                             ? "border-primary bg-blue-50"
                             : ""
@@ -209,42 +209,82 @@ const BookingPage = () => {
               </div>
 
               {/* Summary */}
-              <div className="col-span-1 bg-white rounded-[6px] sticky top-8 max-h-[360px] font-medium">
-                <div className="flex bg-primary text-white py-4 justify-center gap-2 rounded-[4px]">
+              <div className="col-span-1 bg-white rounded-[6px] sticky top-8 max-h-[480px] font-medium">
+                <div className="flex bg-primary/70 text-white py-8 justify-center gap-2 rounded-t-[12px]">
                   <IoMdCheckmarkCircleOutline size={25} />
                   <h1 className="font-medium">Booking Summary</h1>
                 </div>
 
                 <div className="p-4 space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-primary">Date:</span>
-                    <span className="font-medium">
+                  <div className="flex border-b py-3 justify-between">
+                    <div className="flex items-center gap-1">
+                      <Calendar
+                        size={30}
+                        className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
+                      ></Calendar>
+                      <span className="font-medium">Date:</span>
+                    </div>
+                    <span className="font-medium border bg-gray-100 px-3 rounded-[5px] text-gray-700">
                       {selectedDate || "Not selected"}
                     </span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-primary">Time:</span>
-                    <span className="font-medium">
+                  <div className="flex border-b py-3 justify-between">
+                    <div className="flex items-center gap-1">
+                      <Clock1
+                        size={30}
+                        className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
+                      ></Clock1>
+                      <span className="font-medium">Time:</span>
+                    </div>
+
+                    <span className="font-medium border bg-gray-100 px-3 rounded-[5px] text-gray-700">
                       {selectedTime || "Not selected"}
                     </span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-primary">Fee:</span>
-                    <span className="font-medium">{lawyer?.fee ?? "—"}</span>
+                  <div className="flex border-b py-3 justify-between">
+                    <div className="flex items-center gap-1">
+                      <DollarSign
+                        size={30}
+                        className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
+                      ></DollarSign>
+                      <span className="font-medium">Fee:</span>
+                    </div>
+                    <span className="font-medium">${lawyer?.fee ?? "—"}</span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-primary">Consultation Type:</span>
-                    <span className="font-medium">
+                  <div className="flex border-b py-3 justify-between">
+                    <div className="flex items-center gap-1">
+                      {consultationType == "Online" ? (
+                        <Video
+                          size={30}
+                          className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
+                        ></Video>
+                      ) : (
+                        <User
+                          size={30}
+                          className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
+                        ></User>
+                      )}
+
+                      <span className="font-medium">Consultation Type:</span>
+                    </div>
+                    <span className="font-medium border bg-gray-100 px-3 rounded-[5px] text-gray-700">
                       {consultationType || "Not selected"}
                     </span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-primary">Service Type:</span>
-                    <span className="font-medium">
+                  <div className="flex border-b py-3 justify-between">
+                    <div className="flex items-center gap-1">
+                      <DollarSign
+                        size={30}
+                        className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
+                      ></DollarSign>
+                      <span className="font-medium">Service Type:</span>
+                    </div>
+
+                    <span className="font-medium border bg-gray-100 px-3 rounded-[5px] text-gray-700">
                       {selectedLawArea || "Not selected"}
                     </span>
                   </div>
