@@ -8,9 +8,9 @@ import { useForm, Controller } from "react-hook-form";
 const MyProfilePage = () => {
   const { data: profileData } = useProfileQuery("");
   const profile = profileData?.data;
-  const [isDirty, setIsDirty] = useState(false);
-  const [profilePreview, setProfilePreview] = useState(null);
-  const [licencePreview, setLicencePreview] = useState(null);
+  const [isDirty, setIsDirty] = useState<any>(false);
+  const [profilePreview, setProfilePreview] = useState<any>(null);
+  const [licencePreview, setLicencePreview] = useState<any>(null);
 
   const {
     register,
@@ -68,19 +68,19 @@ const MyProfilePage = () => {
     setIsDirty(hasChanges);
   }, [watchedFields, profile]);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:any) => {
     console.log("Updated profile data: ", data);
     // Call your API to update the profile
   };
 
   // Preview handlers
-  const handleProfileImageChange = (e) => {
+  const handleProfileImageChange = (e:any) => {
     const file = e.target.files[0];
     if (file) setProfilePreview(URL.createObjectURL(file));
   };
 
-  const handleLicenceImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleLicenceImageChange = (e:any) => {
+    const file= e.target.files[0];
     if (file) setLicencePreview(URL.createObjectURL(file));
   };
 

@@ -1,45 +1,71 @@
+import { 
+  SquareChartGantt,
+  BookmarkPlus,
+  Settings,
+  Calendar,
+  CircleDollarSign,
+  MessageCircleMore, 
+  Heart
+} from "lucide-react";
+
 import { SidbarItem, TRoles, userRoles } from "@/types/common";
-import { SquareChartGantt,BookmarkPlus, Settings, Calendar, CircleDollarSign, MessageCircleMore } from "lucide-react";
 
+// Shared routes for ALL roles
+const baseMenu: SidbarItem[] = [
+  {
+    title: "Manage Profile",
+    path: "my-profile/manage-profile",
+    icon: SquareChartGantt,
+  },
+  {
+    title: "Booking History",
+    path: "my-profile/manage-bookings",
+    icon: BookmarkPlus,
+  },
+ 
+  {
+    title: "Settings",
+    path: "profile/settings",
+    icon: Settings,
+  },
+];
+
+// Role-specific additions
+const lawyerMenu: SidbarItem[] = [
+  {
+    title: "Earnings Summary",
+    path: "my-profile/manage-earnings",
+    icon: CircleDollarSign,
+  },
+  {
+    title: "Availability",
+    path: "my-profile/availability",
+    icon: Calendar,
+  },
+  {
+    title: "View Reviews",
+    path: "profile/favourite",
+    icon: MessageCircleMore,
+  },
+];
+
+const userMenu: SidbarItem[] = [
+  {
+    title: "My Favourites",
+    path: "my-profile/favourites",
+    icon: Heart,
+  },
+];
+
+// Final generator
 export const sidebarItems = (role: TRoles): SidbarItem[] => {
-  const roleMenus: SidbarItem[] = [];
-
-  switch (role) {
-    case userRoles.USER:
-      roleMenus.push({
-        title: "Manage Profile",
-        path: `my-profile/manage-profile`,
-        icon: SquareChartGantt ,
-      });    
-      roleMenus.push({
-        title: "Booking History",
-        path: `my-profile/manage-bookings`,
-        icon: BookmarkPlus,
-      });
-      roleMenus.push({
-        title: "Earnings Summary",
-        path: `my-profile/manage-earnings`,
-        icon: CircleDollarSign,
-      });
-      roleMenus.push({
-        title: "Availability ",
-        path: `my-profile/availability`,
-        icon: Calendar,
-      });
-      roleMenus.push({
-        title: "View Reviews",
-        path: `profile/favourite`,
-        icon: MessageCircleMore,
-      });
-      roleMenus.push({
-        title: "Settings",
-        path: `profile/settings`,
-        icon: Settings,
-      });
-
-      break;
-    default:
-      break;
+  if (role === userRoles.LAWYER) {
+    return [...baseMenu, ...lawyerMenu];
   }
-  return [...roleMenus];
+
+  if (role === userRoles.USER) {
+    return [...baseMenu, ...userMenu];
+  }
+
+  return baseMenu;
 };

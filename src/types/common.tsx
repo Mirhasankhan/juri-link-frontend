@@ -2,6 +2,7 @@ import { IconType } from "react-icons";
 
 export const userRoles = {
   USER: "User",
+  LAWYER:"Lawyer"
 };
 export type TRoles = keyof typeof userRoles;
 

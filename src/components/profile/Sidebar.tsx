@@ -1,6 +1,7 @@
 "use client";
 import { TRoles } from "@/types/common";
 import { sidebarItems } from "@/utils/generateSidebarItems";
+import { JWTDecode } from "@/utils/jwt";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,10 +9,11 @@ import { usePathname } from "next/navigation";
 const Sidebar = () => {
   const pathName = usePathname();
 
+  const { decoded } = JWTDecode();
 
   return (
     <div className="min-h-screen ">
-      {sidebarItems("User" as TRoles).map((item, index) => (
+      {sidebarItems(decoded?.role as TRoles).map((item, index) => (
         <Link key={index} href={`/${item.path}`}>
           <div
             className={`${
