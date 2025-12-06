@@ -13,6 +13,7 @@ import { useToggleLikePostMutation } from "@/redux/features/services/services.ap
 import { JWTDecode } from "@/utils/jwt";
 import { IoIosHeart } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();
@@ -25,19 +26,24 @@ const PostCard = ({ post }: { post: any }) => {
   const { decoded } = JWTDecode();
   const hasLiked = post.likedUsers.includes(decoded?.id);
 
-  const handleMessage = (id:string) => {
+  const handleMessage = (id: string) => {
     router.push(`/messages?receiverId=${id}`);
   };
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 transition hover:shadow-lg">
       <div className="flex gap-2">
-        <img
-          className="h-16 w-16 rounded-full"
+        <Image
           src={
             post?.userId?.profileImage ||
             "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
           }
-        ></img>
+          alt="profile"
+          width={48}
+          height={48}
+          className="object-cover rounded-full"
+          quality={100}
+        />
+
         <div>
           <div>
             <h1 className="font-medium text-xl">

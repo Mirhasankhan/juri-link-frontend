@@ -1,37 +1,63 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React from 'react';
+
+import { JWTDecode } from "@/utils/jwt";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
 const SubMenu = () => {
+  const { decoded } = JWTDecode();
+
+  const role = decoded?.role
   const pathname = usePathname();
 
-  const links = [
-    { href: '/', label: 'Home' },
-    // { href: '/services', label: 'Services' },
-    { href: '/lawyers', label: 'Find Lawyers' },
-    { href: '/posts', label: 'Posts' },
-    { href: '/premium', label: 'Premium' },
-    { href: '/about-us', label: 'About Us' },
+  // Define all possible links
+  const allLinks = [
+    { href: "/", label: "Home" },
+    { href: "/lawyers", label: "Lawyers Directory" },
+    { href: "/posts", label: "Posts" },
+    { href: "/service-area", label: "Service Areas" },
+    { href: "/create-post", label: "Request Legal Need" },
+    { href: "/premium", label: "Premium Access" },
+    { href: "/about-us", label: "About Us" },
   ];
 
+  // Filter links based on role
+  const filteredLinks = allLinks.filter((link) => {
+    if (!role) {
+      // No role (guest) - hide Premium
+      return link.href !== "/premium" && link.href !== "/create-post";
+    } else if (role === "User") {
+      // Normal user - hide Premium
+      return link.href !== "/premium";
+    } else if (role === "Lawyer") {
+      // Lawyer - hide Request Legal Help and Lawyers Directory
+      return link.href !== "/create-post" && link.href !== "/lawyers";
+    }
+    return true;
+  });
+
   return (
-    <div className='flex items-center gap-6 text-sm sm:text-base font-medium text-gray-600'>
-      {links.map((link) => {
+    <div className="flex items-center gap-6 text-sm sm:text-base font-medium text-gray-600">
+      {filteredLinks.map((link) => {
         const isActive = pathname === link.href;
         return (
           <Link
             key={link.href}
             href={link.href}
             className={`relative transition-all duration-300 hover:text-primary 
-              ${isActive ? 'text-primary font-bold' : ''}`}
+              ${isActive ? "text-primary font-bold" : ""}`}
           >
             <span
               className={`pb-1 inline-block relative
                 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-full 
                 after:transition-all after:duration-300
-                ${isActive ? 'after:bg-primary' : 'after:bg-transparent hover:after:bg-primary'}`}
+                ${
+                  isActive
+                    ? "after:bg-primary"
+                    : "after:bg-transparent hover:after:bg-primary"
+                }`}
             >
               {link.label}
             </span>

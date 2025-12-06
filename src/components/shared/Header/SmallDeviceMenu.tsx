@@ -5,21 +5,34 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Home, Users, FileText, Star, Info } from "lucide-react";
 import React from "react";
-import { useAppSelector } from "@/redux/hooks";
-import { useCurrentUser } from "@/redux/features/auth/authSlice";
+
 import SignOut from "../SignOut";
+import { JWTDecode } from "@/utils/jwt";
 
 const SmallDeviceMenu = () => {
   const pathname = usePathname();
-  const { email } = useAppSelector(useCurrentUser);
+  const { decoded } = JWTDecode();
 
-  const links = [
+  const role = decoded?.role;
+  const email = decoded?.email;
+
+  // All possible links
+  const allLinks = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/lawyers", label: "Find Lawyers", icon: Users },
-    { href: "/posts", label: "Posts", icon: FileText },
-    { href: "/premium", label: "Premium", icon: Star },
+    { href: "/lawyers", label: "Lawyers Directory", icon: Users },
+    { href: "/posts", label: "Articles", icon: FileText },
+    { href: "/premium", label: "Premium Access", icon: Star },
     { href: "/about-us", label: "About Us", icon: Info },
-  ];  
+  ];
+
+  // Filter links based on role
+  const filteredLinks = allLinks.filter((link) => {
+    if (!role) return link.href !== "/premium"; // Guest
+    if (role === "User") return link.href !== "/premium"; // User
+    if (role === "Lawyer")
+      return link.href !== "/lawyers" && link.href !== "/posts"; // Lawyer
+    return true;
+  });
 
   return (
     <motion.div
@@ -34,7 +47,7 @@ const SmallDeviceMenu = () => {
         <p>Legal Services Portal</p>
       </div>
 
-      {links.map(({ href, label, icon: Icon }) => {
+      {filteredLinks.map(({ href, label, icon: Icon }) => {
         const isActive = pathname === href;
 
         return (
@@ -46,8 +59,7 @@ const SmallDeviceMenu = () => {
                 isActive
                   ? "bg-white/10 text-white"
                   : "text-white hover:bg-white/10"
-              }
-            `}
+              }`}
           >
             <Icon size={18} />
             <span>{label}</span>
@@ -71,14 +83,7 @@ const SmallDeviceMenu = () => {
           </Link>
         </div>
       ) : (
-        // <button
-        //   onClick={handleLogout}
-        //   className="mt-4 flex items-center gap-2 px-4 py-2 rounded-[5px] border border-red-500 text-red-500 bg-red-500 bg-opacity-10 transition-all duration-300 font-medium"
-        // >
-        //   <LogOut size={16} />
-        //   Logout
-        // </button>
-          <SignOut></SignOut>
+        <SignOut />
       )}
     </motion.div>
   );

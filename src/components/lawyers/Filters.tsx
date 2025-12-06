@@ -60,7 +60,7 @@ const Filters = ({
             onChange={() =>
               setSelected(selected === option.value ? null : option.value)
             }
-            className="accent-blue-500 w-4 h-4"
+            className="accent-orange-600 w-4 h-4"
           />
           <span>{option.label}</span>
         </label>

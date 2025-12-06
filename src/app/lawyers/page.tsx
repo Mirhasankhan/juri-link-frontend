@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
 import LawyerCard from "@/components/lawyers/LawyerCard";
 import { useSearchParams } from "next/navigation";
+import { SkeletonCard } from "@/components/shared/Skeleton";
 
 const LawyersPage = () => {
   const searchParams = useSearchParams();
@@ -19,7 +20,11 @@ const LawyersPage = () => {
     serviceId || ""
   );
 
-  const { data: lawyers } = useAllLawyersQuery({
+  const {
+    data: lawyers,
+    isLoading,
+    isFetching,
+  } = useAllLawyersQuery({
     experience: selectedYear,
     type: selectedService,
     specializationId: selectedLegal,
@@ -84,9 +89,13 @@ const LawyersPage = () => {
               </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {lawyers?.data.map((lawyer: any) => (
-                <LawyerCard key={lawyer.id} lawyer={lawyer} />
-              ))}
+              {lawyers?.data.map((lawyer: any) =>
+                isLoading || isFetching ? (
+                  <SkeletonCard key={lawyer.id} />
+                ) : (
+                  <LawyerCard key={lawyer.id} lawyer={lawyer} />
+                )
+              )}
             </div>
           </div>
         </div>

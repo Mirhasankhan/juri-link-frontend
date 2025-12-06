@@ -15,7 +15,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Image
-            className="h-[48px] w-[48px] object-cover rounded-full"
+            className="h-[60px] w-[60px] object-cover rounded-full"
             height={400}
             width={100}
             src={
@@ -25,7 +25,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
             alt=""
           ></Image>
           <div>
-            <h1 className="font-medium text-xl">{lawyer?.fullName}</h1>
+            <h1 className="font-medium text-xl pb-1">{lawyer?.fullName}</h1>
 
             <div className="flex gap-1">
               {lawyer?.legalServices?.map(
@@ -51,26 +51,26 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
       </div>
       <div className="flex my-3 justify-between items-center">
         <div className="flex gap-1 items-center">
-          <MapPin size={15} className="text-primary"></MapPin>
-          <h1 className="text-sm">{lawyer?.location}</h1>
+          <MapPin size={20} className="text-primary"></MapPin>
+          <h1>{lawyer?.location}</h1>
         </div>
         <div className="flex gap-1 items-center">
-          <AlarmClockPlus size={15} className="text-primary"></AlarmClockPlus>
-          <h1 className="text-sm">Experience: {lawyer?.experience} Years</h1>
+          <AlarmClockPlus size={20} className="text-primary"></AlarmClockPlus>
+          <h1>Experience: {lawyer?.experience} Years</h1>
         </div>
       </div>
       <div className="flex mt-2 justify-between items-center">
         <div className="flex gap-1 items-center">
           {(lawyer.serviceType === "Online" ||
             lawyer.serviceType === "Both") && (
-            <Video size={15} className="text-primary" />
+            <Video size={20} className="text-primary" />
           )}
           {(lawyer.serviceType === "In_Person" ||
             lawyer.serviceType === "Both") && (
-            <User size={15} className="text-primary"></User>
+            <User size={20} className="text-primary"></User>
           )}
 
-          <h1 className="text-sm">
+          <h1>
             {lawyer?.serviceType == "Both"
               ? "Online & In Person"
               : lawyer.serviceType == "Online"
@@ -86,7 +86,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
       <div className="flex gap-6 mt-4">
         <Link className="w-full" href={`/lawyers/${lawyer._id}`}>
           <button className="bg-primary w-full py-1 rounded-[4px] text-white font-medium">
-            View Details
+            View Profile
           </button>
         </Link>
         <button
