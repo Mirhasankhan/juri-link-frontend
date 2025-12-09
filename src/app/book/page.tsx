@@ -8,6 +8,7 @@ import { useLawyerDetailsQuery } from "@/redux/features/auth/authApi";
 import { useState } from "react";
 import StripeModal from "@/components/shared/CreatePayment";
 import { useDayWiseSlotsQuery } from "@/redux/features/availability/availability.api";
+import { GoLaw } from "react-icons/go";
 
 const BookingPage = () => {
   const searchParams = useSearchParams();
@@ -96,18 +97,40 @@ const BookingPage = () => {
             <div className="grid grid-cols-3 my-6 gap-6">
               <div className="col-span-2">
                 {/* Date Picker */}
-                <div className="border bg-white p-6 rounded-[6px]">
-                  <div className="flex items-center pb-2 gap-1">
-                    <Calendar className="text-primary" />
-                    <p className="font-medium text-gray-700">Select a date</p>
+                <div className="flex gap-5">
+                  <div className="border w-full bg-white p-6 rounded-[6px]">
+                    <div className="flex items-center pb-2 gap-1">
+                      <Calendar className="text-primary" />
+                      <p className="font-medium text-gray-700">Select a date</p>
+                    </div>
+                    <input
+                      type="date"
+                      value={selectedDate}
+                      min={new Date().toISOString().split("T")[0]}
+                      onChange={(e) => handleDateChange(e.target.value)}
+                      className="w-full border rounded-[4px] mt-2 p-2"
+                    />
                   </div>
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    min={new Date().toISOString().split("T")[0]}
-                    onChange={(e) => handleDateChange(e.target.value)}
-                    className="w-full border rounded-[4px] mt-2 p-2"
-                  />
+                  <div className="border w-full bg-white p-6 rounded-[6px]">
+                    <div className="flex items-center pb-2 gap-1">
+                      <GoLaw size={20} className="text-primary" />
+                      <p className="font-medium text-gray-700">
+                        Select area of law
+                      </p>
+                    </div>
+                    <select
+                      value={selectedLawArea}
+                      onChange={handleLawAreaChange}
+                      className="w-full border p-2.5 mt-2 rounded-[4px]"
+                    >
+                      <option value="">Select specialization</option>
+                      {lawyer?.specialization?.map((area: any, i: number) => (
+                        <option key={i} value={area.serviceName}>
+                          {area.serviceName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 {/* Dynamic Slots */}
@@ -126,7 +149,7 @@ const BookingPage = () => {
                       </p>
                     )}
 
-                  <div className="grid grid-cols-3 gap-5">
+                  <div className="grid grid-cols-4 gap-5">
                     {!slotLoading &&
                       slotData?.data?.map((slot: any, idx: number) => (
                         <button
@@ -175,23 +198,6 @@ const BookingPage = () => {
                       </div>
                     ))}
                   </div>
-                </div>
-
-                {/* Specialization */}
-                <div className="border mt-4 bg-white p-6 rounded-[6px]">
-                  <h1 className="font-medium pb-2">Select area of law</h1>
-                  <select
-                    value={selectedLawArea}
-                    onChange={handleLawAreaChange}
-                    className="w-full border p-2 rounded-[4px]"
-                  >
-                    <option value="">Select specialization</option>
-                    {lawyer?.specialization?.map((area: any, i: number) => (
-                      <option key={i} value={area.serviceName}>
-                        {area.serviceName}
-                      </option>
-                    ))}
-                  </select>
                 </div>
 
                 {/* Description */}

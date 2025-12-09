@@ -1,9 +1,10 @@
 "use client";
 
 import Banner from "@/components/home/Banner";
-import Faq from "@/components/home/Faq";
 import FeaturedLawyers from "@/components/home/FeaturedLawyers";
+import ForInPerson from "@/components/home/ForInPerson";
 import ForLawyer from "@/components/home/ForLawyer";
+import ForOnline from "@/components/home/ForOnline";
 import Research from "@/components/home/Research";
 import Testimonials from "@/components/home/Testi";
 
@@ -13,6 +14,8 @@ const HOmePage = () => {
       <Banner></Banner>
       <FeaturedLawyers></FeaturedLawyers>
       <ForLawyer></ForLawyer>
+      <ForInPerson></ForInPerson>
+      <ForOnline></ForOnline>
       <Research></Research>
       <Testimonials></Testimonials>
     </div>

@@ -18,7 +18,7 @@ const ContactLawyer = ({ lawyer }: { lawyer: any }) => {
         <ReactNextPlayer
           src={
             lawyer?.introVideo ||
-            "https://ik.imagekit.io/rfdbp4s3w/Lovable%202.0%20is%20here.%20Multiplayer%20vibe%20coding.%20Smarter%20&%20more%20secure..mp4"
+            "https://fixzone-app-storage.s3.us-east-2.amazonaws.com/record/aTaxTcdmzGSBM1dX_8fDj5DN%m3a4Pikd_68f9b3371b4343a65d9ab107_8fDj5DN%m3a4Pikd_68f9b3371b4343a65d9ab107_main_VA_20251208110653595.mp4"
           }
           controls
           autoplay={true}
