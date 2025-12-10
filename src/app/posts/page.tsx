@@ -18,8 +18,8 @@ const PostsPage = () => {
 
   const {
     data: posts,
-    isLoading,
-    isFetching,
+    isLoading
+    
   } = usePostsQuery({
     serviceId: selectedLegal,
     level: selectedUrgency,
@@ -30,7 +30,7 @@ const PostsPage = () => {
     setShowMobileFilters(!showMobileFilters);
   };
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return "loading.....";
   }
 

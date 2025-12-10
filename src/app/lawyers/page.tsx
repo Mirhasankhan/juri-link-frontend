@@ -22,8 +22,7 @@ const LawyersPage = () => {
 
   const {
     data: lawyers,
-    isLoading,
-    isFetching,
+    isLoading    
   } = useAllLawyersQuery({
     experience: selectedYear,
     type: selectedService,
@@ -90,7 +89,7 @@ const LawyersPage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {lawyers?.data.map((lawyer: any) =>
-                isLoading || isFetching ? (
+                isLoading ? (
                   <SkeletonCard key={lawyer.id} />
                 ) : (
                   <LawyerCard key={lawyer.id} lawyer={lawyer} />

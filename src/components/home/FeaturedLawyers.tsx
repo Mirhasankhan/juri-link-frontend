@@ -11,7 +11,7 @@ const FeaturedLawyers = () => {
   const {
     data: lawyers,
     isLoading,
-    isFetching,
+    
   } = useAllLawyersQuery({
     experience: "",
     type: "",
@@ -23,7 +23,7 @@ const FeaturedLawyers = () => {
       <h1 className="text-4xl font-medium pt-8 pb-3">Our Featured Lawyers</h1>
       <div className="grid grid-cols-4 gap-8">
         {lawyers?.data?.map((lawyer: any) =>
-          isFetching || isLoading ? (
+          isLoading ? (
             <SkeletonCard key={lawyer?._id} />
           ) : (
             <div

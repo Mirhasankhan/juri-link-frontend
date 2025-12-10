@@ -202,7 +202,7 @@ const BookingPage = () => {
 
                 {/* Description */}
                 <div className="mt-6">
-                  <label className="block pb-2 font-medium">
+                  <label className="block pb-2 text-gray-700 font-medium">
                     Describe your need shortly
                   </label>
                   <textarea

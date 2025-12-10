@@ -42,7 +42,7 @@ const authApi = baseApi.injectEndpoints({
         url: "/user/profile",
         method: "GET",
       }),
-      providesTags: ["availability"],
+      providesTags: ["users"],
     }),
     sendOtp: builder.mutation({
       query: (email) => ({
@@ -82,9 +82,25 @@ const authApi = baseApi.injectEndpoints({
     }),
     updateProfile: builder.mutation({
       query: (data) => ({
-        url: "/users/update",
+        url: "/auth/update",
         method: "PUT",
         body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+    updateIntroVideo: builder.mutation({
+      query: (file) => ({
+        url: "/auth/upload/intro-video",
+        method: "PUT",
+        body: file,
+      }),
+      invalidatesTags: ["users"],
+    }),
+    updateprofileImage: builder.mutation({
+      query: (file) => ({
+        url: "/auth/upload/profileImage",
+        method: "PUT",
+        body: file,
       }),
       invalidatesTags: ["users"],
     }),
@@ -110,14 +126,6 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
-
-    updateUserStatus: builder.mutation({
-      query: (id) => ({
-        url: `users/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["users"],
-    }),
   }),
 });
 
@@ -128,11 +136,12 @@ export const {
   useResendOtpMutation,
   useProfileQuery,
   useUpdateImageMutation,
+  useUpdateprofileImageMutation,
   useLawyerDetailsQuery,
+  useUpdateIntroVideoMutation,
   useAllLawyersQuery,
   useLoginMutation,
   useAllUsersQuery,
-  useUpdateUserStatusMutation,
   useUpdateProfileMutation,
   useSocialLoginMutation,
   useVerifyOtpMutation,
