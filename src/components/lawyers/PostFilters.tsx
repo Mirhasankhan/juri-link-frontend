@@ -57,9 +57,9 @@ const PostFilters = ({
             onChange={() =>
               setSelected(selected === option.value ? null : option.value)
             }
-              className="accent-black w-5 h-5"
+              className="accent-orange-600 w-4 h-4"
           />
-          <span>{option.label}</span>
+          <span className="text-gray-600">{option.label}</span>
         </label>
       ))}
     </div>

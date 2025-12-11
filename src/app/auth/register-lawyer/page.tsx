@@ -182,7 +182,7 @@ const LawyerSignUpForm = () => {
                 <option value="">Select Service Type</option>
                 <option value="Online">Online</option>
                 <option value="In_Person">In_Person</option>
-                <option value="Both">Both</option>
+                <option value="Both">Online & In_Person</option>
               </select>
               {errors.serviceType && (
                 <p className="text-red-500 text-sm">

@@ -18,16 +18,23 @@ import Image from "next/image";
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();
   const [toggleLike] = useToggleLikePostMutation();
-  console.log(post);
 
   const handleToggleLikePost = async (id: string) => {
-    await toggleLike(id);
+    if (decoded?.email) {
+      await toggleLike(id);
+    } else {
+      router.push(`/auth/login`);
+    }
   };
   const { decoded } = JWTDecode();
   const hasLiked = post.likedUsers.includes(decoded?.id);
 
   const handleMessage = (id: string) => {
-    router.push(`/messages?receiverId=${id}`);
+    if (decoded?.email) {
+      router.push(`/messages?receiverId=${id}`);
+    } else {
+      router.push(`/auth/login`);
+    }
   };
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 transition hover:shadow-lg">
@@ -40,7 +47,7 @@ const PostCard = ({ post }: { post: any }) => {
           alt="profile"
           width={48}
           height={48}
-          className="object-cover rounded-full"
+          className="object-cover h-16 w-16 rounded-full"
           quality={100}
         />
 
@@ -55,7 +62,7 @@ const PostCard = ({ post }: { post: any }) => {
               </span>
             </h1>
             <div className="flex gap-1 mt-1">
-              <h1 className="inline-block bg-gray-100 text-gray-800 text-xs font-medium px-3 py-1 rounded-full mb-4">
+              <h1 className="inline-block bg-secondary/10 text-secondary text-xs font-medium px-3 py-1 rounded-full mb-4">
                 {post?.serviceId?.serviceName}
               </h1>
             </div>

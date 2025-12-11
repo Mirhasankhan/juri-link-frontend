@@ -1,16 +1,20 @@
 "use client";
 import Container from "@/utils/Container";
+import { JWTDecode } from "@/utils/jwt";
 import { Mail, MapPin, MessageCircleMore } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
   const router = useRouter();
+  const { decoded } = JWTDecode();
 
   const handleBook = () => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     router.push(`/book?lawyerId=${lawyer._id}`);
   };
   const handleMessage = () => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
 
@@ -100,7 +104,6 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
           </div>
         </div>
       </div>
-      
     </Container>
   );
 };

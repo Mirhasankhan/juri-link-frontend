@@ -1,3 +1,4 @@
+import { JWTDecode } from "@/utils/jwt";
 import { AlarmClockPlus, MapPin, Star, User, Video } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,9 +6,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
+  const { decoded } = JWTDecode();
   const router = useRouter();
 
- const handleMessage = () => {
+  const handleMessage = () => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
   return (

@@ -8,6 +8,7 @@ import { Funnel, Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePostsQuery } from "@/redux/features/services/services.api";
 import Link from "next/link";
+import { SkeletonCard } from "@/components/shared/Skeleton";
 
 const PostsPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -16,11 +17,7 @@ const PostsPage = () => {
   const [selectedLegal, setSelectedLegal] = useState<string | null>("");
   const [selectedUrgency, setSelectedUrgency] = useState<string | null>("");
 
-  const {
-    data: posts,
-    isLoading
-    
-  } = usePostsQuery({
+  const { data: posts, isLoading } = usePostsQuery({
     serviceId: selectedLegal,
     level: selectedUrgency,
     serviceType: selectedService,
@@ -29,10 +26,6 @@ const PostsPage = () => {
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
   };
-
-  if (isLoading) {
-    return "loading.....";
-  }
 
   return (
     <div className="py-6">
@@ -84,7 +77,7 @@ const PostsPage = () => {
           <div className="col-span-4 md:col-span-3">
             <div className="flex justify-between items-center pb-6">
               <h1 className="text-xl font-medium">
-                Found {posts?.data?.length} posts
+                Found ({posts?.data?.length}) posts
               </h1>
 
               <button
@@ -95,7 +88,7 @@ const PostsPage = () => {
                 Filters
               </button>
               <Link href="/create-post">
-                <button className="hidden font-medium border px-4 py-1 rounded-[6px] md:flex gap-2 items-center">
+                <button className="hidden bg-secondary/10 text-secondary font-medium border px-4 py-1 rounded-[6px] md:flex gap-2 items-center">
                   <Plus size={18} />
                   Create Post
                 </button>
@@ -106,9 +99,13 @@ const PostsPage = () => {
               {posts?.data
                 ?.slice()
                 .reverse()
-                .map((post: any) => (
-                  <PostCard key={post.id} post={post} />
-                ))}
+                .map((post: any) =>
+                  isLoading ? (
+                    <SkeletonCard key={post.id} />
+                  ) : (
+                    <PostCard key={post.id} post={post} />
+                  )
+                )}
             </div>
           </div>
         </div>

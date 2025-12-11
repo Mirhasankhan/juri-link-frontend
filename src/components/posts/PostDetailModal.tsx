@@ -10,12 +10,16 @@ import {
   useCreateReplyMutation,
   usePostQuery,
 } from "@/redux/features/services/services.api";
+import { JWTDecode } from "@/utils/jwt";
 import { MessageCircle, Send } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const PostDetailModal = ({ id }: { id: string }) => {
   const { data: post } = usePostQuery(id);
+  const router = useRouter();
+  const { decoded } = JWTDecode();
   const [message, setMessage] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
   const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
@@ -26,6 +30,7 @@ const PostDetailModal = ({ id }: { id: string }) => {
   const [createReply, { isLoading: isReplyLoading }] = useCreateReplyMutation();
 
   const handleComment = async () => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     if (!message.trim()) return;
     const data = { postId: id, message };
     const response = await createComment(data);
@@ -34,6 +39,7 @@ const PostDetailModal = ({ id }: { id: string }) => {
   };
 
   const handleReply = async (commentId: string) => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     if (!replyMessage.trim()) return;
     const data = { commentId, message: replyMessage };
     const response = await createReply(data);
@@ -49,7 +55,7 @@ const PostDetailModal = ({ id }: { id: string }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center text-gray-500 gap-2 cursor-pointer">
+        <div className="flex items-center text-gray-500 gap-1 cursor-pointer">
           <MessageCircle size={20} />
           <p className="font-medium">{comments.length}</p>
         </div>
@@ -160,9 +166,7 @@ const PostDetailModal = ({ id }: { id: string }) => {
                                 })}
                               </p>
                             </div>
-                            <p className="text-gray-700 text-sm">
-                              {r.message}
-                            </p>
+                            <p className="text-gray-700 text-sm">{r.message}</p>
                           </div>
                         </div>
                       ))}

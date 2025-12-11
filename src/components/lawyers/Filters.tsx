@@ -62,7 +62,7 @@ const Filters = ({
             }
             className="accent-orange-600 w-4 h-4"
           />
-          <span>{option.label}</span>
+          <span className="text-gray-600">{option.label}</span>
         </label>
       ))}
     </div>

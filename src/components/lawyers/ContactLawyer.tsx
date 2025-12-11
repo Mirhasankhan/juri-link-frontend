@@ -1,13 +1,17 @@
+import { JWTDecode } from "@/utils/jwt";
 import { GraduationCap, Mail, Phone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReactNextPlayer } from "reactnextplayer";
 
 const ContactLawyer = ({ lawyer }: { lawyer: any }) => {
+  const { decoded } = JWTDecode();
   const router = useRouter();
   const handleMessage = () => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
   const handleBook = () => {
+    if (!decoded?.email) return router.push(`/auth/login`);
     router.push(`/book?lawyerId=${lawyer._id}`);
   };
 

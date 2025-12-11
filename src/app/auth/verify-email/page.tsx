@@ -93,7 +93,7 @@ const VerifyEmail = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-2">
+      <div className="min-h-screen bg-[#f8f8f8] flex items-center justify-center p-2">
         <div className="flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-lg rounded-lg p-6">
           <div className="p-4 bg-blue-100 rounded-full mb-3">
             <Mail className="text-blue-800 w-6 h-6" />
@@ -115,7 +115,7 @@ const VerifyEmail = () => {
                   type="text"
                   inputMode="numeric"
                   maxLength={1}
-                  className="w-12 h-12 border rounded-md text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-12 h-12 border rounded-[5px] text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
                   value={otp[`d${i + 1}` as keyof typeof otp]}
                   onChange={(e) => handleChange(e, i)}
                   onKeyDown={(e) => handleKeyDown(e, i)}
