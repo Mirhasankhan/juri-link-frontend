@@ -10,6 +10,7 @@ import { Menu, X } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/redux/hooks";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
+import logo from '../../../assets/logo3.png'
 
 const Header = () => {
   const [active, setActive] = useState(false);
@@ -28,8 +29,8 @@ const Header = () => {
             href="/"
             className="flex text-green-600 text-3xl font-bold items-center gap-1"
           >
-            {/* Juri.Link */}
-            heelo
+            
+            <Image height={80} width={80} src={logo} alt="logo"></Image>
           </Link>
           <div className="hidden md:block">
             <SubMenu></SubMenu>
