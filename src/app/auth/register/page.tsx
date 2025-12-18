@@ -44,7 +44,7 @@ const Register = () => {
         </p>
       </div>
 
-      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
+      <div className="w-full md:w-2/5 xl:w-1/3 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
         <h1 className="text-2xl font-medium ppy-2 ">Client Registration</h1>
         <h1 className="text-sm text-gray-600">Sign up to find and hire lawyers</h1>
 
