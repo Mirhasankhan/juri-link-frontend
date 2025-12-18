@@ -118,9 +118,12 @@ export default function ChatPage() {
                     {m?.content || "📎 File sent"}
                   </div>
                   {m?.fileUrl?.length > 0 && (
-                    <img
+                    <Image
+                      height={30}
+                      width={30}
+                      alt=""
                       src={m.fileUrl || "/avatar.png"}
-                      className="w-10 h-10 rounded-full"
+                      className="w-10 h-10 rounded-full object-cover"
                     />
                   )}
                 </div>

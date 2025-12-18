@@ -21,7 +21,7 @@ export const useChatSocket = (token: string | null) => {
   const connect = useCallback(() => {
     if (!token) return;
 
-    const ws = new WebSocket(`ws://localhost:5006?x-token=${token}`);
+    const ws = new WebSocket(`ws://api.passit.smtsigma.com?x-token=${token}`);
 
     ws.onopen = () => {
       console.log("✅ Connected to chat server");
