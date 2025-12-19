@@ -10,19 +10,12 @@ const bookingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["bookings"],
     }),
-    lawyerDetails: builder.query({
-      query: (id) => ({
-        url: `/user/details/${id}`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
-    }),
     userBookings: builder.query({
       query: () => ({
         url: `/booking/user-wise`,
         method: "GET",
       }),
-      providesTags: ["users"],
+      providesTags: ["bookings"],
     }),
     lawyerBookings: builder.query({
       query: () => ({
@@ -38,13 +31,30 @@ const bookingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["bookings"],
     }),
+    cancelBooking: builder.mutation({
+      query: (data) => ({
+        url: `/booking/cancel`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["bookings"],
+    }),
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: `/review/create`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["bookings"],
+    }),
   }),
 });
 
 export const {
-  useLawyerDetailsQuery,
   useLawyerBookingsQuery,
   useCreateBookingMutation,
   useMarkCompletedMutation,
+  useCancelBookingMutation,
+  useCreateReviewMutation,
   useUserBookingsQuery,
 } = bookingsApi;

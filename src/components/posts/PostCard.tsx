@@ -9,11 +9,11 @@ import {
 } from "lucide-react";
 import PostDetailModal from "./PostDetailModal";
 import { formatDistanceToNow } from "date-fns";
-import { useToggleLikePostMutation } from "@/redux/features/services/services.api";
 import { JWTDecode } from "@/utils/jwt";
 import { IoIosHeart } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useToggleLikePostMutation } from "@/redux/features/post/post.api";
 
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();

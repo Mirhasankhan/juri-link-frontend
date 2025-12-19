@@ -1,5 +1,5 @@
 "use client";
-import BookingList from "@/components/lawyers/Bookings";
+import BookingList from "@/components/lawyers/LawyerBookings";
 import UserBookings from "@/components/lawyers/UserBookings";
 import Sidebar from "@/components/profile/Sidebar";
 import { JWTDecode } from "@/utils/jwt";
@@ -12,7 +12,7 @@ const ManageBookingsPage = () => {
 
   return (
     <>
-      <div className="grid grid-cols-5 gap-6">
+      <div className="grid bg-[#f8f8f8] grid-cols-5 gap-6">
         <div className="hidden md:block md:col-span-1 border-r-2">
           <Sidebar></Sidebar>
         </div>

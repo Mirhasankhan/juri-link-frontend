@@ -5,11 +5,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  useCreateCommentMutation,
-  useCreateReplyMutation,
-  usePostQuery,
-} from "@/redux/features/services/services.api";
+import { useCreateCommentMutation, useCreateReplyMutation, usePostQuery } from "@/redux/features/post/post.api";
+
 import { JWTDecode } from "@/utils/jwt";
 import { MessageCircle, Send } from "lucide-react";
 import Image from "next/image";

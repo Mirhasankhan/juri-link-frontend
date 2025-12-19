@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div className="bg-white border-b">
       <Container>
-        <div className="flex justify-between items-center py-8">
+        <div className="flex justify-between items-center py-6">
           <Link
             style={{
               fontFamily: "'Satisfy', cursive",
@@ -30,7 +30,7 @@ const Header = () => {
             className="flex text-green-600 text-3xl font-bold items-center gap-1"
           >
             
-            <Image height={80} width={80} src={logo} alt="logo"></Image>
+            <Image height={60} width={60} src={logo} alt="logo"></Image>
           </Link>
           <div className="hidden md:block">
             <SubMenu></SubMenu>

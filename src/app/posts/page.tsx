@@ -6,9 +6,9 @@ import Container from "@/utils/Container";
 import React, { useState } from "react";
 import { Funnel, Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePostsQuery } from "@/redux/features/services/services.api";
 import Link from "next/link";
 import { SkeletonCard } from "@/components/shared/Skeleton";
+import { usePostsQuery } from "@/redux/features/post/post.api";
 
 const PostsPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);

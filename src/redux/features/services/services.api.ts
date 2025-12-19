@@ -2,30 +2,6 @@ import { baseApi } from "../../api/baseApi";
 
 const serviceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createPost: builder.mutation({
-      query: (data) => ({
-        url: `/post/create`,
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["post"],
-    }),
-    createComment: builder.mutation({
-      query: (data) => ({
-        url: `/post/comment/create`,
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["post"],
-    }),
-    createReply: builder.mutation({
-      query: (data) => ({
-        url: `/post/reply/create`,
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["post"],
-    }),
     services: builder.query({
       query: () => ({
         url: `/legal-service`,
@@ -33,36 +9,14 @@ const serviceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["service"],
     }),
-    posts: builder.query({
-      query: ({serviceId,serviceType, level}) => ({
-        url: `/post?serviceId=${serviceId}&serviceType=${serviceType}&level=${level}`,
+    service: builder.query({
+      query: (id) => ({
+        url: `/legal-service/${id}`,
         method: "GET",
       }),
-      providesTags: ["post"],
-    }),
-    toggleLikePost: builder.mutation({
-      query: (id) => ({
-        url: `/post/${id}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["post"],
-    }),
-    post: builder.query({
-      query: (id) => ({
-        url: `/post/${id}`,
-        method: "GET",
-      }),
-      providesTags: ["post"],
+      providesTags: ["service"],
     }),
   }),
 });
 
-export const {
-  useServicesQuery,
-  useCreatePostMutation,
-  useCreateCommentMutation,
-  useCreateReplyMutation,
-  useToggleLikePostMutation,
-  usePostsQuery,
-  usePostQuery,
-} = serviceApi;
+export const { useServicesQuery , useServiceQuery} = serviceApi;

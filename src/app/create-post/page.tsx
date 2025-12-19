@@ -1,6 +1,6 @@
 "use client";
-import {
-  useCreatePostMutation,
+import { useCreatePostMutation } from "@/redux/features/post/post.api";
+import { 
   useServicesQuery,
 } from "@/redux/features/services/services.api";
 import { TPostInput } from "@/types/common";
