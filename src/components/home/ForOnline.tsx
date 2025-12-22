@@ -1,14 +1,14 @@
 import Container from "@/utils/Container";
 import Image from "next/image";
-import online from "../../assets/online.jpeg";
+import online from "../../assets/online.png";
 import { GiCheckMark } from "react-icons/gi";
 
 const ForOnline = () => {
   return (
     <Container>
       <div className="grid grid-cols-2 gap-8">
-        <div className="col-span-1 relative w-4/5 h-[430px] overflow-hidden shadow-lg [clip-path:polygon(0%_0%,100%_20%,100%_80%,0%_100%)]">
-          <Image src={online} alt="alt" fill className="object-cover" />
+        <div className="col-span-1 relative w-4/5 h-[430px] overflow-hidden shadow-lg [clip-path:polygon(0%_0%,100%_10%,100%_90%,0%_100%)]">
+          <Image src={online} alt="alt" fill className="object-cover rounded-[66px]" />
         </div>
         <div className="col-span-1">
           <p className="text-secondary font-medium">ONLINE CONSULTATION</p>
@@ -46,10 +46,12 @@ const ForOnline = () => {
               Action-oriented advice tailored to your case in real time
             </p>
           </div>
+            
 
           <button className="bg-secondary/10 mt-6 text-secondary py-2 px-5 rounded-[5px]">
             View Online Lawyers
           </button>
+         
         </div>
       </div>
     </Container>
