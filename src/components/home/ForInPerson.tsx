@@ -1,6 +1,10 @@
 import Container from "@/utils/Container";
 import Image from "next/image";
+<<<<<<< HEAD
 import inPerson from "../../assets/in-persn.jpg";
+=======
+import inPerson from "../../assets/inperons.png";
+>>>>>>> 504844579e9b9d1a4675ae5f5f82b8f6e6dbc625
 import { GiCheckMark } from "react-icons/gi";
 
 const ForInPerson = () => {

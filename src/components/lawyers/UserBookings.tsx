@@ -6,6 +6,7 @@ import Image from "next/image";
 import { SkeletonCard } from "../shared/Skeleton";
 import CancelBookingModal from "./CancelBookingModal";
 import GiveReviewModal from "./ReviewModal";
+import CreateReportModal from "./ReportModal";
 
 const UserBookings = () => {
   const { data, isLoading } = useUserBookingsQuery("");
@@ -131,9 +132,7 @@ const UserBookings = () => {
                 <>
                 <GiveReviewModal bookingId={booking._id} isReview={booking.isReviewed}></GiveReviewModal>
 
-                  <button className="bg-red-600 text-white py-2 w-full rounded-[6px] disabled:bg-gray-400">
-                    Report
-                  </button>
+                  <CreateReportModal isReported={booking.isReported} bookingId={booking._id}></CreateReportModal>
                 </>
               )}
               {booking.status === "Cancelled" && (

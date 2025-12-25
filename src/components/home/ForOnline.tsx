@@ -1,17 +1,26 @@
 import Container from "@/utils/Container";
 import Image from "next/image";
+<<<<<<< HEAD
 import online from "../../assets/online.jpg";
+=======
+import online from "../../assets/online.png";
+>>>>>>> 504844579e9b9d1a4675ae5f5f82b8f6e6dbc625
 import { GiCheckMark } from "react-icons/gi";
 
 const ForOnline = () => {
   return (
     <Container>
       <div className="grid grid-cols-2 gap-8">
+<<<<<<< HEAD
         {/* <div className="col-span-1 relative w-4/5 h-[430px] overflow-hidden shadow-lg [clip-path:polygon(0%_0%,100%_10%,100%_90%,0%_100%)]">
           <Image src={online} alt="alt" fill className="object-cover" />
         </div> */}
         <div className="col-span-1">
           <Image src={online} alt="alt" height={200} width={800} className=" rounded-[30px] " />
+=======
+        <div className="col-span-1 relative w-4/5 h-[430px] overflow-hidden shadow-lg [clip-path:polygon(0%_0%,100%_10%,100%_90%,0%_100%)]">
+          <Image src={online} alt="alt" fill className="object-cover rounded-[66px]" />
+>>>>>>> 504844579e9b9d1a4675ae5f5f82b8f6e6dbc625
         </div>
 
         <div className="col-span-1">
@@ -50,10 +59,12 @@ const ForOnline = () => {
               Action-oriented advice tailored to your case in real time
             </p>
           </div>
+            
 
           <button className="bg-secondary/10 mt-6 text-secondary py-2 px-5 rounded-[5px]">
             View Online Lawyers
           </button>
+         
         </div>
       </div>
     </Container>

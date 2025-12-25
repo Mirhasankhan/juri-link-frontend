@@ -47,6 +47,14 @@ const bookingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["bookings"],
     }),
+    createReport: builder.mutation({
+      query: (data) => ({
+        url: `/review/create-report`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["bookings"],
+    }),
   }),
 });
 
@@ -57,4 +65,5 @@ export const {
   useCancelBookingMutation,
   useCreateReviewMutation,
   useUserBookingsQuery,
+  useCreateReportMutation
 } = bookingsApi;

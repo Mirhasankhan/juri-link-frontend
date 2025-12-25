@@ -1,6 +1,6 @@
 "use client";
 
-import { useLawyerBookingsQuery } from "@/redux/features/bookings/bookingsApi"; // make sure this API exists
+import { useLawyerBookingsQuery, useMarkCompletedMutation } from "@/redux/features/bookings/bookingsApi"; // make sure this API exists
 import { Calendar, Clock, MapPin, Video } from "lucide-react";
 import Image from "next/image";
 import { SkeletonCard } from "../shared/Skeleton";
@@ -8,9 +8,8 @@ import CancelBookingModal from "./CancelBookingModal";
 
 const LawyerBookings = () => {
   const { data, isLoading } = useLawyerBookingsQuery(""); 
+  const [markCompleted, {isLoading: isCompleteLoading}] = useMarkCompletedMutation()
   const bookings = data?.data?.bookings;
-
-  console.log(bookings);
 
   const isToday = (date: string | Date) => {
     const d = new Date(date);
@@ -22,8 +21,10 @@ const LawyerBookings = () => {
     );
   };
 
-  const handleMarkCompleted = (bookingId: string) => {
-    console.log("Mark completed:", bookingId);
+  const handleMarkCompleted =async (bookingId: string) => {
+    const response = await markCompleted(bookingId)
+
+    console.log(response);
   };
 
   return (
@@ -127,14 +128,18 @@ const LawyerBookings = () => {
                     className="bg-secondary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
                     disabled={!isToday(booking.date)}
                   >
-                    Start Session
+                    Start Sessions
                   </button>
 
                   <button
-                    className="bg-primary text-white py-2 w-full rounded-[6px]"
+                  disabled={isCompleteLoading}
+                    className="bg-primary text-white py-2 w-full disabled:bg-opacity-60 rounded-[6px]"
                     onClick={() => handleMarkCompleted(booking._id)}
                   >
-                    Mark as Completed
+                    {
+                      isCompleteLoading ? "Completing" :" Mark as Completed"
+                    }
+                   
                   </button>
                 </>
               )}
