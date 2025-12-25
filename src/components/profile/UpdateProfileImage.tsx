@@ -38,7 +38,7 @@ const UpdateProfileImage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3">  
+    <div className="flex flex-col items-center mb-3 gap-3">  
       <div
         className="relative group w-28 h-28 rounded-full overflow-hidden 
         border-2 border-gray-300 shadow-sm cursor-pointer"

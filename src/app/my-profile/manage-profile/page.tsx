@@ -8,11 +8,11 @@ import { JWTDecode } from "@/utils/jwt";
 const ManageProfile = () => {
   const { decoded } = JWTDecode();
   return (
-    <div className="grid  grid-cols-5 gap-6">
+ <div className="grid bg-[#f8f8f8] grid-cols-5 p-6 gap-6">
       <div className="hidden md:block md:col-span-1 border-r-2">
         <Sidebar></Sidebar>
       </div>
-      <div className="col-span-4 bg-white md:col-span-4">
+      <div className="col-span-4 bg-white rounded-[8px] md:col-span-4">
         {decoded?.role == "User" ? (
           <UserProfile></UserProfile>
         ) : (

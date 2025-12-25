@@ -1,6 +1,6 @@
 import Container from "@/utils/Container";
 import Image from "next/image";
-import inPerson from "../../assets/in_person.jpeg";
+import inPerson from "../../assets/in-persn.jpg";
 import { GiCheckMark } from "react-icons/gi";
 
 const ForInPerson = () => {
@@ -44,7 +44,16 @@ const ForInPerson = () => {
             View In Person Lawyers
           </button>
         </div>
-        <div className="col-span-1 relative w-4/5 ml-auto h-[430px] overflow-hidden  shadow-lg [clip-path:polygon(0%_20%,100%_0%,100%_100%,0%_80%)]">
+        <div className="col-span-1">
+          <Image
+            src={inPerson}
+            alt="alt"
+            height={200}
+            width={800}
+            className=" rounded-[30px] "
+          />
+        </div>
+        {/* <div className="col-span-1 relative w-4/5 ml-auto h-[430px] overflow-hidden  shadow-lg [clip-path:polygon(0%_20%,100%_0%,100%_100%,0%_80%)]">
           <Image
             src={inPerson}
             alt="alt"
@@ -52,7 +61,7 @@ const ForInPerson = () => {
             priority
             className="object-cover"
           />
-        </div>
+        </div> */}
       </div>
     </Container>
   );
