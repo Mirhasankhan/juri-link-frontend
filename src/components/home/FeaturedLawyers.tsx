@@ -21,7 +21,7 @@ const FeaturedLawyers = () => {
   return (
     <Container>
       <h1 className="text-4xl font-medium pt-8 pb-3">Our Featured Lawyers</h1>
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
         {lawyers?.data?.map((lawyer: any) =>
           isLoading ? (
             <SkeletonCard key={lawyer?._id} />

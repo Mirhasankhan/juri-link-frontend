@@ -1,17 +1,16 @@
 import Container from "@/utils/Container";
 import Image from "next/image";
-<<<<<<< HEAD
+
+
 import inPerson from "../../assets/in-persn.jpg";
-=======
-import inPerson from "../../assets/inperons.png";
->>>>>>> 504844579e9b9d1a4675ae5f5f82b8f6e6dbc625
+
 import { GiCheckMark } from "react-icons/gi";
 
 const ForInPerson = () => {
   return (
     <Container>
       <div className="grid grid-cols-2 gap-8 my-12">
-        <div className="col-span-1">
+        <div className="col-span-2 lg:col-span-1">
           <p className="text-secondary font-medium">IN PERSON CONSULTATION</p>
           <h1 className="text-3xl font-bold py-5">
             Meet with our <span className="text-secondary">Expert Lawyers</span>
@@ -48,7 +47,7 @@ const ForInPerson = () => {
             View In Person Lawyers
           </button>
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 hidden lg:block">
           <Image
             src={inPerson}
             alt="alt"

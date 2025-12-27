@@ -18,7 +18,7 @@ const ForLawyer = () => {
       <div className="grid grid-cols-2 gap-8 my-8">
         {/* LEFT SECTION */}
         <motion.div
-          className="col-span-1"
+          className="col-span-2 lg:col-span-1"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -76,7 +76,7 @@ const ForLawyer = () => {
 
         {/* RIGHT IMAGE */}
         <motion.div
-          className="col-span-1"
+          className="col-span-1 hidden lg:block"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: false, amount: 0.2 }}

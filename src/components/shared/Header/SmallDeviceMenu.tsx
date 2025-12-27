@@ -19,18 +19,19 @@ const SmallDeviceMenu = () => {
   // All possible links
   const allLinks = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/lawyers", label: "Lawyers Directory", icon: Users },
-    { href: "/posts", label: "Articles", icon: FileText },
+    { href: "/lawyers", label: "Lawyers", icon: Users },
+    { href: "/posts", label: "Posts", icon: FileText },
+    { href: "/services", label: "Service Areas", icon: Info },
+    { href: "/create-post", label: "Request Legal Need", icon: Star },
     { href: "/premium", label: "Premium Access", icon: Star },
     { href: "/about-us", label: "About Us", icon: Info },
   ];
 
   // Filter links based on role
   const filteredLinks = allLinks.filter((link) => {
-    if (!role) return link.href !== "/premium"; // Guest
+    if (!role) return link.href !== "/premium" && link.href !== "/create-post"; // Guest
     if (role === "User") return link.href !== "/premium"; // User
-    if (role === "Lawyer")
-      return link.href !== "/lawyers" && link.href !== "/posts"; // Lawyer
+    if (role === "Lawyer") return link.href !== "/create-post" && link.href !== "/lawyers"; // Lawyer
     return true;
   });
 
@@ -43,23 +44,18 @@ const SmallDeviceMenu = () => {
       className="absolute right-0 top-16 w-[320px] p-5 text-white rounded-2xl shadow-xl bg-black border border-gray-200 flex flex-col gap-4 z-50"
     >
       <div className="border-b pb-3">
-        <h1>Menu</h1>
-        <p>Legal Services Portal</p>
+        <h1 className="text-lg font-semibold">Menu</h1>
+        <p className="text-sm text-gray-300">Legal Services Portal</p>
       </div>
 
       {filteredLinks.map(({ href, label, icon: Icon }) => {
         const isActive = pathname === href;
-
         return (
           <Link
             key={href}
             href={href}
             className={`flex items-center gap-3 px-3 py-2 rounded-[5px] text-sm font-medium transition-all duration-200
-              ${
-                isActive
-                  ? "bg-white/10 text-white"
-                  : "text-white hover:bg-white/10"
-              }`}
+              ${isActive ? "bg-white/10 text-white" : "text-white hover:bg-white/10"}`}
           >
             <Icon size={18} />
             <span>{label}</span>
@@ -68,16 +64,16 @@ const SmallDeviceMenu = () => {
       })}
 
       {!email ? (
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-2">
           <Link
-            className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
             href="/auth/login"
+            className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
           >
             Login
           </Link>
           <Link
-            className="border border-primary text-white bg-primary px-4 py-1 rounded-[4px] font-medium"
             href="/auth/register"
+            className="border border-primary text-white bg-primary px-4 py-1 rounded-[4px] font-medium"
           >
             Get Started
           </Link>

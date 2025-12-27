@@ -1,6 +1,5 @@
 "use client";
 
-
 import { JWTDecode } from "@/utils/jwt";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,7 +14,7 @@ const SubMenu = () => {
   // Define all possible links
   const allLinks = [
     { href: "/", label: "Home" },
-    { href: "/lawyers", label: "Lawyers Directory" },
+    { href: "/lawyers", label: "Lawyers" },
     { href: "/posts", label: "Posts" },
     { href: "/services", label: "Service Areas" },
     { href: "/create-post", label: "Request Legal Need" },
@@ -25,14 +24,11 @@ const SubMenu = () => {
 
   // Filter links based on role
   const filteredLinks = allLinks.filter((link) => {
-    if (!role) {
-      // No role (guest) - hide Premium
+    if (!role) {    
       return link.href !== "/premium" && link.href !== "/create-post";
     } else if (role === "User") {
-      // Normal user - hide Premium
       return link.href !== "/premium";
-    } else if (role === "Lawyer") {
-      // Lawyer - hide Request Legal Help and Lawyers Directory
+    } else if (role === "Lawyer") {      
       return link.href !== "/create-post" && link.href !== "/lawyers";
     }
     return true;
