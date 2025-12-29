@@ -16,8 +16,9 @@ const HOmePage = () => {
       <FeaturedLawyers></FeaturedLawyers>
       <ForLawyer></ForLawyer>
       <OurServices></OurServices>
+       <ForOnline></ForOnline>
       <ForInPerson></ForInPerson>
-      <ForOnline></ForOnline>
+     
       <Research></Research>
       <Testimonials></Testimonials>
     </div>

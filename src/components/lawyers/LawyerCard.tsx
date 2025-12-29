@@ -14,7 +14,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
   return (
-    <div className="p-3 rounded-[8px] w-full border max-h-[220px]">
+    <div className="p-3 bg-white rounded-[8px] w-full border max-h-[220px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Image

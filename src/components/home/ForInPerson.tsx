@@ -5,6 +5,7 @@ import Image from "next/image";
 import inPerson from "../../assets/in-persn.jpg";
 
 import { GiCheckMark } from "react-icons/gi";
+import Link from "next/link";
 
 const ForInPerson = () => {
   return (
@@ -43,9 +44,9 @@ const ForInPerson = () => {
               Clear action steps to move your case forward with confidence
             </p>
           </div>
-          <button className="bg-secondary/10 mt-6 text-secondary py-2 px-5 rounded-[5px]">
+          <Link href=""><button className="bg-secondary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]">
             View In Person Lawyers
-          </button>
+          </button></Link>
         </div>
         <div className="col-span-1 hidden lg:block">
           <Image

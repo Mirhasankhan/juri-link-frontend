@@ -31,7 +31,7 @@ const UserBookings = () => {
       {isLoading && (
         <div className="grid grid-cols-3 gap-6">
           {bookings?.map((booking: any) => (
-            <SkeletonCard key={booking._id}></SkeletonCard>
+            <SkeletonCard height={350} key={booking._id}></SkeletonCard>
           ))}
         </div>
       )}

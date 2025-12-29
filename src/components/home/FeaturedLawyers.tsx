@@ -20,11 +20,12 @@ const FeaturedLawyers = () => {
   console.log(lawyers?.data);
   return (
     <Container>
-      <h1 className="text-4xl font-medium pt-8 pb-3">Our Featured Lawyers</h1>
+    <h1 className="text-3xl font-bold text-center mt-24">Our Featured Lawyers</h1>
+      <p className="text-center py-6 text-gray-500">Where Expertise Meets Efficiency – Delivering smart solutions tailored for your success.</p>
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
         {lawyers?.data?.map((lawyer: any) =>
           isLoading ? (
-            <SkeletonCard key={lawyer?._id} />
+            <SkeletonCard height={350} key={lawyer?._id} />
           ) : (
             <div
               key={lawyer?._id}

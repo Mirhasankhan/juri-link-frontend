@@ -5,7 +5,8 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5006/api/v1",  
-    // baseUrl: "https://api.passit.smtsigma.com/api/v1/",  
+    // baseUrl: "https://api.passit.smtsigma.com/api/v1/",
+    // baseUrl: "https://juri-link-server.vercel.app/",  
     prepareHeaders: (headers) => {
       const { token } = JWTDecode();
 

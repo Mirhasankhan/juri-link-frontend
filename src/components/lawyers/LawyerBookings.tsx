@@ -35,7 +35,7 @@ const LawyerBookings = () => {
       {isLoading && (
         <div className="grid grid-cols-3 gap-6">
           {Array.from({ length: 3 }).map((_, idx) => (
-            <SkeletonCard key={idx} />
+            <SkeletonCard height={350} key={idx} />
           ))}
         </div>
       )}

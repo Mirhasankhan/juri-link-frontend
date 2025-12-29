@@ -28,7 +28,7 @@ const PostsPage = () => {
   };
 
   return (
-    <div className="py-6">
+    <div className="py-6 bg-[#f8f8f8]">
       {/* Mobile Filters */}
       <AnimatePresence>
         {showMobileFilters && (
@@ -94,18 +94,21 @@ const PostsPage = () => {
                 </button>
               </Link>
             </div>
+            {isLoading && (
+              <div className="grid grid-col-1 md:grid-cols-2 gap-6">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <SkeletonCard height={300} key={idx} />
+                ))}
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {posts?.data
                 ?.slice()
                 .reverse()
-                .map((post: any) =>
-                  isLoading ? (
-                    <SkeletonCard key={post.id} />
-                  ) : (
-                    <PostCard key={post.id} post={post} />
-                  )
-                )}
+                .map((post: any) => (
+                  <PostCard key={post.id} post={post} />
+                ))}
             </div>
           </div>
         </div>

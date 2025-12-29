@@ -31,7 +31,7 @@ const Filters = ({
 
   const serviceOptions = [
     { label: "Online Consultation", value: "Online" },
-    { label: "In Call Meeting", value: "In_Person" },
+    { label: "In Person Meeting", value: "In_Person" },
     { label: "Online & In Person", value: "Both" },
   ];
 
@@ -69,7 +69,7 @@ const Filters = ({
   );
 
   return (
-    <div className="p-4 max-w-md bg-white rounded-md shadow">
+    <div className="p-4 max-w-md bg-white rounded-[6px] shadow">
       {renderCheckboxGroup("Years of Experience", yearOptions, selectedYear, setSelectedYear)}
       {renderCheckboxGroup("Service Type", serviceOptions, selectedService, setSelectedService)}
       {renderCheckboxGroup("Legal Services", legalServiceOptions, selectedLegalService, setSelectedLegalService)}

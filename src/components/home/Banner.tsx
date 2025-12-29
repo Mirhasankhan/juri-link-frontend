@@ -38,7 +38,7 @@ const Banner = () => {
           name=""
           id=""
         />
-        <div className="flex gap-6 mt-6">
+        <div className="hidden lg:flex gap-6 mt-6">
           {legalServies?.data?.slice(0,4).map(
             (service: { serviceName: string; _id: string }) => (
               <button

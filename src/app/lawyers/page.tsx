@@ -20,10 +20,7 @@ const LawyersPage = () => {
     serviceId || ""
   );
 
-  const {
-    data: lawyers,
-    isLoading    
-  } = useAllLawyersQuery({
+  const { data: lawyers, isLoading } = useAllLawyersQuery({
     experience: selectedYear,
     type: selectedService,
     specializationId: selectedLegal,
@@ -36,7 +33,7 @@ const LawyersPage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#f8f8f8]">
       {showMobileFilters && (
         <motion.div
           initial={{ x: "-100%" }}
@@ -63,7 +60,7 @@ const LawyersPage = () => {
       )}
 
       <Container>
-        <div className="grid grid-cols-4 gap-5 my-6">
+        <div className="grid grid-cols-4 gap-5 py-6">
           <div className="hidden md:block md:col-span-1">
             <Filters
               selectedYear={selectedYear}
@@ -87,14 +84,17 @@ const LawyersPage = () => {
                 Filters
               </button>
             </div>
+            {isLoading && (
+              <div className="grid grid-col-1 md:grid-cols-2 gap-6">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <SkeletonCard height={180} key={idx} />
+                ))}
+              </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {lawyers?.data.map((lawyer: any) =>
-                isLoading ? (
-                  <SkeletonCard key={lawyer.id} />
-                ) : (
-                  <LawyerCard key={lawyer.id} lawyer={lawyer} />
-                )
-              )}
+              {lawyers?.data.map((lawyer: any) => (
+                <LawyerCard key={lawyer.id} lawyer={lawyer} />
+              ))}
             </div>
           </div>
         </div>
