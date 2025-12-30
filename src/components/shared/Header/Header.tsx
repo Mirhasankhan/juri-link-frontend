@@ -11,11 +11,12 @@ import { AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/redux/hooks";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
 import logo from '../../../assets/logo3.png'
+import { useProfileQuery } from "@/redux/features/auth/authApi";
 
 const Header = () => {
+  const { data: profileData } = useProfileQuery("");
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
   const { email, role, name } = useAppSelector(useCurrentUser);
 
   return (
@@ -61,7 +62,7 @@ const Header = () => {
                   height={20}
                   width={20}
                   alt=""
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                  src={profileData?.data.profileImage || "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"}
                 ></Image>
                 <div>
                   <h1 className="font-semibold">{name}</h1>

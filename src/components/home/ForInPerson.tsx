@@ -1,13 +1,16 @@
+"use client"
 import Container from "@/utils/Container";
 import Image from "next/image";
-
-
 import inPerson from "../../assets/in-persn.jpg";
-
 import { GiCheckMark } from "react-icons/gi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ForInPerson = () => {
+   const router = useRouter();
+     const handleNavigate = () => {
+      router.push(`/lawyers?serviceType=Online`);
+    };
   return (
     <Container>
       <div className="grid grid-cols-2 gap-8 my-12">
@@ -44,7 +47,7 @@ const ForInPerson = () => {
               Clear action steps to move your case forward with confidence
             </p>
           </div>
-          <Link href=""><button className="bg-secondary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]">
+          <Link  onClick={() => handleNavigate()} href=""><button className="bg-secondary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]">
             View In Person Lawyers
           </button></Link>
         </div>

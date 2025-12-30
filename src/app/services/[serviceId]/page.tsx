@@ -16,7 +16,7 @@ const ServiceDetailsPage = () => {
   const { description, dyk, serviceName, serviceMedia, importance, _id } =
     service?.data?.service;
 
-  const handleBook = (id: string) => {
+  const handleNavigate = (id: string) => {
     router.push(`/lawyers?serviceId=${id}`);
   };
 
@@ -24,14 +24,14 @@ const ServiceDetailsPage = () => {
     <div className="bg-[#f8f8f8] py-8">
       <Container>
         <div className="grid grid-cols-2 mb-8  gap-6">
-          <div className="p-8 bg-white rounded-[6px] border">
+          <div className="p-8 flex flex-col bg-white rounded-[6px] border">
             <h1 className="text-xl font-medium pb-3">
               Why hire a {serviceName} lawyer?
             </h1>
             <p>{importance}</p>
             <button
-              className="bg-secondary/10 mt-6 text-secondary px-4 py-2 font-medium rounded-[6px]"
-              onClick={() => handleBook(_id)}
+              className="bg-secondary/10 mt-auto text-secondary px-4 py-2 font-medium rounded-[6px]"
+              onClick={() => handleNavigate(_id)}
             >
               View {serviceName} Lawyers
             </button>

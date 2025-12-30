@@ -17,7 +17,7 @@ const SubMenu = () => {
     { href: "/lawyers", label: "Lawyers" },
     { href: "/posts", label: "Posts" },
     { href: "/services", label: "Service Areas" },
-    { href: "/create-post", label: "Request Legal Need" },
+   
     { href: "/premium", label: "Premium Access" },
     { href: "/about-us", label: "About Us" },
   ];

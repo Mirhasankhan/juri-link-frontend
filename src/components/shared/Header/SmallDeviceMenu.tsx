@@ -21,8 +21,7 @@ const SmallDeviceMenu = () => {
     { href: "/", label: "Home", icon: Home },
     { href: "/lawyers", label: "Lawyers", icon: Users },
     { href: "/posts", label: "Posts", icon: FileText },
-    { href: "/services", label: "Service Areas", icon: Info },
-    { href: "/create-post", label: "Request Legal Need", icon: Star },
+    { href: "/services", label: "Service Areas", icon: Info }, 
     { href: "/premium", label: "Premium Access", icon: Star },
     { href: "/about-us", label: "About Us", icon: Info },
   ];

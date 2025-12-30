@@ -97,7 +97,7 @@ const PostsPage = () => {
             {isLoading && (
               <div className="grid grid-col-1 md:grid-cols-2 gap-6">
                 {Array.from({ length: 2 }).map((_, idx) => (
-                  <SkeletonCard height={300} key={idx} />
+                  <SkeletonCard height={350} key={idx} />
                 ))}
               </div>
             )}
