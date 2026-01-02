@@ -2,8 +2,9 @@
 
 import { useServiceQuery } from "@/redux/features/services/services.api";
 import Container from "@/utils/Container";
-import { Lightbulb } from "lucide-react";
+import { ChevronRight, Lightbulb } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
 const ServiceDetailsPage = () => {
@@ -23,6 +24,11 @@ const ServiceDetailsPage = () => {
   return (
     <div className="bg-[#f8f8f8] py-8">
       <Container>
+        <div className="flex gap-2 items-center pb-4">
+          <Link href="/services" className="text-secondary font-medium">Services</Link>
+          <ChevronRight size={15} className="text-gray-700"></ChevronRight>
+          <h1 className="font-medium">{serviceName}</h1>
+        </div>
         <div className="grid grid-cols-2 mb-8  gap-6">
           <div className="p-8 flex flex-col bg-white rounded-[6px] border">
             <h1 className="text-xl font-medium pb-3">

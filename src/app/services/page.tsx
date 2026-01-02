@@ -11,6 +11,8 @@ const ServicesPage = () => {
   return (
     <div className="bg-[#f8f8f8]">
       <Container>
+         <h1 className="text-3xl font-medium text-center py-6">Areas of Legal Expertise</h1>
+      <p className="text-center text-gray-500">Explore our expert practice areas—from Family Law to Real Estate and beyond, tailored to protect your rights and interests.</p>
         <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 py-12">
           {legalServies?.data?.map((service: any) => (
             <Link

@@ -6,9 +6,11 @@ import Link from "next/link";
 import { useRegisterRequestMutation } from "@/redux/features/auth/authApi";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import logo from "../../../assets/logo.main.png";
 
 const Register = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [registerRequest, { isLoading }] = useRegisterRequestMutation();
   const {
     register,
@@ -27,8 +29,8 @@ const Register = () => {
     formData.append("bodyData", JSON.stringify(formData));
     const response: any = await registerRequest(registerData);
     if (response.data) {
-      localStorage.setItem("verify",data.email)
-      router.push("/auth/verify-email")
+      localStorage.setItem("verify", data.email);
+      router.push("/auth/verify-email");
       toast.success(response.data.message);
     } else {
       toast.error(response.error.data.message);
@@ -37,16 +39,25 @@ const Register = () => {
 
   return (
     <div className="bg-[#f8f8f8] py-12 min-h-screen">
-      <div className="text-center">
+      {/* <div className="text-center">
         <h1 className="text-4xl font-medium"> Join Juri Link</h1>
         <p className="font-medium py-3 text-gray-500">
           Create your account to get started
         </p>
-      </div>
+      </div> */}
 
-      <div className="w-full md:w-2/5 xl:w-1/3 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
-        <h1 className="text-2xl font-medium ppy-2 ">Client Registration</h1>
-        <h1 className="text-sm text-gray-600">Sign up to find and hire lawyers</h1>
+      <div className="w-full md:w-2/5 xl:w-1/3 shadow-md md:mx-auto mx-2 py-12 px-6 dark:text-white bg-white rounded-[4px]">
+        <Image
+          placeholder="blur"
+          src={logo}
+          alt=""
+          height={150}
+          width={150}
+        ></Image>
+        <h1 className="text-2xl mt-6 font-medium ">Client Registration</h1>
+        <h1 className="text-sm text-gray-600">
+          Sign up to find and hire lawyers
+        </h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -69,7 +80,7 @@ const Register = () => {
           <div className="mb-4">
             <label className="label-design pb-1">Email</label>
             <input
-            type="email"
+              type="email"
               {...register("email", {
                 required: "Email is required",
               })}

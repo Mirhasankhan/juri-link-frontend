@@ -22,17 +22,17 @@ const EarningsPage = () => {
   return (
     <div className="bg-[#f8f8f8]">
       <>
-        <div className="grid grid-cols-5 gap-6">
-          <div className="hidden md:block md:col-span-1 border-r-2">
+        <div className="grid grid-cols-5 p-6 gap-6">
+          <div className="hidden md:block md:col-span-1">
             <Sidebar></Sidebar>
           </div>
-          <div className="md:col-span-4 bg-white p-2">
+          <div className="md:col-span-4 rounded-xl bg-white p-5">
             <div className="flex gap-8 mb-8">
-              <div className="border text-center w-full py-6 rounded-[8px]">
+              <div className="border bg-[#f8f8f8] text-center w-full py-6 rounded-[8px]">
                 <h1 className="text-xl font-medium text-gray-500">Current Earnings</h1>
                 <h1 className="text-3xl font-medium text-[#7869ff]">${currentEarningsValue}</h1>
               </div>
-              <div className="border text-center w-full py-6 rounded-[8px]">
+              <div className="border bg-[#f8f8f8] text-center w-full py-6 rounded-[8px]">
                 <h1 className="text-xl font-medium text-gray-500">All Time Earnings</h1>
                 <h1 className="text-3xl font-medium text-[#7869ff]">${allTimeEarnings}</h1>
               </div>             

@@ -1,6 +1,8 @@
 import Container from "@/utils/Container";
 import Link from "next/link";
-import React from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+// import logo from "../../../assets/logo.main.png";
 
 const Footer = () => {
   return (
@@ -30,16 +32,21 @@ const Footer = () => {
         <Container>
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 border-b pb-6 border-blue-800">
             <div>
-              <Link
+              {/* <Link
                 style={{
                   fontFamily: "'Satisfy', cursive",
                 }}
                 href="/"
                 className="flex text-green-600 text-3xl font-bold items-center gap-1"
               >
-                Juri.Link
-              </Link>
-              <p className="mt-2">Juri.Link is a legal services platform that connects individuals and businesses with trusted lawyers for family, business, immigration, or criminal matters—quickly, confidently, and within your budget.</p>
+                <Image height={70} width={70} src={logo} alt="logo"></Image>
+              </Link> */}
+              <p className="mt-2">
+                Juri.Link is a legal services platform that connects individuals
+                and businesses with trusted lawyers for family, business,
+                immigration, or criminal matters—quickly, confidently, and
+                within your budget.
+              </p>
             </div>
             <div className="flex flex-col gap-2">
               <h1 className="text-xl font-medium">For Clients</h1>

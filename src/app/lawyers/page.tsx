@@ -2,7 +2,7 @@
 
 import Filters from "@/components/lawyers/Filters";
 import Container from "@/utils/Container";
-import { Funnel, X } from "lucide-react";
+import { Funnel, Search, X } from "lucide-react";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
@@ -13,9 +13,12 @@ import { SkeletonCard } from "@/components/shared/Skeleton";
 const LawyersPage = () => {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get("serviceId");
+  const serviceType = searchParams.get("serviceType");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [selectedYear, setSelectedYear] = useState<string | null>("");
-  const [selectedService, setSelectedService] = useState<string | null>("");
+  const [selectedService, setSelectedService] = useState<string | null>(
+    serviceType || ""
+  );
   const [selectedLegal, setSelectedLegal] = useState<string | null>(
     serviceId || ""
   );
@@ -26,11 +29,10 @@ const LawyersPage = () => {
     specializationId: selectedLegal,
   });
 
-  console.log(lawyers);
-
   const toggleFilters = () => {
     setShowMobileFilters(!showMobileFilters);
   };
+  console.log(lawyers);
 
   return (
     <div className="bg-[#f8f8f8]">
@@ -72,18 +74,6 @@ const LawyersPage = () => {
             />
           </div>
           <div className="col-span-4 md:col-span-3">
-            <div className="flex justify-between items-center pb-6">
-              <h1 className="text-xl font-medium">
-                Found &quot;{lawyers?.data?.length} lawyers&quot;
-              </h1>
-              <button
-                onClick={toggleFilters}
-                className="md:hidden font-medium border px-4 py-1 rounded-[6px] flex gap-2 items-center"
-              >
-                <Funnel size={18} />
-                Filters
-              </button>
-            </div>
             {isLoading && (
               <div className="grid grid-col-1 md:grid-cols-2 gap-6">
                 {Array.from({ length: 2 }).map((_, idx) => (
@@ -91,11 +81,39 @@ const LawyersPage = () => {
                 ))}
               </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {lawyers?.data.map((lawyer: any) => (
-                <LawyerCard key={lawyer.id} lawyer={lawyer} />
-              ))}
-            </div>
+            {lawyers?.data?.length > 0 ? (
+              <div>
+                <div className="flex justify-between items-center pb-6">
+                  <h1 className="text-xl font-medium">
+                    Discover the Lawyer: ({lawyers?.data?.length}) Lawyer
+                    Available for You to Explore
+                  </h1>
+                  <button
+                    onClick={toggleFilters}
+                    className="md:hidden font-medium border px-4 py-1 rounded-[6px] flex gap-2 items-center"
+                  >
+                    <Funnel size={18} />
+                    Filters
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {lawyers?.data.map((lawyer: any) => (
+                    <LawyerCard key={lawyer.id} lawyer={lawyer} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className=" flex flex-col mt-16 items-center">
+                <div className="bg-primary/10 text-primary p-6 rounded-full">
+                  <Search size={40}></Search>
+                </div>
+                <h1 className="text-2xl font-medium py-2">Now Lawyers Found</h1>
+                <p className="text-gray-600 ">
+                  We couldn&apos;t find any lawyers matching your search, Try
+                  adjusting your criteria.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </Container>

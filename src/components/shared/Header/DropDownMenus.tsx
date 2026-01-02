@@ -11,7 +11,7 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
   const { name, email } = useAppSelector(useCurrentUser);
 
   return (
-    <div className="border bg-white rounded-[4px] z-40 min-h-60 w-[320px]">
+    <div onClick={()=>setActive(false)} className="border bg-white rounded-[4px] z-40 min-h-60 w-[320px]">
       <div>
         <div className="p-3 bg-gradient-to-r from-primary/10 to-[#f8f8f8] w-full flex items-center gap-1">
           <Image

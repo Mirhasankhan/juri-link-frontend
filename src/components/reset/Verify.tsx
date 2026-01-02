@@ -55,6 +55,8 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
       otp: otpString,
     };
     const response :any = await verifyOtp(verifyData);
+
+    console.log(response);
     
     if (response.data) {
       localStorage.removeItem("email");

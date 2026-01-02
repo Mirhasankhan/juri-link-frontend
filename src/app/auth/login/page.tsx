@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 // import { FaGithub } from "react-icons/fa6";
-import logo from "../../../assets/logo9.png";
+import logo from "../../../assets/logo.main.png";
 import Image from "next/image";
 import { TLoginValues } from "@/types/common";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -63,8 +63,8 @@ const Login = () => {
             placeholder="blur"
             src={logo}
             alt=""
-            height={60}
-            width={60}
+            height={150}
+            width={150}
           ></Image>
           <h1 className="text-3xl font-semibold py-2 ">Welcome Back</h1>
           <p className="text-sm text-gray-600">Access unlimited data & information</p>

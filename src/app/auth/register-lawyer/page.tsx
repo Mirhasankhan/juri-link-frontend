@@ -3,11 +3,13 @@
 import { useRegisterRequestMutation } from "@/redux/features/auth/authApi";
 import { useServicesQuery } from "@/redux/features/services/services.api";
 import { FormValues } from "@/types/common";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import logo from "../../../assets/logo.main.png";
 
 const LawyerSignUpForm = () => {
   const { data: legalServices } = useServicesQuery("");
@@ -64,10 +66,19 @@ const LawyerSignUpForm = () => {
     <div className="bg-[#f8f8f8] py-12">
       <div className="w-full md:w-3/5 xl:w-2/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-          <h2 className="text-3xl font-bold">Lawyer Registration</h2>
-          <p className="text-gray-600 pb-6 pt-2  font-medium">
+         <div className="flex flex-col items-center">
+           <Image
+            placeholder="blur"
+            src={logo}
+            alt=""
+            height={150}
+            width={150}
+          ></Image>
+          <h2 className="text-3xl text-gray-800 font-bold">Lawyer Registration</h2>
+          <p className="text-gray-700 pb-6">
             Provide your professional details to create your account.
           </p>
+         </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-design pb-1">Full Name</label>
@@ -219,7 +230,7 @@ const LawyerSignUpForm = () => {
                     className="flex items-center hover:bg-gray-100 p-2 rounded-xl hover:cursor-pointer space-x-2"
                   >
                     <input
-                       className="accent-orange-600 w-5 h-5"
+                      className="accent-orange-600 w-5 h-5"
                       type="checkbox"
                       value={service._id}
                       {...register("specializations", {

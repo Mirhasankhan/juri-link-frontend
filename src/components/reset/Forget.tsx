@@ -21,8 +21,7 @@ const ForgetPassword = ({
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
     try {
       const response: any = await sendOpt({ email: data.email });
-      console.log(response);
-
+   
       if (response.data) {
         toast.success(response.data.message);
         setActive("verify");

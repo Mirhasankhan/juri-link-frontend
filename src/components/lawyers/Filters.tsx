@@ -31,7 +31,7 @@ const Filters = ({
 
   const serviceOptions = [
     { label: "Online Consultation", value: "Online" },
-    { label: "In Person Meeting", value: "In_Person" },
+    { label: "In Person Consultation", value: "In_Person" },
     { label: "Online & In Person", value: "Both" },
   ];
 

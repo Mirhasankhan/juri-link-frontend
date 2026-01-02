@@ -63,48 +63,56 @@ const LawyerAvailabilities: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6 px-4">
-      {Object.entries(mergedAvailability).map(([dayIndex, slots]) => (
-        <div
-          key={dayIndex}
-          className="bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300"
-        >
-          <div className="flex justify-between mb-4 items-center">
-            <h3 className="text-xl font-semibold  text-gray-800">
-              {dayNames[parseInt(dayIndex)]}
-            </h3>
-            <AddSlotModal dayOfWeek={parseInt(dayIndex)}></AddSlotModal>
-          </div>
-          <div className="flex flex-col gap-3">
-            {slots?.map((slot) => (
-              <div
-                key={slot.id}
-                className="flex justify-between items-center bg-blue-50 text-blue-900 font-semibold px-4 py-2 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
-              >
-                <span>
-                  {slot.startTime} - {slot.endTime}
-                </span>
-                <div className="flex gap-2">
-                  <UpdateSlotModal
-                    slotId={slot.id}
-                    startTime={slot.startTime}
-                    endTime={slot.endTime}
-                  ></UpdateSlotModal>
-                  {deletingSlotId === slot.id ? (
-                    <Loader className="animate-spin text-gray-500" />
-                  ) : (
-                    <FiTrash2
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
-                      onClick={() => handleDelete(slot.id)}
-                    />
-                  )}
+    <>
+      <div className="p-6">
+        <h1 className="text-xl font-medium">Manage Availabilites</h1>
+        <p className="text-gray-500">
+          Manage your availability so that users can find and book you smoothly
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6 px-4">
+        {Object.entries(mergedAvailability).map(([dayIndex, slots]) => (
+          <div
+            key={dayIndex}
+            className="bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300"
+          >
+            <div className="flex justify-between mb-4 items-center">
+              <h3 className="text-xl font-semibold  text-gray-800">
+                {dayNames[parseInt(dayIndex)]}
+              </h3>
+              <AddSlotModal dayOfWeek={parseInt(dayIndex)}></AddSlotModal>
+            </div>
+            <div className="flex flex-col gap-3">
+              {slots?.map((slot) => (
+                <div
+                  key={slot.id}
+                  className="flex justify-between items-center bg-blue-50 text-blue-900 font-semibold px-4 py-2 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
+                >
+                  <span>
+                    {slot.startTime} - {slot.endTime}
+                  </span>
+                  <div className="flex gap-2">
+                    <UpdateSlotModal
+                      slotId={slot.id}
+                      startTime={slot.startTime}
+                      endTime={slot.endTime}
+                    ></UpdateSlotModal>
+                    {deletingSlotId === slot.id ? (
+                      <Loader className="animate-spin text-gray-500" />
+                    ) : (
+                      <FiTrash2
+                        className="text-red-500 hover:text-red-700 cursor-pointer"
+                        onClick={() => handleDelete(slot.id)}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 

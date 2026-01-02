@@ -12,7 +12,7 @@ const Sidebar = () => {
   const { decoded } = JWTDecode();
 
   return (
-    <div className="min-h-screen rounded-[8px] bg-white">
+    <div className="min-h-[85vh] rounded-[8px] pt-3 bg-white">
       {sidebarItems(decoded?.role as TRoles).map((item, index) => (
         <Link key={index} href={`/${item.path}`}>
           <div

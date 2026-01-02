@@ -6,11 +6,11 @@ import Image from "next/image";
 import { useState } from "react";
 import DropDownMenus from "./DropDownMenus";
 import SmallDeviceMenu from "./SmallDeviceMenu";
-import { Menu, X } from "lucide-react";
+import { Menu, MessageCircleMore, X } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/redux/hooks";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
-import logo from '../../../assets/logo3.png'
+import logo from "../../../assets/logo.main.png";
 import { useProfileQuery } from "@/redux/features/auth/authApi";
 
 const Header = () => {
@@ -30,8 +30,7 @@ const Header = () => {
             href="/"
             className="flex text-green-600 text-3xl font-bold items-center gap-1"
           >
-            
-            <Image height={60} width={60} src={logo} alt="logo"></Image>
+            <Image height={70} width={70} src={logo} alt="logo"></Image>
           </Link>
           <div className="hidden md:block">
             <SubMenu></SubMenu>
@@ -53,22 +52,33 @@ const Header = () => {
                 </Link>
               </>
             ) : (
-              <div
-                onClick={() => setActive(!active)}
-                className="p-1 rounded-[8px] shadow cursor-pointer flex items-center gap-1"
-              >
-                <Image
-                  className="h-8 rounded-full w-8 object-cover"
-                  height={20}
-                  width={20}
-                  alt=""
-                  src={profileData?.data.profileImage || "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"}
-                ></Image>
-                <div>
-                  <h1 className="font-semibold">{name}</h1>
-                  <h1 className="text-xs">{role}</h1>
+              <>
+                <Link href="/messages">                 
+                  <MessageCircleMore
+                    className="text-secondary"
+                    size={30}
+                  ></MessageCircleMore>
+                </Link>
+                <div
+                  onClick={() => setActive(!active)}
+                  className="p-1 rounded-[8px] shadow cursor-pointer flex items-center gap-1"
+                >
+                  <Image
+                    className="h-8 rounded-full w-8 object-cover"
+                    height={20}
+                    width={20}
+                    alt=""
+                    src={
+                      profileData?.data.profileImage ||
+                      "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
+                    }
+                  ></Image>
+                  <div>
+                    <h1 className="font-semibold">{name}</h1>
+                    <h1 className="text-xs">{role}</h1>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
 
             {active && (
