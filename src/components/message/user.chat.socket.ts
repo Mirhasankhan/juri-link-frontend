@@ -21,7 +21,7 @@ export const useChatSocket = (token: string | null) => {
   const connect = useCallback(() => {
     if (!token) return;
 
-    const ws = new WebSocket(`ws://65.1.151.193:5006?x-token=${token}`);
+    const ws = new WebSocket(`ws://api.passit.smtsigma.com:5006?x-token=${token}`);
 
     // const ws = new WebSocket(`ws://api.passit.smtsigma.com:5006?x-token=${token}`);
 
