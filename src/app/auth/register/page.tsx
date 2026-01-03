@@ -46,7 +46,7 @@ const Register = () => {
         </p>
       </div> */}
 
-      <div className="w-full md:w-2/5 xl:w-1/3 shadow-md md:mx-auto mx-2 py-12 px-6 dark:text-white bg-white rounded-[4px]">
+      <div className="w-full md:w-2/5 xl:w-1/3 shadow-md md:mx-auto mx-2 py-12 px-6 dark:text-white bg-white rounded-[16px]">
         <Image
           placeholder="blur"
           src={logo}

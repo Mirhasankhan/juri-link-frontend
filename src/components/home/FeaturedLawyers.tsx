@@ -62,7 +62,7 @@ const FeaturedLawyers = () => {
 
                 <div className="flex py-3 font-medium justify-between items-center">
                   <div className="flex items-center gap-1">
-                    <FaStar className="text-red-500" />
+                    <FaStar className="text-yellow-500" />
                     <h1>{lawyer?.avgRating}</h1>
                   </div>
                   <p>({lawyer?.totalReview || 0})</p>

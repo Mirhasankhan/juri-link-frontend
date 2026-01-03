@@ -31,13 +31,13 @@ const Banner = () => {
           Connect with qualified lawyers, post your legal requirements, and get
           expert <br /> legal assistance when you need it most.ff
         </p>
-        <input
+        {/* <input
           className="border text-black w-2/4 py-4 pl-6 rounded-xl mt-6"
           type="text"
           placeholder="Search for any service"
           name=""
           id=""
-        />
+        /> */}
         <div className="hidden lg:flex gap-6 mt-6">
           {legalServies?.data?.slice(0,4).map(
             (service: { serviceName: string; _id: string }) => (

@@ -6,7 +6,8 @@ import Image from "next/image";
 import { useState } from "react";
 import DropDownMenus from "./DropDownMenus";
 import SmallDeviceMenu from "./SmallDeviceMenu";
-import { Menu, MessageCircleMore, X } from "lucide-react";
+import { Menu,  X } from "lucide-react";
+import { FaFacebookMessenger } from "react-icons/fa6";
 import { AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/redux/hooks";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
@@ -53,11 +54,11 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link href="/messages">                 
-                  <MessageCircleMore
-                    className="text-secondary"
+                <Link className="bg-gray-200 p-2 rounded-full" href="/messages">                 
+                  <FaFacebookMessenger
+                    
                     size={30}
-                  ></MessageCircleMore>
+                  ></FaFacebookMessenger>
                 </Link>
                 <div
                   onClick={() => setActive(!active)}

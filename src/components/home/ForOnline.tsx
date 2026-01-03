@@ -20,7 +20,7 @@ const ForOnline = () => {
           <Image src={online} alt="alt" fill className="object-cover" />
         </div> */}
         <div className="col-span-1 hidden lg:block">
-          <Image src={online} alt="alt" height={200} width={800} className=" rounded-[30px] " />
+          <Image src={online} alt="alt" height={200} width={800} priority className=" rounded-[30px] " />
         </div>
 
         <div className="col-span-2 lg:col-span-1">

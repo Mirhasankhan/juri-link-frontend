@@ -64,7 +64,7 @@ const LawyerSignUpForm = () => {
 
   return (
     <div className="bg-[#f8f8f8] py-12">
-      <div className="w-full md:w-3/5 xl:w-2/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[4px]">
+      <div className="w-full md:w-3/5 xl:w-2/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[16px]">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
          <div className="flex flex-col items-center">
            <Image

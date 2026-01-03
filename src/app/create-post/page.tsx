@@ -139,8 +139,8 @@ const CreatePost = () => {
               className="input-design mt-1"
             >
               <option value="">Select urgency</option>
-              <option value="Low">Normal</option>
-              <option value="Medium">Urgent</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
               <option value="High">Immediate attention</option>
             </select>
             {errors.urgencyLevel && (

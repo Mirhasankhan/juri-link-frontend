@@ -58,6 +58,7 @@ const ForInPerson = () => {
             alt="alt"
             height={200}
             width={800}
+            priority
             className=" rounded-[30px] "
           />
         </div>

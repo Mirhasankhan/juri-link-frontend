@@ -75,13 +75,6 @@ const PostsPage = () => {
 
           {/* Posts */}
           <div className="col-span-4 md:col-span-3">
-            {isLoading && (
-              <div className="grid grid-col-1 md:grid-cols-2 gap-6">
-                {Array.from({ length: 2 }).map((_, idx) => (
-                  <SkeletonCard height={350} key={idx} />
-                ))}
-              </div>
-            )}
             {posts?.data?.length > 0 ? (
               <div>
                 <div className="flex justify-between items-center pb-6">
@@ -114,16 +107,28 @@ const PostsPage = () => {
                 </div>
               </div>
             ) : (
-              <div className=" flex flex-col mt-16 items-center">
-                <div className="bg-primary/10 text-primary p-6 rounded-full">
-                  <Search size={40}></Search>
-                </div>
-                <h1 className="text-2xl font-medium py-2">Now Posts Found</h1>
-                <p className="text-gray-600 ">
-                  We couldn&apos;t find any posts matching your search, Try
-                  adjusting your criteria.
-                </p>
-              </div>
+              <>
+                {isLoading ? (
+                  <div className="grid grid-col-1 md:grid-cols-2 gap-6">
+                    {Array.from({ length: 2 }).map((_, idx) => (
+                      <SkeletonCard height={350} key={idx} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className=" flex flex-col mt-16 items-center">
+                    <div className="bg-primary/10 text-primary p-6 rounded-full">
+                      <Search size={40}></Search>
+                    </div>
+                    <h1 className="text-2xl font-medium py-2">
+                      Now Posts Found
+                    </h1>
+                    <p className="text-gray-600 ">
+                      We couldn&apos;t find any posts matching your search, Try
+                      adjusting your criteria.
+                    </p>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

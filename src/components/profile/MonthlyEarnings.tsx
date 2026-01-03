@@ -113,7 +113,7 @@ const MonthlyEarnings = ({
       }}
     >
       
-      <div style={{ height: "300px" }}>
+      <div style={{ height: "350px" }}>
         <Line data={data} options={options} />
       </div>
       <div

@@ -66,7 +66,7 @@ const PostFilters = ({
   );
 
   return (
-    <div className="p-4 max-w-md bg-white rounded-md shadow">
+    <div className="p-4 max-w-md bg-white rounded-[6px] shadow">
         <h1 className="text-2xl font-medium pb-4">Filters</h1>
       {renderCheckboxGroup("Service Type", serviceOptions, selectedService, setSelectedService)}
 

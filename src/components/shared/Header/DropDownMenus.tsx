@@ -6,12 +6,17 @@ import SignOut from "../SignOut";
 import Image from "next/image";
 import { Bell, CircleDollarSign, CircleUser, Settings } from "lucide-react";
 import Link from "next/link";
+import { useProfileQuery } from "@/redux/features/auth/authApi";
 
 const DropDownMenus = ({ setActive }: { setActive: any }) => {
   const { name, email } = useAppSelector(useCurrentUser);
+  const { data: profileData } = useProfileQuery("");
 
   return (
-    <div onClick={()=>setActive(false)} className="border bg-white rounded-[4px] z-40 min-h-60 w-[320px]">
+    <div
+      onClick={() => setActive(false)}
+      className="border bg-white rounded-[4px] z-40 min-h-60 w-[320px]"
+    >
       <div>
         <div className="p-3 bg-gradient-to-r from-primary/10 to-[#f8f8f8] w-full flex items-center gap-1">
           <Image
@@ -19,7 +24,10 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
             height={20}
             width={20}
             alt=""
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+            src={
+              profileData?.data?.profileImage ||
+              "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
+            }
           ></Image>
           <div>
             <h1 className="font-semibold">{name}</h1>
@@ -27,20 +35,32 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
           </div>
         </div>
         <div className="p-2 border-b">
-          <Link href="/my-profile/manage-profile" className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
+          <Link
+            href="/my-profile/manage-profile"
+            className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
+          >
             <CircleUser size={20} className="text-primary "></CircleUser>
             <h1 className="font-medium">My Account</h1>
           </Link>
 
-          <Link href="/my-profile/manage-bookings" className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
+          <Link
+            href="/my-profile/manage-bookings"
+            className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
+          >
             <Bell size={20} className="text-primary "></Bell>
             <h1 className="font-medium">Booking History</h1>
           </Link>
-          <Link href="/my-profile/manage-earnings" className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
-            <CircleDollarSign size={20} className="text-primary "></CircleDollarSign>
+          <Link
+            href="/my-profile/manage-earnings"
+            className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
+          >
+            <CircleDollarSign
+              size={20}
+              className="text-primary "
+            ></CircleDollarSign>
             <h1 className="font-medium">Earnings</h1>
           </Link>
-         
+
           <div className="flex gap-2 my-1 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
             <Settings size={20} className="text-primary "></Settings>
             <h1 className="font-medium">Settings</h1>
