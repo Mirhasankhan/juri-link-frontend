@@ -1,10 +1,18 @@
+"use client"
 import Container from "@/utils/Container";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 // import Image from "next/image";
 // import Link from "next/link";
 // import logo from "../../../assets/logo.main.png";
 
 const Footer = () => {
+  const pathname = usePathname();
+  const isActive = pathname === "/messages";
+
+  if(isActive){
+    return
+  }
   return (
     <div>
       <div className="bg-black bg-opacity-90 py-10">

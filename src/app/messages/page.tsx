@@ -52,7 +52,7 @@ export default function ChatPage() {
   console.log(conversations);
 
   return (
-    <div className="flex h-[90vh] bg-gray-100">
+    <div className="flex h-[100vh] bg-gray-100">
       <div className="md:w-1/3 lg:w-1/4 xl:w-1/5 border-r bg-white overflow-y-auto">
         <h2 className="p-4 font-semibold text-lg border-y">Conversations</h2>
         {conversations?.map((c) => (
@@ -164,3 +164,4 @@ export default function ChatPage() {
     </div>
   );
 }
+

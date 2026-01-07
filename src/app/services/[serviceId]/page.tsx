@@ -29,7 +29,7 @@ const ServiceDetailsPage = () => {
           <ChevronRight size={15} className="text-gray-700"></ChevronRight>
           <h1 className="font-medium">{serviceName}</h1>
         </div>
-        <div className="grid grid-cols-2 mb-8  gap-6">
+        <div className="grid lg:grid-cols-2 mb-8  gap-6">
           <div className="p-8 flex flex-col bg-white rounded-[6px] border">
             <h1 className="text-xl font-medium pb-3">
               Why hire a {serviceName} lawyer?
