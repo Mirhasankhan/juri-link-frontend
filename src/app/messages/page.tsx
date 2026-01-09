@@ -49,8 +49,6 @@ export default function ChatPage() {
     }
   };
 
-  console.log(conversations);
-
   return (
     <div className="flex h-[100vh] bg-gray-100">
       <div className="md:w-1/3 lg:w-1/4 xl:w-1/5 border-r bg-white overflow-y-auto">
@@ -58,8 +56,8 @@ export default function ChatPage() {
         {conversations?.map((c) => (
           <div
             key={c.roomId}
-            className={`p-3 cursor-pointer hover:bg-gray-200 ${
-              c.roomId === activeRoom ? "bg-gray-600" : ""
+            className={`p-3 cursor-pointer hover:bg-secondary/10 hover:border-b hover:border-r-4 hover:border-secondary ${
+              c.roomId === activeRoom ? "bg-secondary/10 border-b border-r-4 border-secondary" : ""
             }`}
             onClick={() => handleSelectUser(c?.partner.id)}
           >

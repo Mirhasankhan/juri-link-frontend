@@ -14,7 +14,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
   return (
-    <div className="p-3 bg-white rounded-[8px] w-full border max-h-[220px]">
+    <div className="p-3 bg-white rounded-[8px] w-full border max-h-[230px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Image
@@ -23,7 +23,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
             width={100}
             src={
               lawyer?.profileImage ||
-              "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
+              "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
             }
             alt=""
           ></Image>

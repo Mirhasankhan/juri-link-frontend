@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Container from "@/utils/Container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,12 +7,12 @@ import { usePathname } from "next/navigation";
 // import logo from "../../../assets/logo.main.png";
 
 const Footer = () => {
-  const pathname = usePathname();
-  const isActive = pathname === "/messages" || "/book";
+  const pathname = usePathname() || "";
+  const normalizedPath = pathname.replace(/\/$/, ""); // remove trailing slash
+  const isExcluded =
+    normalizedPath === "/messages" || normalizedPath === "/book";
 
-  if(isActive){
-    return
-  }
+  if (isExcluded) return null;
   return (
     <div>
       <div className="bg-black bg-opacity-90 py-10">
@@ -81,9 +81,9 @@ const Footer = () => {
         </Container>
       </div>
       <p className="pb-6 text-center bg-black text-white bg-opacity-90">
-       <span >
-            © {new Date().getFullYear()} Juri Link. All rights reserved.
-          </span>
+        <span>
+          © {new Date().getFullYear()} Juri Link. All rights reserved.
+        </span>
       </p>
     </div>
   );

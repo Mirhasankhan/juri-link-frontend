@@ -31,14 +31,16 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
             className="object-cover w-full lg:w-[280px] md:h-[480px] lg:h-[240px] rounded-xl"
             src={
               lawyer?.profileImage ||
-              "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
+              "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
             }
           ></Image>
         </div>
         <div className="col-span-3 lg:col-span-2 flex flex-col">
           <div className="flex justify-between border-b pb-4 items-center">
             <div>
-              <h1 className="text-2xl lg:text-4xl font-semibold">{lawyer?.fullName}</h1>
+              <h1 className="text-2xl lg:text-4xl font-semibold">
+                {lawyer?.fullName}
+              </h1>
               <div className="flex gap-1 lg:gap-4 mt-4">
                 {lawyer?.specialization?.map((s: any) => (
                   <h1
