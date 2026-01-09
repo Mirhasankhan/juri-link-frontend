@@ -43,7 +43,7 @@ const ClientReviews = ({ reviews }: { reviews: any[] }) => {
                       size={14}
                       className={
                         i < review.rating
-                          ? "fill-orange-500 text-orange-500"
+                          ? "fill-yellow-400 text-yellow-400"
                           : "text-gray-300"
                       }
                     />

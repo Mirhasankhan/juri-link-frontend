@@ -22,28 +22,28 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
 
   return (
     <Container>
-      <div className="grid grid-cols-3 shadow-lg text-black bg-white px-8 py-16 gap-6 rounded-[20px]">
-        <div className="col-span-1 flex items-center justify-start">
+      <div className="grid grid-cols-3 shadow-lg text-black bg-white px-3 lg:px-8 py-6 lg:py-16 gap-6 rounded-[20px]">
+        <div className="col-span-3 lg:col-span-1 flex items-center justify-start">
           <Image
             alt=""
             height={200}
             width={700}
-            className="object-cover w-[280px] h-[240px] rounded-xl"
+            className="object-cover w-full lg:w-[280px] md:h-[480px] lg:h-[240px] rounded-xl"
             src={
               lawyer?.profileImage ||
               "https://nyc3.digitaloceanspaces.com/smtech-space/uploads/messages/files/1763556920491-62my97cxpb4.png"
             }
           ></Image>
         </div>
-        <div className="col-span-2 flex flex-col">
+        <div className="col-span-3 lg:col-span-2 flex flex-col">
           <div className="flex justify-between border-b pb-4 items-center">
             <div>
-              <h1 className="text-4xl font-semibold">{lawyer?.fullName}</h1>
-              <div className="flex gap-4 mt-4">
+              <h1 className="text-2xl lg:text-4xl font-semibold">{lawyer?.fullName}</h1>
+              <div className="flex gap-1 lg:gap-4 mt-4">
                 {lawyer?.specialization?.map((s: any) => (
                   <h1
                     key={s._id}
-                    className="px-2 py-1 text-sm  bg-secondary/10 rounded-[4px] text-secondary  font-medium"
+                    className="px-2 py-1 text-sm bg-secondary/10 rounded-[4px] text-secondary  font-medium"
                   >
                     {s.serviceName}
                   </h1>
@@ -54,11 +54,11 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
               <MessageCircleMore
                 onClick={() => handleMessage()}
                 size={30}
-                className="text-secondary cursor-pointer"
+                className="text-secondary hidden lg:block cursor-pointer"
               />
             </div>
           </div>
-          <div className="flex justify-between border-b py-4 items-center">
+          <div className="flex justify-between gap-2 border-b py-4 items-center">
             <div>
               <h1 className="text-secondary font-medium text-xl">
                 {lawyer?.avgRating}
@@ -74,7 +74,7 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
               <p className="text-gray-500 text-sm">per consultation</p>
             </div>
             <div>
-              <h1 className="text-secondary font-medium text-xl">
+              <h1 className="text-secondary font-medium lg:text-xl">
                 {lawyer?.serviceType === "Both"
                   ? "Online & In Person"
                   : lawyer?.serviceType === "In_Person"
@@ -86,17 +86,17 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
               <p className="text-gray-500 text-sm">consultation type</p>
             </div>
           </div>
-          <div className="flex pt-4 justify-between">
+          <div className="lg:flex gap-2 pt-4 justify-between">
             <div className="flex gap-1 items-center">
-              <MapPin className="text-secondary"></MapPin>
-              <h1 className="font-medium">{lawyer?.location}</h1>
+              <MapPin size={18} className="text-secondary"></MapPin>
+              <h1 className="text-gray-900">{lawyer?.location}</h1>
             </div>
-            <div className="flex gap-1 items-center">
-              <Mail className="text-secondary"></Mail>
-              <h1 className="font-medium">{lawyer?.email}</h1>
+            <div className="flex gap-1 py-2 lg:py-0 items-center">
+              <Mail size={18} className="text-secondary"></Mail>
+              <h1 className="text-gray-900">{lawyer?.email}</h1>
             </div>
             <button
-              className="bg-purple-500 text-white px-4 py-2 font-medium rounded-[5px]"
+              className="bg-purple-500 text-white px-4 w-full py-2 font-medium rounded-[5px]"
               onClick={() => handleBook()}
             >
               Book Consultation

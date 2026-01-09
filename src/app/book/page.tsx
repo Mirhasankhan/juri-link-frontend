@@ -9,6 +9,7 @@ import { useState } from "react";
 import StripeModal from "@/components/shared/CreatePayment";
 import { useDayWiseSlotsQuery } from "@/redux/features/availability/availability.api";
 import { GoLaw } from "react-icons/go";
+import { VscLaw } from "react-icons/vsc";
 
 const BookingPage = () => {
   const searchParams = useSearchParams();
@@ -67,7 +68,7 @@ const BookingPage = () => {
     description;
 
   return (
-    <div className="bg-[#f8f8f8] py-12">
+    <div className="bg-[#f8f8f8] pb-[320px] lg:pb-12 pt-2 lg:pt-12">
       <Container>
         {/* Skeleton if lawyer loading but still allowing hooks to run */}
         {lawyerLoading ? (
@@ -87,7 +88,9 @@ const BookingPage = () => {
                 }
               />
               <div>
-                <h1 className="font-medium text-3xl">Book Consultation</h1>
+                <h1 className="font-medium text-xl lg:text-3xl">
+                  Book Consultation
+                </h1>
                 <small className="text-gray-500 font-medium">
                   with {lawyer?.fullName}
                 </small>
@@ -95,10 +98,10 @@ const BookingPage = () => {
             </div>
 
             <div className="grid grid-cols-3 my-6 gap-6">
-              <div className="col-span-2">
+              <div className="col-span-3 lg:col-span-2">
                 {/* Date Picker */}
-                <div className="flex gap-5">
-                  <div className="border w-full bg-white p-6 rounded-[6px]">
+                <div className="lg:flex gap-5">
+                  <div className="border w-full bg-white p-3 lg:p-6  rounded-[6px]">
                     <div className="flex items-center pb-2 gap-1">
                       <Calendar className="text-primary" />
                       <p className="font-medium text-gray-700">Select a date</p>
@@ -111,7 +114,7 @@ const BookingPage = () => {
                       className="w-full border rounded-[4px] mt-2 p-2"
                     />
                   </div>
-                  <div className="border w-full bg-white p-6 rounded-[6px]">
+                  <div className="border mt-4 lg:mt-0 w-full bg-white p-3 lg:p-6  rounded-[6px]">
                     <div className="flex items-center pb-2 gap-1">
                       <GoLaw size={20} className="text-primary" />
                       <p className="font-medium text-gray-700">
@@ -134,7 +137,7 @@ const BookingPage = () => {
                 </div>
 
                 {/* Dynamic Slots */}
-                <div className="border mt-4 bg-white p-6 rounded-[6px]">
+                <div className="border mt-4 bg-white p-3 lg:p-6 rounded-[6px]">
                   <div className="flex items-center pb-2 gap-1">
                     <Clock className="text-primary" />
                     <p className="font-medium text-gray-700">Available Slots</p>
@@ -149,7 +152,7 @@ const BookingPage = () => {
                       </p>
                     )}
 
-                  <div className="grid grid-cols-4 gap-5">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                     {!slotLoading &&
                       slotData?.data?.map((slot: any, idx: number) => (
                         <button
@@ -168,14 +171,14 @@ const BookingPage = () => {
                 </div>
 
                 {/* Consultation Type */}
-                <div className="border mt-4 bg-white p-6 rounded-[6px]">
+                <div className="border mt-4 bg-white p-3 lg:p-6  rounded-[6px]">
                   <h1 className="font-medium pb-2">Consultation Type</h1>
-                  <div className="flex gap-5">
+                  <div className="lg:flex gap-5">
                     {consultationOptions.map((type) => (
                       <div
                         key={type}
                         onClick={() => setConsultationType(type)}
-                        className={`flex items-center border rounded-[6px] p-3 gap-2 w-full cursor-pointer ${
+                        className={`flex items-center mt-1 border rounded-[6px] p-3 gap-2 w-full cursor-pointer ${
                           consultationType === type
                             ? "border-primary bg-blue-50"
                             : ""
@@ -215,14 +218,14 @@ const BookingPage = () => {
               </div>
 
               {/* Summary */}
-              <div className="col-span-1 bg-white rounded-[6px] sticky top-8 max-h-[480px] font-medium">
-                <div className="flex bg-primary/70 text-white py-8 justify-center gap-2 rounded-t-[12px]">
+              <div className="col-span-3 lg:col-span-1 bg-white rounded-[6px] max-h-[480px] fixed bottom-0 left-4 right-4 max-w-screen-md w-auto lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:w-auto">
+                <div className="flex lg:bg-primary/70 text-primary lg:text-white py-2 lg:py-8 justify-center gap-2 rounded-t-[12px]">
                   <IoMdCheckmarkCircleOutline size={25} />
                   <h1 className="font-medium">Booking Summary</h1>
                 </div>
 
-                <div className="p-4 space-y-2">
-                  <div className="flex border-b py-3 justify-between">
+                <div className="p-4 space-y-1 lg:space-y-2">
+                  <div className="flex border-b lg:py-3 py-1 justify-between">
                     <div className="flex items-center gap-1">
                       <Calendar
                         size={30}
@@ -235,7 +238,7 @@ const BookingPage = () => {
                     </span>
                   </div>
 
-                  <div className="flex border-b py-3 justify-between">
+                  <div className="flex border-b lg:py-3 py-1 justify-between">
                     <div className="flex items-center gap-1">
                       <Clock1
                         size={30}
@@ -249,7 +252,7 @@ const BookingPage = () => {
                     </span>
                   </div>
 
-                  <div className="flex border-b py-3 justify-between">
+                  <div className="flex border-b lg:py-3 py-1 justify-between">
                     <div className="flex items-center gap-1">
                       <DollarSign
                         size={30}
@@ -260,7 +263,7 @@ const BookingPage = () => {
                     <span className="font-medium">${lawyer?.fee ?? "—"}</span>
                   </div>
 
-                  <div className="flex border-b py-3 justify-between">
+                  <div className="flex border-b lg:py-3 py-1 justify-between">
                     <div className="flex items-center gap-1">
                       {consultationType == "Online" ? (
                         <Video
@@ -281,12 +284,12 @@ const BookingPage = () => {
                     </span>
                   </div>
 
-                  <div className="flex border-b py-3 justify-between">
+                  <div className="flex border-b lg:py-3 py-1 justify-between">
                     <div className="flex items-center gap-1">
-                      <DollarSign
+                      <VscLaw
                         size={30}
                         className="p-1 bg-gray-100 rounded-[5px] text-gray-800"
-                      ></DollarSign>
+                      ></VscLaw>
                       <span className="font-medium">Service Type:</span>
                     </div>
 

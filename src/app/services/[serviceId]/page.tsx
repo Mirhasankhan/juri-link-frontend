@@ -34,7 +34,7 @@ const ServiceDetailsPage = () => {
             <h1 className="text-xl font-medium pb-3">
               Why hire a {serviceName} lawyer?
             </h1>
-            <p>{importance}</p>
+            <p className="pb-3">{importance}</p>
             <button
               className="bg-secondary/10 mt-auto text-secondary px-4 py-2 font-medium rounded-[6px]"
               onClick={() => handleNavigate(_id)}

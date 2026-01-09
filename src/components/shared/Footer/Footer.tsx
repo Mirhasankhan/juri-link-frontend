@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const pathname = usePathname();
-  const isActive = pathname === "/messages";
+  const isActive = pathname === "/messages" || "/book";
 
   if(isActive){
     return
@@ -65,8 +65,8 @@ const Footer = () => {
             </div>
             <div className="flex flex-col gap-2">
               <h1 className="text-xl font-medium">For Lawyers</h1>
-              <Link href="/lawyers">Join As Lawyer</Link>
-              <Link href="/lawyers">Post Services</Link>
+              <Link href="/auth/register-lawyer">Join As Lawyer</Link>
+              <Link href="/create-post">Post Services</Link>
               <Link href="/lawyers">Benefits</Link>
               <Link href="/lawyers">Pricing</Link>
             </div>
@@ -81,7 +81,9 @@ const Footer = () => {
         </Container>
       </div>
       <p className="pb-6 text-center bg-black text-white bg-opacity-90">
-        © 2024 LegalConnect. All rights reserved.
+       <span >
+            © {new Date().getFullYear()} Juri Link. All rights reserved.
+          </span>
       </p>
     </div>
   );

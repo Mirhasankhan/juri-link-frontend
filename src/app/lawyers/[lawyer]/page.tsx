@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ClientReviews from "@/components/lawyers/ClientReviews";
 import ContactLawyer from "@/components/lawyers/ContactLawyer";
 import Expertise from "@/components/lawyers/Expertise";
@@ -8,22 +8,25 @@ import Container from "@/utils/Container";
 import { useParams } from "next/navigation";
 
 const LawyerDetailsPage = () => {
-  const {lawyer} = useParams()
-  const {data:lawyerDetails} = useLawyerDetailsQuery(lawyer)
+  const { lawyer } = useParams();
+  const { data: lawyerDetails } = useLawyerDetailsQuery(lawyer);
 
   return (
     <div className="bg-[#f8f8f8] pt-6">
       <LawyerOverview lawyer={lawyerDetails?.data?.lawyer}></LawyerOverview>
       <Container>
         <div className="grid grid-cols-3 gap-6 my-8">
-          <div className="col-span-2">
+          <div className="col-span-3 lg:col-span-2">
             <Expertise lawyer={lawyerDetails?.data?.lawyer}></Expertise>
-            <ClientReviews reviews={lawyerDetails?.data?.reviews}></ClientReviews>        
-          
+            <ClientReviews
+              reviews={lawyerDetails?.data?.reviews}
+            ></ClientReviews>
           </div>
-          <div className="col-span-1">
+          <div className="hidden lg:block col-span-1">
             <div className="sticky top-8">
-              <ContactLawyer lawyer={lawyerDetails?.data?.lawyer}></ContactLawyer>
+              <ContactLawyer
+                lawyer={lawyerDetails?.data?.lawyer}
+              ></ContactLawyer>
             </div>
           </div>
         </div>

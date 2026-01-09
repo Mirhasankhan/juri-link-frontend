@@ -33,10 +33,10 @@ const Header = () => {
           >
             <Image height={70} width={70} src={logo} alt="logo"></Image>
           </Link>
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <SubMenu></SubMenu>
           </div>
-          <div className="hidden relative md:flex items-center gap-2">
+          <div className="hidden relative lg:flex items-center gap-2">
             {!email ? (
               <>
                 <Link
@@ -83,12 +83,12 @@ const Header = () => {
             )}
 
             {active && (
-              <div className="absolute right-0 top-16">
+              <div className="absolute right-0 top-16 z-50">
                 <DropDownMenus setActive={setActive}></DropDownMenus>
               </div>
             )}
           </div>
-          <div className="md:hidden relative">
+          <div className="lg:hidden relative">
             {!isOpen && (
               <Menu
                 className="cursor-pointer"
