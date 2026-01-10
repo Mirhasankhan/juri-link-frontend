@@ -19,9 +19,9 @@ const WithdrawHistory = () => {
 
   return (
     <div>
-      <h1 className="text-2xl pb-6 font-medium">Withdraw History</h1>
+      <h1 className="md:text-2xl pb-6 font-medium">Withdraw History</h1>
 
-      <div className="w-full grid grid-cols-1 gap-6">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 gap-6">
         {withdraws.map((item: any) => {
           const isPending = item.status === "Pending";
 

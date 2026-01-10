@@ -36,7 +36,7 @@ const UserBookings = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
         {bookings?.map((booking: any) => (
           <div className="border p-4 rounded-[10px] bg-white" key={booking._id}>
             <div className="flex pb-5 border-b justify-between">
@@ -49,7 +49,7 @@ const UserBookings = () => {
                   width={80}
                 ></Image>
                 <div>
-                  <h1 className="text-xl font-medium">
+                  <h1 className="lg:text-xl font-medium">
                     {booking?.lawyerId?.fullName}{" "}
                   </h1>
                   <p className="text-gray-600 text-sm">

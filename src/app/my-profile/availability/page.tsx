@@ -14,11 +14,11 @@ const AvailabilityPage = () => {
  
       <>
         <div className="grid  grid-cols-5 gap-6 p-6">
-          <div className="hidden md:block md:col-span-1">
+          <div className="lg:col-span-1">
             <Sidebar></Sidebar>
           </div>
-          <div className="col-span-4 bg-white rounded-[8px] md:col-span-4">
-            {profile?.data?.availabilitySetup == true ? (
+          <div className="col-span-5 bg-white rounded-[8px] lg:col-span-4">
+            {profile?.data?.availabilitySetup == false ? (
               <LawyerAvailabilities/>
             ) : (
               <WeeklyAvailabilityPage />

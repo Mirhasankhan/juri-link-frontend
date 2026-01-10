@@ -70,7 +70,7 @@ const LawyerAvailabilities: React.FC = () => {
           Manage your availability so that users can find and book you smoothly
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 my-6 px-4">
         {Object.entries(mergedAvailability).map(([dayIndex, slots]) => (
           <div
             key={dayIndex}

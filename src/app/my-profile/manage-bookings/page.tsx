@@ -13,10 +13,10 @@ const ManageBookingsPage = () => {
   return (
     <>
       <div className="grid bg-[#f8f8f8] grid-cols-5 p-6 gap-6">
-        <div className="hidden md:block md:col-span-1">
+        <div className="lg:col-span-1">
           <Sidebar></Sidebar>
         </div>
-        <div className="col-span-5 bg-white p-5 md:col-span-4 rounded-[8px] 3xl:w-4/5">
+        <div className="col-span-5 bg-white p-5 lg:col-span-4 rounded-[8px] 3xl:w-4/5">
           {decoded.role === "User" ? (
             <UserBookings></UserBookings>
           ) : (

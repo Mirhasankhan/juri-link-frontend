@@ -148,9 +148,9 @@ const WeeklyAvailabilityPage = () => {
 
   return (
     <Container>
-      <h1 className="text-2xl font-bold mb-5">Weekly Availability</h1>
+      <h1 className="text-2xl font-bold my-5">Weekly Availability</h1>
 
-      <div className="grid text-white xl:grid-cols-2 grid-cols-1 gap-5">
+      <div className="grid text-white lg:grid-cols-2 grid-cols-1 gap-5">
         {days.map((day) => (
           <div key={day} className="mb-6 bg-[#1f1f1f] p-4 rounded-[6px]">
             <div className="flex justify-between items-center mb-2">
@@ -230,7 +230,7 @@ const WeeklyAvailabilityPage = () => {
       <button
         disabled={isSubmitDisabled}
         onClick={handleSubmit}
-        className={`px-4 py-2 rounded-[6px] text-white font-medium bg-orange-600 ${
+        className={`px-4 py-2 rounded-[6px] mb-5 text-white font-medium bg-orange-600 ${
           isSubmitDisabled
             ? "opacity-40 cursor-not-allowed"
             : "hover:bg-orange-700"

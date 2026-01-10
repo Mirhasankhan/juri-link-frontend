@@ -102,7 +102,7 @@ const Header = () => {
               ></X>
             )}
             {isOpen && (
-              <AnimatePresence>{isOpen && <SmallDeviceMenu />}</AnimatePresence>
+              <AnimatePresence>{isOpen && <SmallDeviceMenu setIsOpen={setIsOpen}/>}</AnimatePresence>
             )}
           </div>
         </div>

@@ -4,7 +4,7 @@ import UpdateProfileImage from './UpdateProfileImage';
 
 const UserProfile = () => {
     return (
-        <div>
+        <div className='p-3'>
             <UpdateProfileImage></UpdateProfileImage>
             <UpdateUserDetails></UpdateUserDetails>
         </div>

@@ -4,12 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Home, Users, FileText, Star, Info } from "lucide-react";
-import React from "react";
 
 import SignOut from "../SignOut";
 import { JWTDecode } from "@/utils/jwt";
 
-const SmallDeviceMenu = () => {
+const SmallDeviceMenu = ({setIsOpen}:any) => {
   const pathname = usePathname();
   const { decoded } = JWTDecode();
 
@@ -24,6 +23,7 @@ const SmallDeviceMenu = () => {
     { href: "/services", label: "Service Areas", icon: Info }, 
     { href: "/premium", label: "Premium Access", icon: Star },
     { href: "/about-us", label: "About Us", icon: Info },
+    { href: "/my-profile/manage-profile", label: "My Profile", icon: Info },
   ];
 
   // Filter links based on role
@@ -53,6 +53,7 @@ const SmallDeviceMenu = () => {
           <Link
             key={href}
             href={href}
+            onClick={()=>setIsOpen(false)}
             className={`flex items-center gap-3 px-3 py-2 rounded-[5px] text-sm font-medium transition-all duration-200
               ${isActive ? "bg-white/10 text-white" : "text-white hover:bg-white/10"}`}
           >
