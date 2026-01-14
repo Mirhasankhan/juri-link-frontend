@@ -21,23 +21,26 @@ const NewPass = () => {
     formState: { errors },
   } = useForm<TLoginValues>();
 
-  const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
-    console.log(data);
-    if (data.password !== data.confirmPassword) {
+  const onSubmit: SubmitHandler<TLoginValues> = async (datas) => {
+    const token = localStorage.getItem("forgetToken");
+    if (datas.password !== datas.confirmPassword) {
       toast.error("Password didn't match");
       return;
     }
     setIsLoading(true);
+    const data = {
+      newPassword: datas.password,
+      token,
+    };
     try {
-      console.log(data.password);
-      const response = await resetPassword({ newPassword: data.password });
+      const response = await resetPassword(data);
       console.log(response);
 
       if (response.data) {
         toast.success(response.data.message);
         router.push("/");
         setIsLoading(false);
-        localStorage.removeItem("token");
+        localStorage.removeItem("forgetToken");
       } else if (response.error) {
         if ("data" in response.error) {
           const errorData = response.error.data as { message?: string };
@@ -58,8 +61,8 @@ const NewPass = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f8f8] pt-12">
-      <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-5  rounded-[4px]">
+    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
+      <div className="mt-12 flex flex-col items-center w-full bg-white md:w-3/5 lg:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-2 md:mx-auto p-5  rounded-[4px]">
         <div className="p-3 bg-blue-100 rounded-full">
           <Lock className="text-blue-800"></Lock>
         </div>

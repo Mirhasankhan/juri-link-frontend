@@ -63,22 +63,24 @@ const LawyerSignUpForm = () => {
   };
 
   return (
-    <div className="bg-[#f8f8f8] py-12">
-      <div className="w-full md:w-3/5 xl:w-2/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[16px]">
+    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center py-6">
+      <div className="w-full  md:w-4/5  lg:w-3/5 xl:w-2/4 shadow-md md:mx-auto mx-2 py-16 px-6 dark:text-white bg-white rounded-[16px]">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-         <div className="flex flex-col items-center">
-           <Image
-            placeholder="blur"
-            src={logo}
-            alt=""
-            height={150}
-            width={150}
-          ></Image>
-          <h2 className="text-3xl text-gray-800 font-bold">Lawyer Registration</h2>
-          <p className="text-gray-700 pb-6">
-            Provide your professional details to create your account.
-          </p>
-         </div>
+          <div className="flex flex-col items-center">
+            <Image
+              placeholder="blur"
+              src={logo}
+              alt=""
+              height={150}
+              width={150}
+            ></Image>
+            <h2 className="text-3xl text-gray-800 font-bold">
+              Lawyer Registration
+            </h2>
+            <p className="text-gray-700 pb-6">
+              Provide your professional details to create your account.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label-design pb-1">Full Name</label>
@@ -222,7 +224,7 @@ const LawyerSignUpForm = () => {
 
           <div>
             <label className="block mb-2 font-medium">Areas of Practice</label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {legalServices?.data?.map(
                 (service: { _id: string; serviceName: string }) => (
                   <label

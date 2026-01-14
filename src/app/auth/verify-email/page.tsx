@@ -94,7 +94,7 @@ const VerifyEmail = () => {
   return (
     <>
       <div className="min-h-screen bg-[#f8f8f8] flex items-center justify-center p-2">
-        <div className="flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-lg rounded-lg p-6">
+        <div className="flex flex-col items-center w-full bg-white md:w-3/5 lg:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-lg rounded-[6px] p-6">
           <div className="p-4 bg-blue-100 rounded-full mb-3">
             <Mail className="text-blue-800 w-6 h-6" />
           </div>

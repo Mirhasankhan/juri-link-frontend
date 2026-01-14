@@ -56,8 +56,8 @@ const Login = () => {
 
  
   return (
-    <div className="bg-[#f8f8f8] py-12 min-h-screen">
-      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto py-12 px-6 dark:text-white bg-white rounded-[10px]">
+   <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
+      <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-2 md:mx-auto py-12 px-6 dark:text-white bg-white rounded-[10px]">
         <div className="flex flex-col items-center">
           <Image
             placeholder="blur"

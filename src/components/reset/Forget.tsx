@@ -21,33 +21,35 @@ const ForgetPassword = ({
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
     try {
       const response: any = await sendOpt({ email: data.email });
-   
+
       if (response.data) {
         toast.success(response.data.message);
         setActive("verify");
         localStorage.setItem("email", data.email);
-      } else {       
+      } else {
         toast.error(response.error.data.message);
       }
     } catch (error) {
       console.log(error);
-
       toast.error("An unexpected error occurred.");
     }
   };
+
   return (
-    <div className="min-h-screen bg-[#f8f8f8] pt-12">
-      <div className="mt-12 flex flex-col items-center w-full bg-white md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-auto p-5  rounded-[4px]">
+    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center px-3">
+      <div className="mt-12 flex flex-col items-center w-full max-w-md bg-white shadow-md p-6 rounded-[4px]">
         <div className="p-3 bg-blue-100 rounded-full">
-          <Mail size={30} className="text-blue-800"></Mail>
+          <Mail size={30} className="text-blue-800" />
         </div>
+
         <h1 className="text-xl font-medium py-2">Reset Password</h1>
-        <p className="text-gray-600 text-center">
+        <p className="text-gray-600 text-center text-sm sm:text-base">
           Enter your email address and we&apos;ll send you a verification code
         </p>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="rounded-lg pt-6  bg-white"
+          className="rounded-lg pt-6 bg-white w-full"
         >
           <div className="mb-4">
             <label className="block pb-2 font-medium">Email</label>
@@ -56,11 +58,13 @@ const ForgetPassword = ({
               {...register("email", {
                 required: "Email is required",
               })}
-              className="w-[430px] p-2 border rounded-[4px]"
+              className="w-full p-2 border rounded-[4px]"
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
@@ -70,13 +74,14 @@ const ForgetPassword = ({
             className="bg-primary text-white py-3 w-full font-medium rounded-[4px]"
           >
             {isLoading ? (
-              <LoaderCircle className="animate-spin mx-auto"></LoaderCircle>
+              <LoaderCircle className="animate-spin mx-auto" />
             ) : (
               "Send OTP"
             )}
           </button>
         </form>
-        <Link href="/auth/login" className="flex items-center gap-1 pt-6">
+
+        <Link href="/auth/login" className="flex items-center gap-1 pt-6 text-sm">
           <ArrowLeft size={15} /> Back to login
         </Link>
       </div>

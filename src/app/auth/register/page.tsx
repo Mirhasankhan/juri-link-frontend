@@ -38,7 +38,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[#f8f8f8] py-12 min-h-screen">
+    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
       {/* <div className="text-center">
         <h1 className="text-4xl font-medium"> Join Juri Link</h1>
         <p className="font-medium py-3 text-gray-500">
