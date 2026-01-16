@@ -24,7 +24,7 @@ const FeaturedLawyers = () => {
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8 auto-rows-fr">
         {isLoading
           ? Array.from({ length: 4 }).map((_, idx) => <SkeletonCard key={idx} height={350} />)
-          : lawyers?.data?.map((lawyer: any) => (
+          : lawyers?.data?.slice(0,4).map((lawyer: any) => (
               <div
                 key={lawyer._id}
                 className="flex flex-col overflow-hidden rounded-[20px] border hover:border-yellow-700 hover:shadow-md"
