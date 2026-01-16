@@ -6,15 +6,16 @@ import WeeklyEarnings from "@/components/profile/WeeklyEarnings";
 import WithdrawHistory from "@/components/profile/WithdrawHistory";
 import WithdrawModal from "@/components/profile/WithdrawModal";
 import { useEarningsSummaryQuery } from "@/redux/features/earnings/earnings.api";
+import { Ellipsis } from "lucide-react";
 import { useState } from "react";
 
 const EarningsPage = () => {
   const [type, setType] = useState("monthly");
   const { data: earningsData, isLoading } = useEarningsSummaryQuery(type);
 
-  if (isLoading) {
-    return "loading...";
-  }
+  // if (isLoading) {
+  //   return "loading...";
+  // }
 
   const allTimeEarnings = earningsData?.data?.allTimeEarnings;
   const currentEarningsValue = earningsData?.data?.currentEarnings;
@@ -32,25 +33,41 @@ const EarningsPage = () => {
                 <h1 className="text-xl font-medium text-gray-500">
                   Current Earnings
                 </h1>
-                <h1 className="text-3xl font-medium text-[#7869ff]">
-                  ${currentEarningsValue}
-                </h1>
+                {isLoading ? (
+                  <Ellipsis
+                    size={50}
+                    className="mx-auto text-secondary animate-ping"
+                  ></Ellipsis>
+                ) : (
+                  <h1 className="text-3xl font-medium text-secondary">
+                    ${currentEarningsValue}
+                  </h1>
+                )}
               </div>
               <div className="border mt-2 md:mt-0 bg-[#f8f8f8] text-center w-full py-6 rounded-[8px]">
                 <h1 className="text-xl font-medium text-gray-500">
                   All Time Earnings
                 </h1>
-                <h1 className="text-3xl font-medium text-[#7869ff]">
-                  ${allTimeEarnings}
-                </h1>
+                {isLoading ? (
+                  <Ellipsis
+                    size={50}
+                    className="mx-auto text-secondary animate-ping"
+                  ></Ellipsis>
+                ) : (
+                  <h1 className="text-3xl font-medium text-secondary">
+                    ${allTimeEarnings}
+                  </h1>
+                )}
               </div>
             </div>
             <div className="grid grid-cols-4 gap-4">
               <div className="col-span-4 xl:col-span-3">
                 <div className="flex justify-between items-center pb-4">
-                  <h1 className="md:text-2xl font-medium ">Earnings Overview</h1>
+                  <h1 className="md:text-2xl font-medium ">
+                    Earnings Overview
+                  </h1>
                   <select
-                    className="border bg-[#7869ff] text-[#7869ff] bg-opacity-15 outline-none font-bold rounded-[6px] px-2 md:px-5 py-1 md:py-2"
+                    className="border bg-secondary text-secondary bg-opacity-15 outline-none font-bold rounded-[6px] px-2 md:px-5 py-1 md:py-2"
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                   >

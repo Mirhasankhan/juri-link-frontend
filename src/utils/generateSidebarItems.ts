@@ -1,10 +1,8 @@
 import { 
   SquareChartGantt,
   BookmarkPlus,
-  Settings,
   Calendar,
   CircleDollarSign,
-  MessageCircleMore, 
   Heart
 } from "lucide-react";
 
@@ -23,11 +21,11 @@ const baseMenu: SidbarItem[] = [
     icon: BookmarkPlus,
   },
  
-  {
-    title: "Settings",
-    path: "profile/settings",
-    icon: Settings,
-  },
+  // {
+  //   title: "Settings",
+  //   path: "profile/settings",
+  //   icon: Settings,
+  // },
 ];
 
 // Role-specific additions
@@ -42,11 +40,11 @@ const lawyerMenu: SidbarItem[] = [
     path: "my-profile/availability",
     icon: Calendar,
   },
-  {
-    title: "View Reviews",
-    path: "profile/favourite",
-    icon: MessageCircleMore,
-  },
+  // {
+  //   title: "View Reviews",
+  //   path: "profile/favourite",
+  //   icon: MessageCircleMore,
+  // },
 ];
 
 const userMenu: SidbarItem[] = [

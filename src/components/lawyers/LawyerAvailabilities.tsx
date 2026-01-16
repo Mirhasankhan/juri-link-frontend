@@ -8,6 +8,7 @@ import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import UpdateSlotModal from "../profile/UpdateSlotModal";
 import AddSlotModal from "../profile/AddNewSlotModal";
+import { SkeletonCard } from "../shared/Skeleton";
 
 interface Slot {
   id: string;
@@ -34,8 +35,6 @@ const LawyerAvailabilities: React.FC = () => {
   const { data: availabilitySlots, isLoading } = useAvailabilitySlotsQuery("");
   const [deleteSlot] = useDeleteSlotMutation();
   const [deletingSlotId, setDeletingSlotId] = useState<string | null>(null);
-
-  if (isLoading) return <div>Loading...</div>;
 
   const availability: DayAvailability[] = availabilitySlots?.data || [];
 
@@ -70,6 +69,13 @@ const LawyerAvailabilities: React.FC = () => {
           Manage your availability so that users can find and book you smoothly
         </p>
       </div>
+      {isLoading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-6">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <SkeletonCard height={160} key={idx} />
+          ))}
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 my-6 px-4">
         {Object.entries(mergedAvailability).map(([dayIndex, slots]) => (
           <div

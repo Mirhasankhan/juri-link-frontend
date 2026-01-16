@@ -42,7 +42,7 @@ const authApi = baseApi.injectEndpoints({
         url: "/user/profile",
         method: "GET",
       }),
-      providesTags: ["users","availability"],
+      providesTags: ["users", "availability"],
     }),
     sendOtp: builder.mutation({
       query: (email) => ({
@@ -64,8 +64,8 @@ const authApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
         headers: {
-          Authorization: data.token
-        }
+          Authorization: data.token,
+        },
       }),
     }),
     changePassword: builder.mutation({
@@ -108,7 +108,7 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
     allLawyers: builder.query({
-      query: ({experience, type, specializationId }) => ({
+      query: ({ experience, type, specializationId }) => ({
         url: `/user/all?experience=${experience}&type=${type}&specializationId=${specializationId}`,
         method: "GET",
       }),
@@ -129,6 +129,7 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+    
   }),
 });
 

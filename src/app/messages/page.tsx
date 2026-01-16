@@ -2,7 +2,7 @@
 
 import { useChatSocket } from "@/components/message/user.chat.socket";
 import { JWTDecode } from "@/utils/jwt";
-import { Send } from "lucide-react";
+import { Send, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -13,17 +13,12 @@ export default function ChatPage() {
   const router = useRouter();
   const initialReceiverId = searchParams.get("receiverId");
 
-  const {
-    conversations,
-    messages,
-    activeRoom,
-    subscribeToUser,
-    sendMessage,
-    isReady,
-  } = useChatSocket(token);
+  const { conversations, messages, activeRoom, subscribeToUser, sendMessage, isReady } =
+    useChatSocket(token);
 
   const [currentReceiver, setCurrentReceiver] = useState<string | null>(null);
   const [input, setInput] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile sidebar toggle
 
   useEffect(() => {
     if (initialReceiverId && isReady) {
@@ -40,6 +35,8 @@ export default function ChatPage() {
     const url = new URL(window.location.href);
     url.searchParams.set("receiverId", receiverId);
     router.replace(url.toString());
+
+    setIsSidebarOpen(false); // close sidebar on mobile
   };
 
   const handleSend = () => {
@@ -50,14 +47,46 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-[100vh] bg-gray-100">
-      <div className="md:w-1/3 lg:w-1/4 xl:w-1/5 border-r bg-white overflow-y-auto">
+    <div className="flex h-[90vh] relative bg-gray-100">
+      {/* Mobile menu button */}
+      <div className="lg:hidden fixed top-4 left-4 z-50">
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="p-2 bg-white rounded shadow-md"
+        >
+          <Menu size={28} />
+        </button>
+      </div>
+
+      {/* Conversations Sidebar */}
+      <div
+        className={`
+          bg-white border-r overflow-y-auto shadow-lg
+          w-[350px] lg:w-1/3 xl:w-1/5
+          lg:static lg:translate-x-0
+          fixed top-0 left-0 h-full z-40
+          transform transition-transform duration-300 ease-in-out
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        `}
+      >
+        {/* Close button on mobile */}
+        <div className="lg:hidden flex justify-end p-4">
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="p-2 bg-gray-200 rounded-full"
+          >
+            <X size={28} />
+          </button>
+        </div>
+
         <h2 className="p-4 font-semibold text-lg border-y">Conversations</h2>
         {conversations?.map((c) => (
           <div
             key={c.roomId}
             className={`p-3 cursor-pointer hover:bg-secondary/10 hover:border-b hover:border-r-4 hover:border-secondary ${
-              c.roomId === activeRoom ? "bg-secondary/10 border-b border-r-4 border-secondary" : ""
+              c.roomId === activeRoom
+                ? "bg-secondary/10 border-b border-r-4 border-secondary"
+                : ""
             }`}
             onClick={() => handleSelectUser(c?.partner.id)}
           >
@@ -91,7 +120,7 @@ export default function ChatPage() {
       </div>
 
       {/* Chat Window */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col lg:ml-0 ml-0">
         <div className="flex-1 max-h-[80vh] overflow-y-auto p-4">
           {messages
             ?.slice()
@@ -100,21 +129,17 @@ export default function ChatPage() {
               <div
                 key={i}
                 className={`mb-2 ${
-                  m.senderId === currentReceiver
-                    ? "text-left"
-                    : "text-right text-white"
+                  m.senderId === currentReceiver ? "text-left" : "text-right text-white"
                 }`}
               >
                 <div
                   className={`inline-block px-4 py-3 ${
                     m.senderId === currentReceiver
                       ? "bg-gray-200 rounded-b-[16px] rounded-tr-[16px]"
-                      : "bg-gradient-to-br from-primary p-2 to-primary/50 rounded-t-[16px] rounded-br-[16px]"
+                      : "bg-gradient-to-br from-secondary p-2 to-secondary/50 rounded-t-[16px] rounded-br-[16px]"
                   }`}
                 >
-                  <div className="font-medium">
-                    {m?.content || "📎 File sent"}
-                  </div>
+                  <div className="font-medium">{m?.content || "📎 File sent"}</div>
                   {m?.fileUrl?.length > 0 && (
                     <Image
                       height={30}
@@ -148,12 +173,12 @@ export default function ChatPage() {
               }
             }}
             placeholder="Type a message..."
-            className="flex-1 p-2 border rounded"
+            className="flex-1 p-2 border outline-primary rounded"
           />
           <button
             disabled={!input}
             onClick={handleSend}
-            className="px-8 py-4 bg-blue-600 text-white rounded-[12px]"
+            className="px-8 py-4 disabled:bg-gray-300 bg-blue-600 text-white rounded-[12px]"
           >
             <Send />
           </button>
@@ -162,4 +187,3 @@ export default function ChatPage() {
     </div>
   );
 }
-

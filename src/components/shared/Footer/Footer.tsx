@@ -2,13 +2,10 @@
 import Container from "@/utils/Container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import Image from "next/image";
-// import Link from "next/link";
-// import logo from "../../../assets/logo.main.png";
 
 const Footer = () => {
   const pathname = usePathname() || "";
-  const normalizedPath = pathname.replace(/\/$/, ""); // remove trailing slash
+  const normalizedPath = pathname.replace(/\/$/, ""); 
   const isExcluded =
     normalizedPath === "/messages" || normalizedPath === "/book";
 

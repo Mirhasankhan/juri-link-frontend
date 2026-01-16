@@ -1,16 +1,17 @@
 "use client";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hooks";
-import React from "react";
 import SignOut from "../SignOut";
 import Image from "next/image";
-import { Bell, CircleDollarSign, CircleUser, Settings } from "lucide-react";
+import { Bell, Calendar, CircleDollarSign, CircleUser } from "lucide-react";
 import Link from "next/link";
 import { useProfileQuery } from "@/redux/features/auth/authApi";
+import { JWTDecode } from "@/utils/jwt";
 
 const DropDownMenus = ({ setActive }: { setActive: any }) => {
   const { name, email } = useAppSelector(useCurrentUser);
   const { data: profileData } = useProfileQuery("");
+  const { decoded } = JWTDecode();
 
   return (
     <div
@@ -50,21 +51,30 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
             <Bell size={20} className="text-primary "></Bell>
             <h1 className="font-medium">Booking History</h1>
           </Link>
-          <Link
-            href="/my-profile/manage-earnings"
-            className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
-          >
-            <CircleDollarSign
-              size={20}
-              className="text-primary "
-            ></CircleDollarSign>
-            <h1 className="font-medium">Earnings</h1>
-          </Link>
-
-          <div className="flex gap-2 my-1 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]">
-            <Settings size={20} className="text-primary "></Settings>
-            <h1 className="font-medium">Settings</h1>
-          </div>
+          {decoded?.role == "Lawyer" && (
+            <Link
+              href="/my-profile/manage-earnings"
+              className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
+            >
+              <CircleDollarSign
+                size={20}
+                className="text-primary "
+              ></CircleDollarSign>
+              <h1 className="font-medium">Earnings</h1>
+            </Link>
+          )}
+          {decoded?.role == "Lawyer" && (
+            <Link
+              href="/my-profile/availability"
+              className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
+            >
+              <Calendar
+                size={20}
+                className="text-primary "
+              ></Calendar>
+              <h1 className="font-medium">Availabilty</h1>
+            </Link>
+          )}
         </div>
       </div>
 

@@ -66,7 +66,7 @@ export default function WithdrawModal({ currentEarnings }: Props) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-5 py-2 w-full font-medium mt-4 bg-indigo-600 text-white rounded-[8px] hover:bg-indigo-700"
+        className="px-5 py-2 w-full font-medium mt-4 bg-secondary text-white rounded-[8px] hover:bg-secondary"
       >
         Withdraw
       </button>
@@ -74,7 +74,7 @@ export default function WithdrawModal({ currentEarnings }: Props) {
       {!open ? null : (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white w-full max-w-md rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-rose-500 p-6 text-white">
+            <div className="bg-gradient-to-r from-secondary via-fuchsia-600 to-rose-500 p-6 text-white">
               <div className="flex items-start justify-between">
                 <div>
                   <h2 className="text-2xl font-semibold">Withdraw Funds</h2>
@@ -179,7 +179,7 @@ export default function WithdrawModal({ currentEarnings }: Props) {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="px-5 py-2 bg-indigo-600 text-white rounded-[5px] hover:bg-indigo-700 flex items-center gap-2"
+                    className="px-5 py-2 bg-secondary text-white rounded-[5px] hover:bg-indigo-700 flex items-center gap-2"
                   >
                     {isLoading && (
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

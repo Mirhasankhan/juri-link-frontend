@@ -18,9 +18,9 @@
 //           <div
 //             className={`${
 //               pathName === `/${item.path}`
-//                 ? "bg-[#7869ff] bg-opacity-15 text-[#7869ff] border-r-4 border-[#7869ff]"
+//                 ? "bg-secondary bg-opacity-15 text-secondary border-r-4 border-secondary"
 //                 : ""
-//             } hover:bg-[#7869ff] my-1 hover:text-[#7869ff] hover:bg-opacity-15 p-3 mx-3 rounded-[4px] font-medium flex items-center`}
+//             } hover:bg-secondary my-1 hover:text-secondary hover:bg-opacity-15 p-3 mx-3 rounded-[4px] font-medium flex items-center`}
 //           >
 //             {item.icon && <p className="mr-2 text-xl">{<item.icon />}</p>}
 //             <h1>{item.title}</h1>
@@ -98,10 +98,10 @@ const Sidebar = () => {
                 className={`
                   mx-3 my-1 p-3 rounded-[4px]
                   font-medium flex items-center
-                  hover:bg-[#7869ff]/15 hover:text-[#7869ff]
+                  hover:bg-secondary/15 hover:text-secondary
                   ${
                     pathname === `/${item.path}`
-                      ? "bg-[#7869ff]/15 text-[#7869ff] border-r-4 border-[#7869ff]"
+                      ? "bg-secondary/15 text-secondary border-r-4 border-secondary"
                       : ""
                   }
                 `}

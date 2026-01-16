@@ -1,9 +1,9 @@
 import { JWTDecode } from "@/utils/jwt";
-import { AlarmClockPlus, MapPin, Star, User, Video } from "lucide-react";
+import { AlarmClockPlus, MapPin, User, Video } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { FaStar } from "react-icons/fa";
 
 const LawyerCard = ({ lawyer }: { lawyer: any }) => {
   const { decoded } = JWTDecode();
@@ -35,7 +35,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
                 (service: { _id: string; serviceName: string }) => (
                   <div
                     key={service._id}
-                    className="px-2 py-0.5  bg-primary/10 rounded-[4px] text-primary text-xs font-medium"
+                    className="px-2 py-0.5  bg-secondary/10 rounded-[4px] text-secondary text-xs font-medium"
                   >
                     {service.serviceName}
                   </div>
@@ -45,20 +45,20 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
           </div>
         </div>
         <div>
-          <h1 className="text-primary text-xl font-medium">${lawyer?.fee}</h1>
-          <div className="gap-1 items-center flex">
-            <Star size={18} className="text-orange-400"></Star>
+          <h1 className="text-xl font-medium">${lawyer?.fee}</h1>
+          <div className="gap-1 items-center justify-end flex">
+            <FaStar size={18} className="text-orange-400"></FaStar>
             <p>{lawyer?.avgRating}</p>
           </div>
         </div>
       </div>
       <div className="flex my-3 justify-between items-center">
         <div className="flex gap-1 items-center">
-          <MapPin size={20} className="text-primary"></MapPin>
+          <MapPin size={20} className="text-gray-700"></MapPin>
           <h1>{lawyer?.location}</h1>
         </div>
         <div className="flex gap-1 items-center">
-          <AlarmClockPlus size={20} className="text-primary"></AlarmClockPlus>
+          <AlarmClockPlus size={20} className="text-gray-700"></AlarmClockPlus>
           <h1>Experience: {lawyer?.experience} Years</h1>
         </div>
       </div>
@@ -66,11 +66,11 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
         <div className="flex gap-1 items-center">
           {(lawyer.serviceType === "Online" ||
             lawyer.serviceType === "Both") && (
-            <Video size={20} className="text-primary" />
+            <Video size={20} className="text-gray-700" />
           )}
           {(lawyer.serviceType === "In_Person" ||
             lawyer.serviceType === "Both") && (
-            <User size={20} className="text-primary"></User>
+            <User size={20} className="text-gray-700"></User>
           )}
 
           <h1>
@@ -78,23 +78,23 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
               ? "Online & In Person"
               : lawyer.serviceType == "Online"
               ? "Online"
-              : "In Person"}
+              : "In Person"} Consultation
           </h1>
         </div>
 
-        <h1 className="text-sm border-2 font-medium py-1 px-2 rounded-[4px]">
+        {/* <h1 className="text-sm border-2 font-medium py-1 px-2 rounded-[4px]">
           10 (Booked)
-        </h1>
+        </h1> */}
       </div>
       <div className="flex gap-6 mt-4">
         <Link className="w-full" href={`/lawyers/${lawyer._id}`}>
-          <button className="bg-primary w-full py-1 rounded-[4px] text-white font-medium">
+          <button className="bg-secondary w-full py-1 rounded-[4px] text-white font-medium">
             View Profile
           </button>
         </Link>
         <button
           onClick={handleMessage}
-          className="text-primary border-primary border  w-full py-1 rounded-[4px]  font-medium"
+          className="text-secondary border-secondary border  w-full py-1 rounded-[4px]  font-medium"
         >
           Send Message
         </button>

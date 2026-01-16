@@ -54,6 +54,7 @@ const AboutUsPage = () => {
             src={avvo}
             height={800}
             width={800}
+            priority
             alt=""
           ></Image>
           <div className="bg-gray-800 flex lg:py-4 p-8 flex-col justify-center text-white">

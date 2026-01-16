@@ -1,4 +1,3 @@
-import React from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -26,10 +25,10 @@ const MonthlyEarnings = ({
   currentEarnings = 0,
 }: any) => {
   const data = {
-    labels: chartData.map((item: any) => item.month),
+    labels: chartData?.map((item: any) => item.month),
     datasets: [
       {
-        data: chartData.map((item: any) => item.earnings),
+        data: chartData?.map((item: any) => item.earnings),
         borderColor: "#7869ff",
         backgroundColor: "rgba(255, 127, 80, 0.2)",
         tension: 0.4,

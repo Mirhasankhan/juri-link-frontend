@@ -31,11 +31,11 @@ module.exports = {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "#1da077",
+          DEFAULT: "#ff6b00",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#7869ff",
+          DEFAULT: "#ff6b00",
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {

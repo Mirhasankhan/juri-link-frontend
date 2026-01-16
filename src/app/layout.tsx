@@ -71,7 +71,7 @@ export default function RootLayout({
           <Providers>
             <ToastContainer position="top-right" autoClose={3000} />
             <Header />
-            <div className="min-h-screen bg-[#f8f8f8]">{children}</div>
+            <div className="min-h-[90vh] bg-[#f8f8f8]">{children}</div>
             <Footer />
           </Providers>
         </ThemeProvider>
