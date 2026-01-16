@@ -30,7 +30,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<TLoginValues> = async (data) => {
     try {
       const response: any = await loginUser(data);
-  
+
       if (response.data?.data?.accessToken) {
         toast.success("Login Successful");
 
@@ -54,9 +54,8 @@ const Login = () => {
     }
   };
 
- 
   return (
-   <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
+    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
       <div className="w-full md:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-2 md:mx-auto py-12 px-6 dark:text-white bg-white rounded-[10px]">
         <div className="flex flex-col items-center">
           <Image
@@ -66,8 +65,16 @@ const Login = () => {
             height={150}
             width={150}
           ></Image>
-          <h1 className="text-3xl font-semibold py-2 ">Welcome Back</h1>
-          <p className="text-sm text-gray-600">Access unlimited data & information</p>
+          {/* <h1 className="text-3xl font-semibold py-2 ">Welcome Back</h1>
+          <p className="text-sm text-gray-600">Access unlimited data & information</p> */}
+          <h1 className="text-sm text-gray-600">
+            <span className="font-medium">Lawyer email:</span> keith@gmail.com |
+            pass: 123456
+          </h1>
+          <h1 className="text-sm text-gray-600">
+            <span className="font-medium">User email:</span> hassan@gmail.com |
+            pass: 123456
+          </h1>
           {/* <h1 className="pt-3">Email: mirhasan000034@gmail.com</h1>
           <p>Password: 123456</p> */}
         </div>
@@ -189,7 +196,7 @@ const Login = () => {
           <FaGithub size={20} /> Sign In With Github
         </button> */}
         <div className="text-center text-gray-700 pt-4">
-          Dont have an account? 
+          Dont have an account?
           <Link href="/auth/register" className="text-primary hover:underline">
             Register Here
           </Link>

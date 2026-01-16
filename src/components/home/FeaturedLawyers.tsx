@@ -12,19 +12,24 @@ const FeaturedLawyers = () => {
     experience: "",
     type: "",
     specializationId: "",
-  });
+  }); 
 
   return (
     <Container>
-      <h1 className="text-3xl font-bold text-center mt-24">Our Featured Lawyers</h1>
+      <h1 className="text-3xl font-bold text-center mt-24">
+        Our Featured Lawyers
+      </h1>
       <p className="text-center py-6 text-gray-500">
-        Where Expertise Meets Efficiency – Delivering smart solutions tailored for your success.
+        Where Expertise Meets Efficiency – Delivering smart solutions tailored
+        for your success.
       </p>
 
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8 auto-rows-fr">
         {isLoading
-          ? Array.from({ length: 4 }).map((_, idx) => <SkeletonCard key={idx} height={350} />)
-          : lawyers?.data?.slice(0,4).map((lawyer: any) => (
+          ? Array.from({ length: 4 }).map((_, idx) => (
+              <SkeletonCard key={idx} height={350} />
+            ))
+          : lawyers?.data?.slice(0, 4).map((lawyer: any) => (
               <div
                 key={lawyer._id}
                 className="flex flex-col overflow-hidden rounded-[20px] border hover:border-yellow-700 hover:shadow-md"
@@ -74,7 +79,10 @@ const FeaturedLawyers = () => {
                       : lawyer?.serviceType}
                   </h1>
 
-                  <Link href={`/lawyers/${lawyer._id}`} className="mt-auto w-full">
+                  <Link
+                    href={`/lawyers/${lawyer._id}`}
+                    className="mt-auto w-full"
+                  >
                     <button className="bg-secondary w-full py-2 rounded-[4px] text-white font-medium">
                       View Profile
                     </button>
