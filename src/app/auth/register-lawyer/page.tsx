@@ -264,7 +264,7 @@ const LawyerSignUpForm = () => {
           <h1>Already have an account?</h1>
           <Link
             href="/auth/login"
-            className="text-primary hover:underline ml-1"
+            className="text-secondary hover:underline ml-1"
           >
             Login
           </Link>
@@ -274,7 +274,7 @@ const LawyerSignUpForm = () => {
           <h1>Want to register as a user?</h1>
           <Link
             href="/auth/register"
-            className="text-primary hover:underline ml-1"
+            className="text-secondary hover:underline ml-1"
           >
             Register as user
           </Link>

@@ -67,7 +67,7 @@ const EarningsPage = () => {
                     Earnings Overview
                   </h1>
                   <select
-                    className="border bg-secondary text-secondary bg-opacity-15 outline-none font-bold rounded-[6px] px-2 md:px-5 py-1 md:py-2"
+                    className="border bg-primary text-secondary bg-opacity-15 outline-none font-bold rounded-[6px] px-2 md:px-5 py-1 md:py-2"
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                   >

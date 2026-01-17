@@ -1,16 +1,15 @@
-"use client"
+"use client";
 import Container from "@/utils/Container";
 import Image from "next/image";
 
 import online from "../../assets/online.jpg";
 
-
 import { GiCheckMark } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
 const ForOnline = () => {
-   const router = useRouter();
-   const handleNavigate = () => {
+  const router = useRouter();
+  const handleNavigate = () => {
     router.push(`/lawyers?serviceType=Online`);
   };
   return (
@@ -20,7 +19,14 @@ const ForOnline = () => {
           <Image src={online} alt="alt" fill className="object-cover" />
         </div> */}
         <div className="col-span-1 hidden lg:block">
-          <Image src={online} alt="alt" height={200} width={800} priority className=" rounded-[30px] " />
+          <Image
+            src={online}
+            alt="alt"
+            height={200}
+            width={800}
+            priority
+            className=" rounded-[30px] "
+          />
         </div>
 
         <div className="col-span-2 lg:col-span-1">
@@ -59,12 +65,13 @@ const ForOnline = () => {
               Action-oriented advice tailored to your case in real time
             </p>
           </div>
-            
 
-          <button  onClick={() => handleNavigate()} className="bg-secondary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]">
+          <button
+            onClick={() => handleNavigate()}
+            className="bg-primary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]"
+          >
             View Online Lawyers
           </button>
-         
         </div>
       </div>
     </Container>

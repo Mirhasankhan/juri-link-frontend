@@ -1,14 +1,18 @@
 "use client";
 
-import { useLawyerBookingsQuery, useMarkCompletedMutation } from "@/redux/features/bookings/bookingsApi"; // make sure this API exists
+import {
+  useLawyerBookingsQuery,
+  useMarkCompletedMutation,
+} from "@/redux/features/bookings/bookingsApi"; // make sure this API exists
 import { Calendar, Clock, MapPin, Video } from "lucide-react";
 import Image from "next/image";
 import { SkeletonCard } from "../shared/Skeleton";
 import CancelBookingModal from "./CancelBookingModal";
 
 const LawyerBookings = () => {
-  const { data, isLoading } = useLawyerBookingsQuery(""); 
-  const [markCompleted, {isLoading: isCompleteLoading}] = useMarkCompletedMutation()
+  const { data, isLoading } = useLawyerBookingsQuery("");
+  const [markCompleted, { isLoading: isCompleteLoading }] =
+    useMarkCompletedMutation();
   const bookings = data?.data?.bookings;
 
   const isToday = (date: string | Date) => {
@@ -21,8 +25,8 @@ const LawyerBookings = () => {
     );
   };
 
-  const handleMarkCompleted =async (bookingId: string) => {
-    const response = await markCompleted(bookingId)
+  const handleMarkCompleted = async (bookingId: string) => {
+    const response = await markCompleted(bookingId);
 
     console.log(response);
   };
@@ -53,17 +57,21 @@ const LawyerBookings = () => {
                   width={80}
                 />
                 <div>
-                  <h1 className="text-xl font-medium">{booking?.userId?.fullName}</h1>
-                  <p className="text-gray-600 text-sm">{booking?.serviceId?.serviceName}</p>
+                  <h1 className="text-xl font-medium">
+                    {booking?.userId?.fullName}
+                  </h1>
+                  <p className="text-gray-600 text-sm">
+                    {booking?.serviceId?.serviceName}
+                  </p>
                 </div>
               </div>
               <h1
                 className={`self-start text-sm text-white px-2 rounded-[10px] font-medium ${
                   booking.status === "Active"
-                    ? "bg-secondary"
-                    : booking.status === "Completed"
                     ? "bg-primary"
-                    : "bg-red-600"
+                    : booking.status === "Completed"
+                      ? "bg-primary"
+                      : "bg-red-600"
                 }`}
               >
                 {booking.status}
@@ -95,54 +103,57 @@ const LawyerBookings = () => {
             ) : (
               <div className="flex border-b pb-4 mt-3 gap-1 items-center">
                 <MapPin size={15} className="text-gray-600" />
-                <h1 className="text-gray-700 text-sm">{booking.userId?.location || "My Chamber"}</h1>
+                <h1 className="text-gray-700 text-sm">
+                  {booking.userId?.location || "My Chamber"}
+                </h1>
               </div>
             )}
 
             <div className="flex mb-2 justify-between items-center pt-3">
               <h1 className="text-gray-600">Consultation Fee</h1>
-              <h1 className="text-gray-900 text-xl font-medium">${booking.fee}</h1>
+              <h1 className="text-gray-900 text-xl font-medium">
+                ${booking.fee}
+              </h1>
             </div>
 
             <div className="flex gap-3 flex-col">
               {/* Active + In_Person */}
-              {booking.status === "Active" && booking.serviceType === "In_Person" && (
-                <>
-                  <CancelBookingModal id={booking._id} />
-                  <button
-                    className="bg-primary text-white py-2 w-full rounded-[6px]"
-                    onClick={() => handleMarkCompleted(booking._id)}
-                  >
-                    Mark as Completed
-                  </button>
-                </>
-              )}
+              {booking.status === "Active" &&
+                booking.serviceType === "In_Person" && (
+                  <>
+                    <CancelBookingModal id={booking._id} />
+                    <button
+                      className="bg-primary text-white py-2 w-full rounded-[6px]"
+                      onClick={() => handleMarkCompleted(booking._id)}
+                    >
+                      Mark as Completed
+                    </button>
+                  </>
+                )}
 
               {/* Active + Online */}
-              {booking.status === "Active" && booking.serviceType === "Online" && (
-                <>
-                  <CancelBookingModal id={booking._id} />
+              {booking.status === "Active" &&
+                booking.serviceType === "Online" && (
+                  <>
+                    <CancelBookingModal id={booking._id} />
 
-                  <button
-                    onClick={() => window.open(booking.startUrl, "_blank")}
-                    className="bg-secondary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
-                    disabled={!isToday(booking.date)}
-                  >
-                    Start Sessions
-                  </button>
+                    <button
+                      onClick={() => window.open(booking.startUrl, "_blank")}
+                      className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
+                      disabled={!isToday(booking.date)}
+                    >
+                      Start Sessions
+                    </button>
 
-                  <button
-                  disabled={isCompleteLoading}
-                    className="bg-primary text-white py-2 w-full disabled:bg-opacity-60 rounded-[6px]"
-                    onClick={() => handleMarkCompleted(booking._id)}
-                  >
-                    {
-                      isCompleteLoading ? "Completing" :" Mark as Completed"
-                    }
-                   
-                  </button>
-                </>
-              )}
+                    <button
+                      disabled={isCompleteLoading}
+                      className="bg-primary text-white py-2 w-full disabled:bg-opacity-60 rounded-[6px]"
+                      onClick={() => handleMarkCompleted(booking._id)}
+                    >
+                      {isCompleteLoading ? "Completing" : " Mark as Completed"}
+                    </button>
+                  </>
+                )}
 
               {/* Completed */}
               {booking.status === "Completed" && (
@@ -153,7 +164,9 @@ const LawyerBookings = () => {
 
               {/* Cancelled */}
               {booking.status === "Cancelled" && (
-                <h1 className="text-red-500">Cancel Reason: {booking?.cancelReason}</h1>
+                <h1 className="text-red-500">
+                  Cancel Reason: {booking?.cancelReason}
+                </h1>
               )}
             </div>
           </div>

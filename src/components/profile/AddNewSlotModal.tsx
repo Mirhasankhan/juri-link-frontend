@@ -70,7 +70,7 @@ const AddSlotModal: React.FC<AddSlotModalProps> = ({ dayOfWeek }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className=" text-primary rounded-md flex items-center gap-1">
+        <button className=" text-secondary rounded-md flex items-center gap-1">
           <FiPlus size={20} />
         </button>
       </DialogTrigger>

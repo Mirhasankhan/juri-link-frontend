@@ -35,11 +35,11 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
                 (service: { _id: string; serviceName: string }) => (
                   <div
                     key={service._id}
-                    className="px-2 py-0.5  bg-secondary/10 rounded-[4px] text-secondary text-xs font-medium"
+                    className="px-2 py-0.5  bg-primary/10 rounded-[4px] text-secondary text-xs font-medium"
                   >
                     {service.serviceName}
                   </div>
-                )
+                ),
               )}
             </div>
           </div>
@@ -77,8 +77,9 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
             {lawyer?.serviceType == "Both"
               ? "Online & In Person"
               : lawyer.serviceType == "Online"
-              ? "Online"
-              : "In Person"} Consultation
+                ? "Online"
+                : "In Person"}{" "}
+            Consultation
           </h1>
         </div>
 
@@ -88,7 +89,7 @@ const LawyerCard = ({ lawyer }: { lawyer: any }) => {
       </div>
       <div className="flex gap-6 mt-4">
         <Link className="w-full" href={`/lawyers/${lawyer._id}`}>
-          <button className="bg-secondary w-full py-1 rounded-[4px] text-white font-medium">
+          <button className="bg-primary w-full py-1 rounded-[4px] text-white font-medium">
             View Profile
           </button>
         </Link>

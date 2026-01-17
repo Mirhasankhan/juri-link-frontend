@@ -27,7 +27,7 @@ const ServicesPage = () => {
                 className="flex items-center bg-white hover:border-secondary hover:shadow-md gap-2 border p-4 rounded-[6px]"
                 key={service._id}
               >
-                <div className="p-2 bg-secondary/10 rounded-[5px] text-secondary">
+                <div className="p-2 bg-primary/10 rounded-[5px] text-secondary">
                   <Scale></Scale>
                 </div>
                 <p className="font-medium">{service?.serviceName}</p>

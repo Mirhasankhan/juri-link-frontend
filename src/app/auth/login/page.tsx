@@ -121,7 +121,7 @@ const Login = () => {
             </div>
             <Link
               href="/auth/reset-password"
-              className="text-primary hover:underline"
+              className="text-secondary hover:underline"
             >
               Forgot Password?
             </Link>
@@ -197,7 +197,7 @@ const Login = () => {
         </button> */}
         <div className="text-center text-gray-700 pt-4">
           Dont have an account?
-          <Link href="/auth/register" className="text-primary hover:underline">
+          <Link href="/auth/register" className="text-secondary hover:underline">
             Register Here
           </Link>
         </div>

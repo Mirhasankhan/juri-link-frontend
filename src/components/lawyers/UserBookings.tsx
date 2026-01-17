@@ -60,10 +60,10 @@ const UserBookings = () => {
               <h1
                 className={`self-start text-sm text-white px-2 rounded-[10px] font-medium ${
                   booking.status == "Active"
-                    ? "bg-secondary"
-                    : booking.status == "Completed"
                     ? "bg-primary"
-                    : "bg-red-600"
+                    : booking.status == "Completed"
+                      ? "bg-primary"
+                      : "bg-red-600"
                 }`}
               >
                 {booking?.status}
@@ -119,7 +119,7 @@ const UserBookings = () => {
                       onClick={() => {
                         window.open(booking.joinUrl, "_blank");
                       }}
-                      className="bg-secondary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
+                      className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
                       disabled={!isToday(booking.date)}
                     >
                       Join Session
@@ -130,9 +130,15 @@ const UserBookings = () => {
               {/* COMPLETED */}
               {booking.status === "Completed" && (
                 <>
-                <GiveReviewModal bookingId={booking._id} isReview={booking.isReviewed}></GiveReviewModal>
+                  <GiveReviewModal
+                    bookingId={booking._id}
+                    isReview={booking.isReviewed}
+                  ></GiveReviewModal>
 
-                  <CreateReportModal isReported={booking.isReported} bookingId={booking._id}></CreateReportModal>
+                  <CreateReportModal
+                    isReported={booking.isReported}
+                    bookingId={booking._id}
+                  ></CreateReportModal>
                 </>
               )}
               {booking.status === "Cancelled" && (

@@ -18,9 +18,9 @@
 //           <div
 //             className={`${
 //               pathName === `/${item.path}`
-//                 ? "bg-secondary bg-opacity-15 text-secondary border-r-4 border-secondary"
+//                 ? "bg-primary bg-opacity-15 text-secondary border-r-4 border-secondary"
 //                 : ""
-//             } hover:bg-secondary my-1 hover:text-secondary hover:bg-opacity-15 p-3 mx-3 rounded-[4px] font-medium flex items-center`}
+//             } hover:bg-primary my-1 hover:text-secondary hover:bg-opacity-15 p-3 mx-3 rounded-[4px] font-medium flex items-center`}
 //           >
 //             {item.icon && <p className="mr-2 text-xl">{<item.icon />}</p>}
 //             <h1>{item.title}</h1>
@@ -98,15 +98,19 @@ const Sidebar = () => {
                 className={`
                   mx-3 my-1 p-3 rounded-[4px]
                   font-medium flex items-center
-                  hover:bg-secondary/15 hover:text-secondary
+                  hover:bg-primary/15 hover:text-secondary
                   ${
                     pathname === `/${item.path}`
-                      ? "bg-secondary/15 text-secondary border-r-4 border-secondary"
+                      ? "bg-primary/15 text-secondary border-r-4 border-secondary"
                       : ""
                   }
                 `}
               >
-                {item.icon && <span className="mr-2 text-xl"><item.icon /></span>}
+                {item.icon && (
+                  <span className="mr-2 text-xl">
+                    <item.icon />
+                  </span>
+                )}
                 <span>{item.title}</span>
               </div>
             </Link>
@@ -118,4 +122,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-

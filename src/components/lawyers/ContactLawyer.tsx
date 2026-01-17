@@ -36,7 +36,7 @@ const ContactLawyer = ({ lawyer }: { lawyer: any }) => {
         />
       </div>
       <div className="border rounded-[6px] ">
-        <div className="bg-secondary rounded-t-[5px] text-white py-8 text-center">
+        <div className="bg-primary rounded-t-[5px] text-white py-8 text-center">
           <h1 className="text-5xl font-semibold">${lawyer?.fee}</h1>
           <h1 className="text-2xl font-semibold py-1">Book Consultation</h1>
           <p>Get personalized guidance from our expert</p>
@@ -44,7 +44,7 @@ const ContactLawyer = ({ lawyer }: { lawyer: any }) => {
         <div className="p-5">
           <button
             onClick={() => handleMessage()}
-            className="text-white mt-3 bg-secondary border  w-full py-2 rounded-[8px]  font-medium"
+            className="text-white mt-3 bg-primary border  w-full py-2 rounded-[8px]  font-medium"
           >
             Send Message
           </button>

@@ -8,7 +8,7 @@ import React from "react";
 const SubMenu = () => {
   const { decoded } = JWTDecode();
 
-  const role = decoded?.role
+  const role = decoded?.role;
   const pathname = usePathname();
 
   // Define all possible links
@@ -17,18 +17,18 @@ const SubMenu = () => {
     { href: "/lawyers", label: "Lawyers" },
     { href: "/posts", label: "Posts" },
     { href: "/services", label: "Service Areas" },
-   
+
     { href: "/premium", label: "Premium Access" },
     { href: "/about-us", label: "About Us" },
   ];
 
   // Filter links based on role
   const filteredLinks = allLinks.filter((link) => {
-    if (!role) {    
+    if (!role) {
       return link.href !== "/premium" && link.href !== "/create-post";
     } else if (role === "User") {
       return link.href !== "/premium";
-    } else if (role === "Lawyer") {      
+    } else if (role === "Lawyer") {
       return link.href !== "/create-post" && link.href !== "/lawyers";
     }
     return true;
@@ -42,8 +42,8 @@ const SubMenu = () => {
           <Link
             key={link.href}
             href={link.href}
-            className={`relative transition-all duration-300 hover:text-primary 
-              ${isActive ? "text-primary font-bold" : ""}`}
+            className={`relative transition-all duration-300 hover:text-secondary 
+              ${isActive ? "text-secondary font-bold" : ""}`}
           >
             <span
               className={`pb-1 inline-block relative

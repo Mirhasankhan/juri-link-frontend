@@ -32,7 +32,7 @@ const BookingPage = () => {
   // SLOT HOOK ALWAYS EXECUTES — SKIP HANDLES CONDITIONALITY
   const { data: slotData, isLoading: slotLoading } = useDayWiseSlotsQuery(
     { day: dayNumber ?? 0, lawyerId },
-    { skip: dayNumber === null }
+    { skip: dayNumber === null },
   );
 
   // Convert date → weekday (0–6)
@@ -48,7 +48,7 @@ const BookingPage = () => {
     setSelectedLawArea(name);
 
     const service = lawyer?.specialization?.find(
-      (x: any) => x.serviceName === name
+      (x: any) => x.serviceName === name,
     );
     setServiceId(service?._id || "");
   };
@@ -57,8 +57,8 @@ const BookingPage = () => {
     lawyer?.serviceType === "Both"
       ? ["Online", "In_Person"]
       : lawyer?.serviceType === "Online"
-      ? ["Online"]
-      : ["In_Person"];
+        ? ["Online"]
+        : ["In_Person"];
 
   const isFormComplete =
     selectedDate &&
@@ -103,7 +103,7 @@ const BookingPage = () => {
                 <div className="lg:flex gap-5">
                   <div className="border w-full bg-white p-3 lg:p-6  rounded-[6px]">
                     <div className="flex items-center pb-2 gap-1">
-                      <Calendar className="text-primary" />
+                      <Calendar className="text-secondary" />
                       <p className="font-medium text-gray-700">Select a date</p>
                     </div>
                     <input
@@ -116,7 +116,7 @@ const BookingPage = () => {
                   </div>
                   <div className="border mt-4 lg:mt-0 w-full bg-white p-3 lg:p-6  rounded-[6px]">
                     <div className="flex items-center pb-2 gap-1">
-                      <GoLaw size={20} className="text-primary" />
+                      <GoLaw size={20} className="text-secondary" />
                       <p className="font-medium text-gray-700">
                         Select area of law
                       </p>
@@ -139,7 +139,7 @@ const BookingPage = () => {
                 {/* Dynamic Slots */}
                 <div className="border mt-4 bg-white p-3 lg:p-6 rounded-[6px]">
                   <div className="flex items-center pb-2 gap-1">
-                    <Clock className="text-primary" />
+                    <Clock className="text-secondary" />
                     <p className="font-medium text-gray-700">Available Slots</p>
                   </div>
 
@@ -189,7 +189,7 @@ const BookingPage = () => {
                           checked={consultationType === type}
                           onChange={() => setConsultationType(type)}
                         />
-                        <Video className="text-primary" />
+                        <Video className="text-secondary" />
                         <div className="flex flex-col leading-none">
                           <p className="font-medium pb-1">{type}</p>
                           <small className="text-gray-500">
@@ -219,7 +219,7 @@ const BookingPage = () => {
 
               {/* Summary */}
               <div className="col-span-3 lg:col-span-1 bg-white rounded-[6px] max-h-[480px] fixed bottom-0 left-4 right-4 max-w-screen-md w-auto lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:w-auto">
-                <div className="flex lg:bg-primary/70 text-primary lg:text-white py-2 lg:py-8 justify-center gap-2 rounded-t-[12px]">
+                <div className="flex lg:bg-primary/70 text-secondary lg:text-white py-2 lg:py-8 justify-center gap-2 rounded-t-[12px]">
                   <IoMdCheckmarkCircleOutline size={25} />
                   <h1 className="font-medium">Booking Summary</h1>
                 </div>

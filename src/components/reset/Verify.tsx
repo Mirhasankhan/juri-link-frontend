@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
-  const [verifyOtp,{isLoading}] = useVerifyOtpMutation();
+  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
   const email = localStorage.getItem("email");
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otp, setOtp] = useState({
@@ -19,7 +19,7 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const rawValue = e.target.value;
     const value = rawValue.slice(0, 1);
@@ -39,7 +39,7 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -54,23 +54,22 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
       email,
       otp: otpString,
     };
-    const response :any = await verifyOtp(verifyData);
+    const response: any = await verifyOtp(verifyData);
 
     console.log(response);
-    
+
     if (response.data) {
       localStorage.removeItem("email");
       localStorage.setItem("forgetToken", response.data?.data?.accessToken);
       toast.success("Otp verified successfully");
       setActive("reset");
-    }
-    else {
-      toast.error(response.error.data.message)
+    } else {
+      toast.error(response.error.data.message);
     }
   };
 
   return (
-      <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
+    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
       <div className="mt-12 flex flex-col items-center w-full bg-white md:w-3/5 lg:w-2/5 xl:w-1/3 2xl:w-1/4 shadow-md mx-2 md:mx-auto p-3 rounded-[4px]">
         <div className="p-3 bg-blue-100 rounded-full">
           <KeySquare size={30} className="text-blue-800" />
@@ -79,7 +78,7 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
         <p className="text-gray-600">
           We&apos;ve sent a 4-digit verification code to
         </p>
-        <p className="text-primary">{email}</p>
+        <p className="text-secondary">{email}</p>
 
         <div className="flex flex-col items-center gap-4">
           <div className="flex mt-2 gap-2">
@@ -113,12 +112,10 @@ const VerifyOtp = ({ setActive }: { setActive: (value: string) => void }) => {
             className={`mt-2 w-full py-2 rounded-[4px] text-white font-semibold transition 
             ${isComplete ? "bg-primary" : "bg-gray-400 cursor-not-allowed"}`}
           >
-            {
-                isLoading ? "Verifying...":"Verify"
-            }
+            {isLoading ? "Verifying..." : "Verify"}
           </button>
           <p className="text-gray-600">Didn&apos;t receive the code?</p>
-          <p className="text-primary cursor-pointer">
+          <p className="text-secondary cursor-pointer">
             Resend verification code
           </p>
         </div>

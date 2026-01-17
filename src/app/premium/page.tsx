@@ -71,14 +71,14 @@ export default function SubscriptionPlans() {
                       {plan.title}
                     </h3>
 
-                    <div className="text-primary font-extrabold text-4xl mb-4">
+                    <div className="text-secondary font-extrabold text-4xl mb-4">
                       ${plan.price}
                       <span className="text-lg font-medium text-gray-500">
                         {plan.type === "Monthly"
                           ? "/month"
                           : plan.type === "Quarterly"
-                          ? "/3 months"
-                          : "/year"}
+                            ? "/3 months"
+                            : "/year"}
                       </span>
                     </div>
 

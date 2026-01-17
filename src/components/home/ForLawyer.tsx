@@ -9,7 +9,6 @@ import { Clock, Lock } from "lucide-react";
 import Link from "next/link";
 import { SiLinuxprofessionalinstitute } from "react-icons/si";
 
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
@@ -43,7 +42,9 @@ const ForLawyer = () => {
               <GiGrowth className="text-gray-600" size={25} />
               <div>
                 <h1 className="font-medium">Grow your client base</h1>
-                <p className="text-gray-800">Access a steady stream of qualified leads</p>
+                <p className="text-gray-800">
+                  Access a steady stream of qualified leads
+                </p>
               </div>
             </div>
 
@@ -51,7 +52,9 @@ const ForLawyer = () => {
               <Clock className="text-gray-800" size={25} />
               <div>
                 <h1 className="font-medium">Set your own rates and schedule</h1>
-                <p className="text-gray-800">Complete control over your practice</p>
+                <p className="text-gray-800">
+                  Complete control over your practice
+                </p>
               </div>
             </div>
 
@@ -64,7 +67,10 @@ const ForLawyer = () => {
             </div>
 
             <div className="flex gap-2 mb-3">
-              <SiLinuxprofessionalinstitute className="text-gray-600" size={25} />
+              <SiLinuxprofessionalinstitute
+                className="text-gray-600"
+                size={25}
+              />
               <div>
                 <h1 className="font-medium">Professional platform</h1>
                 <p className="text-gray-800">Built for legal professionals</p>
@@ -72,9 +78,11 @@ const ForLawyer = () => {
             </div>
           </div>
 
-          <Link href="/auth/register-lawyer"><button className="bg-secondary/10 text-secondary px-8 py-2 rounded-[5px] mt-6 font-medium">
-            Join As Lawyer
-          </button></Link>
+          <Link href="/auth/register-lawyer">
+            <button className="bg-primary/10 text-secondary px-8 py-2 rounded-[5px] mt-6 font-medium">
+              Join As Lawyer
+            </button>
+          </Link>
         </motion.div>
 
         {/* RIGHT IMAGE */}

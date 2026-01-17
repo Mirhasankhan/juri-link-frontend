@@ -6,7 +6,7 @@ const Expertise = ({ lawyer }: { lawyer: any }) => {
     <div className="border bg-white p-6 rounded-[12px]">
       <div className="border-b-[0.5px] border-primary pb-6 ">
         <div className="flex items-center gap-2">
-          <Award className="text-primary"></Award>
+          <Award className="text-secondary"></Award>
           <h1 className="text-xl font-medium">Areas of Expertise</h1>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 pt-3 text-center gap-5">
@@ -18,13 +18,9 @@ const Expertise = ({ lawyer }: { lawyer: any }) => {
               {s.serviceName}
             </h1>
           ))}
-
-          
         </div>
       </div>
-      <h1 className="text-xl text-primary pt-4 font-medium">
-        Abuout Me
-      </h1>
+      <h1 className="text-xl text-secondary pt-4 font-medium">Abuout Me</h1>
       <p className="text-gray-800 pt-2">
         Sarah Johnson is a highly experienced corporate attorney with over 12
         years of expertise in mergers and acquisitions, securities law, and

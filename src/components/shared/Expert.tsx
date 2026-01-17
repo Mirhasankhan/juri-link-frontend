@@ -12,7 +12,6 @@ const Expert = ({ experts }: { experts: TExprt[] }) => {
           key={expert.id}
         >
           <Image
-          
             alt="expert"
             className="object-cover rounded-[4px] h-[280px] w-full"
             height={300}
@@ -25,13 +24,13 @@ const Expert = ({ experts }: { experts: TExprt[] }) => {
             <p className="pt-2">{expert.category.categoryName} Expert</p>
           </div>
           <div className="flex gap-4 text-xl">
-            <div className="bg-white text-primary hover:bg-primary hover:text-white border border-primary p-1">
+            <div className="bg-white text-secondary hover:bg-primary hover:text-white border border-primary p-1">
               <FaFacebookF size={13} />
             </div>
-            <div className="bg-white text-primary hover:bg-primary hover:text-white border border-primary p-1">
+            <div className="bg-white text-secondary hover:bg-primary hover:text-white border border-primary p-1">
               <FaInstagram size={13} />
             </div>
-            <div className="bg-white text-primary hover:bg-primary hover:text-white border border-primary p-1">
+            <div className="bg-white text-secondary hover:bg-primary hover:text-white border border-primary p-1">
               <FaTwitter size={13} />
             </div>
           </div>

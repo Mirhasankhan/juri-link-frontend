@@ -66,7 +66,7 @@ export default function WithdrawModal({ currentEarnings }: Props) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-5 py-2 w-full font-medium mt-4 bg-secondary text-white rounded-[8px] hover:bg-secondary"
+        className="px-5 py-2 w-full font-medium mt-4 bg-primary text-white rounded-[8px] hover:bg-primary"
       >
         Withdraw
       </button>
@@ -179,7 +179,7 @@ export default function WithdrawModal({ currentEarnings }: Props) {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="px-5 py-2 bg-secondary text-white rounded-[5px] hover:bg-indigo-700 flex items-center gap-2"
+                    className="px-5 py-2 bg-primary text-white rounded-[5px] hover:bg-indigo-700 flex items-center gap-2"
                   >
                     {isLoading && (
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

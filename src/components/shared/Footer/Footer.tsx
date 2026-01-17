@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const pathname = usePathname() || "";
-  const normalizedPath = pathname.replace(/\/$/, ""); 
+  const normalizedPath = pathname.replace(/\/$/, "");
   const isExcluded =
     normalizedPath === "/messages" || normalizedPath === "/book";
 
@@ -26,7 +26,7 @@ const Footer = () => {
               <button className="bg-primary text-white py-2 px-6 rounded-[4px] font-medium">
                 Get Started Today
               </button>
-              <button className="bg-white text-primary border border-primary py-2 px-6 rounded-[4px] font-medium">
+              <button className="bg-white text-secondary border border-primary py-2 px-6 rounded-[4px] font-medium">
                 Browse Lawyers
               </button>
             </div>

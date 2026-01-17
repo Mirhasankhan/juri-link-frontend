@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import DropDownMenus from "./DropDownMenus";
 import SmallDeviceMenu from "./SmallDeviceMenu";
-import { Menu,  X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { FaFacebookMessenger } from "react-icons/fa6";
 import { AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/redux/hooks";
@@ -40,7 +40,7 @@ const Header = () => {
             {!email ? (
               <>
                 <Link
-                  className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
+                  className="border border-primary text-secondary px-4 py-1 rounded-[4px] font-medium"
                   href="/auth/login"
                 >
                   Login
@@ -54,11 +54,8 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link className="bg-gray-200 p-2 rounded-full" href="/messages">                 
-                  <FaFacebookMessenger
-                    
-                    size={30}
-                  ></FaFacebookMessenger>
+                <Link className="bg-gray-200 p-2 rounded-full" href="/messages">
+                  <FaFacebookMessenger size={30}></FaFacebookMessenger>
                 </Link>
                 <div
                   onClick={() => setActive(!active)}
@@ -102,7 +99,9 @@ const Header = () => {
               ></X>
             )}
             {isOpen && (
-              <AnimatePresence>{isOpen && <SmallDeviceMenu setIsOpen={setIsOpen}/>}</AnimatePresence>
+              <AnimatePresence>
+                {isOpen && <SmallDeviceMenu setIsOpen={setIsOpen} />}
+              </AnimatePresence>
             )}
           </div>
         </div>

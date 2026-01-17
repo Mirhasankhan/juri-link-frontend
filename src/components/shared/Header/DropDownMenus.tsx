@@ -40,7 +40,7 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
             href="/my-profile/manage-profile"
             className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
           >
-            <CircleUser size={20} className="text-primary "></CircleUser>
+            <CircleUser size={20} className="text-secondary "></CircleUser>
             <h1 className="font-medium">My Account</h1>
           </Link>
 
@@ -48,7 +48,7 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
             href="/my-profile/manage-bookings"
             className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
           >
-            <Bell size={20} className="text-primary "></Bell>
+            <Bell size={20} className="text-secondary "></Bell>
             <h1 className="font-medium">Booking History</h1>
           </Link>
           {decoded?.role == "Lawyer" && (
@@ -58,7 +58,7 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
             >
               <CircleDollarSign
                 size={20}
-                className="text-primary "
+                className="text-secondary "
               ></CircleDollarSign>
               <h1 className="font-medium">Earnings</h1>
             </Link>
@@ -68,10 +68,7 @@ const DropDownMenus = ({ setActive }: { setActive: any }) => {
               href="/my-profile/availability"
               className="flex gap-2 items-center hover:bg-primary/10 py-2 px-4 rounded-[6px]"
             >
-              <Calendar
-                size={20}
-                className="text-primary "
-              ></Calendar>
+              <Calendar size={20} className="text-secondary "></Calendar>
               <h1 className="font-medium">Availabilty</h1>
             </Link>
           )}

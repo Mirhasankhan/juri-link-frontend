@@ -6,9 +6,10 @@ const ClientReviews = ({ reviews }: { reviews: any[] }) => {
     <div className="my-10 border bg-white rounded-xl p-6">
       {/* Header */}
       <div className="flex items-center gap-2 mb-6">
-        <Star className="text-primary" />
+        <Star className="text-secondary" />
         <h1 className="text-xl font-semibold">
-          Client Reviews <span className="text-gray-500">({reviews?.length})</span>
+          Client Reviews{" "}
+          <span className="text-gray-500">({reviews?.length})</span>
         </h1>
       </div>
 

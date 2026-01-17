@@ -45,7 +45,7 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
                 {lawyer?.specialization?.map((s: any) => (
                   <h1
                     key={s._id}
-                    className="px-2 py-1 text-sm bg-secondary/10 rounded-[4px] text-secondary  font-medium"
+                    className="px-2 py-1 text-sm bg-primary/10 rounded-[4px] text-secondary  font-medium"
                   >
                     {s.serviceName}
                   </h1>
@@ -80,10 +80,10 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
                 {lawyer?.serviceType === "Both"
                   ? "Online & In Person"
                   : lawyer?.serviceType === "In_Person"
-                  ? "In Person"
-                  : lawyer?.serviceType === "Online"
-                  ? "Online"
-                  : ""}
+                    ? "In Person"
+                    : lawyer?.serviceType === "Online"
+                      ? "Online"
+                      : ""}
               </h1>
               <p className="text-gray-500 text-sm">consultation type</p>
             </div>

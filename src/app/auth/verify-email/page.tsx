@@ -36,7 +36,7 @@ const VerifyEmail = () => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const value = e.target.value.slice(0, 1);
     if (!/^\d?$/.test(value)) return;
@@ -52,7 +52,7 @@ const VerifyEmail = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -66,7 +66,7 @@ const VerifyEmail = () => {
     const response: any = await verifyOtp({ email: email, otp: otpString });
     if (response.data) {
       toast.success(response.data.message);
-       router.push("/auth/login");
+      router.push("/auth/login");
       localStorage.removeItem("verify");
       // if (response.data.data?.accountLink) {
       //   setStripeLink(response.data.data.accountLink);
@@ -102,7 +102,7 @@ const VerifyEmail = () => {
           <p className="text-gray-600 text-center">
             We&apos;ve sent a 4-digit verification code to
           </p>
-          <p className="text-primary font-medium">{email}</p>
+          <p className="text-secondary font-medium">{email}</p>
 
           <div className="flex flex-col items-center gap-5 mt-4 w-full">
             <div className="flex gap-3">
@@ -143,7 +143,7 @@ const VerifyEmail = () => {
               ) : (
                 <button
                   onClick={handleResendOtp}
-                  className="text-primary font-medium hover:underline text-sm"
+                  className="text-secondary font-medium hover:underline text-sm"
                 >
                   Resend verification code
                 </button>
@@ -170,7 +170,7 @@ const VerifyEmail = () => {
                 setOpenModal(false);
                 router.push("/auth/login");
               }}
-              className="border border-primary text-primary py-2 px-4 rounded-[6px] w-1/2 font-medium hover:bg-gray-50 transition"
+              className="border border-primary text-secondary py-2 px-4 rounded-[6px] w-1/2 font-medium hover:bg-gray-50 transition"
             >
               Skip for Now
             </button>

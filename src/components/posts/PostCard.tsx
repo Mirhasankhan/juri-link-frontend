@@ -62,7 +62,7 @@ const PostCard = ({ post }: { post: any }) => {
               </span>
             </h1>
             <div className="flex gap-1 mt-1">
-              <h1 className="inline-block bg-secondary/10 text-secondary text-xs font-medium px-3 py-1 rounded-full mb-4">
+              <h1 className="inline-block bg-primary/10 text-secondary text-xs font-medium px-3 py-1 rounded-full mb-4">
                 {post?.serviceId?.serviceName}
               </h1>
             </div>

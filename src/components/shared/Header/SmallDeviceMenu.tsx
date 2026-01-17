@@ -8,7 +8,7 @@ import { Home, Users, FileText, Star, Info } from "lucide-react";
 import SignOut from "../SignOut";
 import { JWTDecode } from "@/utils/jwt";
 
-const SmallDeviceMenu = ({setIsOpen}:any) => {
+const SmallDeviceMenu = ({ setIsOpen }: any) => {
   const pathname = usePathname();
   const { decoded } = JWTDecode();
 
@@ -20,7 +20,7 @@ const SmallDeviceMenu = ({setIsOpen}:any) => {
     { href: "/", label: "Home", icon: Home },
     { href: "/lawyers", label: "Lawyers", icon: Users },
     { href: "/posts", label: "Posts", icon: FileText },
-    { href: "/services", label: "Service Areas", icon: Info }, 
+    { href: "/services", label: "Service Areas", icon: Info },
     { href: "/premium", label: "Premium Access", icon: Star },
     { href: "/about-us", label: "About Us", icon: Info },
     { href: "/my-profile/manage-profile", label: "My Profile", icon: Info },
@@ -30,7 +30,8 @@ const SmallDeviceMenu = ({setIsOpen}:any) => {
   const filteredLinks = allLinks.filter((link) => {
     if (!role) return link.href !== "/premium" && link.href !== "/create-post"; // Guest
     if (role === "User") return link.href !== "/premium"; // User
-    if (role === "Lawyer") return link.href !== "/create-post" && link.href !== "/lawyers"; // Lawyer
+    if (role === "Lawyer")
+      return link.href !== "/create-post" && link.href !== "/lawyers"; // Lawyer
     return true;
   });
 
@@ -53,7 +54,7 @@ const SmallDeviceMenu = ({setIsOpen}:any) => {
           <Link
             key={href}
             href={href}
-            onClick={()=>setIsOpen(false)}
+            onClick={() => setIsOpen(false)}
             className={`flex items-center gap-3 px-3 py-2 rounded-[5px] text-sm font-medium transition-all duration-200
               ${isActive ? "bg-white/10 text-white" : "text-white hover:bg-white/10"}`}
           >
@@ -67,7 +68,7 @@ const SmallDeviceMenu = ({setIsOpen}:any) => {
         <div className="flex gap-2 mt-2">
           <Link
             href="/auth/login"
-            className="border border-primary text-primary px-4 py-1 rounded-[4px] font-medium"
+            className="border border-primary text-secondary px-4 py-1 rounded-[4px] font-medium"
           >
             Login
           </Link>

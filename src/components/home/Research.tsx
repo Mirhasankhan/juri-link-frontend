@@ -53,8 +53,7 @@ const Research = () => {
 
           {/* CTA */}
           <Link href="/create-post">
-          
-            <button className="mt-12 bg-secondary text-white py-3 px-8 rounded-[8px] font-medium hover:opacity-90 transition">
+            <button className="mt-12 bg-primary text-white py-3 px-8 rounded-[8px] font-medium hover:opacity-90 transition">
               Post your legal need
             </button>
           </Link>

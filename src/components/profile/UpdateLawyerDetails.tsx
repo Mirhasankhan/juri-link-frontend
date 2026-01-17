@@ -35,7 +35,7 @@ const UpdateLawyerDetails = () => {
 
   const handleSubmit = async () => {
     await updateProfile(form);
-    toast.success("Profile updated successfully")
+    toast.success("Profile updated successfully");
     setEditMode(false);
   };
 
@@ -55,14 +55,14 @@ const UpdateLawyerDetails = () => {
         {!editMode ? (
           <button
             onClick={() => setEditMode(true)}
-            className="px-6 py-2.5 bg-secondary/10 font-medium text-secondary  rounded-[5px]"
+            className="px-6 py-2.5 bg-primary/10 font-medium text-secondary  rounded-[5px]"
           >
             Edit
           </button>
         ) : (
           <button
             onClick={handleSubmit}
-            className="px-5 py-2.5 bg-primary/10 text-primary rounded-[5px] disabled:bg-gray-400"
+            className="px-5 py-2.5 bg-primary/10 text-secondary rounded-[5px] disabled:bg-gray-400"
             disabled={updating}
           >
             {updating ? "Saving..." : "Save"}
@@ -87,7 +87,10 @@ const UpdateLawyerDetails = () => {
                 type={type || "text"}
                 value={form?.[key] ?? ""}
                 onChange={(e) =>
-                  handleChange(key, type === "number" ? +e.target.value : e.target.value)
+                  handleChange(
+                    key,
+                    type === "number" ? +e.target.value : e.target.value,
+                  )
                 }
                 className="border rounded-[5px] px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />

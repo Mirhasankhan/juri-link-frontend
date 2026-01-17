@@ -3,12 +3,12 @@
 import Filters from "@/components/lawyers/Filters";
 import Container from "@/utils/Container";
 import { Funnel, Search, X } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useAllLawyersQuery } from "@/redux/features/auth/authApi";
-import LawyerCard from "@/components/lawyers/LawyerCard";
 import { useSearchParams } from "next/navigation";
 import { SkeletonCard } from "@/components/shared/Skeleton";
+import NewCard from "@/components/lawyers/NewCard";
 
 const LawyersPage = () => {
   const searchParams = useSearchParams();
@@ -17,10 +17,10 @@ const LawyersPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [selectedYear, setSelectedYear] = useState<string | null>("");
   const [selectedService, setSelectedService] = useState<string | null>(
-    serviceType || ""
+    serviceType || "",
   );
   const [selectedLegal, setSelectedLegal] = useState<string | null>(
-    serviceId || ""
+    serviceId || "",
   );
 
   const { data: lawyers, isLoading } = useAllLawyersQuery({
@@ -74,7 +74,6 @@ const LawyersPage = () => {
             />
           </div>
           <div className="col-span-4 lg:col-span-3">
-          
             {lawyers?.data?.length > 0 ? (
               <div>
                 <div className="flex justify-between items-center pb-6">
@@ -90,23 +89,23 @@ const LawyersPage = () => {
                     Filters
                   </button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {lawyers?.data.map((lawyer: any) => (
-                    <LawyerCard key={lawyer.id} lawyer={lawyer} />
+                    <NewCard key={lawyer.id} lawyer={lawyer} />
                   ))}
                 </div>
               </div>
             ) : (
               <>
                 {isLoading ? (
-                  <div className="grid grid-col-1 md:grid-cols-2 gap-6">
-                    {Array.from({ length: 2 }).map((_, idx) => (
-                      <SkeletonCard height={220} key={idx} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-6">
+                    {Array.from({ length: 6 }).map((_, idx) => (
+                      <SkeletonCard height={420} key={idx} />
                     ))}
                   </div>
                 ) : (
                   <div className=" flex flex-col mt-16 items-center">
-                    <div className="bg-primary/10 text-primary p-6 rounded-full">
+                    <div className="bg-primary/10 text-secondary p-6 rounded-full">
                       <Search size={40}></Search>
                     </div>
                     <h1 className="text-2xl font-medium py-2">

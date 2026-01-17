@@ -47,7 +47,7 @@ const ForInPerson = () => {
             </p>
           </div>
           <button onClick={() => handleNavigate()}>
-            <button className="bg-secondary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]">
+            <button className="bg-primary/10 mt-6 font-medium text-secondary py-2 px-5 rounded-[5px]">
               View In Person Lawyers
             </button>
           </button>

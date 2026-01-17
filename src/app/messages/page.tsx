@@ -13,8 +13,14 @@ export default function ChatPage() {
   const router = useRouter();
   const initialReceiverId = searchParams.get("receiverId");
 
-  const { conversations, messages, activeRoom, subscribeToUser, sendMessage, isReady } =
-    useChatSocket(token);
+  const {
+    conversations,
+    messages,
+    activeRoom,
+    subscribeToUser,
+    sendMessage,
+    isReady,
+  } = useChatSocket(token);
 
   const [currentReceiver, setCurrentReceiver] = useState<string | null>(null);
   const [input, setInput] = useState("");
@@ -83,9 +89,9 @@ export default function ChatPage() {
         {conversations?.map((c) => (
           <div
             key={c.roomId}
-            className={`p-3 cursor-pointer hover:bg-secondary/10 hover:border-b hover:border-r-4 hover:border-secondary ${
+            className={`p-3 cursor-pointer hover:bg-primary/10 hover:border-b hover:border-r-4 hover:border-secondary ${
               c.roomId === activeRoom
-                ? "bg-secondary/10 border-b border-r-4 border-secondary"
+                ? "bg-primary/10 border-b border-r-4 border-secondary"
                 : ""
             }`}
             onClick={() => handleSelectUser(c?.partner.id)}
@@ -129,7 +135,9 @@ export default function ChatPage() {
               <div
                 key={i}
                 className={`mb-2 ${
-                  m.senderId === currentReceiver ? "text-left" : "text-right text-white"
+                  m.senderId === currentReceiver
+                    ? "text-left"
+                    : "text-right text-white"
                 }`}
               >
                 <div
@@ -139,7 +147,9 @@ export default function ChatPage() {
                       : "bg-gradient-to-br from-secondary p-2 to-secondary/50 rounded-t-[16px] rounded-br-[16px]"
                   }`}
                 >
-                  <div className="font-medium">{m?.content || "📎 File sent"}</div>
+                  <div className="font-medium">
+                    {m?.content || "📎 File sent"}
+                  </div>
                   {m?.fileUrl?.length > 0 && (
                     <Image
                       height={30}

@@ -97,7 +97,7 @@ const GiveReviewModal = ({ bookingId, isReview }: GiveReviewModalProps) => {
 
           <button
             type="submit"
-            className="bg-secondary text-white py-2 rounded-[6px]"
+            className="bg-primary text-white py-2 rounded-[6px]"
             disabled={rating === 0 || isLoading}
           >
             {isLoading ? "Submitting" : " Submit Review"}

@@ -126,7 +126,7 @@ const Register = () => {
           <h1>Already have an account?</h1>
           <Link
             href="/auth/login"
-            className="text-primary hover:underline ml-1"
+            className="text-secondary hover:underline ml-1"
           >
             Login
           </Link>
@@ -136,7 +136,7 @@ const Register = () => {
           <h1>Want to register as a lawyer?</h1>
           <Link
             href="/auth/register-lawyer"
-            className="text-primary hover:underline ml-1"
+            className="text-secondary hover:underline ml-1"
           >
             Register as Lawyer
           </Link>

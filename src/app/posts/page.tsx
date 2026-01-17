@@ -91,7 +91,7 @@ const PostsPage = () => {
                     Filters
                   </button>
                   <Link href="/create-post">
-                    <button className="hidden bg-secondary/10 text-secondary font-medium border px-4 py-1 rounded-[6px] lg:flex gap-2 items-center">
+                    <button className="hidden bg-primary/10 text-secondary font-medium border px-4 py-1 rounded-[6px] lg:flex gap-2 items-center">
                       <Plus size={18} />
                       Create Post
                     </button>
@@ -116,7 +116,7 @@ const PostsPage = () => {
                   </div>
                 ) : (
                   <div className=" flex flex-col mt-16 items-center">
-                    <div className="bg-primary/10 text-primary p-6 rounded-full">
+                    <div className="bg-primary/10 text-secondary p-6 rounded-full">
                       <Search size={40}></Search>
                     </div>
                     <h1 className="text-2xl font-medium py-2">

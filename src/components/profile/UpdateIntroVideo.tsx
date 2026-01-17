@@ -32,7 +32,7 @@ const UpdateIntroVideo = () => {
     try {
       await updateIntroVideo(formData).unwrap();
       setSelectedFile(null);
-      toast.success("Intro video uploaded successfully")
+      toast.success("Intro video uploaded successfully");
     } catch (err) {
       console.error("Upload failed:", err);
     }
@@ -81,7 +81,7 @@ const UpdateIntroVideo = () => {
             <button
               disabled={uploading}
               onClick={handleUpload}
-              className="px-5 py-2 bg-secondary/10 text-secondary text-sm font-medium rounded-[6px]  disabled:bg-gray-400"
+              className="px-5 py-2 bg-primary/10 text-secondary text-sm font-medium rounded-[6px]  disabled:bg-gray-400"
             >
               {uploading ? "Uploading..." : "Update Video"}
             </button>

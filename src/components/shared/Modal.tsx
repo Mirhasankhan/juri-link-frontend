@@ -24,9 +24,12 @@ const UpdateExpenseModal = () => {
           </DialogDescription>
         </DialogHeader>
         <div className="flex gap-8">
-          <button className="border border-primary text-primary py-2 w-full font-medium rounded-[6px]">Skip Now</button>
-          <button className="border border-primary text-white bg-primary py-2 w-full font-medium rounded-[6px]">Connect Stripe</button>
-       
+          <button className="border border-primary text-secondary py-2 w-full font-medium rounded-[6px]">
+            Skip Now
+          </button>
+          <button className="border border-primary text-white bg-primary py-2 w-full font-medium rounded-[6px]">
+            Connect Stripe
+          </button>
         </div>
       </DialogContent>
     </Dialog>

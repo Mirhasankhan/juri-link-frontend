@@ -5,7 +5,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useCreateCommentMutation, useCreateReplyMutation, usePostQuery } from "@/redux/features/post/post.api";
+import {
+  useCreateCommentMutation,
+  useCreateReplyMutation,
+  usePostQuery,
+} from "@/redux/features/post/post.api";
 
 import { JWTDecode } from "@/utils/jwt";
 import { MessageCircle, Send } from "lucide-react";
@@ -98,7 +102,7 @@ const PostDetailModal = ({ id }: { id: string }) => {
                       onClick={() =>
                         setActiveReplyId(activeReplyId === c._id ? null : c._id)
                       }
-                      className="text-xs font-medium text-primary"
+                      className="text-xs font-medium text-secondary"
                     >
                       Reply
                     </button>
