@@ -15,15 +15,15 @@ const LawyerBookings = () => {
     useMarkCompletedMutation();
   const bookings = data?.data?.bookings;
 
-  const isToday = (date: string | Date) => {
-    const d = new Date(date);
-    const today = new Date();
-    return (
-      d.getFullYear() === today.getFullYear() &&
-      d.getMonth() === today.getMonth() &&
-      d.getDate() === today.getDate()
-    );
-  };
+const isPastOrToday = (date: string | Date) => {
+  const bookingDate = new Date(date);
+  const today = new Date();
+
+  // normalize today to end of day (23:59:59.999)
+  today.setHours(23, 59, 59, 999);
+
+  return bookingDate <= today;
+};
 
   const handleMarkCompleted = async (bookingId: string) => {
     const response = await markCompleted(bookingId);
@@ -140,7 +140,7 @@ const LawyerBookings = () => {
                     <button
                       onClick={() => window.open(booking.startUrl, "_blank")}
                       className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
-                      disabled={!isToday(booking.date)}
+                      disabled={!isPastOrToday(booking.date)}
                     >
                       Start Sessions
                     </button>

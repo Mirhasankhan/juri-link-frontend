@@ -11,18 +11,17 @@ import CreateReportModal from "./ReportModal";
 const UserBookings = () => {
   const { data, isLoading } = useUserBookingsQuery("");
   const bookings = data?.data?.bookings;
-  console.log(bookings);
 
-  const isToday = (date: string | Date) => {
-    const d = new Date(date);
+  const isPastOrToday = (date: string | Date) => {
+    const bookingDate = new Date(date);
     const today = new Date();
 
-    return (
-      d.getFullYear() === today.getFullYear() &&
-      d.getMonth() === today.getMonth() &&
-      d.getDate() === today.getDate()
-    );
+    // normalize today to end of day (23:59:59.999)
+    today.setHours(23, 59, 59, 999);
+
+    return bookingDate <= today;
   };
+
   return (
     <div>
       <h1 className="font-medium text-xl mt-4">My Bookings</h1>
@@ -120,7 +119,7 @@ const UserBookings = () => {
                         window.open(booking.joinUrl, "_blank");
                       }}
                       className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
-                      disabled={!isToday(booking.date)}
+                      disabled={!isPastOrToday(booking.date)}
                     >
                       Join Session
                     </button>

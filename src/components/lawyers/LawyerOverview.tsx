@@ -97,12 +97,14 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
               <Mail size={18} className="text-secondary"></Mail>
               <h1 className="text-gray-900">{lawyer?.email}</h1>
             </div>
-            <button
-              className="bg-purple-500 text-white px-4 w-full py-2 font-medium rounded-[5px]"
-              onClick={() => handleBook()}
-            >
-              Book Consultation
-            </button>
+            <div className="flex">
+              <button
+                className="bg-purple-500 text-white px-4 w-full lg:w-auto py-2 font-medium rounded-[5px]"
+                onClick={() => handleBook()}
+              >
+                Book Consultation
+              </button>
+            </div>
           </div>
         </div>
       </div>

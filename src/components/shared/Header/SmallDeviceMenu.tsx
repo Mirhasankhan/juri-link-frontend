@@ -28,7 +28,7 @@ const SmallDeviceMenu = ({ setIsOpen }: any) => {
 
   // Filter links based on role
   const filteredLinks = allLinks.filter((link) => {
-    if (!role) return link.href !== "/premium" && link.href !== "/create-post"; // Guest
+    if (!role) return link.href !== "/premium" && link.href !== "/create-post";
     if (role === "User") return link.href !== "/premium"; // User
     if (role === "Lawyer")
       return link.href !== "/create-post" && link.href !== "/lawyers"; // Lawyer
@@ -65,7 +65,7 @@ const SmallDeviceMenu = ({ setIsOpen }: any) => {
       })}
 
       {!email ? (
-        <div className="flex gap-2 mt-2">
+        <div onClick={() => setIsOpen(false)} className="flex gap-2 mt-2">
           <Link
             href="/auth/login"
             className="border border-primary text-secondary px-4 py-1 rounded-[4px] font-medium"
