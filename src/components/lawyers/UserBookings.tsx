@@ -7,6 +7,7 @@ import { SkeletonCard } from "../shared/Skeleton";
 import CancelBookingModal from "./CancelBookingModal";
 import GiveReviewModal from "./ReviewModal";
 import CreateReportModal from "./ReportModal";
+import NoBookings from "./NoBookings";
 
 const UserBookings = () => {
   const { data, isLoading } = useUserBookingsQuery("");
@@ -35,122 +36,129 @@ const UserBookings = () => {
         </div>
       )}
 
-      <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-        {bookings?.map((booking: any) => (
-          <div className="border p-4 rounded-[10px] bg-white" key={booking._id}>
-            <div className="flex pb-5 border-b justify-between">
-              <div className="flex gap-2">
-                <Image
-                  className="h-12 w-12 rounded-full"
-                  src={booking?.lawyerId?.profileImage}
-                  alt=""
-                  height={80}
-                  width={80}
-                ></Image>
-                <div>
-                  <h1 className="lg:text-xl font-medium">
-                    {booking?.lawyerId?.fullName}{" "}
-                  </h1>
-                  <p className="text-gray-600 text-sm">
-                    {booking?.serviceId?.serviceName}
-                  </p>
+      {bookings?.length > 0 ? (
+        <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
+          {bookings?.map((booking: any) => (
+            <div
+              className="border p-4 rounded-[10px] bg-white"
+              key={booking._id}
+            >
+              <div className="flex pb-5 border-b justify-between">
+                <div className="flex gap-2">
+                  <Image
+                    className="h-12 w-12 rounded-full"
+                    src={booking?.lawyerId?.profileImage}
+                    alt=""
+                    height={80}
+                    width={80}
+                  ></Image>
+                  <div>
+                    <h1 className="lg:text-xl font-medium">
+                      {booking?.lawyerId?.fullName}{" "}
+                    </h1>
+                    <p className="text-gray-600 text-sm">
+                      {booking?.serviceId?.serviceName}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <h1
-                className={`self-start text-sm text-white px-2 rounded-[10px] font-medium ${
-                  booking.status == "Active"
-                    ? "bg-primary"
-                    : booking.status == "Completed"
+                <h1
+                  className={`self-start text-sm text-white px-2 rounded-[10px] font-medium ${
+                    booking.status == "Active"
                       ? "bg-primary"
-                      : "bg-red-600"
-                }`}
-              >
-                {booking?.status}
-              </h1>
-            </div>
-            <div className="flex mt-3 gap-1 items-center">
-              <Calendar size={15} className="text-gray-600"></Calendar>
-              <h1 className="text-gray-700 text-sm">
-                {new Date(booking.date).toLocaleDateString("en-GB", {
-                  timeZone: "UTC",
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </h1>
-            </div>
-            <div className="flex  mt-3 gap-1 items-center">
-              <Clock size={15} className="text-gray-600"></Clock>
-              <h1 className="text-gray-700 text-sm">{booking.time}</h1>
-            </div>
-            {booking.serviceType == "Online" ? (
-              <div className="flex border-b pb-4 mt-3 gap-1 items-center">
-                <Video size={15} className="text-gray-600"></Video>
-                <h1 className="text-gray-700 text-sm">Online Consultation</h1>
-              </div>
-            ) : (
-              <div className="flex border-b pb-4 mt-3 gap-1 items-center">
-                <MapPin size={15} className="text-gray-600"></MapPin>
-                <h1 className="text-gray-700 text-sm">
-                  {booking.lawyerId?.location}
+                      : booking.status == "Completed"
+                        ? "bg-primary"
+                        : "bg-red-600"
+                  }`}
+                >
+                  {booking?.status}
                 </h1>
               </div>
-            )}
-            <div className="flex mb-2 justify-between items-center pt-3">
-              <h1 className="text-gray-600">Consultation Fee</h1>
-              <h1 className="text-gray-900 text-xl font-medium">
-                ${booking.fee}
-              </h1>
-            </div>
-            <div className="flex gap-3">
-              {booking.status === "Active" &&
-                booking.serviceType === "In_Person" && (
-                  <CancelBookingModal id={booking._id}></CancelBookingModal>
-                )}
-
-              {/* ACTIVE + ONLINE */}
-              {booking.status === "Active" &&
-                booking.serviceType === "Online" && (
-                  <>
+              <div className="flex mt-3 gap-1 items-center">
+                <Calendar size={15} className="text-gray-600"></Calendar>
+                <h1 className="text-gray-700 text-sm">
+                  {new Date(booking.date).toLocaleDateString("en-GB", {
+                    timeZone: "UTC",
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </h1>
+              </div>
+              <div className="flex  mt-3 gap-1 items-center">
+                <Clock size={15} className="text-gray-600"></Clock>
+                <h1 className="text-gray-700 text-sm">{booking.time}</h1>
+              </div>
+              {booking.serviceType == "Online" ? (
+                <div className="flex border-b pb-4 mt-3 gap-1 items-center">
+                  <Video size={15} className="text-gray-600"></Video>
+                  <h1 className="text-gray-700 text-sm">Online Consultation</h1>
+                </div>
+              ) : (
+                <div className="flex border-b pb-4 mt-3 gap-1 items-center">
+                  <MapPin size={15} className="text-gray-600"></MapPin>
+                  <h1 className="text-gray-700 text-sm">
+                    {booking.lawyerId?.location}
+                  </h1>
+                </div>
+              )}
+              <div className="flex mb-2 justify-between items-center pt-3">
+                <h1 className="text-gray-600">Consultation Fee</h1>
+                <h1 className="text-gray-900 text-xl font-medium">
+                  ${booking.fee}
+                </h1>
+              </div>
+              <div className="flex gap-3">
+                {booking.status === "Active" &&
+                  booking.serviceType === "In_Person" && (
                     <CancelBookingModal id={booking._id}></CancelBookingModal>
+                  )}
 
-                    <button
-                      onClick={() => {
-                        window.open(booking.joinUrl, "_blank");
-                      }}
-                      className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
-                      disabled={!isPastOrToday(booking.date)}
-                    >
-                      Join Session
-                    </button>
+                {/* ACTIVE + ONLINE */}
+                {booking.status === "Active" &&
+                  booking.serviceType === "Online" && (
+                    <>
+                      <CancelBookingModal id={booking._id}></CancelBookingModal>
+
+                      <button
+                        onClick={() => {
+                          window.open(booking.joinUrl, "_blank");
+                        }}
+                        className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
+                        disabled={!isPastOrToday(booking.date)}
+                      >
+                        Join Session
+                      </button>
+                    </>
+                  )}
+
+                {/* COMPLETED */}
+                {booking.status === "Completed" && (
+                  <>
+                    <GiveReviewModal
+                      bookingId={booking._id}
+                      isReview={booking.isReviewed}
+                    ></GiveReviewModal>
+
+                    <CreateReportModal
+                      isReported={booking.isReported}
+                      bookingId={booking._id}
+                    ></CreateReportModal>
                   </>
                 )}
-
-              {/* COMPLETED */}
-              {booking.status === "Completed" && (
-                <>
-                  <GiveReviewModal
-                    bookingId={booking._id}
-                    isReview={booking.isReviewed}
-                  ></GiveReviewModal>
-
-                  <CreateReportModal
-                    isReported={booking.isReported}
-                    bookingId={booking._id}
-                  ></CreateReportModal>
-                </>
-              )}
-              {booking.status === "Cancelled" && (
-                <>
-                  <h1 className="text-red-500">
-                    Cancel Reason:-{booking?.cancelReason}
-                  </h1>
-                </>
-              )}
+                {booking.status === "Cancelled" && (
+                  <>
+                    <h1 className="text-red-500">
+                      Cancel Reason:-{booking?.cancelReason}
+                    </h1>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <NoBookings></NoBookings>
+      )}
     </div>
   );
 };

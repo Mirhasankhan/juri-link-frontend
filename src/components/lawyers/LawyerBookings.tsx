@@ -8,6 +8,8 @@ import { Calendar, Clock, MapPin, Video } from "lucide-react";
 import Image from "next/image";
 import { SkeletonCard } from "../shared/Skeleton";
 import CancelBookingModal from "./CancelBookingModal";
+import NoBookings from "./NoBookings";
+import { toast } from "react-toastify";
 
 const LawyerBookings = () => {
   const { data, isLoading } = useLawyerBookingsQuery("");
@@ -15,20 +17,22 @@ const LawyerBookings = () => {
     useMarkCompletedMutation();
   const bookings = data?.data?.bookings;
 
-const isPastOrToday = (date: string | Date) => {
-  const bookingDate = new Date(date);
-  const today = new Date();
+  const isPastOrToday = (date: string | Date) => {
+    const bookingDate = new Date(date);
+    const today = new Date();
 
-  // normalize today to end of day (23:59:59.999)
-  today.setHours(23, 59, 59, 999);
+    // normalize today to end of day (23:59:59.999)
+    today.setHours(23, 59, 59, 999);
 
-  return bookingDate <= today;
-};
+    return bookingDate <= today;
+  };
 
   const handleMarkCompleted = async (bookingId: string) => {
     const response = await markCompleted(bookingId);
-
     console.log(response);
+    toast.success(
+      "Booking marked as completed. Earnings added to your account",
+    );
   };
 
   return (
@@ -44,134 +48,143 @@ const isPastOrToday = (date: string | Date) => {
         </div>
       )}
 
-      <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-        {bookings?.map((booking: any) => (
-          <div className="border p-4 rounded-[10px] bg-white" key={booking._id}>
-            <div className="flex pb-5 border-b justify-between">
-              <div className="flex gap-2">
-                <Image
-                  className="h-12 w-12 rounded-full"
-                  src={booking?.userId?.profileImage}
-                  alt=""
-                  height={80}
-                  width={80}
-                />
-                <div>
-                  <h1 className="text-xl font-medium">
-                    {booking?.userId?.fullName}
-                  </h1>
-                  <p className="text-gray-600 text-sm">
-                    {booking?.serviceId?.serviceName}
-                  </p>
+      {bookings?.length > 0 ? (
+        <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
+          {bookings?.map((booking: any) => (
+            <div
+              className="border p-4 rounded-[10px] bg-white"
+              key={booking._id}
+            >
+              <div className="flex pb-5 border-b justify-between">
+                <div className="flex gap-2">
+                  <Image
+                    className="h-12 w-12 rounded-full"
+                    src={booking?.userId?.profileImage}
+                    alt=""
+                    height={80}
+                    width={80}
+                  />
+                  <div>
+                    <h1 className="text-xl font-medium">
+                      {booking?.userId?.fullName}
+                    </h1>
+                    <p className="text-gray-600 text-sm">
+                      {booking?.serviceId?.serviceName}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <h1
-                className={`self-start text-sm text-white px-2 rounded-[10px] font-medium ${
-                  booking.status === "Active"
-                    ? "bg-primary"
-                    : booking.status === "Completed"
+                <h1
+                  className={`self-start text-sm text-white px-2 rounded-[10px] font-medium ${
+                    booking.status === "Active"
                       ? "bg-primary"
-                      : "bg-red-600"
-                }`}
-              >
-                {booking.status}
-              </h1>
-            </div>
-
-            <div className="flex mt-3 gap-1 items-center">
-              <Calendar size={15} className="text-gray-600" />
-              <h1 className="text-gray-700 text-sm">
-                {new Date(booking.date).toLocaleDateString("en-GB", {
-                  timeZone: "UTC",
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </h1>
-            </div>
-
-            <div className="flex mt-3 gap-1 items-center">
-              <Clock size={15} className="text-gray-600" />
-              <h1 className="text-gray-700 text-sm">{booking.time}</h1>
-            </div>
-
-            {booking.serviceType === "Online" ? (
-              <div className="flex border-b pb-4 mt-3 gap-1 items-center">
-                <Video size={15} className="text-gray-600" />
-                <h1 className="text-gray-700 text-sm">Online Consultation</h1>
+                      : booking.status === "Completed"
+                        ? "bg-primary"
+                        : "bg-red-600"
+                  }`}
+                >
+                  {booking.status}
+                </h1>
               </div>
-            ) : (
-              <div className="flex border-b pb-4 mt-3 gap-1 items-center">
-                <MapPin size={15} className="text-gray-600" />
+
+              <div className="flex mt-3 gap-1 items-center">
+                <Calendar size={15} className="text-gray-600" />
                 <h1 className="text-gray-700 text-sm">
-                  {booking.userId?.location || "My Chamber"}
+                  {new Date(booking.date).toLocaleDateString("en-GB", {
+                    timeZone: "UTC",
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </h1>
               </div>
-            )}
 
-            <div className="flex mb-2 justify-between items-center pt-3">
-              <h1 className="text-gray-600">Consultation Fee</h1>
-              <h1 className="text-gray-900 text-xl font-medium">
-                ${booking.fee}
-              </h1>
-            </div>
+              <div className="flex mt-3 gap-1 items-center">
+                <Clock size={15} className="text-gray-600" />
+                <h1 className="text-gray-700 text-sm">{booking.time}</h1>
+              </div>
 
-            <div className="flex gap-3 flex-col">
-              {/* Active + In_Person */}
-              {booking.status === "Active" &&
-                booking.serviceType === "In_Person" && (
-                  <>
-                    <CancelBookingModal id={booking._id} />
-                    <button
-                      className="bg-primary text-white py-2 w-full rounded-[6px]"
-                      onClick={() => handleMarkCompleted(booking._id)}
-                    >
-                      Mark as Completed
-                    </button>
-                  </>
-                )}
-
-              {/* Active + Online */}
-              {booking.status === "Active" &&
-                booking.serviceType === "Online" && (
-                  <>
-                    <CancelBookingModal id={booking._id} />
-
-                    <button
-                      onClick={() => window.open(booking.startUrl, "_blank")}
-                      className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
-                      disabled={!isPastOrToday(booking.date)}
-                    >
-                      Start Sessions
-                    </button>
-
-                    <button
-                      disabled={isCompleteLoading}
-                      className="bg-primary text-white py-2 w-full disabled:bg-opacity-60 rounded-[6px]"
-                      onClick={() => handleMarkCompleted(booking._id)}
-                    >
-                      {isCompleteLoading ? "Completing" : " Mark as Completed"}
-                    </button>
-                  </>
-                )}
-
-              {/* Completed */}
-              {booking.status === "Completed" && (
-                <button className="bg-red-600 text-white py-2 w-full rounded-[6px]">
-                  Report
-                </button>
+              {booking.serviceType === "Online" ? (
+                <div className="flex border-b pb-4 mt-3 gap-1 items-center">
+                  <Video size={15} className="text-gray-600" />
+                  <h1 className="text-gray-700 text-sm">Online Consultation</h1>
+                </div>
+              ) : (
+                <div className="flex border-b pb-4 mt-3 gap-1 items-center">
+                  <MapPin size={15} className="text-gray-600" />
+                  <h1 className="text-gray-700 text-sm">
+                    {booking.userId?.location || "My Chamber"}
+                  </h1>
+                </div>
               )}
 
-              {/* Cancelled */}
-              {booking.status === "Cancelled" && (
-                <h1 className="text-red-500">
-                  Cancel Reason: {booking?.cancelReason}
+              <div className="flex mb-2 justify-between items-center pt-3">
+                <h1 className="text-gray-600">Consultation Fee</h1>
+                <h1 className="text-gray-900 text-xl font-medium">
+                  ${booking.fee}
                 </h1>
-              )}
+              </div>
+
+              <div className="flex gap-3 flex-col">
+                {/* Active + In_Person */}
+                {booking.status === "Active" &&
+                  booking.serviceType === "In_Person" && (
+                    <>
+                      <CancelBookingModal id={booking._id} />
+                      <button
+                        className="bg-primary text-white py-2 w-full rounded-[6px]"
+                        onClick={() => handleMarkCompleted(booking._id)}
+                      >
+                        Mark as Completed
+                      </button>
+                    </>
+                  )}
+
+                {/* Active + Online */}
+                {booking.status === "Active" &&
+                  booking.serviceType === "Online" && (
+                    <>
+                      <CancelBookingModal id={booking._id} />
+
+                      <button
+                        onClick={() => window.open(booking.startUrl, "_blank")}
+                        className="bg-primary text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
+                        disabled={!isPastOrToday(booking.date)}
+                      >
+                        Start Sessions
+                      </button>
+
+                      <button
+                        disabled={isCompleteLoading}
+                        className="bg-primary text-white py-2 w-full disabled:bg-opacity-60 rounded-[6px]"
+                        onClick={() => handleMarkCompleted(booking._id)}
+                      >
+                        {isCompleteLoading
+                          ? "Completing"
+                          : " Mark as Completed"}
+                      </button>
+                    </>
+                  )}
+
+                {/* Completed */}
+                {booking.status === "Completed" && (
+                  <button className="bg-red-600 text-white py-2 w-full rounded-[6px]">
+                    Report
+                  </button>
+                )}
+
+                {/* Cancelled */}
+                {booking.status === "Cancelled" && (
+                  <h1 className="text-red-500">
+                    Cancel Reason: {booking?.cancelReason}
+                  </h1>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <NoBookings></NoBookings>
+      )}
     </div>
   );
 };
