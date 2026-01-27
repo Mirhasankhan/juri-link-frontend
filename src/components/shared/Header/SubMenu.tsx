@@ -35,28 +35,21 @@ const SubMenu = () => {
   });
 
   return (
-    <div className="flex items-center gap-6 text-sm sm:text-base font-medium text-gray-600">
+    <div className="flex items-center gap-2 text-sm sm:text-base font-medium text-gray-600">
       {filteredLinks.map((link) => {
         const isActive = pathname === link.href;
         return (
           <Link
             key={link.href}
             href={link.href}
-            className={`relative transition-all duration-300 hover:text-secondary 
-              ${isActive ? "text-secondary font-bold" : ""}`}
+            className={`px-4 py-2 rounded-full transition-all duration-300 
+              ${
+                isActive
+                  ? "bg-secondary/10 text-secondary font-bold shadow-sm"
+                  : "hover:bg-gray-100 hover:text-secondary"
+              }`}
           >
-            <span
-              className={`pb-1 inline-block relative
-                after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-full 
-                after:transition-all after:duration-300
-                ${
-                  isActive
-                    ? "after:bg-primary"
-                    : "after:bg-transparent hover:after:bg-primary"
-                }`}
-            >
-              {link.label}
-            </span>
+            {link.label}
           </Link>
         );
       })}

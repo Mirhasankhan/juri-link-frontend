@@ -16,52 +16,80 @@ const NewCard = ({ lawyer }: { lawyer: any }) => {
     router.push(`/messages?receiverId=${lawyer._id}`);
   };
   return (
-    <div className="bg-white p-5 relative flex flex-col rounded-[10px]">
-      <Image
-        src={lawyer?.profileImage || "/placeholder.png"}
-        width={400}
-        height={400}
-        alt={lawyer.fullName || "lawyer"}
-        className="h-[270px] w-full object-cover rounded-[12px]"
-      />
-      <div className="flex absolute top-[240px] px-3 py-0.5 rounded-full right-8 text-white bg-primary items-center gap-1">
-        <FaStar />
-        <h1>{lawyer?.avgRating}</h1>
-      </div>
-      <p className="text-2xl font-medium pt-3">{lawyer?.fullName}</p>
-      <h1 className="text-gray-700 pb-2">
-        {lawyer?.serviceType == "Both"
-          ? "Online & In Person"
-          : lawyer.serviceType == "Online"
-            ? "Online"
-            : "In Person"}{" "}
-        Consultation
-      </h1>
-      <div className="grid grid-cols-2 gap-2  my-2">
-        {lawyer?.legalServices?.map(
-          (service: { _id: string; serviceName: string }) => (
-            <div
-              key={service._id}
-              className="rounded-[8px] text-gray-600 text-center font-medium text-xs px-1 py-1 border border-gray-300"
-            >
-              {service.serviceName}
-            </div>
-          ),
-        )}
+    <div className="bg-white rounded-[16px] overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+      {/* Image Container */}
+      <div className="relative overflow-hidden bg-gray-200 h-[280px]">
+        <Image
+          src={lawyer?.profileImage || "/placeholder.png"}
+          width={400}
+          height={400}
+          alt={lawyer.fullName || "lawyer"}
+          className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
+        />
+        {/* Rating Badge */}
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white text-primary rounded-full px-3 py-1.5 font-semibold shadow-lg">
+          <FaStar size={14} />
+          <span>{lawyer?.avgRating || "N/A"}</span>
+        </div>
       </div>
 
-      <div className="grid mt-auto grid-cols-4 gap-2">
-        <Link href={`/lawyers/${lawyer._id}`} className="col-span-3 w-full">
-          <button className="bg-primary w-full py-2 rounded-[8px] text-white font-medium">
-            View Profile
+      {/* Content Container */}
+      <div className="p-4 flex flex-col flex-1">
+        {/* Lawyer Name */}
+        <h2 className="text-xl font-bold text-gray-900 mb-1">
+          {lawyer?.fullName}
+        </h2>
+
+        {/* Service Type */}
+        <p className="text-sm text-gray-600 mb-3 font-medium">
+          {lawyer?.serviceType == "Both"
+            ? "🌐 Online & In Person"
+            : lawyer.serviceType == "Online"
+              ? "🌐 Online Consultation"
+              : "🏢 In Person Consultation"}
+        </p>
+
+        {/* Legal Services */}
+        {lawyer?.legalServices?.length > 0 && (
+          <div className="mb-4">
+            <p className="text-xs font-semibold text-gray-500 mb-2">
+              SPECIALIZATIONS
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {lawyer?.legalServices
+                ?.slice(0, 3)
+                .map((service: { _id: string; serviceName: string }) => (
+                  <span
+                    key={service._id}
+                    className="inline-block bg-secondary/10 text-secondary text-xs font-medium px-2.5 py-1 rounded-full"
+                  >
+                    {service.serviceName}
+                  </span>
+                ))}
+              {lawyer?.legalServices?.length > 3 && (
+                <span className="inline-block text-gray-500 text-xs px-2.5 py-1">
+                  +{lawyer?.legalServices?.length - 3} more
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="grid grid-cols-4 gap-2 mt-auto">
+          <Link href={`/lawyers/${lawyer._id}`} className="col-span-3">
+            <button className="w-full bg-primary hover:bg-primary/90 py-2.5 rounded-[10px] text-white font-semibold transition-colors duration-200">
+              View Profile
+            </button>
+          </Link>
+          <button
+            onClick={handleMessage}
+            className="col-span-1 bg-secondary/10 hover:bg-secondary/20 text-secondary rounded-[10px] transition-colors duration-200 flex items-center justify-center"
+            title="Send Message"
+          >
+            <MessagesSquare size={20} />
           </button>
-        </Link>
-        <button
-          onClick={handleMessage}
-          className="bg-gray-100 text-gray-500 text-center col-span-1  w-full py-1 rounded-[8px]  font-medium"
-        >
-         <MessagesSquare className="mx-auto"></MessagesSquare>
-        </button>
+        </div>
       </div>
     </div>
   );
