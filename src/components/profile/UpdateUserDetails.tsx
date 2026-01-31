@@ -35,10 +35,29 @@ const UpdateUserDetails = () => {
     setEditMode(false);
   };
 
-  if (profileLoading) return <p>Loading...</p>;
+  if (profileLoading)
+    return (
+      <div className="bg-white border rounded-2xl shadow-sm p-6 mt-6 w-full max-w-2xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <div className="space-y-2">
+            <div className="h-5 w-40 bg-gray-200 rounded animate-pulse" />
+            <div className="h-3 w-56 bg-gray-200 rounded animate-pulse" />
+          </div>
+          <div className="h-9 w-20 bg-gray-200 rounded animate-pulse" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <div key={idx} className="space-y-2">
+              <div className="h-3 w-24 bg-gray-200 rounded animate-pulse" />
+              <div className="h-10 w-full bg-gray-200 rounded animate-pulse" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
 
   return (
-    <div className="bg-white border rounded-xl shadow-sm p-6 w-full max-w-2xl mx-auto">
+    <div className="bg-white border rounded-2xl shadow-sm p-6 w-full max-w-2xl mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
@@ -51,14 +70,14 @@ const UpdateUserDetails = () => {
         {!editMode ? (
           <button
             onClick={() => setEditMode(true)}
-            className="px-6 font-medium py-2.5 bg-primary/10 text-secondary rounded-[5px]"
+            className="px-6 font-medium py-2.5 bg-primary/10 text-secondary rounded-full"
           >
             Edit
           </button>
         ) : (
           <button
             onClick={handleSubmit}
-            className="px-5 py-2.5 bg-primary/10 text-secondary rounded-[5px]  disabled:bg-gray-400"
+            className="px-5 py-2.5 bg-primary/10 text-secondary rounded-full disabled:bg-gray-200"
             disabled={updating}
           >
             {updating ? "Saving..." : "Save"}
@@ -75,7 +94,7 @@ const UpdateUserDetails = () => {
             </label>
 
             {!editMode ? (
-              <p className="text-gray-900 font-medium bg-gray-50 px-3 py-2 rounded-[5px] border">
+              <p className="text-gray-900 font-medium bg-gray-50 px-3 py-2 rounded-[8px] border">
                 {form?.[key] ? form[key] : "Not provided"}
               </p>
             ) : (
@@ -83,7 +102,7 @@ const UpdateUserDetails = () => {
                 type="text"
                 value={form?.[key] || ""}
                 onChange={(e) => handleChange(key, e.target.value)}
-                className="border rounded-[5px] px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="border rounded-[8px] px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             )}
           </div>

@@ -68,7 +68,7 @@ const Banner = () => {
         </div> */}
 
         {/* Service Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 mt-8 lg:mt-10 animate-fade-in-up-delay max-w-5xl px-4">
+        <div className="hidden lg:flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 mt-8 lg:mt-10 animate-fade-in-up-delay max-w-5xl px-4">
           {legalServies?.data
             ?.slice(0, 4)
             .map((service: { serviceName: string; _id: string }) => (
@@ -85,7 +85,7 @@ const Banner = () => {
         </div>
 
         {/* Stats or Trust Indicators */}
-        <div className="hidden lg:flex items-center gap-8 mt-12 animate-fade-in-up-delay-2">
+        {/* <div className="hidden lg:flex items-center gap-8 mt-12 animate-fade-in-up-delay-2">
           <div className="text-center">
             <div className="text-3xl font-bold">1000+</div>
             <div className="text-sm text-gray-300 mt-1">Verified Lawyers</div>
@@ -102,7 +102,7 @@ const Banner = () => {
               Client Satisfaction
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Custom CSS for animations */}
