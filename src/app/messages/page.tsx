@@ -11,7 +11,7 @@ export default function ChatPage() {
   const { token } = JWTDecode();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const initialReceiverId = searchParams.get("receiverId");
+  const initialReceiverId = searchParams.get("receiverId")
 
   const {
     conversations,
