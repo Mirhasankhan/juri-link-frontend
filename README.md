@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Juri Link — Frontend
 
-## Getting Started
+Juri Link is a Next.js frontend for a legal services marketplace. It provides pages for browsing lawyers and services, creating posts, booking and messaging, and managing user and lawyer profiles.
 
-First, run the development server:
+**This repository** contains the Next.js app (React + TypeScript) used to render the client-facing UI.
+
+**Key features**
+
+- **Browse & Search:** Lawyer and service search and filtering.
+- **Bookings & Availability:** Lawyer availability, booking flow, and earnings pages.
+- **Messaging:** Real-time chat and image upload support.
+- **Profiles & Posts:** User and lawyer profiles, posts, and reviews.
+
+**Tech stack**
+
+- **Framework:** Next.js (app router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **State:** Redux (store in `src/redux`)
+- **Other:** Socket-based messaging, Prisma (backend expected), and various React components in `src/components`.
+
+Quick links
+
+- App entry: [src/app/page.tsx](src/app/page.tsx)
+- Components: [src/components](src/components)
+- Styles: [src/app/globals.css](src/app/globals.css)
+
+Getting started
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Available scripts (from `package.json`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `dev` — start Next.js in development mode
+- `build` — build for production
+- `start` — start the production server after `build`
+- `lint` — run ESLint
 
-## Learn More
+Environment
 
-To learn more about Next.js, take a look at the following resources:
+- This frontend expects a backend API and auth provider. Configure environment variables in a `.env.local` at the repo root if required by your local setup (for example API base URL, auth keys, etc.).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project structure (high level)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app` — Next.js app routes and pages (React Server Components + client components)
+- `src/components` — UI components organized by feature (home, lawyers, posts, profile, message, etc.)
+- `src/redux` — Redux store and feature slices
+- `src/lib` / `src/utils` — helper utilities and providers
+- `public` — static assets (images, videos)
 
-## Deploy on Vercel
+Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Open issues and PRs to the `main` branch. Add clear descriptions and screenshots when relevant.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+License
+
+- See the repository license (if any). If none, add a LICENSE file or contact the project owner for guidance.
+
+If you'd like, I can expand this README with setup details for the backend, environment variable examples, or developer workflows (linting, formatting, testing).
