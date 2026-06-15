@@ -84,7 +84,7 @@ const BookingPage = () => {
                 className="border-2 h-16 w-16 rounded-full object-cover"
                 src={
                   lawyer?.profileImage ||
-                  "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
+                  "https://res.cloudinary.com/dddrm7ep8/image/upload/v1781532954/y7gdxfkl9uznjt96cjea.png"
                 }
               />
               <div>

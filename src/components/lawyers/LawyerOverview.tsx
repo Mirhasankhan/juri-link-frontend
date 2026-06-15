@@ -31,7 +31,7 @@ const LawyerOverview = ({ lawyer }: { lawyer: any }) => {
             className="object-cover w-full lg:w-[280px] md:h-[480px] lg:h-[240px] rounded-xl"
             src={
               lawyer?.profileImage ||
-              "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
+              "https://res.cloudinary.com/dddrm7ep8/image/upload/v1781532954/y7gdxfkl9uznjt96cjea.png"
             }
           ></Image>
         </div>

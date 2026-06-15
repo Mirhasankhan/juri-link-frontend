@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+}
+
 .input-design {
   @apply px-3 py-3.5 w-full text-sm rounded-[6px]
          bg-gray-100 text-gray-800 placeholder-gray-400

@@ -42,7 +42,7 @@ const PostCard = ({ post }: { post: any }) => {
         <Image
           src={
             post?.userId?.profileImage ||
-            "https://sefr.lon1.digitaloceanspaces.com/sefr/uploads/messages/files/1766554616119-kvs0lfqo4u.png"
+            "https://res.cloudinary.com/dddrm7ep8/image/upload/v1781532954/y7gdxfkl9uznjt96cjea.png"
           }
           alt="profile"
           width={48}
