@@ -80,7 +80,7 @@ const LawyerAvailabilities: React.FC = () => {
         {Object.entries(mergedAvailability).map(([dayIndex, slots]) => (
           <div
             key={dayIndex}
-            className="bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300"
+            className="bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl border p-6  transition-all duration-300"
           >
             <div className="flex justify-between mb-4 items-center">
               <h3 className="text-xl font-semibold  text-gray-800">

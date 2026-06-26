@@ -11,7 +11,7 @@ const AvailabilityPage = () => {
 
   return (
     <>
-      <div className="grid  grid-cols-5 gap-6 p-6">
+      <div className="grid bg-[#f8f8f8] grid-cols-5 gap-6 p-6">
         <div className="lg:col-span-1">
           <Sidebar></Sidebar>
         </div>

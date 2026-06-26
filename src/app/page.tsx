@@ -16,8 +16,9 @@ const HOmePage = () => {
       <Banner></Banner>
       <FeaturedLawyers></FeaturedLawyers>
       <ForLawyer></ForLawyer>
-      <OurServices></OurServices>
+     
       <OnlineConsultation></OnlineConsultation>
+       <OurServices></OurServices>
       {/* <ForOnline></ForOnline> */}
       <ForInPerson></ForInPerson>
 

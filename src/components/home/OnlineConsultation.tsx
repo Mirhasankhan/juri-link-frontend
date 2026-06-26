@@ -51,7 +51,7 @@ const OnlineConsultation = () => {
           Get trusted legal advice from the comfort of your home.
         </p>
 
-        <div className="relative max-w-4xl mx-auto mb-12">
+        <div className="relative max-w-5xl mx-auto mb-12">
           {/* Connecting line */}
           <div className="hidden md:block absolute top-[18px] left-[60px] right-[60px] h-px bg-gray-600" />
 

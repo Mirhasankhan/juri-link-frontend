@@ -27,7 +27,7 @@ const ForLawyer = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xl font-medium text-gray-600">
+          <p className="uppercase tracking-widest text-xl font-medium text-gray-600">
             Grow Your Legal Practice
           </p>
           <h1 className="text-5xl font-bold py-5">Are You a Lawyer?</h1>
