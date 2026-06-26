@@ -1,9 +1,7 @@
 "use client";
 import Container from "@/utils/Container";
 import Image from "next/image";
-
 import online from "../../assets/online.jpg";
-
 import { GiCheckMark } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
