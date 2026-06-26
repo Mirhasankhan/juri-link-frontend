@@ -110,16 +110,16 @@ const Testimonials = () => {
                       alt={testimonial.name}
                       className="w-14 h-14 rounded-full object-cover ring-4 ring-blue-50"
                     />
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
+                    {/* <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div> */}
                   </div>
                   <div>
                     <h4 className="font-bold text-lg text-gray-900">
                       {testimonial.name}
                     </h4>
                     <p className="text-sm text-gray-600">{testimonial.role}</p>
-                    <p className="text-xs text-blue-600 font-medium">
+                    {/* <p className="text-xs text-blue-600 font-medium">
                       {testimonial.company}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
 

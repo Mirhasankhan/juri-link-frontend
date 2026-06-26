@@ -3,11 +3,11 @@
 import Image from "next/image";
 import lawyerImage from "../../assets/lawyer.jpg";
 import Container from "@/utils/Container";
-import { GiGrowth } from "react-icons/gi";
 import { motion } from "framer-motion";
 import { Clock, Lock } from "lucide-react";
 import Link from "next/link";
 import { SiLinuxprofessionalinstitute } from "react-icons/si";
+import { HiArrowTrendingUp } from "react-icons/hi2";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -31,15 +31,17 @@ const ForLawyer = () => {
             Grow Your Legal Practice
           </p>
           <h1 className="text-5xl font-bold py-5">Are You a Lawyer?</h1>
-          <h3 className="font-medium text-gray-700">
+          <h3 className="font-medium text-gray-600">
             Join thousands of legal professionals on our platform. Expand your
             practice, connect with qualified clients, and focus on what you do
             best.
           </h3>
 
           <div className="pt-8">
-            <div className="flex gap-2 mb-3">
-              <GiGrowth className="text-gray-600" size={25} />
+            <div className="flex gap-2 items-center mb-3">
+              <div className=" bg-gray-100 rounded p-2">
+                <HiArrowTrendingUp size={25} />
+              </div>
               <div>
                 <h1 className="font-medium">Grow your client base</h1>
                 <p className="text-gray-800">
@@ -47,9 +49,10 @@ const ForLawyer = () => {
                 </p>
               </div>
             </div>
-
-            <div className="flex gap-2 mb-3">
-              <Clock className="text-gray-800" size={25} />
+            <div className="flex items-center gap-2 mb-3">
+              <div className=" bg-gray-100 rounded p-2">
+                <Clock size={25} />
+              </div>
               <div>
                 <h1 className="font-medium">Set your own rates and schedule</h1>
                 <p className="text-gray-800">
@@ -58,19 +61,20 @@ const ForLawyer = () => {
               </div>
             </div>
 
-            <div className="flex gap-2 mb-3">
-              <Lock className="text-gray-800" size={25} />
+            <div className="flex items-center gap-2 mb-3">
+              <div className=" bg-gray-100 rounded p-2">
+                <Lock size={25} />
+              </div>
               <div>
                 <h1 className="font-medium">Secure payment processing</h1>
                 <p className="text-gray-800">Trust and reliability built in</p>
               </div>
             </div>
 
-            <div className="flex gap-2 mb-3">
-              <SiLinuxprofessionalinstitute
-                className="text-gray-600"
-                size={25}
-              />
+            <div className="flex items-center gap-2 mb-3">
+              <div className=" bg-gray-100 rounded p-2">
+                <SiLinuxprofessionalinstitute size={25} />
+              </div>
               <div>
                 <h1 className="font-medium">Professional platform</h1>
                 <p className="text-gray-800">Built for legal professionals</p>
