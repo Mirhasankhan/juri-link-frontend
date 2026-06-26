@@ -29,6 +29,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: userInfo,
       }),
+      invalidatesTags: ["users"],
     }),
     socialLogin: builder.mutation({
       query: (userInfo) => ({

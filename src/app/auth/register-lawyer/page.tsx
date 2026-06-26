@@ -194,8 +194,8 @@ const LawyerSignUpForm = () => {
               >
                 <option value="">Select Service Type</option>
                 <option value="Online">Online</option>
-                <option value="In_Person">In_Person</option>
-                <option value="Both">Online & In_Person</option>
+                <option value="In_Person">In Person</option>
+                <option value="Both">Online & In Person</option>
               </select>
               {errors.serviceType && (
                 <p className="text-red-500 text-sm">
@@ -204,11 +204,11 @@ const LawyerSignUpForm = () => {
               )}
             </div>
             <div>
-              <label className="label-design pb-1">Fee (per case)</label>
+              <label className="label-design pb-1">Fee (per consultation)</label>
               <input
                 type="number"
                 step="0.01"
-                placeholder="Fee (per case)"
+                placeholder="Fee (per consultation)"
                 {...register("fee", {
                   required: "Fee is required",
                   valueAsNumber: true,

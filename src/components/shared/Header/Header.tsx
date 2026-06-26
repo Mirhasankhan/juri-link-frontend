@@ -15,7 +15,9 @@ import logo from "../../../assets/logo.main.png";
 import { useProfileQuery } from "@/redux/features/auth/authApi";
 
 const Header = () => {
-  const { data: profileData } = useProfileQuery("");
+  const { data: profileData } = useProfileQuery("", {
+    refetchOnMountOrArgChange: true,
+  });
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { email, role, name } = useAppSelector(useCurrentUser);

@@ -9,15 +9,15 @@ import { useParams } from "next/navigation";
 
 const LawyerDetailsPage = () => {
   const { lawyer } = useParams();
-  const { data: lawyerDetails } = useLawyerDetailsQuery(lawyer);
+  const { data: lawyerDetails, isLoading } = useLawyerDetailsQuery(lawyer);
 
   return (
     <div className="bg-[#f8f8f8] pt-6">
-      <LawyerOverview lawyer={lawyerDetails?.data?.lawyer}></LawyerOverview>
+      <LawyerOverview lawyer={lawyerDetails?.data?.lawyer} isLoading={isLoading}></LawyerOverview>
       <Container>
         <div className="grid grid-cols-3 gap-6 my-8">
           <div className="col-span-3 lg:col-span-2">
-            <Expertise lawyer={lawyerDetails?.data?.lawyer}></Expertise>
+            <Expertise lawyer={lawyerDetails?.data?.lawyer} isLoading={isLoading}></Expertise>
             <ClientReviews
               reviews={lawyerDetails?.data?.reviews}
             ></ClientReviews>
