@@ -28,7 +28,7 @@ const PostsPage = () => {
   };
 
   return (
-    <div className="py-6 bg-[#f8f8f8]">
+    <div className="py-6 bg-[#f8f8f8] min-h-screen">
       {/* Mobile Filters */}
       <AnimatePresence>
         {showMobileFilters && (

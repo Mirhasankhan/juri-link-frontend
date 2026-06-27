@@ -1,7 +1,7 @@
 "use client";
 
 import { JWTDecode } from "@/utils/jwt";
-import { MessagesSquare } from "lucide-react";
+import { MessagesSquare, Timer } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import { FaStar } from "react-icons/fa6";
 const NewCard = ({ lawyer }: { lawyer: any }) => {
   const { decoded } = JWTDecode();
   const router = useRouter();
+  console.log(lawyer);
 
   const handleMessage = () => {
     if (!decoded?.email) return router.push(`/auth/login`);
@@ -27,18 +28,25 @@ const NewCard = ({ lawyer }: { lawyer: any }) => {
           className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
         />
         {/* Rating Badge */}
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white text-primary rounded-full px-3 py-1.5 font-semibold shadow-lg">
-          <FaStar size={14} />
-          <span>{lawyer?.avgRating || "N/A"}</span>
-        </div>
+        {lawyer?.avgRating && (
+          <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1 text-sm font-semibold text-gray-800">
+            <FaStar className="text-yellow-400" />
+            {lawyer.avgRating.toFixed(1)}
+          </div>
+        )}
       </div>
 
       {/* Content Container */}
       <div className="p-4 flex flex-col flex-1">
         {/* Lawyer Name */}
-        <h2 className="text-xl font-bold text-gray-900 mb-1">
-          {lawyer?.fullName}
-        </h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold text-gray-900 mb-1">
+            {lawyer?.fullName}
+          </h2>
+          <div className="flex justify-center text-sm items-center gap-1 bg-primary/10 text-primary font-medium py-1 px-3 rounded-full">
+            <Timer size={15} /> {lawyer?.experience} yrs
+          </div>
+        </div>
 
         {/* Service Type */}
         <p className="text-sm text-gray-600 mb-3 font-medium">

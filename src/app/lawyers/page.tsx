@@ -76,18 +76,27 @@ const LawyersPage = () => {
           <div className="col-span-4 lg:col-span-3">
             {lawyers?.data?.length > 0 ? (
               <div>
-                <div className="flex justify-between items-center pb-6">
-                  <h1 className="md:text-xl font-medium">
-                    Discover the Lawyer: ({lawyers?.data?.length}) Lawyer
-                    Available for You to Explore
-                  </h1>
+                <div className="lg:flex justify-between border-b items-center pb-6 mb-6">
+                  <div>
+                    <h1 className="text-4xl font-semibold pb-3">
+                      Find Your Legal Expert
+                    </h1>
+                    <p className="text-gray-700 text-sm">
+                      Connect with top-rated legal professionals tailored to
+                      your specific case needs. <br /> Rigorously vetted and
+                      ready to advocate for your rights.
+                    </p>
+                  </div>
                   <button
                     onClick={toggleFilters}
-                    className="lg:hidden font-medium border px-4 py-1 rounded-[6px] flex gap-2 items-center"
+                    className="lg:hidden font-medium border px-4 py-1 mt-2 lg:mt-0 rounded-[6px] flex gap-2 items-center"
                   >
                     <Funnel size={18} />
                     Filters
                   </button>
+                  <div className="hidden lg:block border bg-primary/10 text-primary font-medium py-1 px-3 rounded-[9px]">
+                    {lawyers?.data?.length} LAWYERS AVAILABLE
+                  </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {lawyers?.data.map((lawyer: any) => (
