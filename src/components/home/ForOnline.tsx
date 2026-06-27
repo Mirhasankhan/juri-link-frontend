@@ -28,7 +28,7 @@ const ForOnline = () => {
         </div>
 
         <div className="col-span-2 lg:col-span-1">
-          <p className="text-secondary font-medium">ONLINE CONSULTATION</p>
+          <p className="text-secondary uppercase tracking-widest font-medium">ONLINE CONSULTATION</p>
 
           <h1 className="text-3xl font-bold py-5">
             Get Instant Access to Trusted Legal

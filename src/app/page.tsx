@@ -7,7 +7,6 @@ import ForLawyer from "@/components/home/ForLawyer";
 import OnlineConsultation from "@/components/home/OnlineConsultation";
 import LegalIntakeHero from "@/components/home/PostNeed";
 // import Research from "@/components/home/Research";
-import OurServices from "@/components/home/Services";
 import Testimonials from "@/components/home/Testi";
 
 const HOmePage = () => {
@@ -18,7 +17,7 @@ const HOmePage = () => {
       <ForLawyer></ForLawyer>
      
       <OnlineConsultation></OnlineConsultation>
-       <OurServices></OurServices>
+       {/* <OurServices></OurServices> */}
       {/* <ForOnline></ForOnline> */}
       <ForInPerson></ForInPerson>
 <LegalIntakeHero></LegalIntakeHero>

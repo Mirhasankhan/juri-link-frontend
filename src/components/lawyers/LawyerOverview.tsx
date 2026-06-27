@@ -23,7 +23,7 @@ const LawyerOverview = ({ lawyer, isLoading }: { lawyer: any, isLoading: boolean
 
   return (
     <Container>
-      <div className="grid grid-cols-3 shadow-lg text-black bg-white px-3 lg:px-8 py-6 lg:py-16 gap-6 rounded-[20px]">
+      <div className="grid grid-cols-3 shadow-lg text-black bg-white px-3 lg:px-8 py-6 lg:py-8 gap-6 rounded-[20px]">
         <div className="col-span-3 lg:col-span-1 flex items-center justify-start">
           <Image
             alt=""
