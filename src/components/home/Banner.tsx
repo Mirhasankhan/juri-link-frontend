@@ -1,11 +1,12 @@
 "use client";
 
 import { useServicesQuery } from "@/redux/features/services/services.api";
-import { MoveRight, Scale } from "lucide-react";
+import { MoveRight, Scale, ShieldCheck, Star, Users, Briefcase } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 const Banner = () => {
-  const { data: legalServies } = useServicesQuery("");
+  const { data: legalServices } = useServicesQuery("");
   const router = useRouter();
 
   const handleBook = (id: string) => {
@@ -13,142 +14,139 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative w-full xl:h-[600px] 2xl:h-[900px] z-20 h-[500px] overflow-hidden">
-      {/* Background Video */}
+    <div className="relative w-full min-h-[620px] lg:min-h-[720px] xl:min-h-[780px] flex items-center justify-center overflow-hidden bg-slate-950 text-white">
+      {/* Background Video with Subtle Parallax Feel */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-40 scale-105 transition-transform duration-1000"
       >
         <source src="/videos/video22.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      {/* Gradient Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/60 via-black/50 to-black/70 z-5" />
+      {/* Modern Multi-Layer Gradient Overlays for Depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-900/75 to-slate-950/95 z-0" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-900/30 via-transparent to-transparent z-0 pointer-events-none" />
 
-      {/* Content Container */}
-      <div className="relative z-10 text-white h-full w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-        {/* Badge */}
-        <div className="mb-6 animate-fade-in-down">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full">
-            <Scale className="w-4 h-4" />
-            <span className="text-sm font-medium">Trusted Legal Platform</span>
-          </div>
-        </div>
+      {/* Decorative Grid Pattern Overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03] z-0 pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+          backgroundSize: "32px 32px",
+        }}
+      />
 
-        {/* Main Heading */}
-        <h1 className="text-center text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight animate-fade-in-up mb-6 max-w-5xl">
+      {/* Main Hero Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 flex flex-col items-center text-center">
+        {/* Trust Pill Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-teal-300 text-xs sm:text-sm font-medium tracking-wide shadow-lg mb-6 hover:bg-white/15 transition-colors"
+        >
+          <ShieldCheck className="w-4 h-4 text-teal-400" />
+          <span>Verified Legal Network</span>
+          <span className="w-1 h-1 rounded-full bg-teal-400" />
+          <span className="text-slate-300">Confidential & Secure</span>
+        </motion.div>
+
+        {/* Primary Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+          className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white max-w-4xl leading-[1.15] mb-6"
+        >
           Find the Right{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-cyan-200 to-sky-300">
             Legal Expert
           </span>{" "}
-          <br className="hidden sm:block" />
           for Your Needs
-        </h1>
+        </motion.h1>
 
         {/* Subtitle */}
-        <p className="text-center mt-2 text-base sm:text-lg lg:text-xl text-gray-200 max-w-3xl leading-relaxed animate-fade-in px-4">
-          Connect with qualified lawyers, post your legal requirements, and get
-          expert legal assistance when you need it most.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl leading-relaxed mb-10 font-normal"
+        >
+          Connect with qualified lawyers, post your legal requirements, and receive
+          tailored consultation online or in person when you need it most.
+        </motion.p>
 
-        {/* Search Bar (Optional - commented out originally) */}
-        {/* <div className="w-full max-w-2xl mt-8 animate-fade-in-up-delay">
-          <div className="relative">
-            <input
-              className="w-full py-4 pl-14 pr-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-              type="text"
-              placeholder="Search for legal services..."
-            />
-            <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
-          </div>
-        </div> */}
-
-        {/* Service Buttons */}
-        <div className="hidden lg:flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 mt-8 lg:mt-10 animate-fade-in-up-delay max-w-5xl px-4">
-          {legalServies?.data
-            ?.slice(0, 4)
-            .map((service: { serviceName: string; _id: string }) => (
-              <button
-                onClick={() => handleBook(service._id)}
-                className="group relative bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/30 hover:border-white/50 flex items-center gap-2 font-semibold text-sm sm:text-base lg:text-lg px-4 sm:px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20"
-                key={service._id}
-              >
-                <span className="relative z-10">{service?.serviceName}</span>
-                <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 rounded-xl transition-all duration-300" />
-              </button>
-            ))}
-        </div>
-
-        {/* Stats or Trust Indicators */}
-        {/* <div className="hidden lg:flex items-center gap-8 mt-12 animate-fade-in-up-delay-2">
-          <div className="text-center">
-            <div className="text-3xl font-bold">1000+</div>
-            <div className="text-sm text-gray-300 mt-1">Verified Lawyers</div>
-          </div>
-          <div className="w-px h-12 bg-white/20" />
-          <div className="text-center">
-            <div className="text-3xl font-bold">50K+</div>
-            <div className="text-sm text-gray-300 mt-1">Cases Resolved</div>
-          </div>
-          <div className="w-px h-12 bg-white/20" />
-          <div className="text-center">
-            <div className="text-3xl font-bold">98%</div>
-            <div className="text-sm text-gray-300 mt-1">
-              Client Satisfaction
+        {/* Quick Service Discovery Chips */}
+        {legalServices?.data && legalServices.data.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            className="w-full max-w-3xl mb-12"
+          >
+            <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-3">
+              Popular Practice Areas
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+              {legalServices.data
+                .slice(0, 5)
+                .map((service: { serviceName: string; _id: string }) => (
+                  <button
+                    key={service._id}
+                    onClick={() => handleBook(service._id)}
+                    className="group flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 hover:border-teal-400/40 text-slate-100 hover:text-white text-xs sm:text-sm font-medium transition-all duration-200 transform hover:-translate-y-0.5 shadow-sm hover:shadow-teal-500/10"
+                  >
+                    <Scale className="w-3.5 h-3.5 text-teal-400 transition-transform group-hover:scale-110" />
+                    <span>{service.serviceName}</span>
+                    <MoveRight className="w-3 h-3 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                  </button>
+                ))}
             </div>
+          </motion.div>
+        )}
+
+        {/* Trust Metrics Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+          className="grid grid-cols-3 gap-4 sm:gap-8 pt-8 border-t border-white/10 w-full max-w-2xl text-slate-300"
+        >
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-1.5 text-lg sm:text-2xl font-bold text-white">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400 hidden xs:block" />
+              <span>1,000+</span>
+            </div>
+            <span className="text-[11px] sm:text-xs text-slate-400 mt-0.5 font-medium">
+              Verified Lawyers
+            </span>
           </div>
-        </div> */}
+
+          <div className="flex flex-col items-center border-x border-white/10 px-2 sm:px-4">
+            <div className="flex items-center gap-1.5 text-lg sm:text-2xl font-bold text-white">
+              <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 hidden xs:block" />
+              <span>50k+</span>
+            </div>
+            <span className="text-[11px] sm:text-xs text-slate-400 mt-0.5 font-medium">
+              Cases Consulted
+            </span>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-1.5 text-lg sm:text-2xl font-bold text-white">
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 fill-amber-400 hidden xs:block" />
+              <span>99%</span>
+            </div>
+            <span className="text-[11px] sm:text-xs text-slate-400 mt-0.5 font-medium">
+              Client Satisfaction
+            </span>
+          </div>
+        </motion.div>
       </div>
-
-      {/* Custom CSS for animations */}
-      <style jsx>{`
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in-down {
-          animation: fadeInDown 0.8s ease-out;
-        }
-
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .animate-fade-in {
-          animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .animate-fade-in-up-delay {
-          animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .animate-fade-in-up-delay-2 {
-          animation: fadeInUp 0.8s ease-out 0.8s both;
-        }
-      `}</style>
     </div>
   );
 };
