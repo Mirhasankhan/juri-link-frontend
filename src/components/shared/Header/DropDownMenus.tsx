@@ -11,7 +11,6 @@ import {
   CalendarCheck,
   LogOut,
   ChevronRight,
-  Shield,
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
@@ -38,7 +37,7 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
         email: "",
         role: "",
         token: "",
-      })
+      }),
     );
     Cookies.remove("token");
     setActive(false);
@@ -81,7 +80,10 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
                 </span>
               )}
             </div>
-            <p className="text-xs text-slate-500 truncate" title={email as string}>
+            <p
+              className="text-xs text-slate-500 truncate"
+              title={email as string}
+            >
               {email}
             </p>
           </div>
@@ -100,8 +102,12 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
               <User className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-sm font-medium block leading-tight">My Account</span>
-              <span className="text-[11px] text-slate-400 group-hover:text-slate-500">Profile & security</span>
+              <span className="text-sm font-medium block leading-tight">
+                My Account
+              </span>
+              <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                Profile & security
+              </span>
             </div>
           </div>
           <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -117,8 +123,12 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
               <CalendarCheck className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-sm font-medium block leading-tight">Booking History</span>
-              <span className="text-[11px] text-slate-400 group-hover:text-slate-500">Appointments & logs</span>
+              <span className="text-sm font-medium block leading-tight">
+                Booking History
+              </span>
+              <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                Appointments & logs
+              </span>
             </div>
           </div>
           <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -136,8 +146,12 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
                   <CircleDollarSign className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-sm font-medium block leading-tight">Earnings</span>
-                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">Payouts & balances</span>
+                  <span className="text-sm font-medium block leading-tight">
+                    Earnings
+                  </span>
+                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                    Payouts & balances
+                  </span>
                 </div>
               </div>
               <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -153,8 +167,12 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-sm font-medium block leading-tight">Availability</span>
-                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">Schedule & time slots</span>
+                  <span className="text-sm font-medium block leading-tight">
+                    Availability
+                  </span>
+                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                    Schedule & time slots
+                  </span>
                 </div>
               </div>
               <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
