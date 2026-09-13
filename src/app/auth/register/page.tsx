@@ -38,108 +38,112 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[#f8f8f8] min-h-screen flex items-center justify-center">
-      {/* <div className="text-center">
-        <h1 className="text-4xl font-medium"> Join Juri Link</h1>
-        <p className="font-medium py-3 text-gray-500">
-          Create your account to get started
-        </p>
-      </div> */}
-
-      <div className="w-full md:w-2/5 xl:w-1/3 shadow-md md:mx-auto mx-2 py-12 px-6 dark:text-white bg-white rounded-[16px]">
-        <Image
-          placeholder="blur"
-          src={logo}
-          alt=""
-          height={150}
-          width={150}
-        ></Image>
-        <h1 className="text-2xl mt-6 font-medium ">Client Registration</h1>
-        <h1 className="text-sm text-gray-600">
-          Sign up to find and hire lawyers
-        </h1>
-
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="rounded-lg py-6 bg-white"
-        >
-          <div className="mb-4">
-            <label className="label-design pb-1">Full Name</label>
-            <input
-              {...register("fullName", {
-                required: "Full name is required",
-              })}
-              className="input-design"
-              placeholder="Enter your fullname"
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-8 py-10">
+          {/* Logo & Header */}
+          <div className="mb-8">
+            <Image
+              placeholder="blur"
+              src={logo}
+              alt="Juri Link"
+              height={48}
+              width={48}
+              className="mb-5"
             />
-            {errors.fullName && (
-              <p className="text-red-500 text-sm">{errors.fullName.message}</p>
-            )}
+            <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+              Create your account
+            </h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Sign up to find and hire lawyers
+            </p>
           </div>
 
-          <div className="mb-4">
-            <label className="label-design pb-1">Email</label>
-            <input
-              type="email"
-              {...register("email", {
-                required: "Email is required",
-              })}
-              className="input-design"
-              placeholder="Enter your email"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
+          {/* Form */}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Full Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Full Name
+              </label>
+              <input
+                {...register("fullName", {
+                  required: "Full name is required",
+                })}
+                className="w-full px-3.5 py-2.5 text-sm text-gray-900 bg-white border border-gray-200 rounded-[9px] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                placeholder="John Doe"
+              />
+              {errors.fullName && (
+                <p className="mt-1.5 text-xs text-red-500">{errors.fullName.message}</p>
+              )}
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Email address
+              </label>
+              <input
+                type="email"
+                {...register("email", {
+                  required: "Email is required",
+                })}
+                className="w-full px-3.5 py-2.5 text-sm text-gray-900 bg-white border border-gray-200 rounded-[9px] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                placeholder="you@example.com"
+              />
+              {errors.email && (
+                <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>
+              )}
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Password
+              </label>
+              <input
+                type="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters long",
+                  },
+                })}
+                className="w-full px-3.5 py-2.5 text-sm text-gray-900 bg-white border border-gray-200 rounded-[9px] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                placeholder="Min. 6 characters"
+              />
+              {errors.password && (
+                <p className="mt-1.5 text-xs text-red-500">{errors.password.message}</p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="w-full py-2.5 px-4 mt-1 bg-primary text-white text-sm font-medium rounded-[9px] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+            >
+              {isLoading ? "Creating account…" : "Create Account"}
+            </button>
+          </form>
+
+          {/* Footer links */}
+          <div className="mt-6 pt-6 border-t border-gray-100 space-y-2 text-center text-sm text-gray-500">
+            <p>
+              Already have an account?{" "}
+              <Link href="/auth/login" className="text-primary font-medium hover:underline">
+                Sign in
+              </Link>
+            </p>
+            <p>
+              Want to register as a lawyer?{" "}
+              <Link href="/auth/register-lawyer" className="text-primary font-medium hover:underline">
+                Register as Lawyer
+              </Link>
+            </p>
           </div>
-
-          <div className="mb-4">
-            <label className="label-design pb-1">Password</label>
-            <input
-              type="password"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters long",
-                },
-              })}
-              className="input-design"
-              placeholder="Enter password"
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm">{errors.password.message}</p>
-            )}
-          </div>
-
-          <button
-            disabled={isLoading}
-            type="submit"
-            className={`${
-              isLoading ? "bg-primary/75" : "bg-primary"
-            } text-white py-3 mt-3 w-full font-medium rounded-[4px]`}
-          >
-            {isLoading ? "Creating...." : "Create Account"}
-          </button>
-        </form>
-
-        <div className="flex border-t pt-4 border-gray-200 text-gray-700 justify-center">
-          <h1>Already have an account?</h1>
-          <Link
-            href="/auth/login"
-            className="text-secondary hover:underline ml-1"
-          >
-            Login
-          </Link>
-        </div>
-
-        <div className="flex text-gray-700 pt-2 justify-center">
-          <h1>Want to register as a lawyer?</h1>
-          <Link
-            href="/auth/register-lawyer"
-            className="text-secondary hover:underline ml-1"
-          >
-            Register as Lawyer
-          </Link>
         </div>
       </div>
     </div>
