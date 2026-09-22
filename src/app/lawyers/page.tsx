@@ -64,14 +64,16 @@ const LawyersPage = () => {
       <Container>
         <div className="grid grid-cols-4 gap-5 py-6">
           <div className="hidden lg:block lg:col-span-1">
-            <Filters
-              selectedYear={selectedYear}
-              setSelectedYear={setSelectedYear}
-              selectedService={selectedService}
-              setSelectedService={setSelectedService}
-              selectedLegalService={selectedLegal}
-              setSelectedLegalService={setSelectedLegal}
-            />
+            <div className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto">
+              <Filters
+                selectedYear={selectedYear}
+                setSelectedYear={setSelectedYear}
+                selectedService={selectedService}
+                setSelectedService={setSelectedService}
+                selectedLegalService={selectedLegal}
+                setSelectedLegalService={setSelectedLegal}
+              />
+            </div>
           </div>
           <div className="col-span-4 lg:col-span-3">
             {lawyers?.data?.length > 0 ? (

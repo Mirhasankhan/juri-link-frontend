@@ -63,14 +63,16 @@ const PostsPage = () => {
         <div className="grid grid-cols-4 gap-5 mt-6">
           {/* Desktop Filters */}
           <div className="hidden lg:block col-span-1">
-            <PostFilters
-              selectedService={selectedService}
-              setSelectedService={setSelectedService}
-              selectedLegalService={selectedLegal}
-              setSelectedLegalService={setSelectedLegal}
-              selectedUrgency={selectedUrgency}
-              setSelectedUrgency={setSelectedUrgency}
-            />
+            <div className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto">
+              <PostFilters
+                selectedService={selectedService}
+                setSelectedService={setSelectedService}
+                selectedLegalService={selectedLegal}
+                setSelectedLegalService={setSelectedLegal}
+                selectedUrgency={selectedUrgency}
+                setSelectedUrgency={setSelectedUrgency}
+              />
+            </div>
           </div>
 
           {/* Posts */}
@@ -97,12 +99,12 @@ const PostsPage = () => {
                     </button>
                   </Link>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                   {posts?.data
                     ?.slice()
                     .reverse()
                     .map((post: any) => (
-                      <PostCard key={post.id} post={post} />
+                      <PostCard key={post._id || post.id} post={post} />
                     ))}
                 </div>
               </div>

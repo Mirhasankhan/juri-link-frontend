@@ -23,10 +23,10 @@ const SignOut = () => {
   return (
     <button
       onClick={() => logOut()}
-      className=" flex items-center gap-2 text-red-600 py-3 hover:bg-red-100 w-full  font-medium pl-4"
+      className="flex items-center gap-2.5 text-rose-600 hover:bg-rose-50 w-full font-medium px-3 py-2 rounded-xl transition-colors text-sm"
     >
-      <LogOut />
-      Sign Out
+      <LogOut className="w-4 h-4" />
+      <span>Sign Out</span>
     </button>
   );
 };

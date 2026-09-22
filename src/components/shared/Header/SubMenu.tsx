@@ -35,25 +35,24 @@ const SubMenu = () => {
   });
 
   return (
-    <div className="flex items-center gap-2 text-sm sm:text-base font-medium text-gray-600">
+    <nav className="flex items-center gap-1">
       {filteredLinks.map((link) => {
         const isActive = pathname === link.href;
         return (
           <Link
             key={link.href}
             href={link.href}
-            className={`px-4 py-2 rounded-full transition-all duration-300 
-              ${
-                isActive
-                  ? "bg-secondary/10 text-secondary font-bold shadow-sm"
-                  : "hover:bg-gray-100 hover:text-secondary"
-              }`}
+            className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-150 ${
+              isActive
+                ? "bg-primary/10 text-primary font-semibold shadow-xs"
+                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
+            }`}
           >
             {link.label}
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 };
 

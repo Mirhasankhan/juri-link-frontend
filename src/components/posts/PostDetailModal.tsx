@@ -56,13 +56,20 @@ const PostDetailModal = ({ id }: { id: string }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center text-gray-500 gap-1 cursor-pointer">
-          <MessageCircle size={20} />
-          <p className="font-medium">{comments.length}</p>
-        </div>
+        <button
+          type="button"
+          className="group/comment flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-teal-50/70 border border-slate-200/70 text-slate-600 hover:text-primary text-xs font-semibold transition-all duration-200 active:scale-95 cursor-pointer"
+          title="View comments"
+        >
+          <MessageCircle
+            size={16}
+            className="text-slate-400 group-hover/comment:text-primary transition-colors"
+          />
+          <span>{comments.length}</span>
+        </button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[500px] bg-white !rounded-[8px] p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-[520px] bg-white !rounded-2xl p-0 overflow-hidden border border-slate-200 shadow-2xl">
         <DialogHeader className="p-4 border-b">
           <DialogTitle>
             Comments of {userId?.fullName ?? "Unknown"}&apos;s post
