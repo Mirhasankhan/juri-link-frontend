@@ -51,20 +51,21 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)] transition-all">
       <Container>
-        <div className="flex justify-between items-center py-3.5">
+        <div className="flex min-h-[80px] items-center justify-between gap-4 py-3">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 group transition-opacity hover:opacity-90"
+            aria-label="Juri Link home"
+            className="group flex shrink-0 items-center gap-2.5 rounded-xl transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
             <Image
-              height={48}
-              width={48}
+              height={64}
+              width={64}
               src={logo}
               alt="JuriLink Logo"
-              className="h-10 w-10 sm:h-11 sm:w-11 object-contain transition-transform duration-200 group-hover:scale-105"
+              className="h-16 w-16 object-contain transition-transform duration-200 group-hover:scale-105 sm:h-14 sm:w-14"
               priority
-            />
+            />         
           </Link>
 
           {/* Desktop Navigation */}
@@ -83,7 +84,7 @@ const Header = () => {
                   Login
                 </Link>
                 <Link
-                  className="text-sm font-semibold text-white bg-primary hover:bg-primary/90 px-4 py-2 rounded-lg shadow-xs hover:shadow transition-all duration-200"
+                  className="text-sm font-semibold text-white bg-primary hover:bg-primary/90 px-4 py-2 rounded-[9px] shadow-xs hover:shadow transition-all duration-200"
                   href="/auth/register"
                 >
                   Get Started
@@ -146,7 +147,9 @@ const Header = () => {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-100 transition-colors focus:outline-none"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+              className="rounded-xl p-2.5 text-slate-700 transition-colors hover:bg-primary/10 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
               aria-label="Toggle navigation menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

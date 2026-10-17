@@ -45,6 +45,9 @@ const SmallDeviceMenu = ({ setIsOpen }: SmallDeviceMenuProps) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.98 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
+      id="mobile-navigation"
+      role="navigation"
+      aria-label="Mobile navigation"
       className="absolute right-0 top-14 w-[280px] sm:w-[320px] p-3.5 bg-white text-slate-800 rounded-2xl shadow-[0_12px_36px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.05)] border border-slate-200/90 flex flex-col gap-1 z-50"
     >
       <div className="border-b border-slate-100 pb-2.5 mb-1 px-2.5">

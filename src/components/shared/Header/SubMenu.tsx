@@ -35,7 +35,7 @@ const SubMenu = () => {
   });
 
   return (
-    <nav className="flex items-center gap-1">
+    <nav aria-label="Main navigation" className="flex items-center gap-1">
       {filteredLinks.map((link) => {
         const isActive = pathname === link.href;
         return (
@@ -47,6 +47,7 @@ const SubMenu = () => {
                 ? "bg-primary/10 text-primary font-semibold shadow-xs"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
             }`}
+            aria-current={isActive ? "page" : undefined}
           >
             {link.label}
           </Link>
