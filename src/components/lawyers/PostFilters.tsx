@@ -132,7 +132,13 @@ const PostFilters = ({
             stroke="currentColor"
             strokeWidth="2"
           />
-          <circle cx="12" cy="9.8" r="2.4" stroke="currentColor" strokeWidth="2" />
+          <circle
+            cx="12"
+            cy="9.8"
+            r="2.4"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
         </svg>
       ),
     },
@@ -170,19 +176,17 @@ const PostFilters = ({
     selectedLegalService && {
       key: "legal",
       label: legalServiceOptions.find(
-        (s: any) => s.value === selectedLegalService
+        (s: any) => s.value === selectedLegalService,
       )?.label,
       clear: () => setSelectedLegalService(null),
     },
   ].filter(Boolean) as { key: string; label: string; clear: () => void }[];
 
-  
-
   return (
     <div className="max-w-sm bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="flex items-baseline justify-between px-5 py-4 border-b border-gray-200">
-        <h2 className="font-serif text-lg font-bold text-gray-900">Filters</h2>     
+        <h2 className="font-serif text-lg font-bold text-gray-900">Filters</h2>
       </div>
 
       {/* Service Type */}
@@ -200,9 +204,7 @@ const PostFilters = ({
               <button
                 key={option.value}
                 type="button"
-                onClick={() =>
-                  setSelectedService(active ? null : option.value)
-                }
+                onClick={() => setSelectedService(active ? null : option.value)}
                 className={`flex-1 rounded-[9px] border px-1.5 py-3 text-center transition-colors ${
                   active
                     ? "border-amber-700 bg-amber-50"
@@ -211,7 +213,9 @@ const PostFilters = ({
               >
                 <span
                   className={`mx-auto mb-1.5 flex h-6.5 w-6.5 items-center justify-center rounded-full ${
-                    active ? "bg-white text-amber-700" : "bg-sky-50 text-[#1E3A52]"
+                    active
+                      ? "bg-white text-amber-700"
+                      : "bg-sky-50 text-[#1E3A52]"
                   }`}
                 >
                   {option.icon}
@@ -240,9 +244,7 @@ const PostFilters = ({
               <button
                 key={option.value}
                 type="button"
-                onClick={() =>
-                  setSelectedUrgency(active ? null : option.value)
-                }
+                onClick={() => setSelectedUrgency(active ? null : option.value)}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-[9px] border text-xs font-semibold transition-colors ${
                   active
                     ? "bg-[#1E3A52] border-[#1E3A52] text-white"
@@ -274,7 +276,7 @@ const PostFilters = ({
             return (
               <label
                 key={option.value}
-                className="flex items-center justify-between py-2 px-1 rounded-md cursor-pointer hover:bg-gray-50"
+                className="flex items-center justify-between py-2 px-1 rounded-[6px] cursor-pointer hover:bg-gray-50"
               >
                 <span className="flex items-center gap-2.5">
                   <input

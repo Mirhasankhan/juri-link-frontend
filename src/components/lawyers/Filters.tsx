@@ -19,7 +19,7 @@
 //   selectedLegalService,
 //   setSelectedLegalService,
 // }: FiltersProps) => {
-//   const { data: legalServices } = useServicesQuery(""); 
+//   const { data: legalServices } = useServicesQuery("");
 
 //   const yearOptions = [
 //     { label: "1 Year", value: "1" },
@@ -292,7 +292,7 @@ const Filters = ({
             return (
               <label
                 key={option.value}
-                className="flex items-center justify-between py-2 px-1 rounded-md cursor-pointer hover:bg-gray-50"
+                className="flex items-center justify-between py-2 px-1 rounded-[6px] cursor-pointer hover:bg-gray-50"
               >
                 <span className="flex items-center gap-2.5">
                   <input
@@ -362,4 +362,3 @@ const Filters = ({
 };
 
 export default Filters;
-

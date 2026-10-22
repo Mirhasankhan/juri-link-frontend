@@ -12,14 +12,14 @@ const ServiceHero = () => {
 
         <p className="text-base leading-relaxed text-[#5b6573] max-w-xl mb-7">
           Whether you are navigating a complex real estate transaction or
-          protecting your digital assets, JuriLink connects you with
-          world-class specialists tailored to your specific legal needs.
+          protecting your digital assets, JuriLink connects you with world-class
+          specialists tailored to your specific legal needs.
         </p>
 
         <div className="flex flex-wrap gap-3.5">
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#dde2ea] bg-white px-4 py-2.5 text-sm font-semibold text-[#1a2b4c] hover:border-[#c4cce0] hover:bg-[#f9fafc]"
+            className="inline-flex items-center gap-2 rounded-[8px] border border-[#dde2ea] bg-white px-4 py-2.5 text-sm font-semibold text-[#1a2b4c] hover:border-[#c4cce0] hover:bg-[#f9fafc]"
           >
             <svg
               width="18"
@@ -38,7 +38,7 @@ const ServiceHero = () => {
 
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#dde2ea] bg-white px-4 py-2.5 text-sm font-semibold text-[#1a2b4c] hover:border-[#c4cce0] hover:bg-[#f9fafc]"
+            className="inline-flex items-center gap-2 rounded-[8px] border border-[#dde2ea] bg-white px-4 py-2.5 text-sm font-semibold text-[#1a2b4c] hover:border-[#c4cce0] hover:bg-[#f9fafc]"
           >
             <svg
               width="18"
@@ -58,6 +58,6 @@ const ServiceHero = () => {
       </Container>
     </section>
   );
-}
+};
 
 export default ServiceHero;

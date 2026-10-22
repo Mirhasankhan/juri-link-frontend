@@ -49,7 +49,7 @@ const ForgetPassword = ({
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="rounded-lg pt-6 bg-white w-full"
+          className="rounded-[8px] pt-6 bg-white w-full"
         >
           <div className="mb-4">
             <label className="block pb-2 font-medium">Email</label>
@@ -81,7 +81,10 @@ const ForgetPassword = ({
           </button>
         </form>
 
-        <Link href="/auth/login" className="flex items-center gap-1 pt-6 text-sm">
+        <Link
+          href="/auth/login"
+          className="flex items-center gap-1 pt-6 text-sm"
+        >
           <ArrowLeft size={15} /> Back to login
         </Link>
       </div>

@@ -65,7 +65,7 @@ const Header = () => {
               alt="JuriLink Logo"
               className="h-16 w-16 object-contain transition-transform duration-200 group-hover:scale-105 sm:h-14 sm:w-14"
               priority
-            />         
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -78,7 +78,7 @@ const Header = () => {
             {!email ? (
               <div className="flex items-center gap-2">
                 <Link
-                  className="text-sm font-medium text-slate-700 hover:text-primary px-3.5 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+                  className="text-sm font-medium text-slate-700 hover:text-primary px-3.5 py-2 rounded-[8px] hover:bg-slate-50 transition-colors"
                   href="/auth/login"
                 >
                   Login
@@ -152,7 +152,11 @@ const Header = () => {
               className="rounded-xl p-2.5 text-slate-700 transition-colors hover:bg-primary/10 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
               aria-label="Toggle navigation menu"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
 
             <AnimatePresence>

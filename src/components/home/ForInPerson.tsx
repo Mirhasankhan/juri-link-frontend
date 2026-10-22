@@ -3,7 +3,13 @@
 import Container from "@/utils/Container";
 import Image from "next/image";
 import inPerson from "../../assets/in-persn.jpg";
-import { CheckCircle2, ArrowRight, Building2, MapPin, Users2 } from "lucide-react";
+import {
+  CheckCircle2,
+  ArrowRight,
+  Building2,
+  MapPin,
+  Users2,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
@@ -52,7 +58,10 @@ const ForInPerson = () => {
             </h2>
 
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-8">
-              Connect directly with highly experienced legal professionals for clear, face-to-face guidance tailored to your specific situation. Review sensitive files securely and plan your strategy with confidence.
+              Connect directly with highly experienced legal professionals for
+              clear, face-to-face guidance tailored to your specific situation.
+              Review sensitive files securely and plan your strategy with
+              confidence.
             </p>
 
             {/* Benefit Checklist */}
@@ -116,12 +125,14 @@ const ForInPerson = () => {
 
               {/* Bottom Floating Badge */}
               <div className="absolute bottom-4 right-4 bg-slate-900/90 backdrop-blur-md text-white px-4 py-3 rounded-xl shadow-xl border border-white/10 flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-secondary/30 text-teal-300">
+                <div className="p-2 rounded-[8px] bg-secondary/30 text-teal-300">
                   <Users2 className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-sm font-bold">Confidential & Direct</div>
-                  <div className="text-[11px] text-slate-300">Private office consultation</div>
+                  <div className="text-[11px] text-slate-300">
+                    Private office consultation
+                  </div>
                 </div>
               </div>
             </div>

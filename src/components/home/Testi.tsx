@@ -38,7 +38,10 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 lg:py-28 bg-slate-50/60 border-t border-slate-100" id="testimonials">
+    <section
+      className="py-20 lg:py-28 bg-slate-50/60 border-t border-slate-100"
+      id="testimonials"
+    >
       <Container>
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -52,7 +55,8 @@ const Testimonials = () => {
           </h2>
 
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Real experiences from clients who successfully secured certified legal representation through Juri Link.
+            Real experiences from clients who successfully secured certified
+            legal representation through Juri Link.
           </p>
         </div>
 
@@ -82,7 +86,7 @@ const Testimonials = () => {
                       />
                     ))}
                   </div>
-                  <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
+                  <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-[6px]">
                     {testimonial.caseType}
                   </span>
                 </div>
@@ -113,7 +117,10 @@ const Testimonials = () => {
                     {testimonial.name}
                   </h4>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    {testimonial.role} &bull; <span className="text-slate-700 font-medium">{testimonial.company}</span>
+                    {testimonial.role} &bull;{" "}
+                    <span className="text-slate-700 font-medium">
+                      {testimonial.company}
+                    </span>
                   </p>
                 </div>
               </div>

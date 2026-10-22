@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, Users, FileText, Star, Info, Briefcase, User } from "lucide-react";
+import {
+  Home,
+  Users,
+  FileText,
+  Star,
+  Info,
+  Briefcase,
+  User,
+} from "lucide-react";
 
 import SignOut from "../SignOut";
 import { JWTDecode } from "@/utils/jwt";
@@ -32,7 +40,12 @@ const SmallDeviceMenu = ({ setIsOpen }: SmallDeviceMenuProps) => {
 
   // Filter links based on role
   const filteredLinks = allLinks.filter((link) => {
-    if (!role) return link.href !== "/premium" && link.href !== "/create-post" && link.href !== "/my-profile/manage-profile";
+    if (!role)
+      return (
+        link.href !== "/premium" &&
+        link.href !== "/create-post" &&
+        link.href !== "/my-profile/manage-profile"
+      );
     if (role === "User") return link.href !== "/premium";
     if (role === "Lawyer")
       return link.href !== "/create-post" && link.href !== "/lawyers";
@@ -69,7 +82,9 @@ const SmallDeviceMenu = ({ setIsOpen }: SmallDeviceMenuProps) => {
                   : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-primary" : "text-slate-400"}`} />
+              <Icon
+                className={`w-4 h-4 shrink-0 ${isActive ? "text-primary" : "text-slate-400"}`}
+              />
               <span>{label}</span>
             </Link>
           );
@@ -81,20 +96,23 @@ const SmallDeviceMenu = ({ setIsOpen }: SmallDeviceMenuProps) => {
           <Link
             href="/auth/login"
             onClick={() => setIsOpen(false)}
-            className="flex-1 text-center text-sm font-medium text-slate-700 hover:text-primary py-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
+            className="flex-1 text-center text-sm font-medium text-slate-700 hover:text-primary py-2 rounded-[8px] border border-slate-200 hover:bg-slate-50 transition-colors"
           >
             Login
           </Link>
           <Link
             href="/auth/register"
             onClick={() => setIsOpen(false)}
-            className="flex-1 text-center text-sm font-semibold text-white bg-primary hover:bg-primary/90 py-2 rounded-lg shadow-xs transition-colors"
+            className="flex-1 text-center text-sm font-semibold text-white bg-primary hover:bg-primary/90 py-2 rounded-[8px] shadow-xs transition-colors"
           >
             Get Started
           </Link>
         </div>
       ) : (
-        <div className="pt-1.5 mt-1 border-t border-slate-100" onClick={() => setIsOpen(false)}>
+        <div
+          className="pt-1.5 mt-1 border-t border-slate-100"
+          onClick={() => setIsOpen(false)}
+        >
           <SignOut />
         </div>
       )}

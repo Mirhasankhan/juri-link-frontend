@@ -41,7 +41,7 @@ const Login = () => {
             email: response.data.data.userInfo.email,
             role: response.data.data.userInfo.role,
             token: response.data.data.accessToken,
-          })
+          }),
         );
         Cookies.set("token", response.data?.data.accessToken);
       } else if (response.error) {
@@ -81,7 +81,7 @@ const Login = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="rounded-lg pt-6 bg-white"
+          className="rounded-[8px] pt-6 bg-white"
         >
           <div className="mb-4">
             <label className="label-design pb-1">Email Address</label>
@@ -179,7 +179,7 @@ const Login = () => {
           }
           disabled={isLoading}
           type="submit"
-          className="bg-white flex items-center gap-2 justify-center border py-3 w-full rounded-md"
+          className="bg-white flex items-center gap-2 justify-center border py-3 w-full rounded-[6px]"
         >
           <FcGoogle size={20} /> Sign In With Google
         </button>
@@ -191,13 +191,16 @@ const Login = () => {
           }
           disabled={isLoading}
           type="submit"
-          className="bg-white flex items-center gap-2 justify-center border py-3 w-full rounded-md mt-3"
+          className="bg-white flex items-center gap-2 justify-center border py-3 w-full rounded-[6px] mt-3"
         >
           <FaGithub size={20} /> Sign In With Github
         </button> */}
         <div className="text-center text-gray-700 pt-4">
           Dont have an account?
-          <Link href="/auth/register" className="text-secondary hover:underline">
+          <Link
+            href="/auth/register"
+            className="text-secondary hover:underline"
+          >
             Register Here
           </Link>
         </div>

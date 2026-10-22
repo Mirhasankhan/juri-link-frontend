@@ -1,7 +1,13 @@
 "use client";
 
 import { JWTDecode } from "@/utils/jwt";
-import { MessagesSquare, Timer, ArrowUpRight, Video, Building2 } from "lucide-react";
+import {
+  MessagesSquare,
+  Timer,
+  ArrowUpRight,
+  Video,
+  Building2,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -96,13 +102,13 @@ const NewCard = ({ lawyer }: { lawyer: any }) => {
                 .map((service: { _id: string; serviceName: string }) => (
                   <span
                     key={service._id}
-                    className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200/60"
+                    className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-[6px] border border-slate-200/60"
                   >
                     {service.serviceName}
                   </span>
                 ))}
               {lawyer.legalServices.length > 3 && (
-                <span className="inline-block bg-slate-50 text-slate-500 text-xs font-medium px-2 py-1 rounded-md">
+                <span className="inline-block bg-slate-50 text-slate-500 text-xs font-medium px-2 py-1 rounded-[6px]">
                   +{lawyer.legalServices.length - 3}
                 </span>
               )}

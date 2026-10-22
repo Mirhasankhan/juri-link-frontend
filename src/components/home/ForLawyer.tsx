@@ -4,32 +4,44 @@ import Image from "next/image";
 import lawyerImage from "../../assets/lawyer.jpg";
 import Container from "@/utils/Container";
 import { motion } from "framer-motion";
-import { Clock, ShieldCheck, ArrowRight, TrendingUp, Briefcase, Award, CheckCircle2 } from "lucide-react";
+import {
+  Clock,
+  ShieldCheck,
+  ArrowRight,
+  TrendingUp,
+  Briefcase,
+  Award,
+  CheckCircle2,
+} from "lucide-react";
 import Link from "next/link";
 
 const features = [
   {
     icon: TrendingUp,
     title: "Grow your client base",
-    description: "Access a steady stream of pre-screened, high-intent client inquiries daily.",
+    description:
+      "Access a steady stream of pre-screened, high-intent client inquiries daily.",
     color: "text-teal-600 bg-teal-50 border-teal-100",
   },
   {
     icon: Clock,
     title: "Flexible schedule & rates",
-    description: "Set your own hourly or fixed consultation fees and manage availability on your terms.",
+    description:
+      "Set your own hourly or fixed consultation fees and manage availability on your terms.",
     color: "text-sky-600 bg-sky-50 border-sky-100",
   },
   {
     icon: ShieldCheck,
     title: "Secure escrow payments",
-    description: "Guaranteed, automated payouts directly to your account with zero billing friction.",
+    description:
+      "Guaranteed, automated payouts directly to your account with zero billing friction.",
     color: "text-emerald-600 bg-emerald-50 border-emerald-100",
   },
   {
     icon: Briefcase,
     title: "Integrated practice tools",
-    description: "Built-in video consultations, direct messaging, and document management.",
+    description:
+      "Built-in video consultations, direct messaging, and document management.",
     color: "text-slate-700 bg-slate-100 border-slate-200",
   },
 ];
@@ -58,7 +70,9 @@ const ForLawyer = () => {
             </h2>
 
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-              Join qualified attorneys on Juri Link. Connect with verified clients looking for your specific practice expertise, streamline consultations, and grow your practice.
+              Join qualified attorneys on Juri Link. Connect with verified
+              clients looking for your specific practice expertise, streamline
+              consultations, and grow your practice.
             </p>
 
             {/* Feature Cards 2x2 Grid */}
@@ -71,7 +85,7 @@ const ForLawyer = () => {
                     className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-slate-300 hover:shadow-md transition-all duration-200 flex flex-col gap-2"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg border ${feat.color}`}>
+                      <div className={`p-2 rounded-[8px] border ${feat.color}`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <h4 className="font-bold text-sm text-slate-900">
@@ -126,19 +140,25 @@ const ForLawyer = () => {
               <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-slate-100 flex items-center gap-2.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <div className="text-left">
-                  <div className="text-xs font-bold text-slate-900">Verified Network</div>
-                  <div className="text-[10px] text-slate-500">Top 5% Legal Talent</div>
+                  <div className="text-xs font-bold text-slate-900">
+                    Verified Network
+                  </div>
+                  <div className="text-[10px] text-slate-500">
+                    Top 5% Legal Talent
+                  </div>
                 </div>
               </div>
 
               {/* Bottom Floating Badge */}
               <div className="absolute bottom-4 right-4 left-4 sm:left-auto bg-slate-900/90 backdrop-blur-md text-white px-4 py-3 rounded-xl shadow-xl border border-white/10 flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400">
+                <div className="p-2 rounded-[8px] bg-teal-500/20 text-teal-400">
                   <TrendingUp className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-sm font-bold">+40% Growth</div>
-                  <div className="text-[11px] text-slate-300">Average client roster increase</div>
+                  <div className="text-[11px] text-slate-300">
+                    Average client roster increase
+                  </div>
                 </div>
               </div>
             </div>

@@ -154,7 +154,7 @@ const VerifyEmail = () => {
       </div>
 
       {/* <Dialog open={openModal} onOpenChange={setOpenModal}>
-        <DialogContent className="sm:max-w-[420px] bg-white rounded-lg p-6 shadow-lg">
+        <DialogContent className="sm:max-w-[420px] bg-white rounded-[8px] p-6 shadow-lg">
           <DialogHeader>
             <DialogTitle className="text-xl font-semibold">
               Setup Your Payment

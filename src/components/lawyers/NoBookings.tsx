@@ -31,7 +31,7 @@ const NoBookings = () => {
       <div className="grid md:grid-cols-2 gap-4 mt-10 mb-8 max-w-2xl w-full">
         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-start gap-3">
-            <div className="bg-blue-100 p-2 rounded-lg">
+            <div className="bg-blue-100 p-2 rounded-[8px]">
               <Users size={24} className="text-blue-600" />
             </div>
             <div className="flex-1">
@@ -47,7 +47,7 @@ const NoBookings = () => {
 
         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-start gap-3">
-            <div className="bg-purple-100 p-2 rounded-lg">
+            <div className="bg-purple-100 p-2 rounded-[8px]">
               <Clock size={24} className="text-purple-600" />
             </div>
             <div className="flex-1">
