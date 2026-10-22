@@ -22,13 +22,13 @@ const Footer = () => {
               Join thousands of satisfied clients who found the right legal
               <br /> representation through LegalConnect.
             </p>
-            <div className="flex gap-6">
-              <button className="bg-primary text-white py-2 px-6 rounded-[4px] font-medium">
+            <div  className="flex gap-6">
+              <Link href="/auth/register" className="bg-primary text-white py-2 px-6 rounded-[4px] font-medium">
                 Get Started Today
-              </button>
-              <button className="bg-white text-secondary border border-primary py-2 px-6 rounded-[4px] font-medium">
+              </Link>
+              <Link href="/lawyers" className="bg-white text-secondary border border-primary py-2 px-6 rounded-[4px] font-medium">
                 Browse Lawyers
-              </button>
+              </Link>
             </div>
           </div>
         </Container>

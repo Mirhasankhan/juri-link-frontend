@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { Skeleton } from "@/components/ui/skeleton";
 import logo from "../../../assets/logo.main.png";
 
 const inputClass =
@@ -17,7 +18,7 @@ const inputClass =
 const labelClass = "block text-sm font-medium text-gray-700 mb-1.5";
 
 const LawyerSignUpForm = () => {
-  const { data: legalServices } = useServicesQuery("");
+  const { data: legalServices, isLoading: isServicesLoading } = useServicesQuery("");
   const [registerRequest, { isLoading }] = useRegisterRequestMutation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const router = useRouter();
@@ -236,26 +237,36 @@ const LawyerSignUpForm = () => {
                 Areas of Practice
               </label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 p-4 border border-gray-200 rounded-[9px] bg-gray-50/50">
-                {legalServices?.data?.map(
-                  (service: { _id: string; serviceName: string }) => (
-                    <label
-                      key={service._id}
-                      className="flex items-center gap-2.5 px-2 py-1.5 rounded-[6px] hover:bg-white hover:shadow-sm cursor-pointer transition-all"
-                    >
-                      <input
-                        className="w-4 h-4 rounded accent-primary shrink-0"
-                        type="checkbox"
-                        value={service._id}
-                        {...register("specializations", {
-                          validate: (value) =>
-                            value.length > 0 ||
-                            "At least one specialization is required",
-                        })}
-                      />
-                      <span className="text-sm text-gray-700">{service.serviceName}</span>
-                    </label>
-                  )
-                )}
+                {isServicesLoading
+                  ? Array.from({ length: 6 }).map((_, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-2.5 px-2 py-1.5"
+                      >
+                        <Skeleton className="h-4 w-4 shrink-0 rounded" />
+                        <Skeleton className="h-4 w-full" />
+                      </div>
+                    ))
+                  : legalServices?.data?.map(
+                      (service: { _id: string; serviceName: string }) => (
+                        <label
+                          key={service._id}
+                          className="flex items-center gap-2.5 px-2 py-1.5 rounded-[6px] hover:bg-white hover:shadow-sm cursor-pointer transition-all"
+                        >
+                          <input
+                            className="w-4 h-4 rounded accent-primary shrink-0"
+                            type="checkbox"
+                            value={service._id}
+                            {...register("specializations", {
+                              validate: (value) =>
+                                value.length > 0 ||
+                                "At least one specialization is required",
+                            })}
+                          />
+                          <span className="text-sm text-gray-700">{service.serviceName}</span>
+                        </label>
+                      )
+                    )}
               </div>
               {errors.specializations && (
                 <p className="mt-1.5 text-xs text-red-500">{errors.specializations.message}</p>
