@@ -31,13 +31,7 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
-    socialLogin: builder.mutation({
-      query: (userInfo) => ({
-        url: "/auth/social-login",
-        method: "POST",
-        body: userInfo,
-      }),
-    }),
+
     profile: builder.query({
       query: () => ({
         url: "/user/profile",
@@ -78,7 +72,7 @@ const authApi = baseApi.injectEndpoints({
     }),
     updateImage: builder.mutation({
       query: (image) => ({
-        url: "/users/update/profileImage",
+        url: "/auth/upload/profileImage",
         method: "PUT",
         body: image,
       }),
@@ -109,23 +103,28 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
     allLawyers: builder.query({
-      query: ({ experience, type, specializationId }) => ({
-        url: `/user/all?experience=${experience}&type=${type}&specializationId=${specializationId}`,
-        method: "GET",
-      }),
+      query: (params: { experience?: string | number | null; type?: string | null; specializationId?: string | null } = {}) => {
+        const queryParams = new URLSearchParams();
+        if (params?.experience && params.experience !== "undefined") {
+          queryParams.append("experience", String(params.experience));
+        }
+        if (params?.type && params.type !== "undefined") {
+          queryParams.append("type", String(params.type));
+        }
+        if (params?.specializationId && params.specializationId !== "undefined") {
+          queryParams.append("specializationId", String(params.specializationId));
+        }
+        const qs = queryParams.toString();
+        return {
+          url: qs ? `/user/all?${qs}` : "/user/all",
+          method: "GET",
+        };
+      },
       providesTags: ["users"],
     }),
     lawyerDetails: builder.query({
       query: (id) => ({
         url: `/user/details/${id}`,
-        method: "GET",
-      }),
-      providesTags: ["users"],
-    }),
-
-    allUsers: builder.query({
-      query: ({ searchQuery, selectedRole, page, limit }) => ({
-        url: `/analysis/all-users?search=${searchQuery}&role=${selectedRole}&page=${page}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: ["users"],
@@ -146,9 +145,7 @@ export const {
   useUpdateIntroVideoMutation,
   useAllLawyersQuery,
   useLoginMutation,
-  useAllUsersQuery,
   useUpdateProfileMutation,
-  useSocialLoginMutation,
   useVerifyOtpMutation,
   useResetPasswordMutation,
 } = authApi;
