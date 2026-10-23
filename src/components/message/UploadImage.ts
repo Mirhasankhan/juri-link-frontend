@@ -5,21 +5,29 @@ export const uploadImage = async (file: File) => {
 
   const formData = new FormData();
   formData.append("fileUrl", file);
+  formData.append("files", file);
 
   try {
-    const response = await axios.post(
-      "http://72.60.125.50:5003/api/v1/message/generate-url",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const apiBase =
+      process.env.NEXT_PUBLIC_BASE_URL ||
+      "https://api.passit.smtsigma.com/api/v1";
 
-    return response.data; // API response (likely contains the uploaded image URL)
+    const uploadUrl =
+      process.env.NEXT_PUBLIC_IMAGE_UPLOAD_URL ||
+      `${apiBase.replace(/\/+$/, "")}/message/generate-url`;
+
+    const response = await axios.post(uploadUrl, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
   } catch (error: any) {
-    console.error("Image upload failed:", error.response?.data || error.message);
+    console.error(
+      "Image upload failed:",
+      error.response?.data || error.message
+    );
     throw new Error(error.response?.data?.message || "Upload failed");
   }
 };
