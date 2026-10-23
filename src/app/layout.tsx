@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/Providers/ThemeProvider";
-import Header from "@/components/shared/Header/Header";
-import Footer from "@/components/shared/Footer/Footer";
 import Providers from "@/lib/providers/Providers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,13 +49,15 @@ export const metadata: Metadata = {
 //   );
 // }
 
+import AppLayoutWrapper from "@/components/layout/AppLayoutWrapper";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en"  suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" href="/logo9.png" />
       </head>
@@ -70,9 +70,7 @@ export default function RootLayout({
         >
           <Providers>
             <ToastContainer position="top-right" autoClose={3000} />
-            <Header />
-            <div className="min-h-[90vh] bg-white">{children}</div>
-            <Footer />
+            <AppLayoutWrapper>{children}</AppLayoutWrapper>
           </Providers>
         </ThemeProvider>
       </body>

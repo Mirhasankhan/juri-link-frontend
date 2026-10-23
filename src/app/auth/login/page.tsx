@@ -32,20 +32,31 @@ const Login = () => {
       const response: any = await loginUser(data);
 
       if (response.data?.data?.accessToken) {
-        toast.success("Login Successful");
+        const token = response.data.data.accessToken;
+        const userInfo = response.data.data.userInfo;
+        const role = userInfo?.role;
 
-        router.push("/");
+        // Set auth token cookie first so middleware picks it up immediately
+        Cookies.set("token", token);
+
         dispatch(
           setUser({
-            name: response.data.data.userInfo.fullName,
-            email: response.data.data.userInfo.email,
-            role: response.data.data.userInfo.role,
-            token: response.data.data.accessToken,
+            name: userInfo?.fullName,
+            email: userInfo?.email,
+            role: role,
+            token: token,
           }),
         );
-        Cookies.set("token", response.data?.data.accessToken);
+
+        toast.success("Login Successful");
+
+        if (role === "Lawyer") {
+          router.push("/lawyer/dashboard");
+        } else {
+          router.push("/");
+        }
       } else if (response.error) {
-        toast.error(response.error.data.message);
+        toast.error(response.error.data.message || "Failed to login");
       }
     } catch (error) {
       console.log(error);

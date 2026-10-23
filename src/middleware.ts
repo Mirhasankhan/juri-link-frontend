@@ -20,39 +20,102 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  const loginUrl = new URL("/auth/login", req.url);
-  const is = (path: string) => pathname.startsWith(path);
+  const isAuthRoute = pathname.startsWith("/auth");
+  const isLawyerRoute = pathname.startsWith("/lawyer");
 
-  // 1. Unauthenticated Guests
+  // 1. Logged-in users (any role) cannot access auth pages (login, register, etc.)
+  if (role && isAuthRoute) {
+    if (role === "Lawyer") {
+      return NextResponse.redirect(new URL("/lawyer/dashboard", req.url));
+    }
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  // 2. Unauthenticated Guests
   if (!role) {
     const protectedPaths = [
+      "/lawyer",
       "/messages",
       "/book",
       "/premium",
       "/my-profile",
       "/create-post",
     ];
-    if (protectedPaths.some((p) => is(p))) {
-      return NextResponse.redirect(loginUrl);
+
+    if (protectedPaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+      return NextResponse.redirect(new URL("/auth/login", req.url));
     }
+
     return NextResponse.next();
   }
 
-  // 2. Lawyer Role Guards
+  // 3. Lawyer Role Protection
   if (role === "Lawyer") {
-    const lawyerBlocked = ["/book", "/create-post"];
-    if (lawyerBlocked.some((p) => is(p))) {
-      return NextResponse.redirect(new URL("/", req.url));
+    // Normal users routes that lawyers are strictly blocked from accessing
+    const normalUserRoutes = [
+      "/",
+      "/lawyers",
+      "/book",
+      "/services",
+      "/about-us",
+      "/posts",
+      "/create-post",
+      "/my-profile",
+      "/premium",
+      "/messages",
+    ];
+
+    // Seamlessly redirect old bookmarks or user routes to their lawyer equivalents
+    if (pathname.startsWith("/my-profile/manage-earnings")) {
+      return NextResponse.redirect(new URL("/lawyer/earnings", req.url));
     }
+    if (pathname.startsWith("/my-profile/availability")) {
+      return NextResponse.redirect(new URL("/lawyer/availability", req.url));
+    }
+    if (pathname.startsWith("/my-profile/manage-bookings")) {
+      return NextResponse.redirect(new URL("/lawyer/orders", req.url));
+    }
+    if (pathname.startsWith("/my-profile/manage-profile")) {
+      return NextResponse.redirect(new URL("/lawyer/settings", req.url));
+    }
+    if (pathname.startsWith("/premium")) {
+      return NextResponse.redirect(new URL("/lawyer/premium", req.url));
+    }
+    if (pathname.startsWith("/messages")) {
+      return NextResponse.redirect(new URL("/lawyer/messages", req.url));
+    }
+
+    // If lawyer is accessing lawyer dashboard routes, allow them
+    if (isLawyerRoute) {
+      return NextResponse.next();
+    }
+
+    // If lawyer tries to access ANY normal/public page, redirect to lawyer dashboard
+    const isNormalRoute =
+      pathname === "/" ||
+      normalUserRoutes.some(
+        (p) => p !== "/" && (pathname === p || pathname.startsWith(`${p}/`))
+      );
+
+    if (isNormalRoute) {
+      return NextResponse.redirect(new URL("/lawyer/dashboard", req.url));
+    }
+
     return NextResponse.next();
   }
 
-  // 3. User Role Guards
+  // 4. Normal User Role Protection
   if (role === "User") {
-    const userBlocked = ["/premium"];
-    if (userBlocked.some((p) => is(p))) {
+    // Normal users can NEVER access lawyer protected routes
+    if (isLawyerRoute) {
       return NextResponse.redirect(new URL("/", req.url));
     }
+
+    // Normal users cannot access premium plans (reserved for lawyers)
+    if (pathname.startsWith("/premium")) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
     return NextResponse.next();
   }
 
@@ -61,10 +124,13 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/messages/:path*",
-    "/book/:path*",
-    "/premium/:path*",
-    "/my-profile/:path*",
-    "/create-post/:path*",
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, logo images, static media files
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

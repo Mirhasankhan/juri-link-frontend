@@ -92,52 +92,52 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
 
       {/* Navigation Menu Options */}
       <div className="p-2 space-y-0.5">
-        <Link
-          href="/my-profile/manage-profile"
-          onClick={() => setActive(false)}
-          className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
-        >
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-[8px] bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-              <User className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="text-sm font-medium block leading-tight">
-                My Account
-              </span>
-              <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
-                Profile & security
-              </span>
-            </div>
-          </div>
-          <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
-        </Link>
-
-        <Link
-          href="/my-profile/manage-bookings"
-          onClick={() => setActive(false)}
-          className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
-        >
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-[8px] bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-              <CalendarCheck className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="text-sm font-medium block leading-tight">
-                Booking History
-              </span>
-              <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
-                Appointments & logs
-              </span>
-            </div>
-          </div>
-          <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
-        </Link>
-
-        {userRole === "Lawyer" && (
+        {userRole === "Lawyer" ? (
           <>
             <Link
-              href="/my-profile/manage-earnings"
+              href="/lawyer/dashboard"
+              onClick={() => setActive(false)}
+              className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-[8px] bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <User className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-sm font-medium block leading-tight">
+                    Lawyer Dashboard
+                  </span>
+                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                    Live overview & stats
+                  </span>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+            </Link>
+
+            <Link
+              href="/lawyer/orders"
+              onClick={() => setActive(false)}
+              className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-[8px] bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <CalendarCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-sm font-medium block leading-tight">
+                    Orders & Bookings
+                  </span>
+                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                    Client consultations
+                  </span>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+            </Link>
+
+            <Link
+              href="/lawyer/earnings"
               onClick={() => setActive(false)}
               className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
             >
@@ -147,10 +147,10 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
                 </div>
                 <div>
                   <span className="text-sm font-medium block leading-tight">
-                    Earnings
+                    Earnings & Payouts
                   </span>
                   <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
-                    Payouts & balances
+                    Balances & withdrawals
                   </span>
                 </div>
               </div>
@@ -158,7 +158,7 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
             </Link>
 
             <Link
-              href="/my-profile/availability"
+              href="/lawyer/availability"
               onClick={() => setActive(false)}
               className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
             >
@@ -168,10 +168,54 @@ const DropDownMenus = ({ setActive }: DropDownMenusProps) => {
                 </div>
                 <div>
                   <span className="text-sm font-medium block leading-tight">
-                    Availability
+                    Availability Schedule
                   </span>
                   <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
-                    Schedule & time slots
+                    Working hours & slots
+                  </span>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/my-profile/manage-profile"
+              onClick={() => setActive(false)}
+              className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-[8px] bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <User className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-sm font-medium block leading-tight">
+                    My Account
+                  </span>
+                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                    Profile & security
+                  </span>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+            </Link>
+
+            <Link
+              href="/my-profile/manage-bookings"
+              onClick={() => setActive(false)}
+              className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary transition-all duration-150"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-[8px] bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <CalendarCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-sm font-medium block leading-tight">
+                    Booking History
+                  </span>
+                  <span className="text-[11px] text-slate-400 group-hover:text-slate-500">
+                    Appointments & logs
                   </span>
                 </div>
               </div>
