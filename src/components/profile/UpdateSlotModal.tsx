@@ -18,12 +18,14 @@ interface UpdateSlotModalProps {
   slotId: string;
   startTime: string;
   endTime: string;
+  dayName?: string;
 }
 
 const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({
   slotId,
   startTime,
   endTime,
+  dayName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [start, setStart] = useState<string>("");
@@ -97,69 +99,99 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({
     const payload = { slotId, slot: { startTime: start, endTime: end } };
     const response: any = await updateSlot(payload);
     if (response.data) {
-      toast.success(response.data.message);
+      toast.success(response.data.message || "Slot updated successfully");
       setIsOpen(false);
     } else {
       setError(response.error?.data?.message || "Update failed");
-      toast.error(response.error.data.message)
+      toast.error(response?.error?.data?.message || "Update failed");
     }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button>
-          <FiEdit />
+        <button
+          type="button"
+          className="text-slate-400 hover:text-primary hover:bg-primary/10 p-1 rounded-md transition-colors"
+          title="Edit slot"
+        >
+          <FiEdit size={13} />
         </button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[400px] bg-white !rounded-[8px] p-4">
-        <DialogHeader>
-          <DialogTitle>Update Slot</DialogTitle>
+      <DialogContent className="sm:max-w-md bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xl">
+        <DialogHeader className="text-left">
+          <DialogTitle className="text-base sm:text-lg font-bold text-slate-900">
+            Edit Time Slot
+          </DialogTitle>
+          <p className="text-xs text-slate-500 mt-0.5">
+            {dayName ? (
+              <>
+                Update consultation hours for{" "}
+                <span className="font-semibold text-slate-700">{dayName}</span>
+              </>
+            ) : (
+              "Update consultation start and end time"
+            )}
+          </p>
         </DialogHeader>
 
-        <div className="flex flex-col gap-4 mt-2">
-          <div className="flex gap-3 items-center">
-            <select
-              value={start}
-              onChange={(e) => setStart(e.target.value)}
-              className="px-3 py-2 rounded border border-gray-600"
-            >
-              {timeOptions.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
+        <div className="space-y-4 my-2">
+          <div className="grid grid-cols-2 gap-3 items-center">
+            <div>
+              <label className="block text-[11px] font-bold  tracking-wider text-slate-500 mb-1.5">
+                Start Time
+              </label>
+              <select
+                value={start}
+                onChange={(e) => setStart(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              >
+                {timeOptions.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <span>—</span>
-
-            <select
-              value={end}
-              onChange={(e) => setEnd(e.target.value)}
-              className="px-3 py-2 rounded border border-gray-600"
-            >
-              {timeOptions.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
+            <div>
+              <label className="block text-[11px] font-bold  tracking-wider text-slate-500 mb-1.5">
+                End Time
+              </label>
+              <select
+                value={end}
+                onChange={(e) => setEnd(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              >
+                {timeOptions.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          {error && <p className="text-red-400 text-sm">{error}</p>}
+          {error && (
+            <p className="text-xs font-medium text-rose-600 bg-rose-50 border border-rose-200/60 rounded-lg p-2.5">
+              {error}
+            </p>
+          )}
         </div>
 
-        <DialogFooter className="mt-4 flex justify-end gap-2">
+        <DialogFooter className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
           <button
-            className="bg-red-600 px-4 py-1 text-white font-medium rounded-[6px]"
+            type="button"
+            className="px-3.5 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Cancel
           </button>
 
           <button
-            className="bg-primary px-4 py-1 text-white font-medium rounded-[6px]"
+            type="button"
+            className="px-4 py-2 text-xs font-semibold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handleUpdate}
             disabled={isLoading || !isChanged}
           >

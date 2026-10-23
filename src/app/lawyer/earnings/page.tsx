@@ -4,127 +4,276 @@ import MonthlyEarnings from "@/components/profile/MonthlyEarnings";
 import WeeklyEarnings from "@/components/profile/WeeklyEarnings";
 import WithdrawHistory from "@/components/profile/WithdrawHistory";
 import WithdrawModal from "@/components/profile/WithdrawModal";
-import { useEarningsSummaryQuery } from "@/redux/features/earnings/earnings.api";
-import { TrendingUp, CircleDollarSign, Loader2 } from "lucide-react";
-import { useState } from "react";
+import {
+  useEarningsSummaryQuery,
+  useWithdrawHistoryQuery,
+} from "@/redux/features/earnings/earnings.api";
+import {
+  TrendingUp,
+  CircleDollarSign,
+  Loader2,
+  Hourglass,
+  Building2,
+  ArrowUpRight,
+} from "lucide-react";
+import { useState, useMemo } from "react";
 
 export default function LawyerEarningsPage() {
-  const [type, setType] = useState("monthly");
-  const { data: earningsData, isLoading } = useEarningsSummaryQuery(type);
+  const [type, setType] = useState<"monthly" | "weekly">("monthly");
+  const { data: earningsData, isLoading: isEarningsLoading } =
+    useEarningsSummaryQuery(type);
+  const { data: withdrawData, isLoading: isWithdrawLoading } =
+    useWithdrawHistoryQuery("");
 
   const allTimeEarnings = earningsData?.data?.allTimeEarnings ?? 0;
   const currentEarningsValue = earningsData?.data?.currentEarnings ?? 0;
+  const withdrawHistory: any[] = withdrawData?.data || [];
+
+  // Calculate pending and total disbursed amounts
+  const financialMetrics = useMemo(() => {
+    const pendingItems = withdrawHistory.filter((i) => i.status === "Pending");
+    const acceptedItems = withdrawHistory.filter((i) => i.status === "Accepted");
+
+    const pendingTotal = pendingItems.reduce(
+      (sum, item) => sum + (Number(item.amount) || 0),
+      0
+    );
+    const acceptedTotal = acceptedItems.reduce(
+      (sum, item) => sum + (Number(item.amount) || 0),
+      0
+    );
+
+    return {
+      pendingTotal,
+      pendingCount: pendingItems.length,
+      acceptedTotal,
+      acceptedCount: acceptedItems.length,
+    };
+  }, [withdrawHistory]);
+
+  const chartData = earningsData?.data?.chartData || [];
+
+  // Find peak period in the current chart data
+  const peakPeriod = useMemo(() => {
+    if (!chartData.length) return null;
+    let max = 0;
+    let periodName = "";
+    chartData.forEach((item: any) => {
+      const val = Number(item.earnings || 0);
+      if (val >= max && val > 0) {
+        max = val;
+        periodName = item.month || item.day || "";
+      }
+    });
+    return max > 0 ? { label: periodName, amount: max } : null;
+  }, [chartData]);
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
-      {/* Earnings Overview Top Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              Available Payout Balance
-            </span>
-            <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
-              {isLoading ? (
-                <Loader2 size={24} className="animate-spin text-primary mt-1" />
-              ) : (
-                `$${currentEarningsValue.toLocaleString()}`
-              )}
-            </div>
-            <p className="text-xs text-slate-500 mt-1">
-              Ready for bank withdrawal
-            </p>
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+              Earnings & Payouts
+            </h1>
           </div>
-          <div className="w-14 h-14 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
-            <CircleDollarSign size={28} />
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Track consultation income, analyze financial trends, and transfer earnings to your bank account
+          </p>
+        </div>
+      </div>
+
+      {/* 4 Financial KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Available Balance */}
+        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden group hover:border-slate-300 transition-all">
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="text-[11px] font-bold  tracking-wider text-slate-400 block">
+                Available for Payout
+              </span>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                {isEarningsLoading ? (
+                  <Loader2 size={22} className="animate-spin text-primary mt-1" />
+                ) : (
+                  `$${currentEarningsValue.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`
+                )}
+              </div>
+            </div>
+            <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+              <CircleDollarSign size={22} />
+            </div>
+          </div>
+
+        </div>
+
+        {/* All-Time Revenue */}
+        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden group hover:border-slate-300 transition-all">
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="text-[11px] font-bold  tracking-wider text-slate-400 block">
+                All-Time Revenue
+              </span>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                {isEarningsLoading ? (
+                  <Loader2 size={22} className="animate-spin text-primary mt-1" />
+                ) : (
+                  `$${allTimeEarnings.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`
+                )}
+              </div>
+            </div>
+            <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <TrendingUp size={22} />
+            </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              All-Time Revenue
-            </span>
-            <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
-              {isLoading ? (
-                <Loader2 size={24} className="animate-spin text-primary mt-1" />
-              ) : (
-                `$${allTimeEarnings.toLocaleString()}`
-              )}
+        {/* Pending Payouts */}
+        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden group hover:border-slate-300 transition-all">
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="text-[11px] font-bold  tracking-wider text-slate-400 block">
+                Pending Payouts
+              </span>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                {isWithdrawLoading ? (
+                  <Loader2 size={22} className="animate-spin text-primary mt-1" />
+                ) : (
+                  `$${financialMetrics.pendingTotal.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`
+                )}
+              </div>
             </div>
-            <p className="text-xs text-slate-500 mt-1">
-              Total earned since joining JuriLink
-            </p>
+            <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              <Hourglass size={22} />
+            </div>
           </div>
-          <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-            <TrendingUp size={28} />
+        </div>
+
+        {/* Total Disbursed */}
+        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden group hover:border-slate-300 transition-all">
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="text-[11px] font-bold  tracking-wider text-slate-400 block">
+                Total Withdrawn
+              </span>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                {isWithdrawLoading ? (
+                  <Loader2 size={22} className="animate-spin text-primary mt-1" />
+                ) : (
+                  `$${financialMetrics.acceptedTotal.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`
+                )}
+              </div>
+            </div>
+            <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+              <Building2 size={22} />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Chart and Withdrawal Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Left Column: Analytics Chart */}
-        <div className="xl:col-span-2 bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 mb-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900">
-                Earnings Performance
-              </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Analyze your consultation revenue over time
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-500 font-medium">Period:</span>
-              <select
-                className="bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl text-xs px-3 py-2 outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option value="monthly">Monthly Breakdown</option>
-                <option value="weekly">Weekly Breakdown</option>
-              </select>
-            </div>
-          </div>
-
+      {/* Revenue Performance Chart (Full Width) */}
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div>
-            {type === "monthly" && (
-              <MonthlyEarnings
-                chartData={earningsData?.data?.chartData}
-                currentEarnings={currentEarningsValue}
-              />
-            )}
-            {type === "weekly" && (
-              <WeeklyEarnings
-                weeklyData={earningsData?.data?.chartData}
-                currentEarnings={currentEarningsValue}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* Right Column: Payouts & Withdrawal Requests */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 space-y-4">
-            <h3 className="font-bold text-slate-900 text-base">
-              Withdraw Funds
-            </h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Transfer your available consultation earnings directly to your verified bank account.
+            <div className="flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">
+                Revenue Performance
+              </h2>              
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Analyze your consultation revenues and trends across time periods
             </p>
-
-            <WithdrawModal currentEarnings={currentEarningsValue} />
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6">
-            <h3 className="font-bold text-slate-900 text-base mb-4">
-              Payout History
-            </h3>
-            <WithdrawHistory />
+          {/* Segmented Period Switcher */}
+          <div className="inline-flex p-1 bg-slate-100 rounded-xl self-start sm:self-auto border border-slate-200/60">
+            <button
+              type="button"
+              onClick={() => setType("monthly")}
+              className={`
+                px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all select-none
+                ${type === "monthly"
+                  ? "bg-white text-primary shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
+                }
+              `}
+            >
+              Monthly View
+            </button>
+            <button
+              type="button"
+              onClick={() => setType("weekly")}
+              className={`
+                px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all select-none
+                ${type === "weekly"
+                  ? "bg-white text-primary shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
+                }
+              `}
+            >
+              Weekly View
+            </button>
           </div>
         </div>
+
+        {/* Chart Display */}
+        <div className="pt-2">
+          {type === "monthly" ? (
+            <MonthlyEarnings
+              chartData={earningsData?.data?.chartData}
+              currentEarnings={currentEarningsValue}
+            />
+          ) : (
+            <WeeklyEarnings
+              weeklyData={earningsData?.data?.chartData}
+              currentEarnings={currentEarningsValue}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Full Payout History Table Section */}
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 leading-tight">
+                Payout Transaction History
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              Complete audit log of all requested and disbursed bank withdrawals
+            </p>
+          </div>
+
+          <WithdrawModal
+            currentEarnings={currentEarningsValue}
+            trigger={
+              <button
+                disabled={currentEarningsValue <= 0}
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-primary hover:bg-primary/95 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xs"
+              >
+                <ArrowUpRight size={15} />
+                <span>Request Payout</span>
+              </button>
+            }
+          />
+        </div>
+
+        <WithdrawHistory />
       </div>
     </div>
   );

@@ -6,14 +6,12 @@ import {
   CalendarCheck,
   CircleDollarSign,
   CalendarClock,
-  Crown,
   MessageSquare,
   Video,
   ArrowUpRight,
   Clock,
   CheckCircle2,
   Calendar,
-  Sparkles,
   TrendingUp,
   ChevronRight,
   ShieldCheck,
@@ -43,67 +41,18 @@ export default function LawyerOverviewPage() {
 
   const completedCount = bookings.filter((b: any) => b.status === "Completed" || b.isCompleted).length;
 
-  const todayStr = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
-      {/* Welcome Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#21576d] via-[#2e7999] to-[#2b645c] p-6 sm:p-8 text-white shadow-lg">
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold uppercase tracking-wider text-white">
-              <Sparkles size={13} className="text-amber-300" />
-              <span>Lawyer Control Center</span>
-              <span className="opacity-60">•</span>
-              <span className="font-normal capitalize">{todayStr}</span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Welcome back, {lawyer?.fullName || "Counselor"}!
-            </h1>
-            <p className="text-white/80 text-sm max-w-xl leading-relaxed">
-              Here is your legal practice snapshot. You have{" "}
-              <span className="font-bold text-white underline decoration-amber-300 decoration-2">
-                {upcomingBookings.length} upcoming consultations
-              </span>{" "}
-              and your account is currently in good standing.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/lawyer/availability"
-              className="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-semibold text-xs shadow hover:bg-slate-50 transition-all flex items-center gap-2"
-            >
-              <CalendarClock size={16} className="text-primary" />
-              <span>Set Availability</span>
-            </Link>
-            <Link
-              href="/lawyer/orders"
-              className="px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-semibold text-xs transition-all flex items-center gap-2"
-            >
-              <CalendarCheck size={16} />
-              <span>View Bookings</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Decorative backdrop shapes */}
-        <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute right-40 -top-10 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
-      </div>
+    
 
       {/* Metrics Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {/* Total Earnings */}
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold  tracking-wider text-slate-400">
               Total Earnings
             </span>
             <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -122,7 +71,7 @@ export default function LawyerOverviewPage() {
         {/* Available Balance */}
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold  tracking-wider text-slate-400">
               Available Balance
             </span>
             <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
@@ -146,7 +95,7 @@ export default function LawyerOverviewPage() {
         {/* Total Consultations */}
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold  tracking-wider text-slate-400">
               Total Bookings
             </span>
             <div className="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center">
@@ -165,7 +114,7 @@ export default function LawyerOverviewPage() {
         {/* Schedule & Availability Status */}
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold  tracking-wider text-slate-400">
               Schedule Status
             </span>
             <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
@@ -247,10 +196,10 @@ export default function LawyerOverviewPage() {
                   const client = b.userId || {};
                   const dateStr = b.date
                     ? new Date(b.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })
                     : "Scheduled";
 
                   return (
@@ -407,33 +356,7 @@ export default function LawyerOverviewPage() {
               <ArrowUpRight size={14} />
             </Link>
           </div>
-
-          {/* Premium Membership Banner Card */}
-          <div className="rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 p-6 text-white shadow-md relative overflow-hidden">
-            <div className="relative z-10 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-                <Crown size={22} />
-              </div>
-              <div>
-                <h4 className="font-extrabold text-lg text-white">
-                  Lawyer Premium Tier
-                </h4>
-                <p className="text-xs text-white/85 mt-1 leading-relaxed">
-                  Gain priority listing on the client attorney directory, verified counselor badges, and advanced scheduling perks.
-                </p>
-              </div>
-
-              <Link
-                href="/lawyer/premium"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-amber-900 font-bold text-xs shadow hover:bg-amber-50 transition-colors"
-              >
-                <span>Explore Premium Plans</span>
-                <ChevronRight size={14} />
-              </Link>
-            </div>
-
-            <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none" />
-          </div>
+        
         </div>
       </div>
     </div>

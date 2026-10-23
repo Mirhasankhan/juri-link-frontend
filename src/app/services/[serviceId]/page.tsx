@@ -52,7 +52,7 @@ const ServiceDetailsPage = () => {
                 <div className="p-2 rounded-[9px] bg-primary/10">
                   <Scale size={18} className="text-primary" />
                 </div>
-                <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+                <span className="text-xs font-semibold  tracking-widest text-primary">
                   Practice Area
                 </span>
               </div>
@@ -100,7 +100,7 @@ const ServiceDetailsPage = () => {
           <div className="absolute -bottom-10 -left-10 w-52 h-52 rounded-full bg-white/5 pointer-events-none" />
 
           <div className="relative z-10 max-w-xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/70 mb-2">
+            <p className="text-xs font-semibold  tracking-widest text-white/70 mb-2">
               Did You Know?
             </p>
             <p className="text-white text-sm leading-relaxed">{dyk}</p>

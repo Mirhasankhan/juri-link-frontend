@@ -2,8 +2,8 @@ import {
   useAvailabilitySlotsQuery,
   useDeleteSlotMutation,
 } from "@/redux/features/availability/availability.api";
-import { Loader } from "lucide-react";
-import React, { useState } from "react";
+import { Loader, Clock } from "lucide-react";
+import React, { useState, useMemo } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import UpdateSlotModal from "../profile/UpdateSlotModal";
@@ -38,87 +38,146 @@ const LawyerAvailabilities: React.FC = () => {
 
   const availability: DayAvailability[] = availabilitySlots?.data || [];
 
-  const mergedAvailability: Record<number, Slot[]> = availability.reduce(
-    (acc, curr) => {
-      if (!acc[curr.dayOfWeek]) acc[curr.dayOfWeek] = [];
-      acc[curr.dayOfWeek].push(...curr.slots);
-      return acc;
-    },
-    {} as Record<number, Slot[]>
-  );
+  const mergedAvailability: Record<number, Slot[]> = useMemo(() => {
+    const map: Record<number, Slot[]> = {
+      0: [],
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    };
+    availability.forEach((curr) => {
+      if (!map[curr.dayOfWeek]) map[curr.dayOfWeek] = [];
+      map[curr.dayOfWeek].push(...curr.slots);
+    });
+    return map;
+  }, [availability]);
+
+  const totalSlotsCount = useMemo(() => {
+    return Object.values(mergedAvailability).reduce(
+      (acc, slots) => acc + slots.length,
+      0
+    );
+  }, [mergedAvailability]);
+
+  const activeDaysCount = useMemo(() => {
+    return Object.values(mergedAvailability).filter((slots) => slots.length > 0)
+      .length;
+  }, [mergedAvailability]);
 
   const handleDelete = async (slotId: string) => {
     setDeletingSlotId(slotId);
-    const response: any = await deleteSlot(slotId);
-    console.log(response.data);
-
-    if (response.data) {
+    try {
+      const response: any = await deleteSlot(slotId);
+      if (response?.data) {
+        toast.success(response.data.message || "Slot deleted successfully");
+      } else {
+        toast.error(response?.error?.message || "Failed to delete slot");
+      }
+    } catch {
+      toast.error("Failed to delete slot");
+    } finally {
       setDeletingSlotId(null);
-      toast.success(response.data.message);
-    } else {
-      setDeletingSlotId(null);
-      toast.error(response.error.message);
     }
   };
 
   return (
-    <>
-      <div className="p-6">
-        <h1 className="text-xl font-medium">Manage Availabilites</h1>
-        <p className="text-gray-500">
-          Manage your availability so that users can find and book you smoothly
-        </p>
-      </div>
+    <div className="space-y-4">
+
+
       {isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 px-4 mt-6 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4.5">
           {Array.from({ length: 6 }).map((_, idx) => (
             <SkeletonCard height={160} key={idx} />
           ))}
         </div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 my-6 px-4">
-        {Object.entries(mergedAvailability).map(([dayIndex, slots]) => (
-          <div
-            key={dayIndex}
-            className="bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl border p-6  transition-all duration-300"
-          >
-            <div className="flex justify-between mb-4 items-center">
-              <h3 className="text-xl font-semibold  text-gray-800">
-                {dayNames[parseInt(dayIndex)]}
-              </h3>
-              <AddSlotModal dayOfWeek={parseInt(dayIndex)}></AddSlotModal>
-            </div>
-            <div className="flex flex-col gap-3">
-              {slots?.map((slot) => (
-                <div
-                  key={slot.id}
-                  className="flex justify-between items-center bg-blue-50 text-blue-900 font-semibold px-4 py-2 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
-                >
-                  <span>
-                    {slot.startTime} - {slot.endTime}
-                  </span>
-                  <div className="flex gap-2">
-                    <UpdateSlotModal
-                      slotId={slot.id}
-                      startTime={slot.startTime}
-                      endTime={slot.endTime}
-                    ></UpdateSlotModal>
-                    {deletingSlotId === slot.id ? (
-                      <Loader className="animate-spin text-gray-500" />
-                    ) : (
-                      <FiTrash2
-                        className="text-red-500 hover:text-red-700 cursor-pointer"
-                        onClick={() => handleDelete(slot.id)}
-                      />
-                    )}
+
+      {/* 7 Days Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        {[0, 1, 2, 3, 4, 5, 6].map((dayIndex) => {
+          const slots = mergedAvailability[dayIndex] || [];
+          const hasSlots = slots.length > 0;
+
+          return (
+            <div
+              key={dayIndex}
+              className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between transition-all hover:border-slate-300 hover:shadow-sm"
+            >
+              <div>
+                <div className="flex justify-between items-center pb-3 mb-3 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-bold text-slate-900">
+                      {dayNames[dayIndex]}
+                    </h3>
+                    <span
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                        hasSlots
+                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
+                          : "bg-slate-100 text-slate-500"
+                      }`}
+                    >
+                      {hasSlots
+                        ? `${slots.length} ${slots.length === 1 ? "slot" : "slots"}`
+                        : "Off"}
+                    </span>
                   </div>
+
+                  <AddSlotModal dayOfWeek={dayIndex} />
                 </div>
-              ))}
+
+                <div className="space-y-2">
+                  {slots.map((slot) => (
+                    <div
+                      key={slot.id}
+                      className="group flex justify-between items-center bg-slate-50/80 hover:bg-white border border-slate-200/70 hover:border-slate-300 text-slate-800 font-medium px-3.5 py-2.5 rounded-xl text-xs transition-all shadow-2xs"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <Clock size={13} className="text-primary shrink-0" />
+                        <span className="font-semibold text-slate-900 truncate">
+                          {slot.startTime} – {slot.endTime}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <UpdateSlotModal
+                          slotId={slot.id}
+                          startTime={slot.startTime}
+                          endTime={slot.endTime}
+                          dayName={dayNames[dayIndex]}
+                        />
+                        {deletingSlotId === slot.id ? (
+                          <Loader className="animate-spin text-slate-400 w-3.5 h-3.5" />
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(slot.id)}
+                            className="text-slate-400 hover:text-rose-600 hover:bg-rose-50 p-1 rounded-md transition-colors"
+                            title="Delete slot"
+                          >
+                            <FiTrash2 size={13} />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+
+                  {!hasSlots && (
+                    <div className="py-6 text-center border border-dashed border-slate-200 rounded-xl bg-slate-50/40 flex flex-col items-center justify-center">
+                      <p className="text-xs text-slate-400 font-medium">
+                        No active time slots
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 

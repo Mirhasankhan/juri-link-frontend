@@ -1,197 +1,222 @@
-import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+"use client";
+
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { useWithdrawRequestMutation } from "@/redux/features/earnings/earnings.api";
 import { toast } from "react-toastify";
+import { Loader2, ExternalLink, AlertCircle } from "lucide-react";
 
-type Props = {
+interface WithdrawModalProps {
   currentEarnings: number;
-};
+  trigger?: React.ReactNode;
+}
 
-export default function WithdrawModal({ currentEarnings }: Props) {
-  const [withdrawRequest, { isLoading }] = useWithdrawRequestMutation();
+export default function WithdrawModal({
+  currentEarnings = 0,
+  trigger,
+}: WithdrawModalProps) {
   const [open, setOpen] = useState(false);
   const [amountStr, setAmountStr] = useState("");
   const [stripeLink, setStripeLink] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const currency = "$";
+  const [withdrawRequest, { isLoading }] = useWithdrawRequestMutation();
 
-  const amount = useMemo(() => {
-    const n = parseFloat(amountStr.replace(/,/g, ""));
-    return Number.isFinite(n) ? n : 0;
-  }, [amountStr]);
-  console.log(stripeLink);
+  const handleMax = () => {
+    setAmountStr(currentEarnings.toFixed(2));
+    setError(null);
+  };
 
-  const percent = useMemo(() => {
-    if (!currentEarnings) return 0;
-    return Math.min(100, Math.round((amount / currentEarnings) * 100));
-  }, [amount, currentEarnings]);
+  const handleOpenChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (!isOpen) {
+      setAmountStr("");
+      setError(null);
+      setStripeLink("");
+    }
+  };
 
-  function formatCurrency(v: number) {
-    return `${currency} ${v.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-    })}`;
-  }
-
-  async function handleSubmit(e?: React.FormEvent) {
-    e?.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError(null);
 
-    if (amount <= 0) {
-      setError("Enter a valid amount.");
+    const amount = parseFloat(amountStr);
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+      setError("Please enter a valid amount greater than $0");
       return;
     }
 
     if (amount > currentEarnings) {
-      setError("Amount exceeds current earnings.");
+      setError(
+        `Amount exceeds your available balance ($${currentEarnings.toLocaleString()})`
+      );
       return;
     }
-    const data = { amount };
-    const response: any = await withdrawRequest(data);
-    console.log(response.error);
-    if (response.data) {
-      toast.success(response.data.message);
-      setOpen(false);
-      setStripeLink("");
-    } else if (response.error.status == 403) {
-      setError("Your account not connected with stripe");
-      setStripeLink(response.error.data?.message);
-    } else {
-      toast.error(response.error.data.message);
+
+    try {
+      const response: any = await withdrawRequest({ amount });
+
+      if (response?.data?.success || response?.data?.statusCode === 200) {
+        toast.success(
+          response.data.message || "Withdrawal request submitted successfully"
+        );
+        handleOpenChange(false);
+      } else if (response?.error?.status === 403) {
+        setError("Your account is not connected with Stripe payouts.");
+        setStripeLink(
+          response.error.data?.message || "https://dashboard.stripe.com"
+        );
+      } else {
+        const msg =
+          response?.error?.data?.message || "Failed to process withdrawal";
+        setError(msg);
+        toast.error(msg);
+      }
+    } catch {
+      setError("An unexpected error occurred. Please try again.");
+      toast.error("Failed to request payout");
     }
-  }
+  };
 
   return (
-    <>
-      <button
-        onClick={() => setOpen(true)}
-        className="px-5 py-2 w-full font-medium mt-4 bg-primary text-white rounded-[8px] hover:bg-primary"
-      >
-        Withdraw
-      </button>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>
+        {trigger ? (
+          trigger
+        ) : (
+          <button
+            type="button"
+            disabled={currentEarnings <= 0}
+            className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-white bg-primary hover:bg-primary/95 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          >
+            Withdraw
+          </button>
+        )}
+      </DialogTrigger>
 
-      {!open ? null : (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white w-full max-w-md rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="bg-gradient-to-r from-secondary via-fuchsia-600 to-rose-500 p-6 text-white">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h2 className="text-2xl font-semibold">Withdraw Funds</h2>
-                  <p className="text-sm text-indigo-100 mt-1">
-                    Payout processed within 1–3 business days.
-                  </p>
-                </div>
+      <DialogContent className="sm:max-w-md bg-white rounded-2xl p-6 border border-slate-200 shadow-xl">
+        <DialogHeader className="space-y-1">
+          <DialogTitle className="text-lg font-bold text-slate-900">
+            Withdraw Funds
+          </DialogTitle>
+          <DialogDescription className="text-xs text-slate-500">
+            Enter the amount to transfer to your connected bank account.
+          </DialogDescription>
+        </DialogHeader>
 
-                <motion.div
-                  initial={{ scale: 0.85, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                >
-                  <div className="bg-white/20 rounded-[5px] p-3 text-sm text-right">
-                    <div className="font-semibold">Available</div>
-                    <div className="text-lg font-bold">
-                      {formatCurrency(currentEarnings)}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-            <form onSubmit={handleSubmit} className="p-6 space-y-5">
-              <div>
-                <label className="text-sm font-medium">Amount</label>
-                <div className="mt-2 flex items-center gap-2">
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={amountStr}
-                    onChange={(e) => setAmountStr(e.target.value)}
-                    placeholder="0.00"
-                    className="input-design"
-                  />
-                  <span className="text-gray-500 font-medium">{currency}</span>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Max: {formatCurrency(currentEarnings)}
-                </p>
-              </div>
-              <div className="bg-gray-50 border rounded-[5px] p-4">
-                <div className="flex justify-between text-sm">
-                  <div>
-                    <div className="text-gray-500">Requested</div>
-                    <div className="text-lg font-semibold">
-                      {formatCurrency(amount)}
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-gray-500">Available</div>
-                    <div className="text-lg font-semibold">
-                      {formatCurrency(currentEarnings)}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                  <div
-                    style={{ width: `${percent}%` }}
-                    className="h-full bg-gradient-to-r from-indigo-500 to-rose-500"
-                  />
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  {percent}% of balance
-                </p>
-              </div>
-              {stripeLink && (
-                <a href={stripeLink} target="_blank" rel="noopener noreferrer">
-                  <button
-                    className="bg-primary text-white w-full rounded-[5px] py-1 text-center mt-2"
-                    type="button"
-                  >
-                    Connect Now
-                  </button>
-                </a>
-              )}
-
-              {error && (
-                <p className="text-sm text-red-600 font-medium">{error}</p>
-              )}
-              <div className="flex justify-between items-center pt-2">
-                <button
-                  type="button"
-                  className="px-4 py-2 text-gray-700  rounded-[5px] border  hover:bg-gray-100"
-                  onClick={() => setOpen(false)}
-                  disabled={isLoading}
-                >
-                  Cancel
-                </button>
-
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-[5px] hover:bg-gray-200"
-                    onClick={() =>
-                      setAmountStr((currentEarnings / 2).toFixed(2))
-                    }
-                    disabled={isLoading}
-                  >
-                    Half
-                  </button>
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="px-5 py-2 bg-primary text-white rounded-[5px] hover:bg-indigo-700 flex items-center gap-2"
-                  >
-                    {isLoading && (
-                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    )}
-                    Send Request
-                  </button>
-                </div>
-              </div>
-            </form>
+        <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+          {/* Available balance preview */}
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span className="text-xs font-medium text-slate-600">
+              Available Balance
+            </span>
+            <span className="text-base font-bold text-slate-900">
+              ${currentEarnings.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
           </div>
-        </div>
-      )}
-    </>
+
+          {/* Amount input */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-semibold text-slate-700">
+                Amount (USD)
+              </label>
+              <button
+                type="button"
+                onClick={handleMax}
+                disabled={currentEarnings <= 0}
+                className="text-xs font-semibold text-primary hover:underline disabled:opacity-40"
+              >
+                Max
+              </button>
+            </div>
+
+            <div className="relative">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-base">
+                $
+              </span>
+              <input
+                type="number"
+                step="0.01"
+                min="1"
+                max={currentEarnings}
+                value={amountStr}
+                onChange={(e) => {
+                  setAmountStr(e.target.value);
+                  setError(null);
+                }}
+                placeholder="0.00"
+                className="w-full pl-8 pr-4 py-2.5 text-base font-semibold rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-900 placeholder:text-slate-300"
+                required
+                autoFocus
+              />
+            </div>
+          </div>
+
+          {/* Error Message */}
+          {error && !stripeLink && (
+            <p className="text-xs text-rose-600 font-medium">{error}</p>
+          )}
+
+          {/* Stripe Connect Link if 403 */}
+          {stripeLink && (
+            <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 space-y-2">
+              <div className="flex items-start gap-2">
+                <AlertCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <p className="text-xs text-amber-800">
+                  Your account is not connected with Stripe. Please complete Stripe setup to receive payouts.
+                </p>
+              </div>
+              <a
+                href={stripeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 w-full py-2 rounded-lg text-xs font-bold text-white bg-amber-600 hover:bg-amber-700 transition-colors"
+              >
+                <span>Connect Stripe Account</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
+          )}
+
+          {/* Action buttons */}
+          <div className="flex items-center justify-end gap-2.5 pt-2">
+            <button
+              type="button"
+              onClick={() => handleOpenChange(false)}
+              disabled={isLoading}
+              className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading || !amountStr || parseFloat(amountStr) <= 0}
+              className="inline-flex items-center justify-center gap-1.5 px-5 py-2 text-xs font-bold text-white bg-primary hover:bg-primary/95 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xs"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 size={14} className="animate-spin" />
+                  <span>Submitting...</span>
+                </>
+              ) : (
+                <span>Confirm Withdrawal</span>
+              )}
+            </button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

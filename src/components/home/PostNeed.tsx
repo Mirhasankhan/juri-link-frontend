@@ -40,7 +40,7 @@ const LegalIntakeHero = () => {
 
           {/* Eyebrow & Headline */}
           <div className="relative z-10 max-w-3xl mx-auto text-center mb-14">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-950/80 border border-teal-500/30 text-teal-300 text-xs font-semibold tracking-wider uppercase mb-5">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-950/80 border border-teal-500/30 text-teal-300 text-xs font-semibold tracking-wider  mb-5">
               <Zap className="w-3.5 h-3.5 text-teal-400" />
               <span>Zero Chasing &bull; Free To Post</span>
             </div>

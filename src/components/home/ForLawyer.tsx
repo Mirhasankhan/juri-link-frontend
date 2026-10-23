@@ -59,7 +59,7 @@ const ForLawyer = () => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold tracking-wider uppercase mb-4 w-fit border border-slate-200">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold tracking-wider  mb-4 w-fit border border-slate-200">
               <Award className="w-3.5 h-3.5 text-primary" />
               <span>For Legal Practitioners</span>
             </div>

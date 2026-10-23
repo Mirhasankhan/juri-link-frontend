@@ -1,6 +1,5 @@
 "use client";
 import { useSetAvailabilityMutation } from "@/redux/features/availability/availability.api";
-import Container from "@/utils/Container";
 import {
   generateTimeOptions,
   isOverlap,
@@ -147,48 +146,63 @@ const WeeklyAvailabilityPage = () => {
     return null;
 
   return (
-    <Container>
-      <h1 className="text-2xl font-bold my-5">Weekly Availability</h1>
+    <div className="space-y-6">
+      <div className="border-b border-slate-100 pb-4">
+        <h2 className="text-xl font-bold text-slate-900">Set Initial Weekly Availability</h2>
+        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          Configure your working days and default consultation hours to activate your calendar
+        </p>
+      </div>
 
-      <div className="grid text-white lg:grid-cols-2 grid-cols-1 gap-5">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
         {days.map((day) => (
-          <div key={day} className="mb-6 bg-[#1f1f1f] p-4 rounded-[6px]">
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-lg font-semibold">{day}</h2>
-              <label className="cursor-pointer">
+          <div
+            key={day}
+            className={`p-4 rounded-xl border transition-all ${
+              availability[day]?.active
+                ? "bg-white border-slate-200/90 shadow-2xs"
+                : "bg-slate-50/60 border-slate-200/50 opacity-70"
+            }`}
+          >
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-bold text-slate-900">{day}</h3>
+              <label className="cursor-pointer flex items-center gap-2">
+                <span className="text-xs text-slate-500 font-medium">
+                  {availability[day]?.active ? "Available" : "Off"}
+                </span>
                 <input
                   type="checkbox"
                   checked={availability[day]?.active || false}
                   onChange={() => toggleDay(day)}
-                  className="accent-orange-600 w-5 h-5"
+                  className="accent-primary w-4 h-4 rounded cursor-pointer"
                 />
               </label>
             </div>
 
             {availability[day]?.active &&
               availability[day].slots.map((slot: any, idx) => (
-                <div key={idx} className="mb-3">
-                  <div className="flex gap-3 items-center mb-1">
+                <div key={idx} className="mb-2.5">
+                  <div className="flex gap-2 items-center">
                     <select
                       value={slot.start}
                       onChange={(e) =>
                         updateSlot(day, idx, "start", e.target.value)
                       }
-                      className="bg-black px-3 py-2 rounded-[6px] border border-gray-600"
+                      className="bg-slate-50 text-slate-800 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-primary"
                     >
                       {timeOptions.map((t) => (
                         <option key={t}>{t}</option>
                       ))}
                     </select>
 
-                    <span>—</span>
+                    <span className="text-xs text-slate-400 font-medium">—</span>
 
                     <select
                       value={slot.end}
                       onChange={(e) =>
                         updateSlot(day, idx, "end", e.target.value)
                       }
-                      className="bg-black px-3 py-2 rounded-[6px] border border-gray-600"
+                      className="bg-slate-50 text-slate-800 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-primary"
                     >
                       {timeOptions.map((t) => (
                         <option key={t}>{t}</option>
@@ -197,8 +211,10 @@ const WeeklyAvailabilityPage = () => {
 
                     {idx > 0 && (
                       <button
+                        type="button"
                         onClick={() => removeSlot(day, idx)}
-                        className="text-red-400 text-sm"
+                        className="text-slate-400 hover:text-rose-600 p-1 rounded-md transition-colors text-xs"
+                        title="Remove time slot"
                       >
                         ✕
                       </button>
@@ -207,38 +223,42 @@ const WeeklyAvailabilityPage = () => {
 
                   {/* Error messages */}
                   {slot.error && (
-                    <p className="text-red-400 text-xs">{slot.error}</p>
+                    <p className="text-rose-600 text-[11px] mt-1 font-medium">{slot.error}</p>
                   )}
                   {slot.errorConflict && (
-                    <p className="text-red-400 text-xs">{slot.errorConflict}</p>
+                    <p className="text-rose-600 text-[11px] mt-1 font-medium">{slot.errorConflict}</p>
                   )}
                 </div>
               ))}
 
             {availability[day]?.active && (
               <button
+                type="button"
                 onClick={() => addSlot(day)}
-                className="text-orange-400 text-sm"
+                className="text-primary hover:text-primary/80 text-xs font-semibold mt-1 inline-flex items-center gap-1"
               >
-                + Add Time Interval
+                + Add Time Window
               </button>
             )}
           </div>
         ))}
       </div>
 
-      <button
-        disabled={isSubmitDisabled}
-        onClick={handleSubmit}
-        className={`px-4 py-2 rounded-[6px] mb-5 text-white font-medium bg-orange-600 ${
-          isSubmitDisabled
-            ? "opacity-40 cursor-not-allowed"
-            : "hover:bg-orange-700"
-        }`}
-      >
-        {isLoading ? "Submitting...." : "Submit Availability"}
-      </button>
-    </Container>
+      <div className="pt-2">
+        <button
+          type="button"
+          disabled={isSubmitDisabled || isLoading}
+          onClick={handleSubmit}
+          className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm text-white font-semibold bg-primary shadow-xs transition-all ${
+            isSubmitDisabled
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-primary/90"
+          }`}
+        >
+          {isLoading ? "Saving Availability..." : "Save & Activate Schedule"}
+        </button>
+      </div>
+    </div>
   );
 };
 

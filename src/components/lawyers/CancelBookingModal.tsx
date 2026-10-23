@@ -9,9 +9,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { toast } from "react-toastify";
 import { useCancelBookingMutation } from "@/redux/features/bookings/bookingsApi";
 
-const CancelBookingModal = ({ id }: { id: string }) => {
+const CancelBookingModal = ({
+  id,
+  trigger,
+  className,
+}: {
+  id: string;
+  trigger?: React.ReactNode;
+  className?: string;
+}) => {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [cancelBooking, { isLoading }] = useCancelBookingMutation();
@@ -22,16 +31,34 @@ const CancelBookingModal = ({ id }: { id: string }) => {
       cancelReason: reason,
     };
 
-    const response: any = await cancelBooking(data);
-    console.log(response);
+    try {
+      const response: any = await cancelBooking(data);
+      if (response?.data?.success || response?.data?.statusCode === 200) {
+        toast.success(response.data.message || "Booking cancelled successfully");
+        setOpen(false);
+        setReason("");
+      } else if (response?.error) {
+        toast.error(response.error?.data?.message || "Failed to cancel booking");
+      }
+    } catch {
+      toast.error("An unexpected error occurred");
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="bg-red-50 py-2 text-red-600 w-full rounded-[6px]">
-          Cancel Session
-        </button>
+        {trigger ? (
+          trigger
+        ) : (
+          <button
+            className={
+              className || "bg-red-50 py-2 text-red-600 w-full rounded-[6px]"
+            }
+          >
+            Cancel Session
+          </button>
+        )}
       </DialogTrigger>
 
       <DialogContent

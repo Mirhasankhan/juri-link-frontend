@@ -47,7 +47,7 @@ const ForInPerson = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold tracking-wider uppercase mb-4 w-fit">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold tracking-wider  mb-4 w-fit">
               <Building2 className="w-3.5 h-3.5 text-secondary" />
               <span>In-Person Consultation</span>
             </div>

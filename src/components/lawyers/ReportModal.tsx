@@ -25,9 +25,13 @@ type TFormData = {
 export default function CreateReportModal({
   bookingId,
   isReported,
+  trigger,
+  className,
 }: {
   bookingId: string;
   isReported: boolean;
+  trigger?: React.ReactNode;
+  className?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [createReport, { isLoading }] = useCreateReportMutation();
@@ -67,12 +71,19 @@ export default function CreateReportModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button
-          disabled={isReported}
-          className="bg-red-600 text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
-        >
-          {isReported ? "Reported" : "Report"}
-        </button>
+        {trigger ? (
+          trigger
+        ) : (
+          <button
+            disabled={isReported}
+            className={
+              className ||
+              "bg-red-600 text-white py-2 w-full rounded-[6px] disabled:bg-gray-400"
+            }
+          >
+            {isReported ? "Reported" : "Report"}
+          </button>
+        )}
       </DialogTrigger>
 
       <DialogContent

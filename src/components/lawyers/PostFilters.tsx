@@ -192,7 +192,7 @@ const PostFilters = ({
       {/* Service Type */}
       <div className="px-5 py-4 border-b border-gray-200">
         <div className="flex items-center gap-2 mb-3">
-          <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+          <h3 className="text-[11px] font-bold  tracking-wider text-gray-500">
             Service Type
           </h3>
           <span className="flex-1 h-px bg-gray-200" />
@@ -205,18 +205,16 @@ const PostFilters = ({
                 key={option.value}
                 type="button"
                 onClick={() => setSelectedService(active ? null : option.value)}
-                className={`flex-1 rounded-[9px] border px-1.5 py-3 text-center transition-colors ${
-                  active
+                className={`flex-1 rounded-[9px] border px-1.5 py-3 text-center transition-colors ${active
                     ? "border-amber-700 bg-amber-50"
                     : "border-gray-200 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <span
-                  className={`mx-auto mb-1.5 flex h-6.5 w-6.5 items-center justify-center rounded-full ${
-                    active
+                  className={`mx-auto mb-1.5 flex h-6.5 w-6.5 items-center justify-center rounded-full ${active
                       ? "bg-white text-amber-700"
                       : "bg-sky-50 text-[#1E3A52]"
-                  }`}
+                    }`}
                 >
                   {option.icon}
                 </span>
@@ -232,7 +230,7 @@ const PostFilters = ({
       {/* Urgency */}
       <div className="px-5 py-4 border-b border-gray-200">
         <div className="flex items-center gap-2 mb-3">
-          <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+          <h3 className="text-[11px] font-bold  tracking-wider text-gray-500">
             Urgency
           </h3>
           <span className="flex-1 h-px bg-gray-200" />
@@ -245,11 +243,10 @@ const PostFilters = ({
                 key={option.value}
                 type="button"
                 onClick={() => setSelectedUrgency(active ? null : option.value)}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-[9px] border text-xs font-semibold transition-colors ${
-                  active
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-[9px] border text-xs font-semibold transition-colors ${active
                     ? "bg-[#1E3A52] border-[#1E3A52] text-white"
                     : "border-gray-200 text-gray-600 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <span
                   className="h-1.5 w-1.5 rounded-full"
@@ -265,7 +262,7 @@ const PostFilters = ({
       {/* Legal Services */}
       <div className="px-5 py-4 border-b border-gray-200">
         <div className="flex items-center gap-2 mb-3">
-          <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+          <h3 className="text-[11px] font-bold  tracking-wider text-gray-500">
             Legal Services
           </h3>
           <span className="flex-1 h-px bg-gray-200" />
@@ -309,9 +306,8 @@ const PostFilters = ({
               fill="none"
               stroke="currentColor"
               strokeWidth="3"
-              className={`transition-transform ${
-                showAllServices ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${showAllServices ? "rotate-180" : ""
+                }`}
             >
               <path d="M6 9l6 6 6-6" />
             </svg>

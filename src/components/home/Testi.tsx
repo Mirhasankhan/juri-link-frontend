@@ -45,7 +45,7 @@ const Testimonials = () => {
       <Container>
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold tracking-wider uppercase mb-4 border border-teal-100">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold tracking-wider  mb-4 border border-teal-100">
             <MessageSquareQuote className="w-3.5 h-3.5 text-teal-600" />
             <span>Verified Client Reviews</span>
           </div>

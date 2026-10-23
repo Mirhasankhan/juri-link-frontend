@@ -51,7 +51,7 @@ const OnlineConsultation = () => {
 
       <Container>
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-950/80 border border-teal-500/30 text-teal-300 text-xs font-semibold tracking-wider uppercase mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-950/80 border border-teal-500/30 text-teal-300 text-xs font-semibold tracking-wider  mb-3">
             <Video className="w-3.5 h-3.5" />
             <span>Virtual Legal Sessions</span>
           </div>

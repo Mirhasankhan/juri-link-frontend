@@ -87,8 +87,6 @@ export default function LawyerLayout({
 
   const lawyerName =
     profileData?.data?.fullName || currentUser?.name || "Counselor";
-  const specialization =
-    profileData?.data?.specialization?.[0] || "Legal Practitioner";
   const avatarUrl =
     profileData?.data?.profileImage ||
     "https://res.cloudinary.com/dddrm7ep8/image/upload/v1781532954/y7gdxfkl9uznjt96cjea.png";
@@ -110,10 +108,6 @@ export default function LawyerLayout({
   useEffect(() => {
     setIsSidebarOpen(false);
   }, [pathname]);
-
-  const currentNav = navItems.find((item) =>
-    pathname === item.path || (item.path !== "/lawyer/dashboard" && pathname.startsWith(item.path))
-  );
 
   return (
     <div className="min-h-screen bg-slate-100/70 text-slate-900 flex flex-col lg:flex-row antialiased">
@@ -148,19 +142,14 @@ export default function LawyerLayout({
                 alt="Juri Link"
                 width={44}
                 height={44}
-                className="h-11 w-11 object-contain transition-transform group-hover:scale-105"
+                className="h-16 w-16 object-contain transition-transform group-hover:scale-105"
                 priority
               />
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-lg tracking-tight text-slate-900">
-                    Juri<span className="text-primary">Link</span>
-                  </span>
-                </div>
-                <div className="flex items-center gap-1 text-[11px] font-semibold text-primary uppercase tracking-wider">
-                  <ShieldCheck size={12} className="text-primary" />
-                  <span>Lawyer Portal</span>
-                </div>
+              <div className="text-primary border text-xs px-2 py-1 rounded-[5px] font-medium">               
+               
+                
+                  <h1>Lawyer Portal</h1>
+                
               </div>
             </Link>
 
@@ -175,10 +164,7 @@ export default function LawyerLayout({
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-4 space-y-1.5 overflow-y-auto max-h-[calc(100vh-230px)]">
-            <div className="px-3 pb-2 text-[11px] font-bold tracking-wider uppercase text-slate-400">
-              Workspace
-            </div>
+          <nav className="p-4 space-y-1.5 overflow-y-auto max-h-[calc(100vh-230px)]">           
 
             {navItems.map((item) => {
               const isActive =
@@ -193,19 +179,17 @@ export default function LawyerLayout({
                   className={`
                     group flex items-center justify-between px-3.5 py-3 rounded-xl font-medium text-sm
                     transition-all duration-150 select-none
-                    ${
-                      isActive
-                        ? "bg-primary text-white font-semibold shadow-md shadow-primary/20"
-                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    ${isActive
+                      ? "bg-primary text-white font-semibold shadow-md shadow-primary/20"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                     }
                   `}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <Icon
                       size={18}
-                      className={`shrink-0 transition-colors ${
-                        isActive ? "text-white" : "text-slate-400 group-hover:text-primary"
-                      }`}
+                      className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-slate-400 group-hover:text-primary"
+                        }`}
                     />
                     <span className="truncate">{item.title}</span>
                   </div>
@@ -213,11 +197,10 @@ export default function LawyerLayout({
                   <div className="flex items-center gap-1.5">
                     {item.badge && (
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
-                          isActive
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full  tracking-wider ${isActive
                             ? "bg-white/20 text-white"
                             : "bg-amber-100 text-amber-800"
-                        }`}
+                          }`}
                       >
                         {item.badge}
                       </span>
@@ -232,30 +215,8 @@ export default function LawyerLayout({
           </nav>
         </div>
 
-        {/* Sidebar Footer - Lawyer Profile & Sign Out */}
+        {/* Sidebar Footer - Sign Out */}
         <div className="p-4 border-t border-slate-100 bg-slate-50/60">
-          <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-200/80 shadow-xs mb-3">
-            <div className="relative shrink-0">
-              <Image
-                src={avatarUrl}
-                alt={lawyerName}
-                width={40}
-                height={40}
-                unoptimized
-                className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20"
-              />
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-bold text-slate-900 truncate leading-tight">
-                {lawyerName}
-              </p>
-              <p className="text-[11px] text-slate-500 font-medium truncate capitalize leading-tight">
-                {specialization}
-              </p>
-            </div>
-          </div>
-
           <button
             onClick={handleSignOut}
             className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl font-medium text-xs text-rose-600 bg-rose-50/70 hover:bg-rose-100/70 transition-colors"
@@ -269,7 +230,7 @@ export default function LawyerLayout({
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Dashboard Top Header Bar */}
-        <header className="h-20 bg-white border-b border-slate-200/80 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+        <header className="h-16 bg-white border-b border-slate-200/80 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs">
           <div className="flex items-center gap-3">
             {/* Mobile menu trigger */}
             <button
@@ -279,21 +240,6 @@ export default function LawyerLayout({
             >
               <Menu size={22} />
             </button>
-
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-bold text-lg sm:text-xl text-slate-900 leading-tight">
-                  {currentNav?.title || "Lawyer Workspace"}
-                </h1>
-                <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Accepting Clients
-                </span>
-              </div>
-              <p className="hidden sm:block text-xs text-slate-500">
-                Manage your consultations, client orders, and professional legal practice
-              </p>
-            </div>
           </div>
 
           {/* Top Header Right Actions */}

@@ -50,14 +50,14 @@ const PostCard = ({ post }: PostCardProps) => {
 
   const timeAgo = post?.createdAt
     ? (() => {
-        try {
-          return formatDistanceToNow(new Date(post.createdAt), {
-            addSuffix: true,
-          });
-        } catch {
-          return "";
-        }
-      })()
+      try {
+        return formatDistanceToNow(new Date(post.createdAt), {
+          addSuffix: true,
+        });
+      } catch {
+        return "";
+      }
+    })()
     : "";
 
   const formatBudget = (budget: any) => {
@@ -167,7 +167,7 @@ const PostCard = ({ post }: PostCardProps) => {
               <DollarSign className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold leading-none mb-0.5">
+              <span className="text-[10px] text-slate-400  tracking-wider block font-semibold leading-none mb-0.5">
                 Budget
               </span>
               <span className="font-bold text-slate-900 text-xs truncate block">
@@ -182,7 +182,7 @@ const PostCard = ({ post }: PostCardProps) => {
               <MapPin className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold leading-none mb-0.5">
+              <span className="text-[10px] text-slate-400  tracking-wider block font-semibold leading-none mb-0.5">
                 Location
               </span>
               <span className="font-semibold text-slate-800 text-xs truncate block">
@@ -195,11 +195,10 @@ const PostCard = ({ post }: PostCardProps) => {
           <div className="col-span-2 flex items-center justify-between px-3 py-2 rounded-xl bg-slate-50/80 border border-slate-100/80">
             <div className="flex items-center gap-2.5 min-w-0">
               <div
-                className={`w-7 h-7 rounded-[9px] flex items-center justify-center shrink-0 border ${
-                  isOnline
+                className={`w-7 h-7 rounded-[9px] flex items-center justify-center shrink-0 border ${isOnline
                     ? "bg-teal-50 border-teal-100 text-teal-600"
                     : "bg-slate-100 border-slate-200 text-slate-600"
-                }`}
+                  }`}
               >
                 {isOnline ? (
                   <Laptop2 className="w-4 h-4" />
@@ -212,11 +211,10 @@ const PostCard = ({ post }: PostCardProps) => {
               </span>
             </div>
             <span
-              className={`text-[11px] font-medium px-2 py-0.5 rounded-[6px] shrink-0 ${
-                isOnline
+              className={`text-[11px] font-medium px-2 py-0.5 rounded-[6px] shrink-0 ${isOnline
                   ? "bg-teal-50 text-teal-700"
                   : "bg-slate-100 text-slate-600"
-              }`}
+                }`}
             >
               {isOnline ? "Virtual" : "Physical"}
             </span>
@@ -231,19 +229,17 @@ const PostCard = ({ post }: PostCardProps) => {
           <button
             type="button"
             onClick={() => handleToggleLikePost(postId)}
-            className={`group/like flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all duration-200 active:scale-95 ${
-              hasLiked
+            className={`group/like flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all duration-200 active:scale-95 ${hasLiked
                 ? "bg-rose-50 border-rose-200 text-rose-600 shadow-xs"
                 : "bg-slate-50 hover:bg-rose-50/70 border-slate-200/70 text-slate-600 hover:text-rose-600"
-            }`}
+              }`}
             title={hasLiked ? "Unlike post" : "Like post"}
           >
             <IoIosHeart
-              className={`transition-transform duration-200 group-hover/like:scale-115 ${
-                hasLiked
+              className={`transition-transform duration-200 group-hover/like:scale-115 ${hasLiked
                   ? "text-rose-600"
                   : "text-slate-400 group-hover/like:text-rose-500"
-              }`}
+                }`}
               size={17}
             />
             <span>{likedUsers.length}</span>

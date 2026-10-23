@@ -42,7 +42,7 @@ const Banner = () => {
 
       {/* Main Hero Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 flex flex-col items-center text-center">
-    
+
 
         {/* Primary Headline */}
         <motion.h1
@@ -77,7 +77,7 @@ const Banner = () => {
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             className="w-full max-w-3xl mb-12"
           >
-            <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-3">
+            <p className="text-xs  tracking-wider text-slate-400 font-semibold mb-3">
               Popular Practice Areas
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
@@ -98,7 +98,7 @@ const Banner = () => {
           </motion.div>
         )}
 
-       
+
       </div>
     </div>
   );

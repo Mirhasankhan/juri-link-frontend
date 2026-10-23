@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, Loader2, Crown, Sparkles } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import {
   useCheckoutSessionMutation,
   usePlansQuery,
@@ -37,34 +37,24 @@ export default function LawyerPremiumPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8">
-      {/* Header Banner */}
-      <div className="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 rounded-3xl p-6 sm:p-10 text-white shadow-lg relative overflow-hidden">
-        <div className="relative z-10 max-w-2xl space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-            <Crown size={14} className="text-amber-200" />
-            <span>Lawyer Pro Network</span>
-          </div>
-
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            Supercharge Your Legal Practice
-          </h1>
-
-          <p className="text-white/85 text-sm sm:text-base leading-relaxed">
-            Boost your attorney profile visibility, access verified counselor badges, receive instant booking notifications, and stand out to premium clients.
-          </p>
-
-          {activePlan && (
-            <div className="pt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-amber-900 font-bold text-xs shadow">
-                <Sparkles size={14} className="text-amber-600" />
-                <span>Active Membership: {activePlan.title}</span>
+    <div className="max-w-7xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
+        <div>
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+              Premium Membership
+            </h1>
+            {activePlan && (
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                Active: {activePlan.title}
               </span>
-            </div>
-          )}
+            )}
+          </div>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Upgrade your plan to boost profile visibility, access verified badges, and reach more clients
+          </p>
         </div>
-
-        <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none" />
       </div>
 
       {/* Plans Grid */}
@@ -84,12 +74,11 @@ export default function LawyerPremiumPage() {
               <div
                 key={plan.priceId}
                 className={`
-                  relative rounded-3xl p-6 sm:p-8 flex flex-col justify-between
+                  relative rounded-2xl p-6 sm:p-8 flex flex-col justify-between
                   transition-all duration-200 border
-                  ${
-                    isSubscribed
-                      ? "bg-white border-2 border-primary shadow-xl ring-4 ring-primary/10"
-                      : "bg-white border-slate-200/90 shadow-xs hover:shadow-lg hover:border-slate-300"
+                  ${isSubscribed
+                    ? "bg-white border-2 border-primary shadow-xs"
+                    : "bg-white border-slate-200/90 shadow-xs hover:border-slate-300"
                   }
                 `}
               >
@@ -99,8 +88,8 @@ export default function LawyerPremiumPage() {
                       {plan.title}
                     </h3>
                     {isSubscribed && (
-                      <span className="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-bold text-[11px] uppercase tracking-wider">
-                        Current
+                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-semibold text-xs">
+                        Current Plan
                       </span>
                     )}
                   </div>
@@ -113,8 +102,8 @@ export default function LawyerPremiumPage() {
                       {plan.type === "Monthly"
                         ? "/month"
                         : plan.type === "Quarterly"
-                        ? "/quarter"
-                        : "/year"}
+                          ? "/quarter"
+                          : "/year"}
                     </span>
                   </div>
 
@@ -147,10 +136,9 @@ export default function LawyerPremiumPage() {
                       disabled={disableBuy || isCheckoutLoading}
                       className={`
                         w-full py-3 rounded-xl font-bold text-xs sm:text-sm transition-all duration-150 flex items-center justify-center gap-2
-                        ${
-                          disableBuy
-                            ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                            : "bg-primary text-white hover:bg-primary/90 shadow-md shadow-primary/20 active:scale-95"
+                        ${disableBuy
+                          ? "bg-slate-100 text-slate-400 cursor-not-allowed"
+                          : "bg-primary text-white hover:bg-primary/90 shadow-md shadow-primary/20 active:scale-95"
                         }
                       `}
                     >
