@@ -40,7 +40,7 @@ export const useChatSocket = (token: string | null) => {
 
     const baseUrl =
       process.env.NEXT_PUBLIC_SOCKET_URL ||
-      "ws://api.passit.smtsigma.com:5006";
+      "wss://api.passit.smtsigma.com";
 
     try {
       const ws = new WebSocket(

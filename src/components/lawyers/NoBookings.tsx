@@ -1,5 +1,5 @@
-import { Calendar, Users, Clock, ArrowRight, Sparkles } from "lucide-react";
-import Link from "next/link";
+import { Calendar, Users, Clock } from "lucide-react";
+
 
 const NoBookings = () => {
   return (
@@ -9,11 +9,7 @@ const NoBookings = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-2xl opacity-20 animate-pulse"></div>
         <div className="relative bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-full shadow-lg">
           <Calendar size={80} className="text-blue-600" strokeWidth={1.5} />
-        </div>
-        {/* Decorative Elements */}
-        <div className="absolute -top-2 -right-2 bg-yellow-400 p-2 rounded-full shadow-lg animate-bounce">
-          <Sparkles size={20} className="text-white" />
-        </div>
+        </div>      
       </div>
 
       {/* Main Content */}
@@ -62,18 +58,7 @@ const NoBookings = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
-      <div className="flex flex-col sm:flex-row gap-4 mt-6">
-        <Link href="/lawyers">
-          <button className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2">
-            Explore Lawyers
-            <ArrowRight
-              size={20}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </button>
-        </Link>
-      </div>
+  
 
       {/* Bottom Hint */}
       <p className="text-sm text-gray-500 mt-8 text-center">

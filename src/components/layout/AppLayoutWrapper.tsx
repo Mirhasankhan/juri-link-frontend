@@ -10,7 +10,8 @@ export default function AppLayoutWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLawyerDashboard = pathname?.startsWith("/lawyer");
+  const isLawyerDashboard =
+    pathname === "/lawyer" || pathname?.startsWith("/lawyer/");
 
   if (isLawyerDashboard) {
     return <>{children}</>;

@@ -20,8 +20,9 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  const isAuthRoute = pathname.startsWith("/auth");
-  const isLawyerRoute = pathname.startsWith("/lawyer");
+  const isAuthRoute = pathname === "/auth" || pathname.startsWith("/auth/");
+  const isLawyerRoute =
+    pathname === "/lawyer" || pathname.startsWith("/lawyer/");
 
   // 1. Logged-in users (any role) cannot access auth pages (login, register, etc.)
   if (role && isAuthRoute) {
