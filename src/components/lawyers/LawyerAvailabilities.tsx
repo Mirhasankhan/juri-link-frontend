@@ -55,17 +55,6 @@ const LawyerAvailabilities: React.FC = () => {
     return map;
   }, [availability]);
 
-  const totalSlotsCount = useMemo(() => {
-    return Object.values(mergedAvailability).reduce(
-      (acc, slots) => acc + slots.length,
-      0
-    );
-  }, [mergedAvailability]);
-
-  const activeDaysCount = useMemo(() => {
-    return Object.values(mergedAvailability).filter((slots) => slots.length > 0)
-      .length;
-  }, [mergedAvailability]);
 
   const handleDelete = async (slotId: string) => {
     setDeletingSlotId(slotId);

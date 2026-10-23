@@ -15,8 +15,7 @@ import {
   Settings,
   LogOut,
   Menu,
-  X,
-  ShieldCheck,
+  X, 
   ChevronRight,
 } from "lucide-react";
 import { useProfileQuery } from "@/redux/features/auth/authApi";

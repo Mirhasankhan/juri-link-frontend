@@ -51,22 +51,9 @@ export default function LawyerEarningsPage() {
     };
   }, [withdrawHistory]);
 
-  const chartData = earningsData?.data?.chartData || [];
+  
 
-  // Find peak period in the current chart data
-  const peakPeriod = useMemo(() => {
-    if (!chartData.length) return null;
-    let max = 0;
-    let periodName = "";
-    chartData.forEach((item: any) => {
-      const val = Number(item.earnings || 0);
-      if (val >= max && val > 0) {
-        max = val;
-        periodName = item.month || item.day || "";
-      }
-    });
-    return max > 0 ? { label: periodName, amount: max } : null;
-  }, [chartData]);
+
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">

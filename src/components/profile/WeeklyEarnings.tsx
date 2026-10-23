@@ -33,7 +33,6 @@ interface WeeklyEarningsProps {
 
 const WeeklyEarnings = ({
   weeklyData = [],
-  currentEarnings = 0,
 }: WeeklyEarningsProps) => {
   const days = weeklyData?.map((item) => item.day) || [];
   const values = weeklyData?.map((item) => item.earnings) || [];

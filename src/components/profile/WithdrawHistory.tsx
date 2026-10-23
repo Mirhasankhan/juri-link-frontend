@@ -82,8 +82,7 @@ const WithdrawHistory = () => {
             <tbody className="divide-y divide-slate-100 text-sm">
               {withdraws.map((item: any) => {
                 const isPending = item.status === "Pending";
-                const isAccepted = item.status === "Accepted";
-                const isRejected = item.status === "Rejected";
+                const isAccepted = item.status === "Accepted";             
                 const shortId = item._id ? `#${item._id.slice(-6).toUpperCase()}` : "#PAYOUT";
 
                 return (

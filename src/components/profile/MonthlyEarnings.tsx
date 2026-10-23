@@ -33,7 +33,6 @@ interface MonthlyEarningsProps {
 
 const MonthlyEarnings = ({
   chartData = [],
-  currentEarnings = 0,
 }: MonthlyEarningsProps) => {
   const months = chartData?.map((item) => item.month) || [];
   const values = chartData?.map((item) => item.earnings) || [];
