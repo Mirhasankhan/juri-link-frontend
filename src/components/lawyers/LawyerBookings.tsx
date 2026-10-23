@@ -36,7 +36,6 @@ const LawyerBookings = () => {
   const [markCompleted] = useMarkCompletedMutation();
   const [completingId, setCompletingId] = useState<string | null>(null);
 
-  const [statusFilter, setStatusFilter] = useState<string>("All");
   const [typeFilter, setTypeFilter] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
@@ -77,24 +76,9 @@ const LawyerBookings = () => {
     }
   };
 
-  // Counts for tabs
-  const counts = useMemo(() => {
-    return {
-      all: rawBookings.length,
-      active: rawBookings.filter((b) => b.status === "Active").length,
-      completed: rawBookings.filter((b) => b.status === "Completed").length,
-      cancelled: rawBookings.filter((b) => b.status === "Cancelled").length,
-    };
-  }, [rawBookings]);
-
   // Filtered Bookings
   const filteredBookings = useMemo(() => {
     return rawBookings.filter((booking) => {
-      // Status filter
-      if (statusFilter !== "All" && booking.status !== statusFilter) {
-        return false;
-      }
-
       // Service type filter
       if (typeFilter !== "All" && booking.serviceType !== typeFilter) {
         return false;
@@ -119,7 +103,7 @@ const LawyerBookings = () => {
 
       return true;
     });
-  }, [rawBookings, statusFilter, typeFilter, searchTerm]);
+  }, [rawBookings, typeFilter, searchTerm]);
 
   // Pagination
   const totalPages = Math.ceil(filteredBookings.length / ITEMS_PER_PAGE) || 1;
@@ -133,7 +117,6 @@ const LawyerBookings = () => {
   };
 
   const handleResetFilters = () => {
-    setStatusFilter("All");
     setTypeFilter("All");
     setSearchTerm("");
     setCurrentPage(1);
@@ -193,107 +176,65 @@ const LawyerBookings = () => {
         </div>
       </div>
 
-      {/* Tabs & Filter Bar */}
-      <div className="bg-slate-50/70 p-3 sm:p-4 rounded-2xl border border-slate-200/80 space-y-3">
-        {/* Top: Status Tabs + Search */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-          {/* Status Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
-            {[
-              { key: "All", label: "All Bookings", count: counts.all },
-              { key: "Active", label: "Active", count: counts.active },
-              { key: "Completed", label: "Completed", count: counts.completed },
-              { key: "Cancelled", label: "Cancelled", count: counts.cancelled },
-            ].map((tab) => {
-              const isSelected = statusFilter === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => {
-                    setStatusFilter(tab.key);
-                    setCurrentPage(1);
-                  }}
-                  className={`
-                    px-3.5 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap flex items-center gap-2 select-none
-                    ${isSelected
-                      ? "bg-white text-primary shadow-xs border border-slate-200"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
-                    }
-                  `}
-                >
-                  <span>{tab.label}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${isSelected
-                        ? "bg-primary text-white"
-                        : "bg-slate-200/80 text-slate-600"
-                      }`}
-                  >
-                    {tab.count}
-                  </span>
-                </button>
-              );
-            })}
+      {/* Search & Service Type Filter Controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* Search Input */}
+        <div className="relative flex-1 sm:max-w-md">
+          <Search
+            size={16}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            placeholder="Search client or service..."
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-800 placeholder:text-slate-400"
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+            >
+              <XCircle size={14} />
+            </button>
+          )}
+        </div>
+
+        {/* Type Dropdown & Reset */}
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <select
+              value={typeFilter}
+              onChange={(e) => {
+                setTypeFilter(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="appearance-none pl-3 pr-8 py-2 text-xs font-medium rounded-xl border border-slate-200 bg-white text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer transition-all"
+            >
+              <option value="All">All Types</option>
+              <option value="Online">Online Video</option>
+              <option value="In_Person">In-Person</option>
+            </select>
+            <Filter
+              size={12}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+            />
           </div>
 
-          {/* Search & Service Type Controls */}
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5">
-            {/* Search Input */}
-            <div className="relative flex-1 sm:w-64">
-              <Search
-                size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-              />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(1);
-                }}
-                placeholder="Search client or service..."
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-800 placeholder:text-slate-400"
-              />
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                >
-                  <XCircle size={14} />
-                </button>
-              )}
-            </div>
-
-            {/* Type Dropdown */}
-            <div className="relative">
-              <select
-                value={typeFilter}
-                onChange={(e) => {
-                  setTypeFilter(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="appearance-none pl-3 pr-8 py-2 text-xs font-medium rounded-xl border border-slate-200 bg-white text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer transition-all"
-              >
-                <option value="All">All Types</option>
-                <option value="Online">Online Video</option>
-                <option value="In_Person">In-Person</option>
-              </select>
-              <Filter
-                size={12}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
-              />
-            </div>
-
-            {/* Reset button if filtered */}
-            {(statusFilter !== "All" || typeFilter !== "All" || searchTerm) && (
-              <button
-                onClick={handleResetFilters}
-                className="p-2 text-slate-500 hover:text-slate-800 rounded-xl hover:bg-white border border-transparent hover:border-slate-200 transition-colors"
-                title="Reset Filters"
-              >
-                <RotateCcw size={15} />
-              </button>
-            )}
-          </div>
+          {/* Reset button if filtered */}
+          {(typeFilter !== "All" || searchTerm) && (
+            <button
+              onClick={handleResetFilters}
+              className="p-2 text-slate-500 hover:text-slate-800 rounded-xl hover:bg-slate-100 border border-slate-200 transition-colors"
+              title="Reset Filters"
+            >
+              <RotateCcw size={15} />
+            </button>
+          )}
         </div>
       </div>
 
